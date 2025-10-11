@@ -23,8 +23,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <!-- Preload das imagens principais -->
-  <link rel="preload" as="image" href="./img/hero-desktop.jpg">
-  <link rel="preload" as="image" href="./img/hero-mobile.jpg" media="(max-width: 960px)">
+  <link rel="preload" as="image" href="img/hero-desktop.jpg">
+  <link rel="preload" as="image" href="img/hero-mobile.jpg" media="(max-width: 960px)">
 
   <!-- Google Tag Manager -->
   <script>
@@ -55,11 +55,11 @@
   <style>
     :root{--brand:#c44b04;--dark:#0b0b0c;--light:#ffffff;--muted:#8b8b8f;}
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--light);background:var(--dark);scroll-behavior:smooth;overflow-x:hidden}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--light);background:var(--dark);scroll-behavior:smooth}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;height:auto;border-radius:12px}
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
-    header{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.7);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06);animation:fadeDown 0.8s ease forwards;opacity:0}
+    header{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.7);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
     .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
     .logo-mark{width:28px;height:28px;border-radius:7px;background:var(--brand)}
@@ -68,8 +68,8 @@
     .btn:hover{transform:translateY(-1px)}
     .btn-primary{background:var(--brand);color:var(--light)}
     .btn-outline{border-color:rgba(255,255,255,.18);color:var(--light)}
-    .hero{padding:86px 0 46px;background:url('./img/hero-desktop.jpg') center/cover no-repeat;}
-    .hero-overlay{background:rgba(0,0,0,.6);padding:60px 0;animation:fadeInUp 1s ease forwards;opacity:0}
+    .hero{padding:86px 0 46px;background:url('img/hero-desktop.jpg') center/cover no-repeat;}
+    .hero-overlay{background:rgba(0,0,0,.6);padding:60px 0}
     .hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:center}
     .eyebrow{color:var(--brand);font-weight:800;letter-spacing:.14em;text-transform:uppercase}
     h1{font-size: clamp(28px, 5vw, 48px);line-height:1.1;margin:10px 0 16px}
@@ -78,7 +78,7 @@
     .badgebar{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap;color:#cfcfd6}
     .badge{padding:8px 12px;border:1px solid rgba(255,255,255,.12);border-radius:999px;font-size:13px}
     .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px}
-    section{padding:60px 0;animation:fadeIn 1s ease forwards;opacity:0}
+    section{padding:60px 0}
     h2{font-size: clamp(22px, 3.6vw, 32px);margin:0 0 14px}
     p.section-lead{color:#d6d6dc;max-width:70ch}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -89,11 +89,8 @@
     .cta{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:linear-gradient(180deg, rgba(196,75,4,.14), rgba(255,255,255,.02))}
     footer{padding:36px 0;color:#b9bac3;border-top:1px solid rgba(255,255,255,.08)}
     footer a{color:#b9bac3}
-    @keyframes fadeIn{to{opacity:1;transform:none}from{opacity:0;transform:translateY(15px)}}
-    @keyframes fadeInUp{to{opacity:1;transform:none}from{opacity:0;transform:translateY(40px)}}
-    @keyframes fadeDown{to{opacity:1;transform:none}from{opacity:0;transform:translateY(-20px)}}
     @media (max-width: 960px){
-      .hero{background:url('./img/hero-mobile.jpg') center/cover no-repeat;}
+      .hero{background:url('img/hero-mobile.jpg') center/cover no-repeat;}
       .hero-grid, .grid-3, .grid-2{grid-template-columns:1fr}
       .menu{display:none}
       .cta{flex-direction:column;align-items:flex-start}
@@ -120,6 +117,7 @@
   </header>
 
   <main>
+    <!-- ======= HERO ======= -->
     <section class="hero">
       <div class="hero-overlay">
         <div class="container hero-grid">
@@ -137,13 +135,71 @@
               <span class="badge">Treinamentos executivos</span>
             </div>
           </div>
-          <img src="./img/ia-person.jpg" alt="Pessoa usando tecnologia de IA" loading="lazy">
+          <img src="img/ia-person.jpg" alt="Pessoa usando tecnologia de IA" loading="lazy">
         </div>
       </div>
     </section>
 
-    <!-- Demais seções (serviços, como funciona, contato, footer) -->
-    <!-- Você pode manter exatamente como estavam no HTML anterior -->
+    <!-- ======= SERVIÇOS ======= -->
+    <section id="servicos">
+      <div class="container">
+        <h2>Soluções sob medida para resultado rápido</h2>
+        <p class="section-lead">Projetamos e implantamos iniciativas de IA alinhadas ao seu funil de valor — do diagnóstico estratégico a pilotos em produção.</p>
+        <div class="grid-3" style="margin-top:16px">
+          <div class="service"><h3>🔍 Estratégia & Roadmap de IA</h3><p>Mapeamento de oportunidades e plano de 90 dias.</p></div>
+          <div class="service"><h3>🤖 Agentes & Automação</h3><p>Criação de agentes especializados e integrações inteligentes.</p></div>
+          <div class="service"><h3>🧩 Data & Governança</h3><p>Arquiteturas seguras e conformidade de dados.</p></div>
+          <div class="service"><h3>🎓 Treinamentos Executivos</h3><p>Capacitações práticas em IA estratégica e produtividade.</p></div>
+          <div class="service"><h3>🚀 Provas de Conceito (PoC)</h3><p>Pilotos rápidos com métricas de impacto mensurável.</p></div>
+          <div class="service"><h3>🛠 Suporte Contínuo</h3><p>Monitoramento e evolução das soluções implantadas.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= COMO FUNCIONA ======= -->
+    <section id="como-funciona">
+      <div class="container">
+        <h2>Como trabalhamos</h2>
+        <p class="section-lead">Nosso método combina diagnóstico estratégico, prototipagem rápida e escalabilidade segura.</p>
+        <div class="grid-3" style="margin-top:12px">
+          <div class="service"><h3>1️⃣ Diagnóstico</h3><p>Identificação dos casos de maior impacto.</p></div>
+          <div class="service"><h3>2️⃣ MVP em semanas</h3><p>Desenvolvimento rápido e validação com dados reais.</p></div>
+          <div class="service"><h3>3️⃣ Escala com segurança</h3><p>Governança, KPIs e integração às rotinas do negócio.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= CONTATO ======= -->
+    <section id="contato">
+      <div class="container">
+        <h2>Fale com a Intellih</h2>
+        <p class="section-lead">Preencha o formulário e receba um diagnóstico gratuito para sua empresa.</p>
+
+        <form id="lead-form" class="card" method="POST" action="https://formsubmit.co/contato@intellih.com.br">
+          <div class="grid-2">
+            <label>Nome<br>
+              <input required name="name" type="text" placeholder="Seu nome" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:#121214;color:#fff">
+            </label>
+            <label>E-mail<br>
+              <input required name="email" type="email" placeholder="voce@empresa.com" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:#121214;color:#fff">
+            </label>
+          </div>
+
+          <label style="display:block;margin-top:12px">Como a IA pode ajudar?<br>
+            <textarea name="need" rows="4" placeholder="Ex.: automatizar relatórios, criar agente de atendimento, otimizar fluxos..." style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:#121214;color:#fff"></textarea>
+          </label>
+
+          <div style="display:flex;gap:12px;align-items:center;margin-top:14px">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <span style="color:#b9bac3;font-size:14px">Responderemos em até 1 dia útil.</span>
+          </div>
+
+          <input type="hidden" name="_subject" value="Novo contato - Site Intellih Tecnologia">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://www.intellih.com.br/obrigado.html">
+        </form>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -162,10 +218,6 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    window.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('header').style.opacity = '1';
-      document.querySelector('.hero-overlay').style.opacity = '1';
-    });
   </script>
 </body>
 </html>
