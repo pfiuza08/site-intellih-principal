@@ -15,12 +15,16 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicon_intellih.ico" />
+  <link rel="icon" type="image/x-icon" href="./favicon_intellih.ico" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Preload das imagens principais -->
+  <link rel="preload" as="image" href="./img/hero-desktop.jpg">
+  <link rel="preload" as="image" href="./img/hero-mobile.jpg" media="(max-width: 960px)">
 
   <!-- Google Tag Manager -->
   <script>
@@ -64,7 +68,7 @@
     .btn:hover{transform:translateY(-1px)}
     .btn-primary{background:var(--brand);color:var(--light)}
     .btn-outline{border-color:rgba(255,255,255,.18);color:var(--light)}
-    .hero{padding:86px 0 46px;background:url('https://images.unsplash.com/photo-1691401982441-f16dc76aa87f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;}
+    .hero{padding:86px 0 46px;background:url('./img/hero-desktop.jpg') center/cover no-repeat;}
     .hero-overlay{background:rgba(0,0,0,.6);padding:60px 0;animation:fadeInUp 1s ease forwards;opacity:0}
     .hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:center}
     .eyebrow{color:var(--brand);font-weight:800;letter-spacing:.14em;text-transform:uppercase}
@@ -89,7 +93,7 @@
     @keyframes fadeInUp{to{opacity:1;transform:none}from{opacity:0;transform:translateY(40px)}}
     @keyframes fadeDown{to{opacity:1;transform:none}from{opacity:0;transform:translateY(-20px)}}
     @media (max-width: 960px){
-      .hero{background:url('https://images.unsplash.com/photo-1682327365739-6aabadefabf0?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;}
+      .hero{background:url('./img/hero-mobile.jpg') center/cover no-repeat;}
       .hero-grid, .grid-3, .grid-2{grid-template-columns:1fr}
       .menu{display:none}
       .cta{flex-direction:column;align-items:flex-start}
@@ -133,14 +137,13 @@
               <span class="badge">Treinamentos executivos</span>
             </div>
           </div>
-          <img src="https://images.unsplash.com/photo-1607706189992-eae578626c86?auto=format&fit=crop&w=800&q=80" alt="Pessoa usando tecnologia de IA">
+          <img src="./img/ia-person.jpg" alt="Pessoa usando tecnologia de IA" loading="lazy">
         </div>
       </div>
     </section>
 
-    <!-- As demais seções do site permanecem iguais -->
-    <!-- ... (serviços, como funciona, contato, footer) ... -->
-
+    <!-- Demais seções (serviços, como funciona, contato, footer) -->
+    <!-- Você pode manter exatamente como estavam no HTML anterior -->
   </main>
 
   <footer>
@@ -159,10 +162,9 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    // ativa animação apenas na dobra inicial
-    window.addEventListener('DOMContentLoaded',()=>{
-      document.querySelector('header').style.opacity='1';
-      document.querySelector('.hero-overlay').style.opacity='1';
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('header').style.opacity = '1';
+      document.querySelector('.hero-overlay').style.opacity = '1';
     });
   </script>
 </body>
