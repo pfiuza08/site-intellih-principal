@@ -6,7 +6,7 @@
   const brandColor = "#c44b04";
 
   /* --- META PIXEL (configuração básica) ---------------------- */
-  const PIXEL_IDS = ["1467115531230271"]; // ⬅️ coloque aqui um ou mais IDs, separados por vírgula
+  const PIXEL_IDS = ["1240394014783181"]; // ⬅️ coloque aqui um ou mais IDs, separados por vírgula
   (function(f,b,e,v,n,t,s){
     if(f.fbq) return; n=f.fbq=function(){ n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq) f._fbq=n; n.push=n; n.loaded=!0; n.version='2.0'; n.queue=[];
@@ -131,3 +131,4 @@
   });
   closeChat.addEventListener("click",()=> box.style.display="none");
 })();
+
