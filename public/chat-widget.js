@@ -113,16 +113,16 @@
     setTimeout(()=>addMessage(reply),800);
   }
 
-  function sendLead(name,email){
+ // function sendLead(name,email){
     // 🔧 Substitua pelo endpoint do seu Google Form ou webhook
-    const endpoint="https://docs.google.com/forms/u/0/d/e/1FAIpQLSc4FVsHnAG9m-3CmvbHOTU75pBvQEKSxB7UJifI6bkUUe93yw/formResponse";
-    const data=new FormData();
-    data.append("entry.123456789",name);  // ID do campo Nome
-    data.append("entry.987654321",email); // ID do campo E-mail
-    fetch(endpoint,{method:"POST",body:data})
-      .then(()=>{console.log("Lead enviado"); fbq('track','Lead');})
+   //const endpoint="https://docs.google.com/forms/u/0/d/e/1FAIpQLSc4FVsHnAG9m-3CmvbHOTU75pBvQEKSxB7UJifI6bkUUe93yw/formResponse";
+   // const data=new FormData();
+    //data.append("entry.123456789",name);  // ID do campo Nome
+   // data.append("entry.987654321",email); // ID do campo E-mail
+   // fetch(endpoint,{method:"POST",body:data})
+     // .then(()=>{console.log("Lead enviado"); fbq('track','Lead');})
       .catch(err=>console.warn("Erro ao enviar lead:",err));
-  }
+  //}//
 
   /* --- AÇÕES -------------------------------------------------- */
   bubble.addEventListener("click",()=>{
@@ -131,5 +131,6 @@
   });
   closeChat.addEventListener("click",()=> box.style.display="none");
 })();
+
 
 
