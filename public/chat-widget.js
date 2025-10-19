@@ -115,7 +115,7 @@
 
   function sendLead(name,email){
     // 🔧 Substitua pelo endpoint do seu Google Form ou webhook
-    const endpoint="https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse";
+    const endpoint="https://docs.google.com/forms/u/0/d/e/1FAIpQLSc4FVsHnAG9m-3CmvbHOTU75pBvQEKSxB7UJifI6bkUUe93yw/formResponse";
     const data=new FormData();
     data.append("entry.123456789",name);  // ID do campo Nome
     data.append("entry.987654321",email); // ID do campo E-mail
@@ -131,4 +131,5 @@
   });
   closeChat.addEventListener("click",()=> box.style.display="none");
 })();
+
 
