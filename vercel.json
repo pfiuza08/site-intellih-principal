@@ -1,12 +1,31 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "**/*.html", "use": "@vercel/static" },
-    { "src": "**/*.js", "use": "@vercel/static" },
-    { "src": "img/**/*", "use": "@vercel/static" },
-    { "src": "favicon_intellih.ico", "use": "@vercel/static" }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)\\.(jpg|jpeg|png|gif|svg|webp|ico)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(js|css)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=600" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache" }
+      ]
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
+    { "src": "/chat-widget.js", "dest": "/chat-widget.js" },
+    { "src": "/chat-icon.png", "dest": "/chat-icon.png" },
+    { "src": "/img/(.*)", "dest": "/img/$1" },
+    { "src": "/favicon_intellih.ico", "dest": "/favicon_intellih.ico" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
