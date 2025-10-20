@@ -23,10 +23,10 @@
   ],
   "rewrites": [
     { "source": "/chat-widget.js", "destination": "/chat-widget.js" },
+    { "source": "/chat-icon.png", "destination": "/chat-icon.png" },
     { "source": "/img/(.*)", "destination": "/img/$1" },
     { "source": "/favicon_intellih.ico", "destination": "/favicon_intellih.ico" },
-    { "source": "/chat-icon.png", "destination": "/chat-icon.png" },
     { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "ignoreCommand": false
+  ]
 }
+
