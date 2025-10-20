@@ -5,7 +5,7 @@
     {
       "source": "/(.*)\\.(jpg|jpeg|png|gif|svg|webp|ico)$",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
       ]
     },
     {
@@ -23,7 +23,6 @@
   ],
   "routes": [
     { "src": "/chat-widget.js", "dest": "/chat-widget.js" },
-    { "src": "/chat-icon.png", "dest": "/chat-icon.png" },
     { "src": "/img/(.*)", "dest": "/img/$1" },
     { "src": "/favicon_intellih.ico", "dest": "/favicon_intellih.ico" },
     { "src": "/(.*)", "dest": "/index.html" }
