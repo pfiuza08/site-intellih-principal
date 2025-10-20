@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // === BOTÃO FLUTUANTE ===
   const chatButton = document.createElement("div");
   chatButton.id = "intellih-chat-button";
-  chatButton.innerHTML = `<img src="/chat-icon.png?v=5" alt="Chat Intellih" style="width:60px;height:60px;">`;
+  chatButton.innerHTML = `<img src="/img/chat-icon.png?v=${Date.now()}" alt="Chat Intellih" style="width:60px;height:60px;">`;
   Object.assign(chatButton.style, {
     position: "fixed",
     bottom: "24px",
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     boxShadow: "0 3px 10px rgba(0,0,0,0.3)",
     transition: "transform .25s ease, opacity .25s ease",
     opacity: "0",
-    transform: "translateY(20px)",
+    transform: "translateY(20px)"
   });
   document.body.appendChild(chatButton);
 
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     transform: "translateY(10px)",
     transition: "opacity .6s ease, transform .6s ease",
     zIndex: "999",
-    maxWidth: "240px",
+    maxWidth: "240px"
   });
   document.body.appendChild(welcomeBubble);
 
