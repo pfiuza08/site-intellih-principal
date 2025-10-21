@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v16) ===
-// Conversa consultiva + nichos + aplicações + confirmação + WhatsApp interno
+// === Chat Widget Intellih (v17) ===
+// Conversa fluida + animação de digitação + confirmações + WhatsApp interno
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -96,20 +96,39 @@ document.addEventListener("DOMContentLoaded", () => {
         <span>Assistente Intellih</span>
         <span id="close-chat" style="cursor:pointer;font-size:18px;">✕</span>
       </div>
-      <div id="chat-body" style="flex:1;padding:14px;overflow-y:auto;font-size:14px;line-height:1.5;"></div>
+      <div id="chat-body" style="flex:1;padding:14px;overflow-y:auto;font-size:14px;line-height:1.5;scroll-behavior:smooth;"></div>
     </div>`;
   document.body.appendChild(chatBox);
 
   const chatWindow = chatBox.querySelector(":scope > div");
   const chatBody = chatBox.querySelector("#chat-body");
 
-  // === Funções auxiliares ===
+  // === Animação de digitação ===
+  const showTyping = (delay = 500) => {
+    const typing = document.createElement("div");
+    typing.className = "typing";
+    typing.innerHTML = `<span style="background:#ccc;border-radius:50%;width:6px;height:6px;display:inline-block;margin-right:3px;animation: blink 1s infinite alternate;"></span>
+                        <span style="background:#ccc;border-radius:50%;width:6px;height:6px;display:inline-block;margin-right:3px;animation: blink 1s .2s infinite alternate;"></span>
+                        <span style="background:#ccc;border-radius:50%;width:6px;height:6px;display:inline-block;animation: blink 1s .4s infinite alternate;"></span>`;
+    Object.assign(typing.style, { opacity: "0", transition: "opacity .3s ease" });
+    chatBody.appendChild(typing);
+    setTimeout(() => (typing.style.opacity = "1"), 50);
+    setTimeout(() => typing.remove(), delay);
+  };
+
   const addMessage = (html, delay = 800) => {
+    showTyping(delay - 400);
     setTimeout(() => {
       const msg = document.createElement("div");
       msg.innerHTML = html;
+      Object.assign(msg.style, {
+        opacity: "0",
+        transition: "opacity .6s ease",
+        marginBottom: "8px"
+      });
       chatBody.appendChild(msg);
       chatBody.scrollTop = chatBody.scrollHeight;
+      setTimeout(() => (msg.style.opacity = "1"), 50);
     }, delay);
   };
 
@@ -124,13 +143,16 @@ document.addEventListener("DOMContentLoaded", () => {
       border: "1px solid #0ad67d",
       borderRadius: "6px",
       textAlign: "center",
-      fontSize: "14px"
+      fontSize: "14px",
+      opacity: "0",
+      transition: "opacity .6s ease"
     });
     chatBody.appendChild(confirm);
     chatBody.scrollTop = chatBody.scrollHeight;
+    setTimeout(() => (confirm.style.opacity = "1"), 100);
   };
 
-  // === Fluxo da conversa ===
+  // === Fluxo ===
   const startConversation = () => {
     chatBody.innerHTML = "";
     addMessage(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 800);
