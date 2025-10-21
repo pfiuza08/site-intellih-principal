@@ -1,8 +1,8 @@
-// === Chat Widget Intellih (v6 Lead Focus) ===
-// Conversa curta, vendedor e responsivo
+// === Chat Widget Intellih (v7 Conversa Consultiva + Lead) ===
+// Começa com pergunta de valor, depois pede nome e e-mail
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Detecta se o fundo é escuro
+  // Detecta tema claro/escuro
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
   const [r, g, b] = bgColor.match(/\d+/g).map(Number);
   const brightness = (r * 299 + g * 587 + b * 114) / 1000;
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cursor: "pointer",
     zIndex: "1000",
     borderRadius: "50%",
-    background: "#c44b04",
+    background: "#fff",
     padding: "6px",
     boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
     transition: "transform .25s ease, opacity .25s ease",
@@ -33,15 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
     transform: "translateY(20px)"
   });
   document.body.appendChild(chatButton);
-
   setTimeout(() => {
     chatButton.style.opacity = "1";
     chatButton.style.transform = "translateY(0)";
   }, 600);
 
-  // === BALÃO DE BOAS-VINDAS ===
+  // === BALÃO DE ABERTURA ===
   const welcomeBubble = document.createElement("div");
-  welcomeBubble.innerHTML = `💡 Quer descobrir em <b>10 minutos</b> onde a <b>IA</b> pode gerar mais lucro para o seu negócio?`;
+  welcomeBubble.innerHTML = `🤖 Quer receber <b>sugestões de aplicações de IA</b> para o seu negócio?`;
   Object.assign(welcomeBubble.style, {
     position: "fixed",
     bottom: "100px",
@@ -58,22 +57,20 @@ document.addEventListener("DOMContentLoaded", () => {
     transform: "translateY(10px)",
     transition: "opacity .6s ease, transform .6s ease",
     zIndex: "999",
-    maxWidth: "240px"
+    maxWidth: "260px"
   });
   document.body.appendChild(welcomeBubble);
-
   setTimeout(() => {
     welcomeBubble.style.opacity = "1";
     welcomeBubble.style.transform = "translateY(0)";
-  }, 2000);
-
+  }, 1800);
   setTimeout(() => {
     welcomeBubble.style.opacity = "0";
     welcomeBubble.style.transform = "translateY(10px)";
     setTimeout(() => welcomeBubble.remove(), 800);
   }, 8000);
 
-  // === JANELA DO CHAT ===
+  // === JANELA DE CHAT ===
   const chatBox = document.createElement("div");
   chatBox.id = "intellih-chat-box";
   chatBox.innerHTML = `
@@ -101,10 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
         <span id="close-chat" style="cursor:pointer;font-size:18px;">✕</span>
       </div>
 
-      <div style="flex:1;padding:14px;overflow-y:auto;font-size:14px;line-height:1.5;">
-        <p>🚀 Olá! Eu sou o assistente da <b>Intellih</b>.</p>
-        <p>Mostramos onde aplicar <b>IA</b> para reduzir custos, automatizar tarefas e aumentar lucros.</p>
-        <p>Quer receber um <b>diagnóstico gratuito</b> com sugestões práticas para o seu negócio?</p>
+      <div id="chat-messages" style="flex:1;padding:14px;overflow-y:auto;font-size:14px;line-height:1.5;">
+        <p>👋 Oi! Eu sou o assistente da <b>Intellih</b>.</p>
+        <p>Quer descobrir <b>onde aplicar IA</b> para gerar mais lucro, economizar tempo e automatizar processos no seu negócio?</p>
+        <p><b>Posso te mostrar algumas sugestões personalizadas!</b></p>
       </div>
 
       <form id="chat-form" style="padding:12px;border-top:1px solid ${inputBorder};background:${formBg};">
@@ -138,13 +135,14 @@ document.addEventListener("DOMContentLoaded", () => {
           font-weight:600;
           cursor:pointer;
           font-size:15px;
-        ">Quero meu diagnóstico</button>
+        ">Ver sugestões de IA</button>
       </form>
     </div>
   `;
   document.body.appendChild(chatBox);
 
   const chatWindow = chatBox.querySelector("div");
+  const messages = chatBox.querySelector("#chat-messages");
 
   // === ABRIR / FECHAR ===
   chatButton.addEventListener("click", () => {
@@ -168,19 +166,28 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => (chatWindow.style.display = "none"), 300);
   });
 
-  // === FORM ===
+  // === FORMULÁRIO ===
   chatBox.querySelector("#chat-form").addEventListener("submit", (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value.trim();
     const email = form.email.value.trim();
+
     if (name && email) {
+      messages.innerHTML += `<p>✅ Perfeito, <b>${name}</b>! Estamos analisando seu perfil...</p>`;
+      setTimeout(() => {
+        messages.innerHTML += `<p>📩 Em breve você receberá no e-mail <b>${email}</b> nossas <b>sugestões práticas de aplicação de IA</b> no seu negócio.</p>`;
+        messages.scrollTop = messages.scrollHeight;
+      }, 1200);
+
       if (typeof fbq === "function") fbq("track", "Lead");
-      alert(`✅ Obrigado, ${name}! Nosso time vai te enviar um diagnóstico de IA no e-mail ${email}.`);
+
       form.reset();
-      chatWindow.style.opacity = "0";
-      chatWindow.style.transform = "translateY(20px)";
-      setTimeout(() => (chatWindow.style.display = "none"), 300);
+      setTimeout(() => {
+        chatWindow.style.opacity = "0";
+        chatWindow.style.transform = "translateY(20px)";
+        setTimeout(() => (chatWindow.style.display = "none"), 800);
+      }, 5000);
     }
   });
 
