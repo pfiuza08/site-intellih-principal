@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v24) ===
-// Scroll automático + envio com "enviando..." animado + envio de nicho
+// === Chat Widget Intellih (v25) ===
+// Envio com "enviando..." animado + selo visual de sucesso + scroll automático
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -77,14 +77,30 @@ document.addEventListener("DOMContentLoaded", () => {
     @keyframes dots {0%,20%{content:".";}40%{content:"..";}60%,100%{content:"...";}}
     .fade-in{animation:fadeSlide 0.6s ease forwards;opacity:0;}
     .sending::after{content:".";animation:dots 1.5s infinite;}
+    .success-banner {
+      position: fixed;
+      bottom: 90px;
+      right: 30px;
+      background: #2ecc71;
+      color: #fff;
+      font-family: Inter, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1200;
+    }
   `;
   document.head.appendChild(style);
 
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   function scrollToBottom() {
     chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
   }
 
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   async function say(text, delay = 800) {
     await sleep(delay);
     const msg = document.createElement("div");
@@ -95,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollToBottom();
   }
 
-  // === CONVERSA ===
+  // === INÍCIO ===
   async function startConversation() {
     chatBody.innerHTML = "";
     await say(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 400);
@@ -162,10 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     };
 
-    for (const idea of ideas[niche]) {
-      await say(`<p class="fade-in" style="margin:6px 0;">${idea}</p>`, 800);
-    }
-
+    for (const idea of ideas[niche]) await say(`<p class="fade-in" style="margin:6px 0;">${idea}</p>`, 800);
     await say(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões específicas para o seu caso?</p>`, 1000);
     showContactForm();
   }
@@ -213,13 +226,20 @@ document.addEventListener("DOMContentLoaded", () => {
         })
       });
 
-      // Remove indicador e mostra confirmação
       sending.remove();
       await say(`<p class="fade-in">Obrigado, <b>${name}</b>. Recebemos seu interesse em <b>${selectedNiche}</b>.</p>`, 400);
       await say(`<p class="fade-in">Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico ideal para você.</p>`, 700);
-      await say(`<p class="fade-in">Se preferir, fale agora mesmo com nossa equipe pelo <a href="https://wa.me/5521995558808" target="_blank" style="color:#c44b04;font-weight:600;">WhatsApp</a>.</p>`, 1000);
       form.remove();
       scrollToBottom();
+
+      // Selo visual de sucesso
+      const banner = document.createElement("div");
+      banner.className = "success-banner";
+      banner.textContent = "✅ Mensagem enviada com sucesso!";
+      document.body.appendChild(banner);
+      setTimeout(() => (banner.style.opacity = "1"), 100);
+      setTimeout(() => (banner.style.opacity = "0"), 4000);
+      setTimeout(() => banner.remove(), 4800);
     };
 
     chatBody.appendChild(form);
