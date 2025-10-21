@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v18) ===
-// Corrigido: indicador de digitação único + fila de mensagens + transições suaves
+// === Chat Widget Intellih (v19) ===
+// Correção: frase posicionada após o nome do nicho + todas as opções visíveis
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const showApplications = (niche) => {
-    chatBody.innerHTML = `<p><b>${niche}</b> — veja exemplos práticos de aplicação de IA:</p>`;
+    chatBody.innerHTML = `<p><b>${niche}</b></p><p>Veja exemplos práticos de aplicação de IA:</p>`;
 
     const ideas = {
       "Vendas e Marketing": [
@@ -218,13 +218,12 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     };
 
-    let delay = 800;
-    ideas[niche].forEach((i) => say(`<p>${i}</p>`, (delay += 700)));
+    ideas[niche].forEach((i) => say(`<p>${i}</p>`, 900));
 
     setTimeout(() => {
-      say(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões específicas para o seu caso?</p>`, delay + 800);
+      say(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões específicas para o seu caso?</p>`, 2200);
       showContactForm();
-    }, delay + 1000);
+    }, 2600);
   };
 
   const showContactForm = () => {
@@ -298,7 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => (chatWindow.style.display = "none"), 300);
   });
 
-  // === MOBILE ===
   function adjustChatForMobile() {
     if (window.innerWidth <= 480) {
       chatWindow.style.width = "92vw";
