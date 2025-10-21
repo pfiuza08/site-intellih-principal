@@ -1,8 +1,8 @@
-// === Chat Widget Intellih (v5.1) ===
-// Balão de boas-vindas + Animações + Modo adaptativo escuro/claro + Correção de contraste mobile
+// === Chat Widget Intellih (v6 Final) ===
+// Balão de boas-vindas + Animações + Modo adaptativo escuro/claro + Mobile otimizado
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Detecta se o fundo do site é escuro
+  // Detecta o fundo do site
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
   const [r, g, b] = bgColor.match(/\d+/g).map(Number);
   const brightness = (r * 299 + g * 587 + b * 114) / 1000;
@@ -11,39 +11,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // Cores adaptativas
   const bgPanel = isDark ? "#181818" : "#ffffff";
   const textColor = isDark ? "#f5f5f5" : "#222";
-  const inputBg = isDark ? "#242424" : "#fff";
-  const inputBorder = isDark ? "#444" : "#ccc";
-  const formBg = isDark ? "#1a1a1a" : "#f9f9f9";
+  const inputBg = isDark ? "#222" : "#fff";
+  const inputBorder = isDark ? "#555" : "#ccc";
+  const formBg = isDark ? "#1e1e1e" : "#f8f8f8";
 
   // === BOTÃO FLUTUANTE ===
   const chatButton = document.createElement("div");
   chatButton.id = "intellih-chat-button";
-  chatButton.innerHTML = `<img src="/img/chat-icon.png?v=${Date.now()}" alt="Chat Intellih" style="width:60px;height:60px;">`;
-
+  chatButton.innerHTML = `<img src="img/chat-icon.png?v=${Date.now()}" alt="Chat Intellih" style="width:64px;height:64px;">`;
   Object.assign(chatButton.style, {
     position: "fixed",
-    bottom: "24px",
-    right: "24px",
+    bottom: "22px",
+    right: "22px",
     cursor: "pointer",
     zIndex: "1000",
     borderRadius: "50%",
     background: "#fff",
-    padding: "4px",
-    boxShadow: "0 3px 10px rgba(0,0,0,0.3)",
+    padding: "6px",
+    boxShadow: "0 3px 12px rgba(0,0,0,0.35)",
     transition: "transform .25s ease, opacity .25s ease",
     opacity: "0",
     transform: "translateY(20px)"
   });
-
   document.body.appendChild(chatButton);
 
-  // Anima o botão após o carregamento
+  // Animação do botão
   setTimeout(() => {
     chatButton.style.opacity = "1";
     chatButton.style.transform = "translateY(0)";
   }, 600);
 
-  // === BALÃO DE BOAS-VINDAS PERSONALIZADO ===
+  // === BALÃO DE BOAS-VINDAS ===
   const welcomeBubble = document.createElement("div");
   welcomeBubble.innerHTML = `👋 <b>Oi!</b> Quer descobrir como automatizar seu negócio com <b>IA?</b>`;
   Object.assign(welcomeBubble.style, {
@@ -64,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
     zIndex: "999",
     maxWidth: "240px"
   });
-
   document.body.appendChild(welcomeBubble);
 
   setTimeout(() => {
@@ -72,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     welcomeBubble.style.transform = "translateY(0)";
   }, 2000);
 
-  // Desaparece suavemente após 8s
+  // Desaparece suavemente
   setTimeout(() => {
     welcomeBubble.style.opacity = "0";
     welcomeBubble.style.transform = "translateY(10px)";
@@ -144,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
           font-weight:600;
           cursor:pointer;
           font-size:15px;
+          transition:background .2s ease;
         ">Enviar</button>
       </form>
     </div>
@@ -152,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const chatWindow = chatBox.querySelector("div");
 
-  // === ABRIR / FECHAR COM ANIMAÇÃO ===
+  // === ABRIR / FECHAR CHAT ===
   chatButton.addEventListener("click", () => {
     const isOpen = chatWindow.style.display === "flex";
     if (isOpen) {
@@ -181,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     if (name && email) {
+      fbq && fbq('trackCustom', 'ChatLead');
       alert(`✅ Obrigado, ${name}! Entraremos em contato pelo e-mail ${email}.`);
       form.reset();
       chatWindow.style.opacity = "0";
@@ -193,15 +192,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function adjustChatForMobile() {
     if (window.innerWidth <= 480) {
       chatWindow.style.width = "92vw";
-      chatWindow.style.height = "78vh";
+      chatWindow.style.height = "75vh";
       chatWindow.style.right = "4%";
-      chatWindow.style.bottom = "110px";
+      chatWindow.style.bottom = "100px";
       chatWindow.style.fontSize = "15px";
-      chatWindow.style.background = isDark ? "#1a1a1a" : "#ffffff";
+      chatWindow.style.background = "#111";
     }
   }
-
   window.addEventListener("resize", adjustChatForMobile);
   adjustChatForMobile();
 });
-
