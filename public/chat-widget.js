@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v19) ===
-// Correção: frase posicionada após o nome do nicho + todas as opções visíveis
+// === Chat Widget Intellih (v20) ===
+// Fluxo aprimorado, destaque do nicho e exibição sequencial correta
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let selectedNiche = null;
 
-  // === BOTÃO FLUTUANTE DO CHAT ===
+  // === BOTÃO FLUTUANTE ===
   const chatButton = document.createElement("div");
   chatButton.innerHTML = `<img src="/img/chat-icon.png?v=${Date.now()}" alt="Chat Intellih" style="width:64px;height:64px;">`;
   Object.assign(chatButton.style, {
@@ -71,10 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatWindow = chatBox.querySelector(":scope > div");
   const chatBody = chatBox.querySelector("#chat-body");
 
-  // --- Indicador de digitação (singleton) + Fila de mensagens ---
+  // === INDICADOR DE DIGITAÇÃO ===
   const typing = document.createElement("div");
-  typing.setAttribute("aria-live", "polite");
-  typing.style.cssText = "opacity:0; transition:opacity .25s ease; margin:6px 0;";
+  typing.style.cssText = "opacity:0;transition:opacity .25s ease;margin:6px 0;";
   typing.innerHTML = `
     <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#bbb;margin-right:4px;animation:blink 1s infinite alternate;"></span>
     <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#bbb;margin-right:4px;animation:blink 1s .2s infinite alternate;"></span>
@@ -99,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200);
   }
 
+  // === FILA DE MENSAGENS ===
   const msgQueue = [];
   let processing = false;
 
@@ -112,9 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
     while (msgQueue.length) {
       const { html, delay } = msgQueue.shift();
       showTyping();
-      await new Promise((r) => setTimeout(r, Math.max(0, delay)));
+      await new Promise((r) => setTimeout(r, delay));
       hideTyping();
-
       const msg = document.createElement("div");
       msg.innerHTML = html;
       msg.style.opacity = "0";
@@ -127,26 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     processing = false;
   }
 
-  const showConfirmation = (message) => {
-    const confirm = document.createElement("div");
-    confirm.textContent = message;
-    Object.assign(confirm.style, {
-      color: "#0ad67d",
-      fontWeight: "600",
-      marginTop: "10px",
-      padding: "8px",
-      border: "1px solid #0ad67d",
-      borderRadius: "6px",
-      textAlign: "center",
-      fontSize: "14px",
-      opacity: "0",
-      transition: "opacity .6s ease"
-    });
-    chatBody.appendChild(confirm);
-    chatBody.scrollTop = chatBody.scrollHeight;
-    setTimeout(() => (confirm.style.opacity = "1"), 100);
-  };
-
+  // === CONVERSA INICIAL ===
   const startConversation = () => {
     chatBody.innerHTML = "";
     say(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 800);
@@ -193,7 +173,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const showApplications = (niche) => {
-    chatBody.innerHTML = `<p><b>${niche}</b></p><p>Veja exemplos práticos de aplicação de IA:</p>`;
+    chatBody.innerHTML = `
+      <p><span style="font-weight:700;text-decoration:underline;">${niche}</span></p>
+      <p>Veja exemplos práticos de aplicação de IA:</p>
+    `;
 
     const ideas = {
       "Vendas e Marketing": [
@@ -218,14 +201,19 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     };
 
-    ideas[niche].forEach((i) => say(`<p>${i}</p>`, 900));
+    let delay = 600;
+    ideas[niche].forEach((idea, idx) => {
+      say(`<p style="margin:6px 0;">${idea}</p>`, delay + idx * 700);
+    });
 
+    const totalDelay = delay + ideas[niche].length * 800 + 800;
     setTimeout(() => {
-      say(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões específicas para o seu caso?</p>`, 2200);
+      say(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões específicas para o seu caso?</p>`, 600);
       showContactForm();
-    }, 2600);
+    }, totalDelay);
   };
 
+  // === FORMULÁRIO ===
   const showContactForm = () => {
     const form = document.createElement("form");
     form.innerHTML = `
@@ -245,7 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = form.name.value.trim();
       const email = form.email.value.trim();
       say(`<p>Obrigado, <b>${name}</b>. Sua solicitação foi registrada. Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico de IA ideal para você.</p>`, 600);
-      showConfirmation("✔ Dados registrados com sucesso");
       say(`<p>Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp:</p>`, 1800);
 
       const btn = document.createElement("button");
@@ -297,6 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => (chatWindow.style.display = "none"), 300);
   });
 
+  // === AJUSTE MOBILE ===
   function adjustChatForMobile() {
     if (window.innerWidth <= 480) {
       chatWindow.style.width = "92vw";
