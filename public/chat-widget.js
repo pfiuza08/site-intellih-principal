@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v25) ===
-// Envio com "enviando..." animado + selo visual de sucesso + scroll automático
+// === Chat Widget Intellih (v26) ===
+// Selo de sucesso na cor da marca (#c44b04) + envio com nicho + animações
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       position: fixed;
       bottom: 90px;
       right: 30px;
-      background: #2ecc71;
+      background: #c44b04;
       color: #fff;
       font-family: Inter, sans-serif;
       font-size: 14px;
@@ -205,7 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = form.name.value.trim();
       const email = form.email.value.trim();
 
-      // Indicador "enviando..."
       const sending = document.createElement("p");
       sending.textContent = "Enviando";
       sending.classList.add("sending");
@@ -214,7 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
       chatBody.appendChild(sending);
       scrollToBottom();
 
-      // Envio via FormSubmit
       await fetch("https://formsubmit.co/ajax/intellih.tec@gmail.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -232,7 +230,6 @@ document.addEventListener("DOMContentLoaded", () => {
       form.remove();
       scrollToBottom();
 
-      // Selo visual de sucesso
       const banner = document.createElement("div");
       banner.className = "success-banner";
       banner.textContent = "✅ Mensagem enviada com sucesso!";
