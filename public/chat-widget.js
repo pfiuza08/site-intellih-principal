@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v22) ===
-// Scroll automático + envio de e-mail + layout refinado (sem ícone WhatsApp)
+// === Chat Widget Intellih (v24) ===
+// Scroll automático + envio com "enviando..." animado + envio de nicho
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputBg = isDark ? "#222" : "#fff";
   const inputBorder = isDark ? "#555" : "#ccc";
   const formBg = isDark ? "#1e1e1e" : "#f8f8f8";
+
+  let selectedNiche = "";
 
   // === BOTÃO DO CHAT ===
   const chatButton = document.createElement("div");
@@ -69,21 +71,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatWindow = chatBox.querySelector(":scope > div");
   const chatBody = chatBox.querySelector("#chat-body");
 
-  // === SCROLL AUTOMÁTICO ===
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes fadeSlide {from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes dots {0%,20%{content:".";}40%{content:"..";}60%,100%{content:"...";}}
+    .fade-in{animation:fadeSlide 0.6s ease forwards;opacity:0;}
+    .sending::after{content:".";animation:dots 1.5s infinite;}
+  `;
+  document.head.appendChild(style);
+
   function scrollToBottom() {
     chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
   }
-
-  // === ANIMAÇÕES ===
-  const style = document.createElement("style");
-  style.textContent = `
-    @keyframes fadeSlide { 
-      from { opacity:0; transform:translateY(10px); } 
-      to { opacity:1; transform:translateY(0); } 
-    }
-    .fade-in { animation: fadeSlide 0.6s ease forwards; opacity:0; }
-  `;
-  document.head.appendChild(style);
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   async function say(text, delay = 800) {
@@ -96,24 +95,19 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollToBottom();
   }
 
-  // === CONVERSA INICIAL ===
+  // === CONVERSA ===
   async function startConversation() {
     chatBody.innerHTML = "";
-    await say(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 500);
+    await say(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 400);
     await say(`<p>Trabalhamos com soluções em Inteligência Artificial para empresas e profissionais que desejam automatizar processos e acelerar resultados.</p>`, 900);
     await say(`<p>Quer ver onde a IA pode ser aplicada no seu negócio?</p>`, 900);
     showNicheOptions();
   }
 
-  // === OPÇÕES DE NICHO ===
+  // === NICHOS ===
   function showNicheOptions() {
     const options = document.createElement("div");
-    Object.assign(options.style, {
-      display: "flex",
-      flexDirection: "column",
-      gap: "8px",
-      marginTop: "12px"
-    });
+    Object.assign(options.style, { display:"flex",flexDirection:"column",gap:"8px",marginTop:"12px" });
 
     const niches = [
       "Vendas e Marketing",
@@ -126,21 +120,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const btn = document.createElement("button");
       btn.textContent = opt;
       Object.assign(btn.style, {
-        padding: "10px",
-        borderRadius: "8px",
-        border: "1px solid #c44b04",
-        background: "#fff",
-        color: "#c44b04",
-        cursor: "pointer",
-        fontWeight: "600"
+        padding:"10px",borderRadius:"8px",border:"1px solid #c44b04",
+        background:"#fff",color:"#c44b04",cursor:"pointer",fontWeight:"600"
       });
-      btn.onclick = () => showApplications(opt);
+      btn.onclick = () => {
+        selectedNiche = opt;
+        showApplications(opt);
+      };
       options.appendChild(btn);
     });
     chatBody.appendChild(options);
   }
 
-  // === APLICAÇÕES POR NICHO ===
+  // === IDEIAS POR NICHO ===
   async function showApplications(niche) {
     chatBody.innerHTML = `
       <p><span style="font-weight:700;text-decoration:underline;">${niche}</span></p>
@@ -171,14 +163,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     for (const idea of ideas[niche]) {
-      await say(`<p class="fade-in" style="margin:6px 0;">${idea}</p>`, 900);
+      await say(`<p class="fade-in" style="margin:6px 0;">${idea}</p>`, 800);
     }
 
     await say(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões específicas para o seu caso?</p>`, 1000);
     showContactForm();
   }
 
-  // === FORMULÁRIO DE CONTATO ===
+  // === FORMULÁRIO ===
   function showContactForm() {
     const form = document.createElement("form");
     form.classList.add("fade-in");
@@ -194,25 +186,38 @@ document.addEventListener("DOMContentLoaded", () => {
         border-radius:8px;font-weight:600;cursor:pointer;font-size:15px;">
         Enviar
       </button>`;
-    
+
     form.onsubmit = async (e) => {
       e.preventDefault();
       const name = form.name.value.trim();
       const email = form.email.value.trim();
 
-      // Envia via FormSubmit
+      // Indicador "enviando..."
+      const sending = document.createElement("p");
+      sending.textContent = "Enviando";
+      sending.classList.add("sending");
+      sending.style.color = textColor;
+      sending.style.margin = "8px 0";
+      chatBody.appendChild(sending);
+      scrollToBottom();
+
+      // Envio via FormSubmit
       await fetch("https://formsubmit.co/ajax/intellih.tec@gmail.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           _subject: "Novo lead via Chat Intellih",
           name,
-          email
+          email,
+          niche: selectedNiche
         })
       });
 
-      await say(`<p class="fade-in">Obrigado, <b>${name}</b>. Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico ideal para você.</p>`, 600);
-      await say(`<p class="fade-in">Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp: <a href="https://wa.me/5521995558808" target="_blank" style="color:#c44b04;font-weight:600;">abrir conversa</a></p>`, 1000);
+      // Remove indicador e mostra confirmação
+      sending.remove();
+      await say(`<p class="fade-in">Obrigado, <b>${name}</b>. Recebemos seu interesse em <b>${selectedNiche}</b>.</p>`, 400);
+      await say(`<p class="fade-in">Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico ideal para você.</p>`, 700);
+      await say(`<p class="fade-in">Se preferir, fale agora mesmo com nossa equipe pelo <a href="https://wa.me/5521995558808" target="_blank" style="color:#c44b04;font-weight:600;">WhatsApp</a>.</p>`, 1000);
       form.remove();
       scrollToBottom();
     };
