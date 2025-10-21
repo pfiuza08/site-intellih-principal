@@ -249,10 +249,104 @@
   </footer>
 
   <!-- Widget de chat -->
-  <script src="chat-widget.js" defer></script>
+<script src="chat-widget.js" defer></script>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("lead-form");
+
+  // === Estilos globais de animação ===
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes dots {
+      0%, 20% { content: ''; }
+      40% { content: '.'; }
+      60% { content: '..'; }
+      80%, 100% { content: '...'; }
+    }
+    .fadeSlide {
+      animation: fadeSlide 0.6s ease forwards;
+      opacity: 0;
+    }
+    .dots::after {
+      content: '';
+      animation: dots 1.4s infinite;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // === Envio do formulário ===
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Remove selo anterior, se houver
+    const oldBanner = form.querySelector(".success-banner");
+    if (oldBanner) oldBanner.remove();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // Cria selo interno (mensagem abaixo do botão)
+    const banner = document.createElement("div");
+    banner.className = "success-banner fadeSlide";
+    banner.innerHTML = `Enviando<span class="dots"></span>`;
+    Object.assign(banner.style, {
+      background: "#c44b04",
+      color: "#fff",
+      fontFamily: "Inter, sans-serif",
+      fontSize: "14px",
+      fontWeight: "600",
+      padding: "10px 14px",
+      borderRadius: "8px",
+      marginTop: "14px",
+      textAlign: "center",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
+      transition: "opacity 0.6s ease",
+      opacity: "0"
+    });
+    form.appendChild(banner);
+    setTimeout(() => (banner.style.opacity = "1"), 100);
+
+    // === Envio AJAX para FormSubmit ===
+    try {
+      await fetch("https://formsubmit.co/ajax/intellih.tec@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _subject: "Novo contato - Site Intellih Tecnologia",
+          name: data.name,
+          email: data.email,
+          need: data.need
+        })
+      });
+
+      // Substitui mensagem após envio bem-sucedido
+      banner.textContent = "Mensagem enviada com sucesso!";
+      banner.style.background = "#c44b04";
+      banner.style.color = "#fff";
+      form.reset();
+
+      setTimeout(() => (banner.style.opacity = "0"), 4000);
+      setTimeout(() => banner.remove(), 4600);
+
+    } catch (err) {
+      console.error("Erro ao enviar formulário:", err);
+      banner.textContent = "Erro ao enviar. Tente novamente.";
+      banner.style.background = "#a00";
+      setTimeout(() => (banner.style.opacity = "1"), 100);
+      setTimeout(() => (banner.style.opacity = "0"), 5000);
+      setTimeout(() => banner.remove(), 5200);
+    }
+  });
+});
+</script>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
