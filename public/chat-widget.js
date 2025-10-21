@@ -1,16 +1,15 @@
-// === Chat Widget Intellih (v6 Final) ===
-// Balão de boas-vindas + Animações + Modo adaptativo escuro/claro + Mobile otimizado
+// === Chat Widget Intellih (v6 Lead Focus) ===
+// Conversa curta, vendedor e responsivo
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Detecta o fundo do site
+  // Detecta se o fundo é escuro
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
   const [r, g, b] = bgColor.match(/\d+/g).map(Number);
   const brightness = (r * 299 + g * 587 + b * 114) / 1000;
   const isDark = brightness < 128;
 
-  // Cores adaptativas
   const bgPanel = isDark ? "#181818" : "#ffffff";
-  const textColor = isDark ? "#f5f5f5" : "#222";
+  const textColor = isDark ? "#f0f0f0" : "#222";
   const inputBg = isDark ? "#222" : "#fff";
   const inputBorder = isDark ? "#555" : "#ccc";
   const formBg = isDark ? "#1e1e1e" : "#f8f8f8";
@@ -18,24 +17,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // === BOTÃO FLUTUANTE ===
   const chatButton = document.createElement("div");
   chatButton.id = "intellih-chat-button";
-  chatButton.innerHTML = `<img src="img/chat-icon.png?v=${Date.now()}" alt="Chat Intellih" style="width:64px;height:64px;">`;
+  chatButton.innerHTML = `<img src="/img/chat-icon.png?v=${Date.now()}" alt="Chat Intellih" style="width:64px;height:64px;">`;
   Object.assign(chatButton.style, {
     position: "fixed",
-    bottom: "22px",
-    right: "22px",
+    bottom: "24px",
+    right: "24px",
     cursor: "pointer",
     zIndex: "1000",
     borderRadius: "50%",
-    background: "#fff",
+    background: "#c44b04",
     padding: "6px",
-    boxShadow: "0 3px 12px rgba(0,0,0,0.35)",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
     transition: "transform .25s ease, opacity .25s ease",
     opacity: "0",
     transform: "translateY(20px)"
   });
   document.body.appendChild(chatButton);
 
-  // Animação do botão
   setTimeout(() => {
     chatButton.style.opacity = "1";
     chatButton.style.transform = "translateY(0)";
@@ -43,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // === BALÃO DE BOAS-VINDAS ===
   const welcomeBubble = document.createElement("div");
-  welcomeBubble.innerHTML = `👋 <b>Oi!</b> Quer descobrir como automatizar seu negócio com <b>IA?</b>`;
+  welcomeBubble.innerHTML = `💡 Quer descobrir em <b>10 minutos</b> onde a <b>IA</b> pode gerar mais lucro para o seu negócio?`;
   Object.assign(welcomeBubble.style, {
     position: "fixed",
     bottom: "100px",
@@ -69,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
     welcomeBubble.style.transform = "translateY(0)";
   }, 2000);
 
-  // Desaparece suavemente
   setTimeout(() => {
     welcomeBubble.style.opacity = "0";
     welcomeBubble.style.transform = "translateY(10px)";
@@ -85,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       color:${textColor};
       border-radius:16px;
       width:340px;
-      height:440px;
+      height:460px;
       position:fixed;
       bottom:100px;
       right:20px;
@@ -100,14 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
       transition:opacity .3s ease, transform .3s ease;
     ">
       <div style="background:#c44b04;color:#fff;padding:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center;">
-        <span>💬 Atendente Intellih</span>
+        <span>💬 Assistente Intellih</span>
         <span id="close-chat" style="cursor:pointer;font-size:18px;">✕</span>
       </div>
 
       <div style="flex:1;padding:14px;overflow-y:auto;font-size:14px;line-height:1.5;">
-        <p>👋 Olá! Eu sou o assistente da <b>Intellih</b>.</p>
-        <p>Posso te mostrar como usar <b>Inteligência Artificial</b> para economizar tempo e aumentar seus resultados?</p>
-        <p>Deixe seu <b>nome</b> e <b>e-mail</b> e entraremos em contato.</p>
+        <p>🚀 Olá! Eu sou o assistente da <b>Intellih</b>.</p>
+        <p>Mostramos onde aplicar <b>IA</b> para reduzir custos, automatizar tarefas e aumentar lucros.</p>
+        <p>Quer receber um <b>diagnóstico gratuito</b> com sugestões práticas para o seu negócio?</p>
       </div>
 
       <form id="chat-form" style="padding:12px;border-top:1px solid ${inputBorder};background:${formBg};">
@@ -141,8 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
           font-weight:600;
           cursor:pointer;
           font-size:15px;
-          transition:background .2s ease;
-        ">Enviar</button>
+        ">Quero meu diagnóstico</button>
       </form>
     </div>
   `;
@@ -150,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const chatWindow = chatBox.querySelector("div");
 
-  // === ABRIR / FECHAR CHAT ===
+  // === ABRIR / FECHAR ===
   chatButton.addEventListener("click", () => {
     const isOpen = chatWindow.style.display === "flex";
     if (isOpen) {
@@ -172,15 +168,15 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => (chatWindow.style.display = "none"), 300);
   });
 
-  // === FORMULÁRIO ===
+  // === FORM ===
   chatBox.querySelector("#chat-form").addEventListener("submit", (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     if (name && email) {
-      fbq && fbq('trackCustom', 'ChatLead');
-      alert(`✅ Obrigado, ${name}! Entraremos em contato pelo e-mail ${email}.`);
+      if (typeof fbq === "function") fbq("track", "Lead");
+      alert(`✅ Obrigado, ${name}! Nosso time vai te enviar um diagnóstico de IA no e-mail ${email}.`);
       form.reset();
       chatWindow.style.opacity = "0";
       chatWindow.style.transform = "translateY(20px)";
@@ -188,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // === AJUSTE PARA MOBILE ===
+  // === MOBILE ===
   function adjustChatForMobile() {
     if (window.innerWidth <= 480) {
       chatWindow.style.width = "92vw";
@@ -196,7 +192,6 @@ document.addEventListener("DOMContentLoaded", () => {
       chatWindow.style.right = "4%";
       chatWindow.style.bottom = "100px";
       chatWindow.style.fontSize = "15px";
-      chatWindow.style.background = "#111";
     }
   }
   window.addEventListener("resize", adjustChatForMobile);
