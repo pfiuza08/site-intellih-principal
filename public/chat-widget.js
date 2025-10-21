@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v26) ===
-// Selo de sucesso na cor da marca (#c44b04) + envio com nicho + animações
+// === Chat Widget Intellih (v27) ===
+// Selo de sucesso dentro do chat + scroll automático + envio com nicho
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -78,20 +78,19 @@ document.addEventListener("DOMContentLoaded", () => {
     .fade-in{animation:fadeSlide 0.6s ease forwards;opacity:0;}
     .sending::after{content:".";animation:dots 1.5s infinite;}
     .success-banner {
-      position: fixed;
-      bottom: 90px;
-      right: 30px;
       background: #c44b04;
       color: #fff;
       font-family: Inter, sans-serif;
       font-size: 14px;
       font-weight: 600;
-      padding: 10px 16px;
+      padding: 10px 14px;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      margin-top: 10px;
+      text-align: center;
       opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: 1200;
+      transition: opacity 0.6s ease;
+      animation: fadeSlide 0.6s ease forwards;
     }
   `;
   document.head.appendChild(style);
@@ -230,10 +229,12 @@ document.addEventListener("DOMContentLoaded", () => {
       form.remove();
       scrollToBottom();
 
+      // Selo visual interno
       const banner = document.createElement("div");
       banner.className = "success-banner";
       banner.textContent = "✅ Mensagem enviada com sucesso!";
-      document.body.appendChild(banner);
+      chatBody.appendChild(banner);
+      scrollToBottom();
       setTimeout(() => (banner.style.opacity = "1"), 100);
       setTimeout(() => (banner.style.opacity = "0"), 4000);
       setTimeout(() => banner.remove(), 4800);
