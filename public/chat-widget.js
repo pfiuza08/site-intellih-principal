@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v15) ===
-// Conversa consultiva + nichos + aplicações + WhatsApp + design preto e branco
+// === Chat Widget Intellih (v16) ===
+// Conversa consultiva + nichos + aplicações + confirmação + WhatsApp interno
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -38,39 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
     chatButton.style.transform = "translateY(0)";
   }, 600);
 
-  // === BOTÃO FIXO DO WHATSAPP (PRETO E BRANCO) ===
-  const whatsappButton = document.createElement("div");
-  whatsappButton.innerHTML = `<img src="/img/whatsapp-icon.svg?v=${Date.now()}" alt="WhatsApp Intellih" style="width:60px;height:60px;">`;
-  Object.assign(whatsappButton.style, {
-    position: "fixed",
-    bottom: "100px",
-    right: "24px",
-    cursor: "pointer",
-    zIndex: "999",
-    borderRadius: "50%",
-    background: "transparent",
-    padding: "0",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
-    transition: "transform .25s ease, opacity .25s ease",
-    opacity: "0",
-    transform: "translateY(20px)"
-  });
-  whatsappButton.addEventListener("click", () => {
-    const msg = encodeURIComponent("Olá! Vim do site da Intellih e quero saber mais sobre aplicações de IA no meu negócio.");
-    window.open(`https://wa.me/5521995558808?text=${msg}`, "_blank");
-  });
-  document.body.appendChild(whatsappButton);
-  setTimeout(() => {
-    whatsappButton.style.opacity = "1";
-    whatsappButton.style.transform = "translateY(0)";
-  }, 800);
-
   // === BALÃO DE APRESENTAÇÃO ===
   const welcomeBubble = document.createElement("div");
   welcomeBubble.innerHTML = `<b>Quer ver onde a Inteligência Artificial pode ser aplicada no seu negócio?</b>`;
   Object.assign(welcomeBubble.style, {
     position: "fixed",
-    bottom: "170px",
+    bottom: "100px",
     right: "100px",
     background: "#fff",
     color: "#222",
@@ -130,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatWindow = chatBox.querySelector(":scope > div");
   const chatBody = chatBox.querySelector("#chat-body");
 
-  // === Funções de mensagens ===
+  // === Funções auxiliares ===
   const addMessage = (html, delay = 800) => {
     setTimeout(() => {
       const msg = document.createElement("div");
@@ -140,11 +113,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }, delay);
   };
 
+  const showConfirmation = (message) => {
+    const confirm = document.createElement("div");
+    confirm.textContent = message;
+    Object.assign(confirm.style, {
+      color: "#0ad67d",
+      fontWeight: "600",
+      marginTop: "10px",
+      padding: "8px",
+      border: "1px solid #0ad67d",
+      borderRadius: "6px",
+      textAlign: "center",
+      fontSize: "14px"
+    });
+    chatBody.appendChild(confirm);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  };
+
   // === Fluxo da conversa ===
   const startConversation = () => {
     chatBody.innerHTML = "";
     addMessage(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 800);
-    addMessage(`<p>Trabalhamos com soluções em Inteligência Artificial para empresas e profissionais que querem automatizar processos e acelerar resultados.</p>`, 1600);
+    addMessage(`<p>Trabalhamos com soluções em Inteligência Artificial para empresas e profissionais que desejam automatizar processos e acelerar resultados.</p>`, 1600);
     addMessage(`<p>Quer ver onde a IA pode ser aplicada no seu negócio?</p>`, 2500);
     setTimeout(showNicheOptions, 3400);
   };
@@ -240,7 +230,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = form.name.value.trim();
       const email = form.email.value.trim();
       addMessage(`<p>Obrigado, <b>${name}</b>. Sua solicitação foi registrada. Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico de IA ideal para você.</p>`, 600);
-      addMessage(`<p>Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp:</p>`, 1400);
+      showConfirmation("✔ Dados registrados com sucesso");
+      addMessage(`<p>Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp:</p>`, 1800);
 
       const btn = document.createElement("button");
       btn.innerHTML = `<img src="/img/whatsapp-icon.svg" alt="WhatsApp" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> Falar pelo WhatsApp`;
