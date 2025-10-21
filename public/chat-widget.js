@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v22) ===
-// Scroll automático + envio de e-mail + layout refinado (sem ícone WhatsApp)
+// === Chat Widget Intellih (v21) ===
+// Correção de sequência + animações suaves nas ideias + layout consistente
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -69,22 +69,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatWindow = chatBox.querySelector(":scope > div");
   const chatBody = chatBox.querySelector("#chat-body");
 
-  // === SCROLL AUTOMÁTICO ===
-  function scrollToBottom() {
-    chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
-  }
-
-  // === ANIMAÇÕES ===
+  // === ANIMAÇÕES DE ENTRADA ===
   const style = document.createElement("style");
   style.textContent = `
     @keyframes fadeSlide { 
       from { opacity:0; transform:translateY(10px); } 
       to { opacity:1; transform:translateY(0); } 
     }
-    .fade-in { animation: fadeSlide 0.6s ease forwards; opacity:0; }
+    .fade-in {
+      opacity:0;
+      animation: fadeSlide 0.6s ease forwards;
+    }
   `;
   document.head.appendChild(style);
 
+  // === FUNÇÕES DE MENSAGENS ===
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   async function say(text, delay = 800) {
     await sleep(delay);
@@ -93,10 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
     msg.classList.add("fade-in");
     msg.style.marginBottom = "8px";
     chatBody.appendChild(msg);
-    scrollToBottom();
+    chatBody.scrollTop = chatBody.scrollHeight;
   }
 
-  // === CONVERSA INICIAL ===
+  // === FLUXO INICIAL ===
   async function startConversation() {
     chatBody.innerHTML = "";
     await say(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 500);
@@ -140,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     chatBody.appendChild(options);
   }
 
-  // === APLICAÇÕES POR NICHO ===
+  // === EXIBE AS IDEIAS COM CONTROLE DE FLUXO ===
   async function showApplications(niche) {
     chatBody.innerHTML = `
       <p><span style="font-weight:700;text-decoration:underline;">${niche}</span></p>
@@ -178,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showContactForm();
   }
 
-  // === FORMULÁRIO DE CONTATO ===
+  // === FORMULÁRIO ===
   function showContactForm() {
     const form = document.createElement("form");
     form.classList.add("fade-in");
@@ -194,34 +193,40 @@ document.addEventListener("DOMContentLoaded", () => {
         border-radius:8px;font-weight:600;cursor:pointer;font-size:15px;">
         Enviar
       </button>`;
-    
-    form.onsubmit = async (e) => {
+    form.onsubmit = (e) => {
       e.preventDefault();
       const name = form.name.value.trim();
       const email = form.email.value.trim();
+      chatBody.innerHTML += `<p class="fade-in">Obrigado, <b>${name}</b>. Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico de IA ideal para você.</p>`;
+      chatBody.innerHTML += `<p class="fade-in">Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp:</p>`;
 
-      // Envia via FormSubmit
-      await fetch("https://formsubmit.co/ajax/intellih.tec@gmail.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          _subject: "Novo lead via Chat Intellih",
-          name,
-          email
-        })
+      const btn = document.createElement("button");
+      btn.classList.add("fade-in");
+      btn.innerHTML = `<img src="/img/whatsapp-icon.svg" alt="WhatsApp" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> Falar pelo WhatsApp`;
+      Object.assign(btn.style, {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "10px",
+        padding: "10px",
+        borderRadius: "8px",
+        border: "1px solid #ccc",
+        background: "#fff",
+        color: "#000",
+        cursor: "pointer",
+        fontWeight: "600"
       });
-
-      await say(`<p class="fade-in">Obrigado, <b>${name}</b>. Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico ideal para você.</p>`, 600);
-      await say(`<p class="fade-in">Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp: <a href="https://wa.me/5521995558808" target="_blank" style="color:#c44b04;font-weight:600;">abrir conversa</a></p>`, 1000);
+      btn.onclick = () => {
+        const msg = encodeURIComponent("Olá! Vim do site da Intellih e quero saber mais sobre aplicações de IA no meu negócio.");
+        window.open(`https://wa.me/5521995558808?text=${msg}`, "_blank");
+      };
+      chatBody.appendChild(btn);
       form.remove();
-      scrollToBottom();
     };
-
     chatBody.appendChild(form);
-    scrollToBottom();
   }
 
-  // === ABRIR / FECHAR ===
+  // === ABRIR/FECHAR ===
   chatButton.onclick = () => {
     const open = chatWindow.style.display === "flex";
     if (open) {
