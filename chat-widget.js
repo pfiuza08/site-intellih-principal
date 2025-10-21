@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v5 Final) ===
-// Balão de boas-vindas + Animações + Modo adaptativo escuro/claro
+// === Chat Widget Intellih (v5.1) ===
+// Balão de boas-vindas + Animações + Modo adaptativo escuro/claro + Correção de contraste mobile
 
 document.addEventListener("DOMContentLoaded", () => {
   // Detecta se o fundo do site é escuro
@@ -10,15 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Cores adaptativas
   const bgPanel = isDark ? "#181818" : "#ffffff";
-  const textColor = isDark ? "#f0f0f0" : "#222";
-  const inputBg = isDark ? "#222" : "#fff";
-  const inputBorder = isDark ? "#555" : "#ccc";
-  const formBg = isDark ? "#1e1e1e" : "#f8f8f8";
+  const textColor = isDark ? "#f5f5f5" : "#222";
+  const inputBg = isDark ? "#242424" : "#fff";
+  const inputBorder = isDark ? "#444" : "#ccc";
+  const formBg = isDark ? "#1a1a1a" : "#f9f9f9";
 
   // === BOTÃO FLUTUANTE ===
   const chatButton = document.createElement("div");
   chatButton.id = "intellih-chat-button";
   chatButton.innerHTML = `<img src="/img/chat-icon.png?v=${Date.now()}" alt="Chat Intellih" style="width:60px;height:60px;">`;
+
   Object.assign(chatButton.style, {
     position: "fixed",
     bottom: "24px",
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     opacity: "0",
     transform: "translateY(20px)"
   });
+
   document.body.appendChild(chatButton);
 
   // Anima o botão após o carregamento
@@ -62,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     zIndex: "999",
     maxWidth: "240px"
   });
+
   document.body.appendChild(welcomeBubble);
 
   setTimeout(() => {
@@ -190,12 +193,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function adjustChatForMobile() {
     if (window.innerWidth <= 480) {
       chatWindow.style.width = "92vw";
-      chatWindow.style.height = "75vh";
+      chatWindow.style.height = "78vh";
       chatWindow.style.right = "4%";
-      chatWindow.style.bottom = "100px";
+      chatWindow.style.bottom = "110px";
       chatWindow.style.fontSize = "15px";
+      chatWindow.style.background = isDark ? "#1a1a1a" : "#ffffff";
     }
   }
+
   window.addEventListener("resize", adjustChatForMobile);
   adjustChatForMobile();
 });
