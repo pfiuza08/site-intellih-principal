@@ -198,11 +198,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = form.name.value.trim();
       const email = form.email.value.trim();
       chatBody.innerHTML += `<p class="fade-in">Obrigado, <b>${name}</b>. Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico de IA ideal para você.</p>`;
-      chatBody.innerHTML += `<p class="fade-in">Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp:</p>`;
+      chatBody.innerHTML += `<p class="fade-in">Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp.</p>`;
 
       const btn = document.createElement("button");
       btn.classList.add("fade-in");
-      btn.innerHTML = `<img src="/img/whatsapp-icon.svg" alt="WhatsApp" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> Falar pelo WhatsApp`;
+      btn.innerHTML = `<alt="WhatsApp" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> Falar pelo WhatsApp`;
       Object.assign(btn.style, {
         display: "inline-flex",
         alignItems: "center",
