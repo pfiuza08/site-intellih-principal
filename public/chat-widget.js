@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v20) ===
-// Fluxo aprimorado, destaque do nicho e exibição sequencial correta
+// === Chat Widget Intellih (v21) ===
+// Correção de sequência + animações suaves nas ideias + layout consistente
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -13,9 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputBorder = isDark ? "#555" : "#ccc";
   const formBg = isDark ? "#1e1e1e" : "#f8f8f8";
 
-  let selectedNiche = null;
-
-  // === BOTÃO FLUTUANTE ===
+  // === BOTÃO DO CHAT ===
   const chatButton = document.createElement("div");
   chatButton.innerHTML = `<img src="/img/chat-icon.png?v=${Date.now()}" alt="Chat Intellih" style="width:64px;height:64px;">`;
   Object.assign(chatButton.style, {
@@ -71,71 +69,43 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatWindow = chatBox.querySelector(":scope > div");
   const chatBody = chatBox.querySelector("#chat-body");
 
-  // === INDICADOR DE DIGITAÇÃO ===
-  const typing = document.createElement("div");
-  typing.style.cssText = "opacity:0;transition:opacity .25s ease;margin:6px 0;";
-  typing.innerHTML = `
-    <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#bbb;margin-right:4px;animation:blink 1s infinite alternate;"></span>
-    <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#bbb;margin-right:4px;animation:blink 1s .2s infinite alternate;"></span>
-    <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#bbb;animation:blink 1s .4s infinite alternate;"></span>`;
-  const keyframes = document.createElement("style");
-  keyframes.textContent = `@keyframes blink { from{opacity:.3} to{opacity:1} }`;
-  document.head.appendChild(keyframes);
-
-  let typingOn = false;
-  function showTyping() {
-    if (typingOn) return;
-    typingOn = true;
-    chatBody.appendChild(typing);
-    requestAnimationFrame(() => (typing.style.opacity = "1"));
-  }
-  function hideTyping() {
-    if (!typingOn) return;
-    typing.style.opacity = "0";
-    setTimeout(() => {
-      if (typing.parentNode) typing.remove();
-      typingOn = false;
-    }, 200);
-  }
-
-  // === FILA DE MENSAGENS ===
-  const msgQueue = [];
-  let processing = false;
-
-  function say(html, delay = 800) {
-    msgQueue.push({ html, delay });
-    if (!processing) processQueue();
-  }
-
-  async function processQueue() {
-    processing = true;
-    while (msgQueue.length) {
-      const { html, delay } = msgQueue.shift();
-      showTyping();
-      await new Promise((r) => setTimeout(r, delay));
-      hideTyping();
-      const msg = document.createElement("div");
-      msg.innerHTML = html;
-      msg.style.opacity = "0";
-      msg.style.transition = "opacity .35s ease";
-      msg.style.marginBottom = "8px";
-      chatBody.appendChild(msg);
-      chatBody.scrollTop = chatBody.scrollHeight;
-      requestAnimationFrame(() => (msg.style.opacity = "1"));
+  // === ANIMAÇÕES DE ENTRADA ===
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes fadeSlide { 
+      from { opacity:0; transform:translateY(10px); } 
+      to { opacity:1; transform:translateY(0); } 
     }
-    processing = false;
+    .fade-in {
+      opacity:0;
+      animation: fadeSlide 0.6s ease forwards;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // === FUNÇÕES DE MENSAGENS ===
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  async function say(text, delay = 800) {
+    await sleep(delay);
+    const msg = document.createElement("div");
+    msg.innerHTML = text;
+    msg.classList.add("fade-in");
+    msg.style.marginBottom = "8px";
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
   }
 
-  // === CONVERSA INICIAL ===
-  const startConversation = () => {
+  // === FLUXO INICIAL ===
+  async function startConversation() {
     chatBody.innerHTML = "";
-    say(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 800);
-    say(`<p>Trabalhamos com soluções em Inteligência Artificial para empresas e profissionais que desejam automatizar processos e acelerar resultados.</p>`, 1600);
-    say(`<p>Quer ver onde a IA pode ser aplicada no seu negócio?</p>`, 2500);
-    setTimeout(showNicheOptions, 3400);
-  };
+    await say(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 500);
+    await say(`<p>Trabalhamos com soluções em Inteligência Artificial para empresas e profissionais que desejam automatizar processos e acelerar resultados.</p>`, 900);
+    await say(`<p>Quer ver onde a IA pode ser aplicada no seu negócio?</p>`, 900);
+    showNicheOptions();
+  }
 
-  const showNicheOptions = () => {
+  // === OPÇÕES DE NICHO ===
+  function showNicheOptions() {
     const options = document.createElement("div");
     Object.assign(options.style, {
       display: "flex",
@@ -163,16 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
         cursor: "pointer",
         fontWeight: "600"
       });
-      btn.addEventListener("click", () => {
-        selectedNiche = opt;
-        showApplications(opt);
-      });
+      btn.onclick = () => showApplications(opt);
       options.appendChild(btn);
     });
     chatBody.appendChild(options);
-  };
+  }
 
-  const showApplications = (niche) => {
+  // === EXIBE AS IDEIAS COM CONTROLE DE FLUXO ===
+  async function showApplications(niche) {
     chatBody.innerHTML = `
       <p><span style="font-weight:700;text-decoration:underline;">${niche}</span></p>
       <p>Veja exemplos práticos de aplicação de IA:</p>
@@ -201,21 +169,18 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     };
 
-    let delay = 600;
-    ideas[niche].forEach((idea, idx) => {
-      say(`<p style="margin:6px 0;">${idea}</p>`, delay + idx * 700);
-    });
+    for (const idea of ideas[niche]) {
+      await say(`<p class="fade-in" style="margin:6px 0;">${idea}</p>`, 900);
+    }
 
-    const totalDelay = delay + ideas[niche].length * 800 + 800;
-    setTimeout(() => {
-      say(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões específicas para o seu caso?</p>`, 600);
-      showContactForm();
-    }, totalDelay);
-  };
+    await say(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões específicas para o seu caso?</p>`, 1000);
+    showContactForm();
+  }
 
   // === FORMULÁRIO ===
-  const showContactForm = () => {
+  function showContactForm() {
     const form = document.createElement("form");
+    form.classList.add("fade-in");
     form.innerHTML = `
       <input type="text" name="name" placeholder="Seu nome" required style="
         width:100%;padding:10px;margin:8px 0;border:1px solid ${inputBorder};
@@ -228,14 +193,15 @@ document.addEventListener("DOMContentLoaded", () => {
         border-radius:8px;font-weight:600;cursor:pointer;font-size:15px;">
         Enviar
       </button>`;
-    form.addEventListener("submit", (e) => {
+    form.onsubmit = (e) => {
       e.preventDefault();
       const name = form.name.value.trim();
       const email = form.email.value.trim();
-      say(`<p>Obrigado, <b>${name}</b>. Sua solicitação foi registrada. Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico de IA ideal para você.</p>`, 600);
-      say(`<p>Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp:</p>`, 1800);
+      chatBody.innerHTML += `<p class="fade-in">Obrigado, <b>${name}</b>. Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico de IA ideal para você.</p>`;
+      chatBody.innerHTML += `<p class="fade-in">Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp:</p>`;
 
       const btn = document.createElement("button");
+      btn.classList.add("fade-in");
       btn.innerHTML = `<img src="/img/whatsapp-icon.svg" alt="WhatsApp" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> Falar pelo WhatsApp`;
       Object.assign(btn.style, {
         display: "inline-flex",
@@ -255,15 +221,15 @@ document.addEventListener("DOMContentLoaded", () => {
         window.open(`https://wa.me/5521995558808?text=${msg}`, "_blank");
       };
       chatBody.appendChild(btn);
-      form.reset();
-    });
+      form.remove();
+    };
     chatBody.appendChild(form);
-  };
+  }
 
-  // === ABRIR / FECHAR ===
-  chatButton.addEventListener("click", () => {
-    const isOpen = chatWindow.style.display === "flex";
-    if (isOpen) {
+  // === ABRIR/FECHAR ===
+  chatButton.onclick = () => {
+    const open = chatWindow.style.display === "flex";
+    if (open) {
       chatWindow.style.opacity = "0";
       chatWindow.style.transform = "translateY(20px)";
       setTimeout(() => (chatWindow.style.display = "none"), 300);
@@ -276,15 +242,14 @@ document.addEventListener("DOMContentLoaded", () => {
         chatWindow.style.transform = "translateY(0)";
       }, 10);
     }
-  });
-
-  chatBox.querySelector("#close-chat").addEventListener("click", () => {
+  };
+  chatBox.querySelector("#close-chat").onclick = () => {
     chatWindow.style.opacity = "0";
     chatWindow.style.transform = "translateY(20px)";
     setTimeout(() => (chatWindow.style.display = "none"), 300);
-  });
+  };
 
-  // === AJUSTE MOBILE ===
+  // === MOBILE ===
   function adjustChatForMobile() {
     if (window.innerWidth <= 480) {
       chatWindow.style.width = "92vw";
