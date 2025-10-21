@@ -1,5 +1,5 @@
-// === Chat Widget Intellih (v14) ===
-// Conversa natural + Indicador de digitação + Diagnóstico personalizado + Botão WhatsApp fixo
+// === Chat Widget Intellih (v15) ===
+// Conversa consultiva + nichos + aplicações + WhatsApp + design preto e branco
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgColor = window.getComputedStyle(document.body).backgroundColor;
@@ -11,103 +11,128 @@ document.addEventListener("DOMContentLoaded", () => {
   const textColor = isDark ? "#f0f0f0" : "#222";
   const inputBg = isDark ? "#222" : "#fff";
   const inputBorder = isDark ? "#555" : "#ccc";
+  const formBg = isDark ? "#1e1e1e" : "#f8f8f8";
 
   let selectedNiche = null;
 
-  // === BOTÃO DO CHAT ===
+  // === BOTÃO FLUTUANTE DO CHAT ===
   const chatButton = document.createElement("div");
   chatButton.innerHTML = `<img src="/img/chat-icon.png?v=${Date.now()}" alt="Chat Intellih" style="width:64px;height:64px;">`;
   Object.assign(chatButton.style, {
-    position: "fixed", bottom: "24px", right: "24px",
-    cursor: "pointer", zIndex: "1000", borderRadius: "50%",
-    background: "#fff", padding: "6px",
+    position: "fixed",
+    bottom: "24px",
+    right: "24px",
+    cursor: "pointer",
+    zIndex: "1000",
+    borderRadius: "50%",
+    background: "#fff",
+    padding: "6px",
     boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
     transition: "transform .25s ease, opacity .25s ease",
-    opacity: "0", transform: "translateY(20px)"
+    opacity: "0",
+    transform: "translateY(20px)"
   });
   document.body.appendChild(chatButton);
-  setTimeout(() => { chatButton.style.opacity = "1"; chatButton.style.transform = "translateY(0)"; }, 600);
+  setTimeout(() => {
+    chatButton.style.opacity = "1";
+    chatButton.style.transform = "translateY(0)";
+  }, 600);
 
-  // === BOTÃO FIXO DO WHATSAPP ===
+  // === BOTÃO FIXO DO WHATSAPP (PRETO E BRANCO) ===
   const whatsappButton = document.createElement("div");
-  whatsappButton.innerHTML = `<img src="/img/whatsapp-icon.png?v=${Date.now()}" alt="WhatsApp Intellih" style="width:60px;height:60px;">`;
+  whatsappButton.innerHTML = `<img src="/img/whatsapp-icon.svg?v=${Date.now()}" alt="WhatsApp Intellih" style="width:60px;height:60px;">`;
   Object.assign(whatsappButton.style, {
-    position: "fixed", bottom: "100px", right: "24px",
-    cursor: "pointer", zIndex: "999", borderRadius: "50%",
-    background: "#25d366", padding: "6px",
+    position: "fixed",
+    bottom: "100px",
+    right: "24px",
+    cursor: "pointer",
+    zIndex: "999",
+    borderRadius: "50%",
+    background: "transparent",
+    padding: "0",
     boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
     transition: "transform .25s ease, opacity .25s ease",
-    opacity: "0", transform: "translateY(20px)"
+    opacity: "0",
+    transform: "translateY(20px)"
   });
   whatsappButton.addEventListener("click", () => {
     const msg = encodeURIComponent("Olá! Vim do site da Intellih e quero saber mais sobre aplicações de IA no meu negócio.");
     window.open(`https://wa.me/5521995558808?text=${msg}`, "_blank");
   });
   document.body.appendChild(whatsappButton);
-  setTimeout(() => { whatsappButton.style.opacity = "1"; whatsappButton.style.transform = "translateY(0)"; }, 800);
+  setTimeout(() => {
+    whatsappButton.style.opacity = "1";
+    whatsappButton.style.transform = "translateY(0)";
+  }, 800);
 
-  // === BALÃO DE ABERTURA ===
+  // === BALÃO DE APRESENTAÇÃO ===
   const welcomeBubble = document.createElement("div");
-  welcomeBubble.innerHTML = `<b>Quer descobrir onde aplicar Inteligência Artificial no seu negócio?</b>`;
+  welcomeBubble.innerHTML = `<b>Quer ver onde a Inteligência Artificial pode ser aplicada no seu negócio?</b>`;
   Object.assign(welcomeBubble.style, {
-    position: "fixed", bottom: "170px", right: "100px",
-    background: "#fff", color: "#222", padding: "10px 14px",
-    borderRadius: "16px", boxShadow: "0 3px 12px rgba(0,0,0,.25)",
-    fontFamily: "Inter, system-ui, sans-serif", fontSize: "14px", lineHeight: "1.4",
-    opacity: "0", transform: "translateY(10px)", transition: "opacity .6s ease, transform .6s ease",
-    zIndex: "999", maxWidth: "280px"
+    position: "fixed",
+    bottom: "170px",
+    right: "100px",
+    background: "#fff",
+    color: "#222",
+    padding: "10px 14px",
+    borderRadius: "16px",
+    boxShadow: "0 3px 12px rgba(0,0,0,.25)",
+    fontFamily: "Inter, system-ui, sans-serif",
+    fontSize: "14px",
+    lineHeight: "1.4",
+    opacity: "0",
+    transform: "translateY(10px)",
+    transition: "opacity .6s ease, transform .6s ease",
+    zIndex: "999",
+    maxWidth: "280px"
   });
   document.body.appendChild(welcomeBubble);
-  setTimeout(() => { welcomeBubble.style.opacity = "1"; welcomeBubble.style.transform = "translateY(0)"; }, 1800);
-  setTimeout(() => { welcomeBubble.style.opacity = "0"; welcomeBubble.style.transform = "translateY(10px)"; setTimeout(() => welcomeBubble.remove(), 800); }, 8000);
+  setTimeout(() => {
+    welcomeBubble.style.opacity = "1";
+    welcomeBubble.style.transform = "translateY(0)";
+  }, 1800);
+  setTimeout(() => {
+    welcomeBubble.style.opacity = "0";
+    welcomeBubble.style.transform = "translateY(10px)";
+    setTimeout(() => welcomeBubble.remove(), 800);
+  }, 8000);
 
   // === JANELA DO CHAT ===
   const chatBox = document.createElement("div");
   chatBox.id = "intellih-chat-box";
   chatBox.innerHTML = `
     <div style="
-      background:${bgPanel}; color:${textColor};
-      border-radius:16px; width:360px; height:520px;
-      position:fixed; bottom:100px; right:20px;
+      background:${bgPanel};
+      color:${textColor};
+      border-radius:16px;
+      width:360px;
+      height:520px;
+      position:fixed;
+      bottom:100px;
+      right:20px;
       box-shadow:0 5px 20px rgba(0,0,0,.3);
-      display:none; flex-direction:column;
+      display:none;
+      flex-direction:column;
       font-family:Inter,system-ui,sans-serif;
-      overflow:hidden; z-index:1001;
-      opacity:0; transform:translateY(20px);
+      overflow:hidden;
+      z-index:1001;
+      opacity:0;
+      transform:translateY(20px);
       transition:opacity .3s ease, transform .3s ease;">
-      
-      <div style="background:#c44b04;color:#fff;padding:14px;font-weight:600;
-                  display:flex;justify-content:space-between;align-items:center;">
+      <div style="background:#c44b04;color:#fff;padding:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center;">
         <span>Assistente Intellih</span>
         <span id="close-chat" style="cursor:pointer;font-size:18px;">✕</span>
       </div>
-
       <div id="chat-body" style="flex:1;padding:14px;overflow-y:auto;font-size:14px;line-height:1.5;"></div>
-    </div>
-  `;
+    </div>`;
   document.body.appendChild(chatBox);
 
   const chatWindow = chatBox.querySelector(":scope > div");
   const chatBody = chatBox.querySelector("#chat-body");
 
-  // === Efeito de digitação ===
-  const typingIndicator = document.createElement("div");
-  typingIndicator.innerHTML = `<span style="font-style:italic;color:${textColor};opacity:0.7">Assistente digitando...</span>`;
-  Object.assign(typingIndicator.style, {marginTop:"4px"});
-
-  const showTyping = () => {
-    chatBody.appendChild(typingIndicator);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  };
-
-  const hideTyping = () => {
-    if (typingIndicator.parentNode) typingIndicator.remove();
-  };
-
-  const addMessage = (html, delay = 1000) => {
-    showTyping();
+  // === Funções de mensagens ===
+  const addMessage = (html, delay = 800) => {
     setTimeout(() => {
-      hideTyping();
       const msg = document.createElement("div");
       msg.innerHTML = html;
       chatBody.appendChild(msg);
@@ -115,84 +140,88 @@ document.addEventListener("DOMContentLoaded", () => {
     }, delay);
   };
 
-  // === Fluxo principal ===
+  // === Fluxo da conversa ===
   const startConversation = () => {
     chatBody.innerHTML = "";
-    addMessage(`<p>Olá! Eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 800);
-    addMessage(`<p>Trabalhamos com estratégias, automações e agentes de IA para gerar resultados reais em empresas e profissionais.</p>`, 1500);
-    addMessage(`<p>Quer ver onde a Inteligência Artificial pode gerar mais impacto para você?</p>`, 2200);
-    setTimeout(showNiches, 3400);
+    addMessage(`<p>Olá, eu sou o assistente da <b>Intellih Tecnologia</b>.</p>`, 800);
+    addMessage(`<p>Trabalhamos com soluções em Inteligência Artificial para empresas e profissionais que querem automatizar processos e acelerar resultados.</p>`, 1600);
+    addMessage(`<p>Quer ver onde a IA pode ser aplicada no seu negócio?</p>`, 2500);
+    setTimeout(showNicheOptions, 3400);
   };
 
-  const showNiches = () => {
+  const showNicheOptions = () => {
     const options = document.createElement("div");
     Object.assign(options.style, {
-      display: "flex", flexDirection: "column", gap: "8px", marginTop: "12px"
+      display: "flex",
+      flexDirection: "column",
+      gap: "8px",
+      marginTop: "12px"
     });
 
     const niches = [
-      "Vendas e Crescimento",
+      "Vendas e Marketing",
       "Atendimento e Experiência do Cliente",
       "Operações e Eficiência Interna",
       "Profissionais e Consultores"
     ];
 
-    addMessage(`<p>Escolha abaixo o que melhor representa você:</p>`, 500);
-
-    setTimeout(() => {
-      niches.forEach((opt) => {
-        const btn = document.createElement("button");
-        btn.textContent = opt;
-        Object.assign(btn.style, {
-          padding: "10px", borderRadius: "8px", border: "1px solid #c44b04",
-          background: "#fff", color: "#c44b04", cursor: "pointer", fontWeight: "600"
-        });
-        btn.addEventListener("click", () => {
-          selectedNiche = opt;
-          showApplications(opt);
-        });
-        options.appendChild(btn);
+    niches.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.textContent = opt;
+      Object.assign(btn.style, {
+        padding: "10px",
+        borderRadius: "8px",
+        border: "1px solid #c44b04",
+        background: "#fff",
+        color: "#c44b04",
+        cursor: "pointer",
+        fontWeight: "600"
       });
-      chatBody.appendChild(options);
-    }, 1200);
+      btn.addEventListener("click", () => {
+        selectedNiche = opt;
+        showApplications(opt);
+      });
+      options.appendChild(btn);
+    });
+    chatBody.appendChild(options);
   };
 
   const showApplications = (niche) => {
-    chatBody.innerHTML = `<p><b>${niche}</b> — veja algumas formas práticas de aplicar IA:</p>`;
+    chatBody.innerHTML = `<p><b>${niche}</b> — veja exemplos práticos de aplicação de IA:</p>`;
 
     const ideas = {
-      "Vendas e Crescimento": [
-        "IA que analisa leads e prevê conversão.",
-        "Gerador automático de campanhas e textos.",
-        "Painéis com métricas e alertas inteligentes."
+      "Vendas e Marketing": [
+        "Análise automática de leads e previsão de conversão.",
+        "Geração de campanhas e textos persuasivos com IA.",
+        "Painéis de métricas com alertas inteligentes."
       ],
       "Atendimento e Experiência do Cliente": [
-        "Agente virtual com conhecimento da empresa.",
-        "IA que identifica insatisfação e retém clientes.",
-        "Respostas automáticas com linguagem natural."
+        "Agentes virtuais personalizados com linguagem natural.",
+        "Análise de sentimentos para retenção de clientes.",
+        "Respostas automáticas baseadas em contexto real."
       ],
       "Operações e Eficiência Interna": [
         "Automação de relatórios e dashboards.",
         "Assistentes internos para equipes operacionais.",
-        "IA que otimiza rotinas e detecta gargalos."
+        "IA que identifica gargalos e otimiza rotinas."
       ],
       "Profissionais e Consultores": [
-        "Chat de atendimento automatizado para captar clientes.",
-        "IA que gera conteúdo e textos para redes sociais.",
-        "Agente pessoal que organiza tarefas e agenda."
+        "Chats inteligentes para captação de clientes.",
+        "Geração de conteúdo automatizado para redes sociais.",
+        "Assistente pessoal para organização e produtividade."
       ]
     };
 
     let delay = 800;
-    ideas[niche].forEach((i) => addMessage(`<p>${i}</p>`, delay += 700));
+    ideas[niche].forEach((i) => addMessage(`<p>${i}</p>`, (delay += 700)));
 
     setTimeout(() => {
-      addMessage(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões personalizadas para o seu caso?</p>`, delay + 500);
-      showLeadForm();
+      addMessage(`<p>Deseja receber um <b>diagnóstico gratuito</b> com sugestões específicas para o seu caso?</p>`, delay + 800);
+      showContactForm();
     }, delay + 1000);
   };
 
-  const showLeadForm = () => {
+  const showContactForm = () => {
     const form = document.createElement("form");
     form.innerHTML = `
       <input type="text" name="name" placeholder="Seu nome" required style="
@@ -204,33 +233,35 @@ document.addEventListener("DOMContentLoaded", () => {
       <button type="submit" style="
         width:100%;padding:10px;background:#c44b04;color:#fff;border:none;
         border-radius:8px;font-weight:600;cursor:pointer;font-size:15px;">
-        Receber diagnóstico
+        Enviar
       </button>`;
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const name = form.name.value.trim();
       const email = form.email.value.trim();
-      const msgNiche = selectedNiche
-        ? `Estamos preparando um diagnóstico de IA voltado para <b>${selectedNiche.toLowerCase()}</b>.`
-        : `Estamos preparando um diagnóstico de IA personalizado para você.`;
-
-      addMessage(`<p>Obrigado, <b>${name}</b>! Em breve você receberá no e-mail <b>${email}</b> suas sugestões práticas de aplicação de IA. ${msgNiche}</p>`, 600);
-      addMessage(`<p>Se preferir, você pode falar conosco agora mesmo pelo WhatsApp.</p>`, 1600);
+      addMessage(`<p>Obrigado, <b>${name}</b>. Sua solicitação foi registrada. Em breve entraremos em contato pelo e-mail <b>${email}</b> com o diagnóstico de IA ideal para você.</p>`, 600);
+      addMessage(`<p>Se preferir, fale agora mesmo com nossa equipe pelo WhatsApp:</p>`, 1400);
 
       const btn = document.createElement("button");
-      btn.textContent = "Falar pelo WhatsApp";
+      btn.innerHTML = `<img src="/img/whatsapp-icon.svg" alt="WhatsApp" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> Falar pelo WhatsApp`;
       Object.assign(btn.style, {
-        marginTop: "10px", padding: "10px", borderRadius: "8px",
-        border: "none", background: "#25d366", color: "#fff",
-        cursor: "pointer", fontWeight: "600"
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "10px",
+        padding: "10px",
+        borderRadius: "8px",
+        border: "1px solid #ccc",
+        background: "#fff",
+        color: "#000",
+        cursor: "pointer",
+        fontWeight: "600"
       });
       btn.onclick = () => {
         const msg = encodeURIComponent("Olá! Vim do site da Intellih e quero saber mais sobre aplicações de IA no meu negócio.");
         window.open(`https://wa.me/5521995558808?text=${msg}`, "_blank");
       };
       chatBody.appendChild(btn);
-
-      if (typeof fbq === "function") fbq("track", "Lead");
       form.reset();
     });
     chatBody.appendChild(form);
