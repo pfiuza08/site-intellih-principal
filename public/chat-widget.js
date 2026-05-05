@@ -81,14 +81,14 @@
         cursor: pointer;
         z-index: 1000;
         box-shadow: 0 12px 34px rgba(196,75,4,.28);
-        transition: transform .22s ease, opacity .22s ease, box-shadow .22s ease;
+        transition: trans .22s ease, opacity .22s ease, box-shadow .22s ease;
         opacity: 0;
-        transform: translateY(18px);
+        trans: translateY(18px);
         animation: intellihPulse 3.2s ease-in-out infinite;
       }
 
       #intellih-chat-button:hover {
-        transform: translateY(-2px) scale(1.02);
+        trans: translateY(-2px) scale(1.02);
       }
 
       #intellih-chat-button svg {
@@ -111,8 +111,8 @@
         font-size: 14px;
         box-shadow: 0 10px 30px rgba(0,0,0,.28);
         opacity: 0;
-        transform: translateY(10px);
-        transition: opacity .35s ease, transform .35s ease;
+        trans: translateY(10px);
+        transition: opacity .35s ease, trans .35s ease;
         pointer-events: none;
         max-width: 290px;
         white-space: nowrap;
@@ -137,8 +137,8 @@
         box-shadow: 0 24px 80px rgba(0,0,0,.42);
         font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
         opacity: 0;
-        transform: translateY(18px);
-        transition: opacity .28s ease, transform .28s ease;
+        trans: translateY(18px);
+        transition: opacity .28s ease, trans .28s ease;
       }
 
       .intellih-chat-header {
@@ -256,11 +256,11 @@
         cursor: pointer;
         font-weight: 750;
         font-family: inherit;
-        transition: transform .12s ease, background .2s ease, border-color .2s ease;
+        transition: trans .12s ease, background .2s ease, border-color .2s ease;
       }
 
       .intellih-option:hover {
-        transform: translateY(-1px);
+        trans: translateY(-1px);
         background: rgba(196,75,4,.16);
         border-color: rgba(196,75,4,.6);
       }
@@ -286,14 +286,21 @@
         font-size: 13px;
       }
 
-      .intellih-form {
+           .intellih-form {
         display: grid;
-        gap: 10px;
+        gap: 12px;
         margin-top: 12px;
+        padding: 16px;
+        background: rgba(255,255,255,.06);
+        border: 1px solid rgba(255,255,255,.10);
+        border-radius: 18px;
+        box-shadow: none;
       }
 
       .intellih-form label {
-        color: #f4f4f5;
+        display: grid;
+        gap: 6px;
+        color: #f7f7f8;
         font-size: 13px;
         font-weight: 750;
       }
@@ -302,27 +309,48 @@
       .intellih-form textarea,
       .intellih-form select {
         width: 100%;
-        margin-top: 6px;
-        padding: 11px 12px;
+        margin-top: 0;
+        padding: 12px 13px;
         border-radius: 12px;
-        border: 1px solid rgba(255,255,255,.16);
-        background: rgba(0,0,0,.22);
-        color: #fff;
+        border: 1px solid rgba(255,255,255,.18);
+        background: rgba(0,0,0,.30);
+        color: #ffffff;
         font: inherit;
         font-size: 14px;
+        line-height: 1.45;
         outline: none;
+        box-shadow: none;
+        -webkit-text-fill-color: #ffffff;
+      }
+
+      .intellih-form input:focus,
+      .intellih-form textarea:focus,
+      .intellih-form select:focus {
+        border-color: rgba(233,118,39,.85);
+        box-shadow: 0 0 0 3px rgba(196,75,4,.18);
       }
 
       .intellih-form input::placeholder,
       .intellih-form textarea::placeholder {
-        color: #8f9098;
+        color: #a6a7ae;
+        opacity: 1;
       }
 
       .intellih-form textarea {
         resize: vertical;
-        min-height: 84px;
+        min-height: 92px;
       }
 
+      .intellih-form input:-webkit-autofill,
+      .intellih-form input:-webkit-autofill:hover,
+      .intellih-form input:-webkit-autofill:focus,
+      .intellih-form textarea:-webkit-autofill,
+      .intellih-form select:-webkit-autofill {
+        -webkit-text-fill-color: #ffffff;
+        -webkit-box-shadow: 0 0 0 1000px rgba(0,0,0,.30) inset;
+        box-shadow: 0 0 0 1000px rgba(0,0,0,.30) inset;
+        transition: background-color 9999s ease-in-out 0s;
+      }
       .intellih-submit {
         width: 100%;
         padding: 12px;
@@ -710,7 +738,7 @@
             message: String(err && err.message ? err.message : err)
           });
 
-          showError("Não consegui enviar agora. Tente pelo formulário da página ou pelo WhatsApp.");
+          showError("Não consegui enviar agora. Tente novamente em instantes ou use o formulário da página.");
         }
       };
 
