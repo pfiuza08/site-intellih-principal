@@ -1,4 +1,4 @@
-// === Chat Widget Intellih (v29) ===
+// === Chat Widget Intellih (v31) ===
 // Assistente comercial com foco em presença digital inteligente:
 // sites, páginas de bio, assistentes IA, WhatsApp profissional, FAQ e landing pages.
 
@@ -81,14 +81,14 @@
         cursor: pointer;
         z-index: 1000;
         box-shadow: 0 12px 34px rgba(196,75,4,.28);
-        transition: trans .22s ease, opacity .22s ease, box-shadow .22s ease;
+        transition: transform .22s ease, opacity .22s ease, box-shadow .22s ease;
         opacity: 0;
-        trans: translateY(18px);
+        transform: translateY(18px);
         animation: intellihPulse 3.2s ease-in-out infinite;
       }
 
       #intellih-chat-button:hover {
-        trans: translateY(-2px) scale(1.02);
+        transform: translateY(-2px) scale(1.02);
       }
 
       #intellih-chat-button svg {
@@ -111,8 +111,8 @@
         font-size: 14px;
         box-shadow: 0 10px 30px rgba(0,0,0,.28);
         opacity: 0;
-        trans: translateY(10px);
-        transition: opacity .35s ease, trans .35s ease;
+        transform: translateY(10px);
+        transition: opacity .35s ease, transform .35s ease;
         pointer-events: none;
         max-width: 290px;
         white-space: nowrap;
@@ -137,8 +137,8 @@
         box-shadow: 0 24px 80px rgba(0,0,0,.42);
         font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
         opacity: 0;
-        trans: translateY(18px);
-        transition: opacity .28s ease, trans .28s ease;
+        transform: translateY(18px);
+        transition: opacity .28s ease, transform .28s ease;
       }
 
       .intellih-chat-header {
@@ -256,11 +256,11 @@
         cursor: pointer;
         font-weight: 750;
         font-family: inherit;
-        transition: trans .12s ease, background .2s ease, border-color .2s ease;
+        transition: transform .12s ease, background .2s ease, border-color .2s ease;
       }
 
       .intellih-option:hover {
-        trans: translateY(-1px);
+        transform: translateY(-1px);
         background: rgba(196,75,4,.16);
         border-color: rgba(196,75,4,.6);
       }
@@ -286,86 +286,127 @@
         font-size: 13px;
       }
 
-           .intellih-form {
+      #intellih-chat-window .intellih-form {
         display: grid;
         gap: 12px;
-        margin-top: 12px;
+        margin: 12px 0 0;
         padding: 16px;
-        background: rgba(255,255,255,.06);
-        border: 1px solid rgba(255,255,255,.10);
+        background:
+          radial-gradient(circle at 12% 0, rgba(196,75,4,.18), transparent 38%),
+          rgba(255,255,255,.065);
+        border: 1px solid rgba(255,255,255,.12);
         border-radius: 18px;
-        box-shadow: none;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
       }
 
-      .intellih-form label {
+      #intellih-chat-window .intellih-form,
+      #intellih-chat-window .intellih-form * {
+        box-sizing: border-box;
+      }
+
+      #intellih-chat-window .intellih-form-intro {
+        padding: 12px;
+        border-radius: 14px;
+        background: rgba(0,0,0,.22);
+        border: 1px solid rgba(255,255,255,.09);
+      }
+
+      #intellih-chat-window .intellih-form-intro strong {
+        display: block;
+        color: #ffffff;
+        font-size: 14px;
+        line-height: 1.3;
+        margin-bottom: 4px;
+      }
+
+      #intellih-chat-window .intellih-form-intro span {
+        display: block;
+        color: #cfd0d6;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      #intellih-chat-window .intellih-form label {
         display: grid;
         gap: 6px;
-        color: #f7f7f8;
-        font-size: 13px;
-        font-weight: 750;
+        color: #ffffff;
+        font-size: 12.5px;
+        font-weight: 800;
+        letter-spacing: .01em;
       }
 
-      .intellih-form input,
-      .intellih-form textarea,
-      .intellih-form select {
+      #intellih-chat-window .intellih-form input,
+      #intellih-chat-window .intellih-form textarea,
+      #intellih-chat-window .intellih-form select {
         width: 100%;
         margin-top: 0;
         padding: 12px 13px;
-        border-radius: 12px;
+        border-radius: 13px;
         border: 1px solid rgba(255,255,255,.18);
-        background: rgba(0,0,0,.30);
+        background: rgba(8,8,10,.72);
         color: #ffffff;
         font: inherit;
         font-size: 14px;
         line-height: 1.45;
         outline: none;
         box-shadow: none;
+        appearance: none;
+        -webkit-appearance: none;
         -webkit-text-fill-color: #ffffff;
       }
 
-      .intellih-form input:focus,
-      .intellih-form textarea:focus,
-      .intellih-form select:focus {
-        border-color: rgba(233,118,39,.85);
-        box-shadow: 0 0 0 3px rgba(196,75,4,.18);
+      #intellih-chat-window .intellih-form input:focus,
+      #intellih-chat-window .intellih-form textarea:focus,
+      #intellih-chat-window .intellih-form select:focus {
+        border-color: rgba(233,118,39,.9);
+        background: rgba(0,0,0,.84);
+        box-shadow: 0 0 0 3px rgba(196,75,4,.20);
       }
 
-      .intellih-form input::placeholder,
-      .intellih-form textarea::placeholder {
-        color: #a6a7ae;
+      #intellih-chat-window .intellih-form input::placeholder,
+      #intellih-chat-window .intellih-form textarea::placeholder {
+        color: #a9abb3;
         opacity: 1;
+        -webkit-text-fill-color: #a9abb3;
       }
 
-      .intellih-form textarea {
+      #intellih-chat-window .intellih-form textarea {
         resize: vertical;
-        min-height: 92px;
+        min-height: 96px;
       }
 
-      .intellih-form input:-webkit-autofill,
-      .intellih-form input:-webkit-autofill:hover,
-      .intellih-form input:-webkit-autofill:focus,
-      .intellih-form textarea:-webkit-autofill,
-      .intellih-form select:-webkit-autofill {
+      #intellih-chat-window .intellih-form input:-webkit-autofill,
+      #intellih-chat-window .intellih-form input:-webkit-autofill:hover,
+      #intellih-chat-window .intellih-form input:-webkit-autofill:focus,
+      #intellih-chat-window .intellih-form textarea:-webkit-autofill,
+      #intellih-chat-window .intellih-form select:-webkit-autofill {
         -webkit-text-fill-color: #ffffff;
-        -webkit-box-shadow: 0 0 0 1000px rgba(0,0,0,.30) inset;
-        box-shadow: 0 0 0 1000px rgba(0,0,0,.30) inset;
+        -webkit-box-shadow: 0 0 0 1000px rgba(8,8,10,.92) inset;
+        box-shadow: 0 0 0 1000px rgba(8,8,10,.92) inset;
         transition: background-color 9999s ease-in-out 0s;
       }
-      .intellih-submit {
+
+      #intellih-chat-window .intellih-submit {
         width: 100%;
-        padding: 12px;
+        padding: 13px 14px;
         border: none;
         border-radius: 14px;
-        background: ${BRAND};
+        background: linear-gradient(135deg, ${BRAND}, #e97627);
         color: #fff;
-        font-weight: 850;
+        font-weight: 900;
         cursor: pointer;
         font-family: inherit;
         font-size: 15px;
+        box-shadow: 0 12px 28px rgba(196,75,4,.24);
       }
 
-      .intellih-submit:hover {
-        background: #d95708;
+      #intellih-chat-window .intellih-submit:hover {
+        background: linear-gradient(135deg, #d95708, #f08a3a);
+      }
+
+      #intellih-chat-window .intellih-submit:disabled {
+        opacity: .72;
+        cursor: not-allowed;
       }
 
       .intellih-success {
@@ -392,11 +433,15 @@
         animation: intellihFadeSlide .45s ease forwards;
       }
 
-      .intellih-mini-note {
-        color: ${MUTED};
+      #intellih-chat-window .intellih-mini-note {
+        color: #cfd0d6;
         font-size: 12px;
         line-height: 1.45;
-        margin-top: 4px;
+        margin-top: 0;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: rgba(255,255,255,.045);
+        border: 1px solid rgba(255,255,255,.08);
       }
 
       @media (max-width: 520px) {
@@ -663,6 +708,11 @@
       const form = document.createElement("form");
       form.className = "intellih-form intellih-chat-fade";
       form.innerHTML = `
+        <div class="intellih-form-intro">
+          <strong>Receba uma avaliação inicial</strong>
+          <span>Preencha os dados abaixo para entendermos o melhor caminho para seu site, perfil ou atendimento.</span>
+        </div>
+
         <label>Nome
           <input type="text" name="name" placeholder="Seu nome" required>
         </label>
@@ -695,6 +745,10 @@
         e.preventDefault();
 
         const data = Object.fromEntries(new FormData(form).entries());
+        const submitButton = form.querySelector('.intellih-submit');
+        const originalSubmitText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
         const sending = addTyping();
 
         try {
@@ -739,6 +793,9 @@
           });
 
           showError("Não consegui enviar agora. Tente novamente em instantes ou use o formulário da página.");
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = originalSubmitText;
         }
       };
 
