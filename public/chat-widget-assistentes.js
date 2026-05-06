@@ -1,4 +1,4 @@
-// === Chat Widget Intellih — Assistentes Inteligentes (v1) ===
+// === Chat Widget Intellih — Assistentes Inteligentes (v2) ===
 // Widget específico para a página /assistentes-inteligentes.
 // Não conflita com o chat geral da home porque usa IDs e atributos próprios.
 
@@ -833,6 +833,8 @@
     }
 
     function openChat() {
+      if (chatWindow.style.display === "flex") return;
+
       chatWindow.style.display = "flex";
       chatButton.style.animation = "none";
       chatBubble.style.opacity = "0";
@@ -874,11 +876,7 @@
       }
     });
 
-    // Botões externos da página específica.
-    document.querySelectorAll("[data-open-assistentes-chat], [data-open-intellih-assistentes-chat]").forEach((button) => {
-      button.addEventListener("click", () => {
-        openChat();
-      });
-    });
+    // A abertura por botões externos é tratada no HTML da página.
+    // Evitamos registrar listener aqui para não duplicar a conversa quando o botão externo for clicado.
   });
 })();
