@@ -3,13 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Intellih Tecnologia — Sites e Assistentes Inteligentes com IA</title>
-  <meta name="description" content="A Intellih cria sites, páginas e assistentes inteligentes com IA para ajudar profissionais e pequenos negócios a atender melhor, responder dúvidas frequentes e captar contatos qualificados." />
+  <title>Intellih Tecnologia — Soluções com IA para pessoas e negócios</title>
+  <meta name="description" content="A Intellih cria soluções baseadas em inteligência artificial para facilitar rotinas, organizar informações, melhorar atendimento e transformar oportunidades em resultado." />
   <link rel="canonical" href="https://www.intellih.com.br/" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Intellih — Sites e Assistentes Inteligentes com IA" />
-  <meta property="og:description" content="Presença digital inteligente para profissionais e pequenos negócios: sites, páginas de bio, assistentes com IA, FAQ, WhatsApp profissional e landing pages." />
+  <meta property="og:title" content="Intellih Tecnologia — Soluções com IA para pessoas e negócios" />
+  <meta property="og:description" content="Mentoria, assistentes inteligentes, agentes de IA, capacitação e soluções digitais para aplicar inteligência artificial com método e resultado." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.intellih.com.br/" />
   <meta property="og:image" content="https://www.intellih.com.br/og-image.jpg" />
@@ -20,17 +19,21 @@
     :root {
       --bg: #ffffff;
       --bg-soft: #f7f5f2;
-      --bg-dark: #12100e;
-      --bg-card: #ffffff;
+      --bg-dark: #12100f;
+      --bg-dark-2: #1b1815;
+      --card: #ffffff;
       --text: #191715;
       --text-soft: #5f5a55;
       --muted: #817870;
       --line: #e7e0d8;
       --brand: #c65f22;
       --brand-dark: #944314;
+      --brand-light: #e47c3c;
       --brand-soft: #fff0e7;
       --graphite: #25211e;
-      --radius: 22px;
+      --success: #226b38;
+      --error: #944314;
+      --radius: 24px;
       --shadow: 0 18px 45px rgba(21, 18, 15, 0.10);
       --shadow-soft: 0 10px 28px rgba(21, 18, 15, 0.08);
       --max: 1160px;
@@ -52,11 +55,6 @@
       line-height: 1.6;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
     a {
       color: inherit;
       text-decoration: none;
@@ -64,6 +62,11 @@
 
     p {
       margin: 0 0 1rem;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
     }
 
     .container {
@@ -75,9 +78,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(231, 224, 216, 0.75);
+      border-bottom: 1px solid rgba(231, 224, 216, 0.78);
     }
 
     .nav {
@@ -92,29 +95,29 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      font-weight: 800;
+      font-weight: 850;
       letter-spacing: -0.03em;
-      font-size: 1.1rem;
+      font-size: 1.08rem;
     }
 
     .brand-mark {
       width: 42px;
       height: 42px;
       border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand), #f19a57);
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
       color: #fff;
       display: grid;
       place-items: center;
       font-weight: 900;
-      box-shadow: 0 10px 24px rgba(198, 95, 34, 0.28);
+      box-shadow: 0 10px 24px rgba(198, 95, 34, 0.24);
     }
 
     .nav-links {
       display: flex;
+      gap: 20px;
       align-items: center;
-      gap: 22px;
-      font-size: 0.96rem;
       color: var(--text-soft);
+      font-size: 0.95rem;
     }
 
     .nav-links a:hover {
@@ -123,8 +126,8 @@
 
     .nav-actions {
       display: flex;
+      gap: 10px;
       align-items: center;
-      gap: 12px;
     }
 
     .menu-btn {
@@ -135,7 +138,7 @@
       padding: 10px 12px;
       cursor: pointer;
       color: var(--text);
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .btn {
@@ -143,15 +146,16 @@
       align-items: center;
       justify-content: center;
       gap: 9px;
-      border: 0;
+      min-height: 48px;
       border-radius: 999px;
       padding: 13px 20px;
-      min-height: 48px;
-      font-weight: 750;
+      border: 0;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      font: inherit;
       font-size: 0.96rem;
+      font-weight: 820;
       white-space: nowrap;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
     }
 
     .btn:hover {
@@ -171,7 +175,7 @@
     .btn-secondary {
       background: var(--graphite);
       color: #fff;
-      box-shadow: 0 14px 30px rgba(21, 18, 15, 0.20);
+      box-shadow: 0 14px 30px rgba(21, 18, 15, 0.18);
     }
 
     .btn-light {
@@ -180,21 +184,27 @@
       border: 1px solid var(--line);
     }
 
+    .btn-ghost {
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 86px 0 56px;
+      padding: 92px 0 66px;
       background:
-        radial-gradient(circle at 10% 15%, rgba(198, 95, 34, 0.16), transparent 28%),
-        radial-gradient(circle at 90% 5%, rgba(37, 33, 30, 0.10), transparent 28%),
+        radial-gradient(circle at 12% 12%, rgba(198, 95, 34, 0.16), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(37, 33, 30, 0.10), transparent 30%),
         linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1.08fr 0.92fr;
+      gap: 56px;
       align-items: center;
-      gap: 54px;
     }
 
     .eyebrow {
@@ -207,7 +217,7 @@
       border-radius: 999px;
       padding: 8px 13px;
       font-size: 0.88rem;
-      font-weight: 760;
+      font-weight: 840;
       margin-bottom: 20px;
     }
 
@@ -216,7 +226,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--brand);
-      box-shadow: 0 0 0 5px rgba(198, 95, 34, 0.15);
+      box-shadow: 0 0 0 5px rgba(198, 95, 34, 0.14);
     }
 
     h1, h2, h3 {
@@ -227,14 +237,22 @@
     }
 
     h1 {
-      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-size: clamp(2.6rem, 5.2vw, 5rem);
       max-width: 980px;
     }
 
-    .hero p.lead {
+    h2 {
+      font-size: clamp(2rem, 3.4vw, 3.2rem);
+    }
+
+    h3 {
+      font-size: 1.32rem;
+    }
+
+    .lead {
       font-size: clamp(1.08rem, 1.45vw, 1.3rem);
       color: var(--text-soft);
-      max-width: 690px;
+      max-width: 720px;
       margin: 24px 0 0;
     }
 
@@ -246,139 +264,115 @@
     }
 
     .hero-note {
-      margin-top: 22px;
+      margin-top: 20px;
       color: var(--muted);
       font-size: 0.96rem;
-      max-width: 620px;
+      max-width: 680px;
     }
 
-    .hero-card {
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid rgba(231, 224, 216, 0.9);
-      border-radius: 32px;
+    .hero-panel {
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(231,224,216,.92);
+      border-radius: 34px;
+      padding: 24px;
       box-shadow: var(--shadow);
-      padding: 20px;
+    }
+
+    .ai-map {
+      border-radius: 26px;
+      background: var(--graphite);
+      color: #fff;
+      padding: 22px;
+      overflow: hidden;
       position: relative;
     }
 
-    .browser {
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      overflow: hidden;
-      background: #fff;
+    .ai-map::before {
+      content: "";
+      position: absolute;
+      inset: -80px -80px auto auto;
+      width: 190px;
+      height: 190px;
+      background: radial-gradient(circle, rgba(198,95,34,.36), transparent 60%);
     }
 
-    .browser-bar {
-      height: 44px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0 16px;
-      background: #f4eee8;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .browser-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #c7b9ae;
-    }
-
-    .browser-content {
-      padding: 20px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .mock-section {
-      min-height: 72px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #fbf8f5, #fff);
-      border: 1px solid #eee5dd;
-      padding: 16px;
-    }
-
-    .mock-line {
-      height: 10px;
-      border-radius: 999px;
-      background: #e8ded5;
-      margin-bottom: 10px;
-    }
-
-    .mock-line.w70 { width: 70%; }
-    .mock-line.w55 { width: 55%; }
-    .mock-line.w42 { width: 42%; }
-
-    .assistant-box {
-      background: var(--graphite);
-      color: #fff;
-      border-radius: 22px;
-      padding: 18px;
-      box-shadow: 0 22px 40px rgba(37, 33, 30, 0.22);
-    }
-
-    .assistant-top {
+    .ai-map-head {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 16px;
+      margin-bottom: 18px;
     }
 
-    .assistant-name {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
+    .ai-map-head strong {
+      display: block;
+      font-size: 1.05rem;
+      line-height: 1.2;
     }
 
-    .assistant-avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 12px;
+    .ai-map-head span {
+      display: block;
+      color: #d8d0c8;
+      font-size: 0.86rem;
+      margin-top: 3px;
+    }
+
+    .ai-badge {
+      width: 50px;
+      height: 50px;
+      border-radius: 18px;
       display: grid;
       place-items: center;
-      background: var(--brand);
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
       color: #fff;
+      font-weight: 950;
+      box-shadow: 0 16px 32px rgba(198,95,34,.24);
+      flex-shrink: 0;
+    }
+
+    .ai-items {
+      position: relative;
+      display: grid;
+      gap: 12px;
+    }
+
+    .ai-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .ai-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(198,95,34,.16);
+      color: #ffd7c1;
       font-weight: 900;
     }
 
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: #d9d2cb;
-      font-size: 0.82rem;
+    .ai-item strong {
+      display: block;
+      line-height: 1.25;
+      margin-bottom: 3px;
     }
 
-    .status span {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #66dc8a;
-    }
-
-    .bubble {
-      padding: 12px 14px;
-      border-radius: 16px;
-      font-size: 0.94rem;
-      margin-bottom: 10px;
-    }
-
-    .bubble.bot {
-      background: rgba(255, 255, 255, 0.10);
-      color: #fff;
-    }
-
-    .bubble.user {
-      background: #fff;
-      color: var(--text);
-      margin-left: 34px;
+    .ai-item span {
+      color: #d8d0c8;
+      font-size: 0.92rem;
+      line-height: 1.42;
     }
 
     section {
-      padding: 74px 0;
+      padding: 76px 0;
     }
 
     .section-soft {
@@ -396,40 +390,36 @@
     }
 
     .section-dark p,
-    .section-dark .section-intro,
-    .section-dark li {
+    .section-dark li,
+    .section-dark .section-intro {
       color: #d8d0c8;
     }
 
     .section-head {
-      max-width: 760px;
-      margin-bottom: 34px;
+      max-width: 790px;
+      margin-bottom: 36px;
     }
 
     .section-kicker {
       color: var(--brand);
-      font-weight: 820;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-size: 0.78rem;
       margin-bottom: 10px;
     }
 
-    h2 {
-      font-size: clamp(2rem, 3.4vw, 3.2rem);
-    }
-
     .section-intro {
-      margin-top: 16px;
       color: var(--text-soft);
       font-size: 1.06rem;
-      max-width: 760px;
+      margin-top: 16px;
+      max-width: 790px;
     }
 
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
+      gap: 28px;
     }
 
     .grid-3 {
@@ -445,7 +435,7 @@
     }
 
     .card {
-      background: var(--bg-card);
+      background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 24px;
@@ -453,8 +443,7 @@
     }
 
     .card h3 {
-      font-size: 1.35rem;
-      margin-bottom: 12px;
+      margin-bottom: 11px;
     }
 
     .card p {
@@ -462,20 +451,62 @@
     }
 
     .icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 15px;
-      background: var(--brand-soft);
-      color: var(--brand-dark);
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
       display: grid;
       place-items: center;
-      font-size: 1.25rem;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      font-size: 1.1rem;
+      font-weight: 950;
       margin-bottom: 16px;
+    }
+
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(198,95,34,.08);
+    }
+
+    .service-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card .btn {
+      margin-top: auto;
+      width: fit-content;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      font-size: 0.78rem;
       font-weight: 900;
+      margin-bottom: 13px;
     }
 
     .list {
-      margin: 16px 0 0;
+      margin: 16px 0 22px;
       padding: 0;
       list-style: none;
       display: grid;
@@ -499,53 +530,30 @@
       background: var(--brand);
     }
 
-    .service-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-    }
-
-    .service-card .btn {
-      margin-top: auto;
-      width: fit-content;
-    }
-
-    .tag {
-      display: inline-flex;
-      width: fit-content;
-      border-radius: 999px;
-      background: #f3ebe3;
-      color: var(--brand-dark);
-      padding: 6px 10px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .audience-card {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+    .dark-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
       box-shadow: none;
     }
 
-    .audience-card p {
+    .dark-card p,
+    .dark-card .list li {
       color: #d8d0c8;
     }
 
-    .steps {
+    .process {
       counter-reset: step;
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
     }
 
     .step {
-      position: relative;
       background: #fff;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 22px;
-      min-height: 210px;
+      box-shadow: var(--shadow-soft);
     }
 
     .step::before {
@@ -554,146 +562,22 @@
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      background: var(--brand);
-      color: #fff;
       display: grid;
       place-items: center;
-      font-weight: 900;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 950;
       margin-bottom: 18px;
-    }
-
-    .step h3 {
-      font-size: 1.12rem;
-      margin-bottom: 9px;
     }
 
     .step p {
       color: var(--text-soft);
-      font-size: 0.94rem;
-    }
-
-    .demo-wrap {
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 34px;
-      align-items: center;
-    }
-
-    .chat-demo {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .chat-head {
-      padding: 18px;
-      background: var(--graphite);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .chat-body {
-      padding: 20px;
-      background: #fbf8f5;
-    }
-
-    .chat-message {
-      padding: 13px 15px;
-      border-radius: 16px;
-      margin-bottom: 12px;
       font-size: 0.95rem;
     }
 
-    .chat-message.visitor {
-      background: #fff;
-      border: 1px solid var(--line);
-      margin-left: 35px;
-    }
-
-    .chat-message.assistant {
-      background: var(--brand-soft);
-      color: var(--text);
-      margin-right: 35px;
-    }
-
-    .plans {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .plan {
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 28px;
-      background: #fff;
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .plan.featured {
-      border-color: rgba(198, 95, 34, 0.45);
-      box-shadow: 0 24px 60px rgba(198, 95, 34, 0.18);
-    }
-
-    .plan.featured::before {
-      content: "Mais procurado";
-      position: absolute;
-      top: 18px;
-      right: -34px;
-      transform: rotate(38deg);
-      background: var(--brand);
-      color: #fff;
-      font-size: 0.72rem;
-      font-weight: 900;
-      padding: 6px 42px;
-    }
-
-    .plan h3 {
-      font-size: 1.55rem;
-      margin-bottom: 10px;
-    }
-
-    .plan .ideal {
-      color: var(--brand-dark);
-      font-weight: 750;
-      margin-bottom: 18px;
-    }
-
-    .faq {
-      display: grid;
-      gap: 12px;
-      max-width: 920px;
-    }
-
-    details {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px 20px;
-      box-shadow: 0 8px 20px rgba(21, 18, 15, 0.04);
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    details p {
-      color: var(--text-soft);
-      margin: 12px 0 0;
-    }
-
-    .cta-band {
+    .highlight-band {
       background:
-        radial-gradient(circle at 10% 20%, rgba(198, 95, 34, 0.24), transparent 32%),
+        radial-gradient(circle at 10% 15%, rgba(198,95,34,.24), transparent 32%),
         linear-gradient(135deg, #201c19, #11100f);
       color: #fff;
       border-radius: 34px;
@@ -701,25 +585,25 @@
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
-      gap: 24px;
+      gap: 26px;
       box-shadow: var(--shadow);
     }
 
-    .cta-band h2 {
+    .highlight-band h2 {
       color: #fff;
       font-size: clamp(1.8rem, 3vw, 2.8rem);
       margin-bottom: 12px;
     }
 
-    .cta-band p {
+    .highlight-band p {
       color: #d8d0c8;
-      max-width: 720px;
+      max-width: 760px;
     }
 
     .contact-grid {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 28px;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 30px;
       align-items: start;
     }
 
@@ -736,8 +620,8 @@
     label {
       display: grid;
       gap: 7px;
-      font-weight: 760;
       color: var(--text);
+      font-weight: 800;
       font-size: 0.93rem;
     }
 
@@ -750,17 +634,17 @@
       color: var(--text);
       background: #fff;
       outline: none;
-      transition: border 0.2s ease, box-shadow 0.2s ease;
+      transition: border .2s ease, box-shadow .2s ease;
     }
 
     textarea {
-      min-height: 130px;
+      min-height: 126px;
       resize: vertical;
     }
 
     input:focus, textarea:focus, select:focus {
       border-color: var(--brand);
-      box-shadow: 0 0 0 4px rgba(198, 95, 34, 0.12);
+      box-shadow: 0 0 0 4px rgba(198,95,34,.12);
     }
 
     .form-row {
@@ -773,20 +657,21 @@
       display: none;
       border-radius: 14px;
       padding: 12px 14px;
-      font-weight: 700;
+      font-weight: 760;
+      line-height: 1.4;
     }
 
     .form-status.ok {
       display: block;
       background: #eaf8ee;
-      color: #226b38;
+      color: var(--success);
       border: 1px solid #bce9c8;
     }
 
     .form-status.error {
       display: block;
       background: #fff0eb;
-      color: #944314;
+      color: var(--error);
       border: 1px solid #ffd0bf;
     }
 
@@ -798,10 +683,15 @@
 
     .footer-grid {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 20px;
       flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: #fff;
+      font-weight: 760;
     }
 
     .socials {
@@ -813,36 +703,42 @@
     .socials a {
       width: 42px;
       height: 42px;
-      border-radius: 50%;
       display: grid;
       place-items: center;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
       color: #fff;
-      font-weight: 900;
-      transition: background 0.2s ease, transform 0.2s ease;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
 
     .socials a:hover {
-      background: var(--brand);
       transform: translateY(-1px);
+      background: rgba(198,95,34,.82);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .socials svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 1040px) {
+      .grid-4,
+      .process {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 980px) {
       .hero-grid,
-      .demo-wrap,
-      .contact-grid,
-      .grid-2 {
+      .grid-2,
+      .contact-grid {
         grid-template-columns: 1fr;
       }
 
-      .grid-3,
-      .plans {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .grid-4,
-      .steps {
+      .grid-3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -873,7 +769,7 @@
         display: none;
       }
 
-      .cta-band {
+      .highlight-band {
         grid-template-columns: 1fr;
       }
     }
@@ -884,39 +780,40 @@
       }
 
       .hero {
-        padding: 60px 0 42px;
+        padding: 62px 0 44px;
       }
 
       section {
-        padding: 54px 0;
+        padding: 56px 0;
       }
 
       .grid-3,
       .grid-4,
-      .plans,
-      .steps,
+      .process,
       .form-row {
         grid-template-columns: 1fr;
       }
 
       .hero-actions,
-      .cta-band .btn {
+      .btn,
+      .highlight-band .btn {
         width: 100%;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .cta-band {
-        padding: 28px;
-        border-radius: 26px;
       }
 
       .brand span:last-child {
         display: none;
       }
 
+      .hero-panel,
+      .highlight-band,
+      form {
+        padding: 24px;
+        border-radius: 26px;
+      }
+
+      .footer-grid {
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
@@ -924,66 +821,64 @@
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a href="#inicio" class="brand" aria-label="Intellih Tecnologia">
+      <a href="/" class="brand" aria-label="Intellih Tecnologia">
         <span class="brand-mark">I</span>
         <span>Intellih Tecnologia</span>
       </a>
 
       <nav class="nav-links" id="navLinks" aria-label="Menu principal">
         <a href="#solucoes">Soluções</a>
-        <a href="#publicos">Para quem é</a>
+        <a href="#frentes">Frentes</a>
+        <a href="#publicos">Para quem</a>
         <a href="#como-funciona">Como funciona</a>
-        <a href="#demonstracao">Demonstração</a>
-        <a href="#faq">FAQ</a>
         <a href="#contato">Contato</a>
       </nav>
 
       <div class="nav-actions">
-        <button class="btn btn-primary" type="button" data-open-intellih-chat>Quero uma avaliação</button>
+        <a class="btn btn-primary" href="#contato">Fale com a Intellih</a>
         <button class="menu-btn" type="button" aria-label="Abrir menu" id="menuBtn">Menu</button>
       </div>
     </div>
   </header>
 
-  <main id="inicio">
-    <section class="hero">
+  <main>
+    <section class="hero" id="inicio">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow"><span class="dot"></span> Presença digital inteligente com IA</div>
-          <h1>Sites e assistentes inteligentes para transformar visitantes em contatos qualificados</h1>
-          <p class="lead">A Intellih cria sites, páginas de bio e assistentes com IA para profissionais e pequenos negócios que querem apresentar melhor seus serviços, responder dúvidas frequentes e facilitar o primeiro contato com clientes.</p>
+          <div class="eyebrow"><span class="dot"></span> Inteligência artificial aplicada, com método</div>
+          <h1>Soluções com IA para facilitar rotinas, organizar informações e transformar oportunidades em resultado</h1>
+          <p class="lead">A Intellih cria assistentes, agentes, automações, mentorias e capacitações para pessoas, profissionais e empresas que querem usar inteligência artificial de forma prática, segura e orientada a resultado.</p>
 
           <div class="hero-actions">
-            <button class="btn btn-primary" type="button" data-open-intellih-chat>Quero uma avaliação</button>
-            <a class="btn btn-light" href="#solucoes">Ver soluções</a>
+            <a class="btn btn-primary" href="#solucoes">Conheça as soluções</a>
+            <button class="btn btn-light" type="button" data-open-intellih-chat>Conversar com o assistente</button>
           </div>
 
-          <p class="hero-note">Seu site não precisa ser apenas uma vitrine. Ele pode orientar, responder e encaminhar o visitante para o próximo passo.</p>
+          <p class="hero-note">As páginas específicas de cada serviço são divulgadas individualmente, conforme o público e a oferta. Esta home apresenta a Intellih como guarda-chuva das soluções.</p>
         </div>
 
-        <div class="hero-card" aria-label="Demonstração visual de site com assistente inteligente">
-          <div class="browser">
-            <div class="browser-bar">
-              <span class="browser-dot"></span>
-              <span class="browser-dot"></span>
-              <span class="browser-dot"></span>
-            </div>
-            <div class="browser-content">
-              <div class="mock-section">
-                <div class="mock-line w70"></div>
-                <div class="mock-line w55"></div>
-                <div class="mock-line w42"></div>
+        <div class="hero-panel" aria-label="Mapa visual das soluções da Intellih">
+          <div class="ai-map">
+            <div class="ai-map-head">
+              <div>
+                <strong>IA aplicada ao trabalho real</strong>
+                <span>Do diagnóstico à implementação viável</span>
               </div>
+              <div class="ai-badge">IA</div>
+            </div>
 
-              <div class="assistant-box">
-                <div class="assistant-top">
-                  <div class="assistant-name"><span class="assistant-avatar">IA</span> Assistente</div>
-                  <div class="status"><span></span> online</div>
-                </div>
-                <div class="bubble user">Vocês atendem clínicas?</div>
-                <div class="bubble bot">Sim. Podemos criar um site com assistente para apresentar serviços, responder dúvidas frequentes e encaminhar interessados para contato humano.</div>
-                <div class="bubble user">Preciso trocar meu site?</div>
-                <div class="bubble bot">Não necessariamente. Se o site atual permitir integração, podemos adicionar apenas o assistente inteligente.</div>
+            <div class="ai-items">
+              <div class="ai-item">
+                <div class="ai-icon">1</div>
+                <div><strong>Entender</strong><span>Mapeamos rotina, dor, processo, dados e gargalos.</span></div>
+              </div>
+              <div class="ai-item">
+                <div class="ai-icon">2</div>
+                <div><strong>Estruturar</strong><span>Definimos solução, escopo, limites, fluxos e critérios de qualidade.</span></div>
+              </div>
+              <div class="ai-item">
+                <div class="ai-icon">3</div>
+                <div><strong>Aplicar</strong><span>Criamos assistentes, agentes, materiais, automações ou capacitações sob medida.</span></div>
               </div>
             </div>
           </div>
@@ -994,137 +889,113 @@
     <section>
       <div class="container grid-2">
         <div class="section-head">
-          <div class="section-kicker">O problema</div>
-          <h2>Seu cliente se interessa, mas nem sempre entra em contato</h2>
+          <div class="section-kicker">Posicionamento</div>
+          <h2>A Intellih não vende IA pela IA</h2>
         </div>
         <div>
-          <p>Muitos profissionais e pequenos negócios perdem oportunidades porque sua presença digital não explica bem o que oferecem. O visitante chega pelo Google, Instagram ou indicação, mas encontra um site desatualizado, uma bio pouco clara ou um caminho confuso até o atendimento.</p>
-          <p>Com uma presença digital mais clara e um assistente inteligente bem configurado, o visitante encontra respostas, entende melhor seus serviços e sabe qual é o próximo passo.</p>
+          <p>A inteligência artificial só gera valor quando resolve um problema real: excesso de trabalho repetitivo, informação espalhada, atendimento desorganizado, baixa clareza na comunicação, dificuldade de aprendizagem ou processos que poderiam ser mais simples.</p>
+          <p>Por isso, a Intellih trabalha com soluções baseadas em IA que partem do contexto: primeiro entendemos o problema, depois definimos a solução mais adequada.</p>
+          <p>A tecnologia entra como meio. O resultado esperado é uma rotina mais clara, produtiva, organizada e sustentável.</p>
         </div>
       </div>
     </section>
 
-    <section class="section-soft">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">A solução</div>
-          <h2>Presença digital inteligente, simples e orientada a resultado</h2>
-          <p class="section-intro">A proposta é combinar comunicação clara, tecnologia e IA aplicada para transformar sua presença digital em uma experiência mais útil para o visitante.</p>
-        </div>
-
-        <div class="grid-3">
-          <article class="card">
-            <div class="icon">1</div>
-            <h3>Clareza</h3>
-            <p>Seu site, página ou perfil precisam explicar rapidamente quem você é, o que oferece, para quem atende e qual é o próximo passo.</p>
-          </article>
-
-          <article class="card">
-            <div class="icon">2</div>
-            <h3>Atendimento inicial</h3>
-            <p>Um assistente inteligente pode responder dúvidas frequentes, orientar visitantes e encaminhar para WhatsApp, formulário ou atendimento humano.</p>
-          </article>
-
-          <article class="card">
-            <div class="icon">3</div>
-            <h3>Captação</h3>
-            <p>A jornada digital deve facilitar o contato de pessoas realmente interessadas, reduzindo ruído e aumentando a qualidade dos leads.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="solucoes">
+    <section class="section-soft" id="solucoes">
       <div class="container">
         <div class="section-head">
           <div class="section-kicker">Soluções</div>
-          <h2>Serviços para organizar, atender e converter melhor</h2>
-          <p class="section-intro">Você pode começar com uma página simples, um site completo, um assistente para o site atual ou uma estrutura melhor para WhatsApp e perguntas frequentes.</p>
+          <h2>Frentes de atuação da Intellih</h2>
+          <p class="section-intro">Cada frente possui uma página própria para divulgação, com mensagem, oferta e chamada específicas. A home funciona como visão geral da empresa.</p>
         </div>
 
-        <div class="grid-3">
+        <div class="grid-4">
           <article class="card service-card">
-            <span class="tag">Oferta principal</span>
-            <h3>Site Inteligente com Assistente IA</h3>
-            <p>Para profissionais e empresas que precisam de um site moderno, claro e conectado a um assistente inteligente.</p>
+            <span class="tag">Mentoria</span>
+            <div class="icon">M</div>
+            <h3>Mentoria em IA</h3>
+            <p>Para profissionais, professores, empreendedores e equipes que querem usar IA com método, clareza e aplicação real no trabalho.</p>
             <ul class="list">
-              <li>Site institucional</li>
-              <li>Copy profissional</li>
-              <li>FAQ e formulário</li>
-              <li>Chamada para o assistente</li>
-              <li>Assistente inteligente</li>
+              <li>diagnóstico da rotina;</li>
+              <li>plano de uso de IA;</li>
+              <li>orientação prática;</li>
+              <li>uso responsável e produtivo.</li>
             </ul>
-            <button class="btn btn-secondary" type="button" data-open-intellih-chat>Quero um site inteligente</button>
-          </article>
-
-          <article class="card service-card">
-            <span class="tag">Para site atual</span>
-            <h3>Assistente Inteligente para Site Existente</h3>
-            <p>Para quem já tem site, mas quer adicionar uma camada de atendimento inicial com IA.</p>
-            <ul class="list">
-              <li>Análise do site atual</li>
-              <li>Base de conhecimento inicial</li>
-              <li>Regras de resposta</li>
-              <li>Implantação do widget</li>
-              <li>Testes e ajustes</li>
-            </ul>
-            <button class="btn btn-secondary" type="button" data-open-intellih-chat>Quero adicionar um assistente</button>
-          </article>
-
-          <article class="card service-card">
-            <span class="tag">Instagram</span>
-            <h3>Página Inteligente para Link da Bio</h3>
-            <p>Para transformar o link do Instagram em uma página mais profissional, clara e interativa.</p>
-            <ul class="list">
-              <li>Apresentação curta</li>
-              <li>Botões principais</li>
-              <li>Serviços e FAQ</li>
-              <li>Assistente inteligente</li>
-              <li>WhatsApp ou formulário</li>
-            </ul>
-            <button class="btn btn-secondary" type="button" data-open-intellih-chat>Quero melhorar minha bio</button>
+            <a class="btn btn-secondary" href="/mentoria-ia">Conhecer mentoria</a>
           </article>
 
           <article class="card service-card">
             <span class="tag">Atendimento</span>
-            <h3>WhatsApp Profissional</h3>
-            <p>Para organizar o atendimento inicial, reduzir respostas repetitivas e melhorar o primeiro contato com interessados.</p>
+            <div class="icon">A</div>
+            <h3>Assistentes inteligentes</h3>
+            <p>Para sites, páginas de bio, redes sociais, dúvidas frequentes, captação de contatos e atendimento inicial.</p>
             <ul class="list">
-              <li>Mensagem de boas-vindas</li>
-              <li>Respostas rápidas</li>
-              <li>Roteiro de qualificação</li>
-              <li>Mensagens de encaminhamento</li>
-              <li>Fluxo básico de atendimento</li>
+              <li>assistente para site;</li>
+              <li>assistente para página de bio;</li>
+              <li>FAQ inteligente;</li>
+              <li>triagem e encaminhamento.</li>
             </ul>
-            <button class="btn btn-secondary" type="button" data-open-intellih-chat>Quero organizar meu WhatsApp</button>
+            <a class="btn btn-secondary" href="/assistentes-inteligentes">Criar assistente</a>
           </article>
 
           <article class="card service-card">
-            <span class="tag">Conteúdo-base</span>
-            <h3>FAQ Estratégico</h3>
-            <p>Para organizar as principais dúvidas dos clientes e transformar respostas em conteúdo útil para site, Instagram, WhatsApp e assistente.</p>
+            <span class="tag">Automação</span>
+            <div class="icon">G</div>
+            <h3>Agentes de IA</h3>
+            <p>Para automatizar fluxos específicos de trabalho com regras, supervisão, integração e foco em resultado operacional.</p>
             <ul class="list">
-              <li>Levantamento de dúvidas</li>
-              <li>Organização por tema</li>
-              <li>Respostas profissionais</li>
-              <li>Tom de comunicação</li>
-              <li>Limites de resposta</li>
+              <li>triagem de demandas;</li>
+              <li>organização de documentos;</li>
+              <li>apoio comercial;</li>
+              <li>fluxos internos com IA.</li>
             </ul>
-            <button class="btn btn-secondary" type="button" data-open-intellih-chat>Quero estruturar meu FAQ</button>
+            <a class="btn btn-secondary" href="/agentes-ia">Avaliar agente</a>
           </article>
 
           <article class="card service-card">
-            <span class="tag">Campanhas</span>
-            <h3>Landing Page Inteligente</h3>
-            <p>Para campanhas, cursos, eventos, lançamentos ou divulgação de um serviço específico.</p>
+            <span class="tag">Capacitação</span>
+            <div class="icon">C</div>
+            <h3>Capacitação em IA</h3>
+            <p>Para equipes, instituições e negócios que precisam usar IA com mais segurança, produtividade e responsabilidade.</p>
             <ul class="list">
-              <li>Página de campanha</li>
-              <li>Texto persuasivo</li>
-              <li>Chamada para ação</li>
-              <li>Formulário e FAQ</li>
-              <li>Assistente configurado</li>
+              <li>workshops práticos;</li>
+              <li>treinamentos sob medida;</li>
+              <li>uso profissional da IA;</li>
+              <li>critérios de qualidade e risco.</li>
             </ul>
-            <button class="btn btn-secondary" type="button" data-open-intellih-chat>Quero uma landing page</button>
+            <a class="btn btn-secondary" href="/capacitacao-ia">Capacitar equipe</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="frentes">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Também desenvolvemos</div>
+          <h2>Soluções digitais de baixa complexidade para gerar resultado rápido</h2>
+          <p class="section-intro">Nem toda aplicação de IA precisa começar com um grande projeto. Em muitos casos, uma solução simples, bem estruturada, já reduz atrito e melhora a experiência de clientes, alunos, visitantes ou equipes.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">B</div>
+            <h3>Presença digital inteligente</h3>
+            <p>Sites, páginas de bio, landing pages e assistentes para transformar visitantes em contatos mais qualificados.</p>
+            <a class="btn btn-light" href="/analise-presenca-digital">Pedir análise rápida</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">F</div>
+            <h3>FAQ e bases de conhecimento</h3>
+            <p>Organização de perguntas frequentes, serviços, políticas, instruções e conteúdos que alimentam assistentes e reduzem dúvidas repetidas.</p>
+            <a class="btn btn-light" href="/assistentes-inteligentes">Ver assistentes</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">P</div>
+            <h3>Projetos sob medida</h3>
+            <p>Desenvolvimento de soluções específicas quando há clareza de problema, escopo, dados, processo e retorno esperado.</p>
+            <a class="btn btn-light" href="#contato">Solicitar avaliação</a>
           </article>
         </div>
       </div>
@@ -1133,141 +1004,62 @@
     <section class="section-dark" id="publicos">
       <div class="container">
         <div class="section-head">
-          <div class="section-kicker">Para quem é</div>
-          <h2>Para profissionais e pequenos negócios que precisam explicar melhor o que fazem</h2>
-          <p class="section-intro">As soluções são indicadas para quem recebe dúvidas frequentes, depende de indicação, usa Instagram como vitrine ou precisa melhorar o primeiro contato com potenciais clientes.</p>
+          <div class="section-kicker">Para quem</div>
+          <h2>Soluções para diferentes níveis de maturidade em IA</h2>
+          <p class="section-intro">A Intellih atende desde pessoas e profissionais que precisam começar com orientação até empresas que já desejam estruturar agentes, assistentes e fluxos mais avançados.</p>
         </div>
 
         <div class="grid-4">
-          <article class="card audience-card">
-            <h3>Clínicas e consultórios</h3>
-            <p>Sites e assistentes para apresentar especialidades, responder dúvidas gerais e encaminhar para atendimento humano.</p>
+          <article class="card dark-card">
+            <h3>Pessoas e profissionais</h3>
+            <p>Para quem quer usar IA no trabalho, organizar ideias, ganhar produtividade ou reposicionar sua atuação.</p>
           </article>
 
-          <article class="card audience-card">
-            <h3>Profissionais liberais</h3>
-            <p>Páginas e assistentes para explicar serviços, organizar perguntas recorrentes e captar interessados.</p>
+          <article class="card dark-card">
+            <h3>Pequenos negócios</h3>
+            <p>Para quem precisa melhorar atendimento, presença digital, captação de contatos e comunicação de serviços.</p>
           </article>
 
-          <article class="card audience-card">
-            <h3>Escolas e cursos</h3>
-            <p>Soluções para divulgar cursos, responder dúvidas sobre inscrição, metodologia, calendário e participação.</p>
+          <article class="card dark-card">
+            <h3>Educação e capacitação</h3>
+            <p>Para professores, coordenadores, cursos e instituições que querem aplicar IA com rigor, método e responsabilidade.</p>
           </article>
 
-          <article class="card audience-card">
-            <h3>Empresas de serviço</h3>
-            <p>Presença digital para apresentar soluções, explicar processos, captar leads e reduzir dúvidas repetitivas.</p>
+          <article class="card dark-card">
+            <h3>Empresas e equipes</h3>
+            <p>Para negócios que buscam automatizar processos, estruturar assistentes, criar agentes ou capacitar times.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="como-funciona" class="section-soft">
+    <section class="section-soft" id="como-funciona">
       <div class="container">
         <div class="section-head">
-          <div class="section-kicker">Processo</div>
-          <h2>Como funciona</h2>
-          <p class="section-intro">O processo é organizado para evitar projetos indefinidos. Primeiro entendemos o cenário, depois definimos a solução mais adequada e só então criamos a entrega.</p>
+          <div class="section-kicker">Método</div>
+          <h2>Como trabalhamos</h2>
+          <p class="section-intro">O objetivo é evitar solução genérica, promessa vaga ou automação sem fundamento. Cada projeto começa pela definição do problema e dos limites da solução.</p>
         </div>
 
-        <div class="steps">
+        <div class="process">
           <article class="step">
-            <h3>Avaliação inicial</h3>
-            <p>Entendemos seu negócio, serviços, público e principais canais digitais.</p>
-          </article>
-
-          <article class="step">
-            <h3>Definição da solução</h3>
-            <p>Indicamos o melhor caminho: site, página de bio, assistente, FAQ, WhatsApp ou landing page.</p>
+            <h3>Diagnóstico</h3>
+            <p>Entendemos o contexto, a rotina, os canais, os dados, os gargalos e o objetivo real da solução.</p>
           </article>
 
           <article class="step">
-            <h3>Conteúdo e estrutura</h3>
-            <p>Organizamos textos, perguntas frequentes, chamadas para ação e informações do assistente.</p>
+            <h3>Desenho da solução</h3>
+            <p>Definimos o que será feito, o que não será feito, quais recursos usar e como medir se a solução faz sentido.</p>
           </article>
 
           <article class="step">
-            <h3>Criação e configuração</h3>
-            <p>Desenvolvemos a solução e configuramos o assistente dentro do escopo combinado.</p>
+            <h3>Implementação</h3>
+            <p>Criamos a solução, o fluxo, o assistente, o agente, a capacitação ou o material necessário para aplicar IA.</p>
           </article>
 
           <article class="step">
-            <h3>Testes e publicação</h3>
-            <p>Você valida textos e respostas. Depois publicamos e acompanhamos os ajustes iniciais.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="demonstracao">
-      <div class="container demo-wrap">
-        <div>
-          <div class="section-kicker">Demonstração</div>
-          <h2>Veja como um assistente pode atuar</h2>
-          <p class="section-intro">O assistente não substitui pessoas. Ele funciona como primeira camada de orientação: responde dúvidas frequentes, apresenta serviços e encaminha para o contato humano quando necessário.</p>
-          <button class="btn btn-primary" type="button" data-open-intellih-chat>Quero ver uma demonstração</button>
-        </div>
-
-        <div class="chat-demo" aria-label="Exemplo de conversa com assistente inteligente">
-          <div class="chat-head">
-            <span class="assistant-avatar">IA</span>
-            <strong>Assistente Intellih</strong>
-          </div>
-          <div class="chat-body">
-            <div class="chat-message visitor">Vocês criam sites para clínicas?</div>
-            <div class="chat-message assistant">Sim. Criamos sites com assistente inteligente para clínicas e consultórios, com foco em apresentação dos serviços, dúvidas frequentes e encaminhamento para contato humano.</div>
-            <div class="chat-message visitor">O assistente pode agendar consultas?</div>
-            <div class="chat-message assistant">Ele pode orientar o visitante e encaminhar para o canal de agendamento definido pela clínica. Integrações avançadas podem ser avaliadas separadamente.</div>
-            <div class="chat-message visitor">Preciso trocar meu site inteiro?</div>
-            <div class="chat-message assistant">Não necessariamente. Se o site atual permitir integração, podemos adicionar apenas o assistente inteligente.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-soft">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Planos</div>
-          <h2>Escolha o ponto de partida</h2>
-          <p class="section-intro">Os projetos são avaliados conforme escopo. A proposta inicial é começar por soluções simples, úteis e sustentáveis.</p>
-        </div>
-
-        <div class="plans">
-          <article class="plan">
-            <h3>Essencial</h3>
-            <p class="ideal">Para organizar a presença digital com uma solução simples e profissional.</p>
-            <ul class="list">
-              <li>Página ou site de entrada</li>
-              <li>Textos principais</li>
-              <li>Formulário ou WhatsApp</li>
-              <li>FAQ básico</li>
-              <li>Publicação</li>
-            </ul>
-          </article>
-
-          <article class="plan featured">
-            <h3>Inteligente</h3>
-            <p class="ideal">Para quem quer site ou página com assistente de IA para dúvidas frequentes e captação.</p>
-            <ul class="list">
-              <li>Site ou página profissional</li>
-              <li>Assistente inteligente</li>
-              <li>Base de conhecimento inicial</li>
-              <li>Formulário e assistente</li>
-              <li>Testes e suporte inicial</li>
-            </ul>
-          </article>
-
-          <article class="plan">
-            <h3>Profissional</h3>
-            <p class="ideal">Para negócios que precisam de uma presença digital mais completa e suporte evolutivo.</p>
-            <ul class="list">
-              <li>Site mais completo</li>
-              <li>Copy profissional</li>
-              <li>Assistente com fluxos definidos</li>
-              <li>FAQ ampliado</li>
-              <li>Captação de leads</li>
-            </ul>
+            <h3>Ajuste e evolução</h3>
+            <p>Validamos funcionamento, tom, qualidade, limites, encaminhamentos e próximos passos de evolução.</p>
           </article>
         </div>
       </div>
@@ -1275,81 +1067,34 @@
 
     <section>
       <div class="container">
-        <div class="cta-band">
+        <div class="highlight-band">
           <div>
-            <h2>Seu site, Instagram ou WhatsApp estão perdendo oportunidades?</h2>
-            <p>Vamos avaliar seu cenário e indicar a solução mais adequada para melhorar clareza, atendimento inicial e captação de contatos.</p>
+            <h2>Não sabe qual solução faz mais sentido?</h2>
+            <p>Converse com o assistente da Intellih ou envie uma solicitação. A primeira etapa é entender o problema antes de escolher a tecnologia.</p>
           </div>
-          <button class="btn btn-primary" type="button" data-open-intellih-chat>Solicitar avaliação</button>
+          <button class="btn btn-primary" type="button" data-open-intellih-chat>Conversar com o assistente</button>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="section-soft">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Perguntas frequentes</div>
-          <h2>Dúvidas comuns</h2>
-        </div>
-
-        <div class="faq">
-          <details>
-            <summary>Preciso ter um site pronto?</summary>
-            <p>Não. Podemos criar um site novo ou adicionar um assistente ao site existente, dependendo da estrutura atual.</p>
-          </details>
-
-          <details>
-            <summary>O assistente substitui uma pessoa?</summary>
-            <p>Não. Ele funciona como uma primeira camada de orientação. Quando a dúvida exige avaliação específica, negociação ou decisão, o visitante deve ser encaminhado para atendimento humano.</p>
-          </details>
-
-          <details>
-            <summary>O assistente pode funcionar no Instagram?</summary>
-            <p>Sim, de forma complementar. Ele pode estar em uma página de link da bio ou em fluxos de automação de mensagens, dependendo da necessidade e das ferramentas utilizadas.</p>
-          </details>
-
-          <details>
-            <summary>O assistente pode ir para o WhatsApp?</summary>
-            <p>A solução pode encaminhar o visitante para o WhatsApp. Integrações mais avançadas com WhatsApp API podem ser avaliadas separadamente.</p>
-          </details>
-
-          <details>
-            <summary>A IA responde qualquer coisa?</summary>
-            <p>Não. O assistente é configurado para responder dentro do escopo definido. Perguntas fora do contexto devem ser recusadas ou encaminhadas para atendimento humano.</p>
-          </details>
-
-          <details>
-            <summary>O serviço tem mensalidade?</summary>
-            <p>Projetos com assistente inteligente devem ter acompanhamento mínimo para manter informações atualizadas, revisar respostas e garantir suporte básico.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section id="contato">
+    <section id="contato" class="section-soft">
       <div class="container contact-grid">
         <div>
           <div class="section-kicker">Contato</div>
-          <h2>Solicite uma avaliação</h2>
-          <p class="section-intro">Conte rapidamente o que você precisa melhorar: site, Instagram, WhatsApp, captação de contatos, FAQ ou assistente inteligente. A partir disso, avaliamos o melhor caminho.</p>
+          <h2>Fale com a Intellih</h2>
+          <p class="section-intro">Conte brevemente o que você quer resolver. A resposta pode indicar mentoria, assistente, agente, capacitação ou uma solução digital mais simples.</p>
 
           <ul class="list">
-            <li>Resposta objetiva sobre viabilidade</li>
-            <li>Indicação do melhor tipo de solução</li>
-            <li>Escopo inicial claro</li>
-            <li>Possibilidade de demonstração</li>
+            <li>mentoria para uso prático de IA;</li>
+            <li>assistente para site, bio ou atendimento;</li>
+            <li>agentes de IA para fluxos específicos;</li>
+            <li>capacitação para equipes;</li>
+            <li>soluções digitais sob medida.</li>
           </ul>
 
-          <button class="btn btn-secondary" type="button" data-open-intellih-chat>
-            Conversar com o assistente
-          </button>
+          <button class="btn btn-secondary" type="button" data-open-intellih-chat>Conversar com o assistente</button>
         </div>
 
-        <!--
-          IMPORTANTE:
-          Substitua o action abaixo pelo endpoint correto do seu FormSubmit ou backend.
-          Exemplo FormSubmit: https://formsubmit.co/contato@intellih.com.br
-        -->
         <form id="contactForm" action="https://formsubmit.co/contato@intellih.com.br" method="POST">
           <input type="hidden" name="_subject" value="Nova solicitação pelo site da Intellih" />
           <input type="hidden" name="_captcha" value="false" />
@@ -1360,6 +1105,7 @@
               Nome
               <input type="text" name="nome" placeholder="Seu nome" required />
             </label>
+
             <label>
               WhatsApp
               <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required />
@@ -1375,19 +1121,19 @@
             O que você procura?
             <select name="interesse" required>
               <option value="">Selecione uma opção</option>
-              <option>Site inteligente com assistente IA</option>
-              <option>Assistente para site existente</option>
-              <option>Página inteligente para link da bio</option>
-              <option>WhatsApp profissional</option>
-              <option>FAQ estratégico</option>
-              <option>Landing page inteligente</option>
-              <option>Ainda não sei. Quero uma avaliação.</option>
+              <option>Mentoria em IA</option>
+              <option>Assistente inteligente</option>
+              <option>Agente de IA</option>
+              <option>Capacitação em IA</option>
+              <option>Presença digital inteligente</option>
+              <option>Solução sob medida</option>
+              <option>Ainda não sei. Quero orientação.</option>
             </select>
           </label>
 
           <label>
             Mensagem
-            <textarea name="mensagem" placeholder="Descreva brevemente seu negócio e o que gostaria de melhorar." required></textarea>
+            <textarea name="mensagem" placeholder="Descreva brevemente sua necessidade, rotina, negócio ou problema que deseja resolver." required></textarea>
           </label>
 
           <button class="btn btn-primary" type="submit">Enviar solicitação</button>
@@ -1401,20 +1147,25 @@
     <div class="container footer-grid">
       <div>
         <strong>Intellih Tecnologia</strong>
-        <p style="margin: 6px 0 0;">Presença digital inteligente para negócios que querem atender melhor e converter mais.</p>
+        <p style="margin: 6px 0 0;">Soluções com IA para facilitar rotinas, organizar informações e transformar oportunidades em resultado.</p>
         <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
       </div>
 
       <div class="socials" aria-label="Redes sociais">
-        <!-- Substitua os links abaixo pelos links reais -->
-        <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-        <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-        <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+        <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"/></svg>
+        </a>
       </div>
     </div>
   </footer>
 
-  <!-- O botão flutuante do assistente é criado pelo arquivo chat-widget.js. -->
+  <!-- Carrega o assistente da Intellih. Confirme que chat-widget.js está publicado na raiz do site. -->
   <script src="/chat-widget.js"></script>
 
   <script>
@@ -1473,7 +1224,7 @@
         formStatus.textContent = 'Solicitação enviada com sucesso. Em breve entraremos em contato.';
       } catch (error) {
         formStatus.className = 'form-status error';
-        formStatus.textContent = 'Não foi possível enviar agora. Tente novamente ou converse com o assistente.';
+        formStatus.textContent = 'Não foi possível enviar agora. Tente novamente em instantes.';
       } finally {
         submitButton.disabled = false;
         submitButton.textContent = originalText;
