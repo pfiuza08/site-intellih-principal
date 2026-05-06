@@ -482,7 +482,7 @@
 
     const chatBubble = document.createElement("div");
     chatBubble.id = "intellih-chat-bubble";
-    chatBubble.textContent = "Quer aplicar IA com método no seu contexto?";
+    chatBubble.textContent = "Quer aplicar IA com método?";
     document.body.appendChild(chatBubble);
 
     setTimeout(() => {
