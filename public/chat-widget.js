@@ -1,6 +1,6 @@
-// === Chat Widget Intellih (v31) ===
-// Assistente comercial com foco em presença digital inteligente:
-// sites, páginas de bio, assistentes IA, WhatsApp profissional, FAQ e landing pages.
+// === Chat Widget Intellih (v32) ===
+// Assistente comercial da home principal da Intellih:
+// IA aplicada, mentoria, assistentes inteligentes, agentes de IA, capacitação e soluções sob medida.
 
 (function () {
   document.addEventListener("DOMContentLoaded", () => {
@@ -482,7 +482,7 @@
 
     const chatBubble = document.createElement("div");
     chatBubble.id = "intellih-chat-bubble";
-    chatBubble.textContent = "Quer melhorar seu site, bio ou atendimento?";
+    chatBubble.textContent = "Quer aplicar IA com método no seu contexto?";
     document.body.appendChild(chatBubble);
 
     setTimeout(() => {
@@ -507,7 +507,7 @@
           <div class="intellih-chat-mark">IA</div>
           <div>
             <strong>Assistente Intellih</strong>
-            <span>Presença digital inteligente</span>
+            <span>IA aplicada com método</span>
           </div>
         </div>
         <button id="intellih-chat-close" aria-label="Fechar chat">×</button>
@@ -580,20 +580,20 @@
       chatBody.innerHTML = "";
 
       await say(`Olá. Eu sou o assistente da <strong>Intellih Tecnologia</strong>.`);
-      await say(`Posso te ajudar a identificar uma solução para melhorar sua presença digital: site, link da bio, assistente com IA, WhatsApp, FAQ ou landing page.`);
-      await say(`Primeiro, qual situação parece mais próxima da sua realidade?`);
+      await say(`Posso te ajudar a identificar qual frente de IA faz mais sentido para o seu momento: mentoria, assistentes inteligentes, agentes de IA, capacitação ou uma solução sob medida.`);
+      await say(`Primeiro, qual situação parece mais próxima do que você procura?`);
 
       renderNeedOptions();
     }
 
     function renderNeedOptions() {
       const options = [
-        { label: "Meu site está desatualizado ou não tenho site", key: "site" },
-        { label: "Quero um assistente com IA no meu site", key: "assistant" },
-        { label: "Meu Instagram gera interesse, mas não converte", key: "bio" },
-        { label: "Recebo muitas perguntas repetidas no WhatsApp", key: "whatsapp" },
-        { label: "Preciso divulgar um curso, evento ou serviço específico", key: "landing" },
-        { label: "Ainda não sei. Quero uma avaliação", key: "diagnostic" }
+        { label: "Quero entender como usar IA no meu trabalho", key: "mentoria" },
+        { label: "Quero um assistente para site, bio ou atendimento", key: "assistant" },
+        { label: "Quero criar um agente de IA para um processo específico", key: "agent" },
+        { label: "Quero capacitar uma equipe para usar IA melhor", key: "training" },
+        { label: "Quero melhorar minha presença digital com IA", key: "presence" },
+        { label: "Ainda não sei. Quero orientação", key: "diagnostic" }
       ];
 
       renderOptions(options, async (option) => {
@@ -610,41 +610,41 @@
 
     async function showRecommendation(key) {
       const recommendations = {
-        site: {
-          title: "Site Inteligente com Assistente IA",
-          text: "O caminho mais adequado é criar um site claro, profissional e preparado para orientar visitantes, apresentar seus serviços e captar contatos.",
-          solution: "Site Inteligente com Assistente IA",
-          next: "Avaliar conteúdo atual, serviços, público e principais dúvidas dos clientes."
+        mentoria: {
+          title: "Mentoria em IA",
+          text: "Esse caminho é indicado quando você quer usar IA com mais clareza na própria rotina, mas ainda precisa transformar possibilidades em método, fluxos e práticas concretas.",
+          solution: "Mentoria em IA",
+          next: "Mapear sua rotina, identificar oportunidades de uso, definir ferramentas, limites, cuidados e um plano de aplicação."
         },
         assistant: {
-          title: "Assistente Inteligente para Site Existente",
-          text: "Se o site atual já funciona, podemos adicionar uma camada de atendimento inicial com IA, baseada em perguntas frequentes e informações validadas do negócio.",
-          solution: "Assistente Inteligente para Site Existente",
-          next: "Verificar se o site permite integração e definir o escopo de respostas do assistente."
+          title: "Assistentes inteligentes",
+          text: "Esse caminho faz sentido quando você quer orientar visitantes, responder dúvidas frequentes, organizar atendimento inicial ou captar contatos em site, página de bio ou canal digital.",
+          solution: "Assistentes inteligentes",
+          next: "Definir onde o assistente será usado, quais perguntas deve responder, quais limites precisa respeitar e quando encaminhar para atendimento humano."
         },
-        bio: {
-          title: "Página Inteligente para Link da Bio",
-          text: "Para quem recebe atenção pelo Instagram, uma página de bio bem estruturada pode explicar serviços, organizar links, responder dúvidas e encaminhar para WhatsApp ou formulário.",
-          solution: "Página Inteligente para Link da Bio",
-          next: "Avaliar bio atual, principais serviços, CTAs e caminho até o contato."
+        agent: {
+          title: "Agente de IA para processo específico",
+          text: "Esse caminho é mais adequado quando existe um fluxo recorrente que pode ser apoiado por IA, como triagem, organização de informações, geração de documentos, apoio comercial ou análise inicial.",
+          solution: "Agente de IA",
+          next: "Entender o processo, entradas, saídas esperadas, regras, integrações, riscos e nível de supervisão humana necessário."
         },
-        whatsapp: {
-          title: "WhatsApp Profissional + FAQ Estratégico",
-          text: "Quando há muitas perguntas repetidas, o melhor primeiro passo é padronizar respostas, organizar um fluxo de qualificação e reduzir ruído no atendimento.",
-          solution: "WhatsApp Profissional + FAQ Estratégico",
-          next: "Mapear perguntas frequentes, respostas atuais e pontos em que contatos são perdidos."
+        training: {
+          title: "Capacitação em IA",
+          text: "Esse caminho é indicado para equipes, instituições ou negócios que precisam usar IA de forma mais produtiva, segura e alinhada ao trabalho real.",
+          solution: "Capacitação em IA",
+          next: "Identificar perfil da equipe, objetivos do treinamento, casos de uso prioritários e nível de maturidade em IA."
         },
-        landing: {
-          title: "Landing Page Inteligente",
-          text: "Para divulgar uma oferta específica, uma landing page com CTA, FAQ e assistente pode explicar melhor a proposta e captar interessados com mais clareza.",
-          solution: "Landing Page Inteligente",
-          next: "Entender a oferta, público-alvo, prazo da campanha e objetivo de conversão."
+        presence: {
+          title: "Presença digital inteligente",
+          text: "Esse caminho é útil quando o objetivo é melhorar site, Instagram, link da bio, FAQ, landing page ou atendimento inicial com apoio de IA.",
+          solution: "Presença digital inteligente",
+          next: "Avaliar canais atuais, clareza da oferta, jornada até o contato e oportunidades de assistente, FAQ ou página inteligente."
         },
         diagnostic: {
-          title: "Raio-X da Presença Digital",
-          text: "Quando ainda não está claro por onde começar, faz sentido avaliar site, Instagram, WhatsApp, clareza da oferta e oportunidades de uso de IA.",
-          solution: "Raio-X da Presença Digital",
-          next: "Fazer uma análise objetiva dos canais atuais e indicar prioridades."
+          title: "Diagnóstico de IA aplicada",
+          text: "Quando ainda não está claro por onde começar, o melhor primeiro passo é entender contexto, dores, oportunidades e nível de complexidade adequado.",
+          solution: "Diagnóstico de IA aplicada",
+          next: "Fazer uma conversa inicial para identificar se faz mais sentido mentoria, assistente, agente, capacitação ou solução sob medida."
         }
       };
 
@@ -665,18 +665,18 @@
       chatBody.appendChild(card);
       scrollToBottom();
 
-      await say(`Antes de enviar, me diga qual tipo de negócio você representa:`);
+      await say(`Antes de enviar, me diga qual perfil descreve melhor seu contexto:`);
       renderAudienceOptions();
     }
 
     function renderAudienceOptions() {
       const options = [
-        { label: "Clínica ou consultório", key: "clinica" },
-        { label: "Profissional liberal", key: "profissional" },
-        { label: "Escola, curso ou projeto educacional", key: "educacao" },
-        { label: "Empresa de serviço", key: "servico" },
-        { label: "Consultoria ou especialista", key: "consultoria" },
-        { label: "Outro tipo de negócio", key: "outro" }
+        { label: "Pessoa ou profissional autônomo", key: "individual" },
+        { label: "Professor, curso ou instituição educacional", key: "educacao" },
+        { label: "Pequeno negócio ou profissional liberal", key: "pequeno_negocio" },
+        { label: "Empresa ou equipe", key: "empresa" },
+        { label: "Projeto, startup ou solução digital", key: "projeto" },
+        { label: "Outro contexto", key: "outro" }
       ];
 
       renderOptions(options, async (option) => {
@@ -687,11 +687,11 @@
           audience: selectedAudience
         });
 
-        await say(`Perfeito. Com esse contexto, a Intellih consegue avaliar melhor a solução mais adequada.`);
-        await say(`Quer enviar seus dados para receber uma avaliação inicial?`);
+        await say(`Perfeito. Com esse contexto, a Intellih consegue indicar um caminho mais adequado.`);
+        await say(`Quer enviar seus dados para receber uma orientação inicial?`);
 
         renderOptions([
-          { label: "Sim, quero uma avaliação", key: "lead" },
+          { label: "Sim, quero uma orientação inicial", key: "lead" },
           { label: "Quero escolher outra necessidade", key: "again" }
         ], async (option) => {
           if (option.key === "again") {
@@ -709,16 +709,16 @@
       form.className = "intellih-form intellih-chat-fade";
       form.innerHTML = `
         <div class="intellih-form-intro">
-          <strong>Receba uma avaliação inicial</strong>
-          <span>Preencha os dados abaixo para entendermos o melhor caminho para seu site, perfil ou atendimento.</span>
+          <strong>Receba uma orientação inicial</strong>
+          <span>Preencha os dados abaixo para entendermos qual solução de IA faz mais sentido para o seu contexto.</span>
         </div>
 
         <label>Nome
           <input type="text" name="name" placeholder="Seu nome" required>
         </label>
 
-        <label>Empresa ou projeto
-          <input type="text" name="company" placeholder="Nome do negócio, projeto ou perfil">
+        <label>Empresa, projeto ou área de atuação
+          <input type="text" name="company" placeholder="Ex.: clínica, escola, consultoria, projeto pessoal...">
         </label>
 
         <label>E-mail
@@ -729,16 +729,16 @@
           <input type="text" name="whatsapp" placeholder="(00) 00000-0000">
         </label>
 
-        <label>Você já tem site ou Instagram?
-          <input type="text" name="current_channel" placeholder="Cole o link, se quiser">
+        <label>Link de referência, se houver
+          <input type="text" name="current_channel" placeholder="Site, Instagram, LinkedIn, página ou material">
         </label>
 
-        <label>Conte rapidamente o que quer melhorar
-          <textarea name="need_details" placeholder="Ex.: meu site não explica bem os serviços; recebo muitas perguntas no WhatsApp; quero uma página para divulgar um curso..."></textarea>
+        <label>Conte rapidamente o que quer resolver com IA
+          <textarea name="need_details" placeholder="Ex.: quero usar IA no meu trabalho; preciso de um assistente para atendimento; quero automatizar um processo; preciso capacitar minha equipe..."></textarea>
         </label>
 
-        <button type="submit" class="intellih-submit">Enviar avaliação</button>
-        <div class="intellih-mini-note">A Intellih responderá com uma orientação inicial sobre viabilidade e melhor caminho.</div>
+        <button type="submit" class="intellih-submit">Enviar orientação</button>
+        <div class="intellih-mini-note">A Intellih responderá com uma orientação inicial sobre viabilidade, melhor caminho e possível próximo passo.</div>
       `;
 
       form.onsubmit = async (e) => {
@@ -766,7 +766,7 @@
               selected_need: selectedNeed,
               selected_audience: selectedAudience,
               recommended_solution: selectedSolution,
-              source: "Chat Widget Intellih - Presença Digital Inteligente"
+              source: "Chat Widget Intellih - Home IA Aplicada"
             })
           });
 
@@ -783,8 +783,8 @@
 
           await say(`Obrigado, <strong>${escapeHtml(data.name)}</strong>. Recebemos sua solicitação.`);
           await say(`Vou encaminhar com este foco: <strong>${escapeHtml(selectedSolution)}</strong>.`);
-          await say(`Enquanto isso, uma boa preparação é reunir: link do site ou Instagram, principais serviços e perguntas que seus clientes mais fazem.`);
-          showSuccess("✅ Mensagem enviada com sucesso!");
+          await say(`Enquanto isso, uma boa preparação é reunir: objetivo principal, rotina ou processo envolvido, exemplos de tarefas repetitivas e materiais ou links de referência.`);
+          showSuccess("✅ Solicitação enviada com sucesso!");
         } catch (err) {
           sending.remove();
 
