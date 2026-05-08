@@ -216,74 +216,6 @@
       color: #fff;
       border: 1px solid rgba(255,255,255,.14);
     }
-
-
-    .home-identity-strip {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #25211e;
-      color: #fff;
-      border: 1px solid rgba(198, 95, 34, 0.35);
-      box-shadow: 0 12px 28px rgba(21, 18, 15, 0.12);
-      font-size: 0.88rem;
-      font-weight: 850;
-    }
-
-    .home-identity-strip span {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-light));
-      color: #fff;
-      font-weight: 950;
-    }
-
-    .home-hub-panel {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      max-width: 760px;
-    }
-
-    .home-hub-link {
-      padding: 12px 13px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(231,224,216,.95);
-      color: var(--text);
-      font-size: 0.88rem;
-      font-weight: 850;
-      box-shadow: 0 8px 20px rgba(21,18,15,.06);
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
-    }
-
-    .home-hub-link:hover {
-      transform: translateY(-1px);
-      border-color: rgba(198,95,34,.45);
-      background: #fff;
-      color: var(--brand-dark);
-    }
-
-    @media (max-width: 760px) {
-      .home-hub-panel {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 420px) {
-      .home-hub-panel {
-        grid-template-columns: 1fr;
-      }
-    }
-
     .hero {
       position: relative;
       overflow: hidden;
@@ -313,6 +245,22 @@
       font-size: 0.88rem;
       font-weight: 840;
       margin-bottom: 20px;
+    }
+
+
+    .eyebrow-home {
+      background:
+        linear-gradient(135deg, rgba(37, 33, 30, 0.98), rgba(68, 58, 50, 0.96));
+      color: #fff;
+      border: 1px solid rgba(198, 95, 34, 0.42);
+      box-shadow: 0 14px 32px rgba(21, 18, 15, 0.16);
+      padding: 10px 15px;
+      letter-spacing: 0.01em;
+    }
+
+    .eyebrow-home .dot {
+      background: var(--brand-light);
+      box-shadow: 0 0 0 5px rgba(228, 124, 60, 0.18);
     }
 
     .dot {
@@ -872,74 +820,6 @@
       .container {
         width: min(var(--max), calc(100% - 28px));
       }
-
-  
-    .home-identity-strip {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: #25211e;
-      color: #fff;
-      border: 1px solid rgba(198, 95, 34, 0.35);
-      box-shadow: 0 12px 28px rgba(21, 18, 15, 0.12);
-      font-size: 0.88rem;
-      font-weight: 850;
-    }
-
-    .home-identity-strip span {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-light));
-      color: #fff;
-      font-weight: 950;
-    }
-
-    .home-hub-panel {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      max-width: 760px;
-    }
-
-    .home-hub-link {
-      padding: 12px 13px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(231,224,216,.95);
-      color: var(--text);
-      font-size: 0.88rem;
-      font-weight: 850;
-      box-shadow: 0 8px 20px rgba(21,18,15,.06);
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
-    }
-
-    .home-hub-link:hover {
-      transform: translateY(-1px);
-      border-color: rgba(198,95,34,.45);
-      background: #fff;
-      color: var(--brand-dark);
-    }
-
-    @media (max-width: 760px) {
-      .home-hub-panel {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 420px) {
-      .home-hub-panel {
-        grid-template-columns: 1fr;
-      }
-    }
-
     .hero {
         padding: 62px 0 44px;
       }
@@ -1006,23 +886,10 @@
     <section class="hero" id="inicio">
       <div class="container hero-grid">
         <div>
-          <div class="home-identity-strip">
-            <span>I</span>
-            Página principal da Intellih · visão geral das soluções
-          </div>
-
-          <div class="eyebrow"><span class="dot"></span> Hub de soluções em inteligência artificial aplicada</div>
+<div class="eyebrow eyebrow-home"><span class="dot"></span> Inteligência artificial aplicada, com método</div>
           <h1>Soluções com IA para facilitar rotinas, organizar informações e transformar oportunidades em resultado</h1>
           <p class="lead">A Intellih cria assistentes, agentes, automações, mentorias e capacitações para pessoas, profissionais e empresas que querem usar inteligência artificial de forma prática, segura e orientada a resultado.</p>
-
-          <div class="home-hub-panel" aria-label="Navegação rápida pelas soluções da Intellih">
-            <a class="home-hub-link" href="/mentoria-ia">Mentoria em IA</a>
-            <a class="home-hub-link" href="/assistentes-inteligentes">Assistentes inteligentes</a>
-            <a class="home-hub-link" href="/agentes-ia">Agentes de IA</a>
-            <a class="home-hub-link" href="/capacitacao-ia">Capacitação em IA</a>
-          </div>
-
-          <div class="hero-actions">
+<div class="hero-actions">
             <a class="btn btn-primary" href="#solucoes">Conheça as soluções</a>
             <button class="btn btn-light" type="button" data-open-intellih-chat>Conversar com o assistente</button>
           </div>
