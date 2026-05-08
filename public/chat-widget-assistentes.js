@@ -859,6 +859,22 @@
       track("AssistentesChatClose");
     }
 
+    function registrarAberturaAssistente(nomePagina) {
+      if (window.__assistenteAbertoRegistrado) {
+        return;
+      }
+    
+      window.__assistenteAbertoRegistrado = true;
+    
+      if (typeof fbq === "function") {
+        fbq("trackCustom", "AssistenteAberto", {
+          pagina: nomePagina || window.location.pathname,
+          url: window.location.href
+        });
+      }
+    }
+
+    
     chatButton.addEventListener("click", () => {
       const isOpen = chatWindow.style.display === "flex";
       if (isOpen) {
