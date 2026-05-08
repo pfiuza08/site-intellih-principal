@@ -1216,6 +1216,7 @@
 
         if (chatButton) {
           chatButton.click();
+          registrarAberturaAssistente(window.location.pathname);
         } else {
           document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
         }
