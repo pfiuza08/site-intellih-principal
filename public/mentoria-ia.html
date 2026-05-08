@@ -1173,18 +1173,24 @@
       }
     }
     
-    document.querySelectorAll('[data-open-mentoria-chat]').forEach((button) => {
-      button.addEventListener('click', () => {
-        const chatButton = document.getElementById('intellih-mentoria-chat-button');
-    
-        if (chatButton) {
-          chatButton.click();
-          registrarAberturaAssistenteMentoria(window.location.pathname);
-        } else {
-          document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
+   document.querySelectorAll('[data-open-mentoria-chat]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const chatButton =
+        document.getElementById('intellih-mentoria-chat-button') ||
+        document.getElementById('intellih-chat-button') ||
+        document.querySelector('[data-intellih-chat-button]') ||
+        document.querySelector('[data-open-chat]');
+  
+      if (chatButton) {
+        chatButton.click();
+        registrarAberturaAssistenteMentoria(window.location.pathname);
+        return;
+      }
+  
+      console.warn('Botão do chat de mentoria não encontrado. Verifique o ID criado em chat-widget-mentoria.js.');
+      document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
     });
+  });
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
