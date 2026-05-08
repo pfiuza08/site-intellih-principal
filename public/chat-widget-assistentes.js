@@ -873,7 +873,6 @@
         });
       }
     }
-
     
     chatButton.addEventListener("click", () => {
       const isOpen = chatWindow.style.display === "flex";
