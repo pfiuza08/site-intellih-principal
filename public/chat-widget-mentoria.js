@@ -475,7 +475,7 @@
 
     setTimeout(() => {
       chatButton.style.opacity = "1";
-      .style.transform = "translateY(0)";
+      chatButton.style.transform = "translateY(0)";
       chatBubble.style.opacity = "1";
       chatBubble.style.transform = "translateY(0)";
     }, 700);
