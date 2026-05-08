@@ -475,7 +475,7 @@
 
     setTimeout(() => {
       chatButton.style.opacity = "1";
-      chatButton.style.transform = "translateY(0)";
+      .style.transform = "translateY(0)";
       chatBubble.style.opacity = "1";
       chatBubble.style.transform = "translateY(0)";
     }, 700);
@@ -843,6 +843,21 @@
       track("MentoriaChatClose");
     }
 
+    function registrarAberturaAssistenteMentoria(nomePagina) {
+      if (window.__assistenteMentoriaAbertoRegistrado) {
+        return;
+      }
+    
+      window.__assistenteMentoriaAbertoRegistrado = true;
+    
+      if (typeof fbq === "function") {
+        fbq("trackCustom", "AssistenteMentoriaAberto", {
+          pagina: nomePagina || window.location.pathname,
+          url: window.location.href
+        });
+      }
+    }
+    
     chatButton.addEventListener("click", () => {
       const isOpen = chatWindow.style.display === "flex";
       if (isOpen) {
