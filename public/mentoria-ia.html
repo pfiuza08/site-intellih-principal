@@ -1158,22 +1158,7 @@
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
 
-    function registrarAberturaAssistenteMentoria(nomePagina) {
-      if (window.__assistenteMentoriaAbertoRegistrado) {
-        return;
-      }
-    
-      window.__assistenteMentoriaAbertoRegistrado = true;
-    
-      if (typeof fbq === "function") {
-        fbq("trackCustom", "AssistenteMentoriaAberto", {
-          pagina: nomePagina || window.location.pathname,
-          url: window.location.href
-        });
-      }
-    }
-    
-   document.querySelectorAll('[data-open-mentoria-chat]').forEach((button) => {
+    document.querySelectorAll('[data-open-mentoria-chat]').forEach((button) => {
     button.addEventListener('click', () => {
       const chatButton =
         document.getElementById('intellih-mentoria-chat-button') ||
