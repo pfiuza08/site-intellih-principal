@@ -384,25 +384,18 @@
     }
 
     .social-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
       gap: 10px;
-      margin-top: 14px;
+      align-items: center;
     }
 
     .social {
-      min-height: 54px;
-      display: flex;
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.075);
-      border: 1px solid rgba(255,255,255,.12);
-      color: #fff;
-      font-weight: 850;
-      font-size: .9rem;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      border-radius: 50%;
     }
 
     .social:hover {
@@ -411,11 +404,9 @@
       border-color: rgba(241,154,87,.28);
     }
 
-    .social svg {
-      width: 20px;
-      height: 20px;
-      display: block;
-      fill: currentColor;
+   .social svg {
+      width: 18px;
+      height: 18px;
     }
 
     .footer {
