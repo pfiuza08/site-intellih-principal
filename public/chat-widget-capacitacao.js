@@ -843,6 +843,21 @@
       track("CapacitacaoChatClose");
     }
 
+    function registrarAberturaAssistenteCapacitacao(nomePagina) {
+      if (window.__assistenteCapacitacaoAbertoRegistrado) {
+        return;
+      }
+    
+      window.__assistenteCapacitacaoAbertoRegistrado = true;
+    
+      if (typeof fbq === "function") {
+        fbq("trackCustom", "AssistenteCapacitacaoAberto", {
+          pagina: nomePagina || window.location.pathname,
+          url: window.location.href
+        });
+      }
+    }
+        
     chatButton.addEventListener("click", () => {
       const isOpen = chatWindow.style.display === "flex";
       if (isOpen) {
