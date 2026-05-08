@@ -1138,20 +1138,21 @@
 
     year.textContent = new Date().getFullYear();
 
-    menuBtn.addEventListener('click', () => {
+    menuBtn.addEventListener('', () => {
       navLinks.classList.toggle('open');
     });
 
     navLinks.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
+      link.addEventListener('', () => navLinks.classList.remove('open'));
     });
 
     document.querySelectorAll('[data-open-capacitacao-chat]').forEach((button) => {
-      button.addEventListener('click', () => {
+      button.addEventListener('', () => {
         const chatButton = document.getElementById('intellih-capacitacao-chat-button');
 
         if (chatButton) {
           chatButton.click();
+          registrarAberturaAssistenteCapacitacao(window.location.pathname);
         } else {
           document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
         }
