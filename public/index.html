@@ -642,6 +642,91 @@
       max-width: 760px;
     }
 
+
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .featured-post {
+      min-height: 100%;
+      padding: 30px;
+      background:
+        radial-gradient(circle at 92% 0%, rgba(198, 95, 34, 0.12), transparent 34%),
+        #fff;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 720;
+      margin-bottom: 14px;
+    }
+
+    .post-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .post-meta span + span::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.72;
+    }
+
+    .post-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .post-card {
+      display: grid;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      border-color: #ffd0b8;
+      box-shadow: 0 16px 34px rgba(21, 18, 15, 0.10);
+    }
+
+    .post-card h3 {
+      font-size: 1.18rem;
+      letter-spacing: -0.035em;
+    }
+
+    .post-card p {
+      color: var(--text-soft);
+      margin-bottom: 0;
+    }
+
+    .post-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      color: var(--brand-dark);
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
     .contact-grid {
       display: grid;
       grid-template-columns: 0.92fr 1.08fr;
@@ -776,7 +861,92 @@
     @media (max-width: 980px) {
       .hero-grid,
       .grid-2,
-      .contact-grid {
+  
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .featured-post {
+      min-height: 100%;
+      padding: 30px;
+      background:
+        radial-gradient(circle at 92% 0%, rgba(198, 95, 34, 0.12), transparent 34%),
+        #fff;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 720;
+      margin-bottom: 14px;
+    }
+
+    .post-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .post-meta span + span::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.72;
+    }
+
+    .post-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .post-card {
+      display: grid;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      border-color: #ffd0b8;
+      box-shadow: 0 16px 34px rgba(21, 18, 15, 0.10);
+    }
+
+    .post-card h3 {
+      font-size: 1.18rem;
+      letter-spacing: -0.035em;
+    }
+
+    .post-card p {
+      color: var(--text-soft);
+      margin-bottom: 0;
+    }
+
+    .post-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      color: var(--brand-dark);
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
+    .contact-grid {
         grid-template-columns: 1fr;
       }
 
@@ -872,6 +1042,7 @@
         <a href="#frentes">Frentes</a>
         <a href="#publicos">Para quem</a>
         <a href="#como-funciona">Como funciona</a>
+        <a href="#blog">Blog</a>
         <a href="#contato">Contato</a>
       </nav>
 
@@ -1101,6 +1272,50 @@
             <h3>Ajuste e evolução</h3>
             <p>Validamos funcionamento, tom, qualidade, limites, encaminhamentos e próximos passos de evolução.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="blog">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Blog</div>
+          <h2>IA aplicada com método para negócios reais</h2>
+          <p class="section-intro">Artigos práticos sobre inteligência artificial, automação, assistentes inteligentes, processos e oportunidades reais de aplicação da IA em pequenos negócios e rotinas profissionais.</p>
+        </div>
+
+        <div class="blog-grid">
+          <article class="card featured-post">
+            <span class="tag">Artigo em destaque</span>
+            <div class="post-meta">
+              <span>IA aplicada</span>
+              <span>Processos e automação</span>
+            </div>
+            <h3>Antes da IA, vem o fluxo: como identificar oportunidades reais de automação no seu negócio</h3>
+            <p>Entenda por que aplicar inteligência artificial no negócio não deve começar pela ferramenta, mas pela análise do processo, das repetições, dos gargalos e dos pontos de improviso.</p>
+            <a class="post-link" href="/blog/antes-da-ia-vem-o-fluxo.html">Ler artigo →</a>
+          </article>
+
+          <div class="post-list" aria-label="Últimos artigos do blog da Intellih">
+            <a class="post-card" href="/blog/como-saber-se-minha-empresa-precisa-de-ia.html">
+              <div class="post-meta"><span>Diagnóstico</span><span>IA nos negócios</span></div>
+              <h3>Como saber se minha empresa precisa de IA?</h3>
+              <p>Sinais práticos para identificar quando a IA pode ajudar — e quando o problema ainda é falta de processo.</p>
+            </a>
+
+            <a class="post-card" href="/blog/quando-criar-assistente-inteligente.html">
+              <div class="post-meta"><span>Assistentes</span><span>Atendimento</span></div>
+              <h3>Quando vale a pena criar um assistente inteligente?</h3>
+              <p>Critérios para decidir se um assistente pode melhorar atendimento, triagem, qualificação de leads ou suporte inicial.</p>
+            </a>
+
+            <a class="post-card" href="/blog/">
+              <div class="post-meta"><span>Conteúdo</span><span>Intellih</span></div>
+              <h3>Ver todos os artigos</h3>
+              <p>Acesse o blog da Intellih e acompanhe conteúdos sobre IA aplicada, automação, processos e uso responsável da tecnologia.</p>
+            </a>
+          </div>
         </div>
       </div>
     </section>
