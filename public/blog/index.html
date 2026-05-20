@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog Intellih — IA aplicada com método para negócios reais</title>
+  <meta name="description" content="Artigos práticos da Intellih sobre inteligência artificial aplicada, automação, assistentes inteligentes, processos e oportunidades reais de uso da IA em negócios." />
+  <link rel="canonical" href="https://www.intellih.com.br/blog/" />
+
+  <meta property="og:title" content="Blog Intellih — IA aplicada com método para negócios reais" />
+  <meta property="og:description" content="Conteúdos práticos sobre IA aplicada, automação, assistentes inteligentes, processos e oportunidades reais de uso da inteligência artificial em negócios." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.intellih.com.br/blog/" />
+  <meta property="og:image" content="https://www.intellih.com.br/og-image.jpg" />
+
+  <link rel="icon" href="/favicon_intellih.ico" />
+
+  <!-- Meta Pixel Code - Intellih Principal -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}
+  (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1240394014783181');
+  fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1240394014783181&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog Intellih",
+    "description": "Artigos práticos sobre inteligência artificial aplicada, automação, assistentes inteligentes, processos e oportunidades reais de uso da IA em negócios.",
+    "url": "https://www.intellih.com.br/blog/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Intellih Tecnologia",
+      "url": "https://www.intellih.com.br/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.intellih.com.br/og-image.jpg"
+      }
+    },
+    "blogPost": [
+      {
+        "@type": "BlogPosting",
+        "headline": "Antes da IA, vem o fluxo: como identificar oportunidades reais de automação no seu negócio",
+        "url": "https://www.intellih.com.br/blog/antes-da-ia-vem-o-fluxo.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Como saber se minha empresa precisa de IA?",
+        "url": "https://www.intellih.com.br/blog/como-saber-se-minha-empresa-precisa-de-ia.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Quando vale a pena criar um assistente inteligente?",
+        "url": "https://www.intellih.com.br/blog/quando-criar-assistente-inteligente.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f5f2;
+      --bg-dark: #12100f;
+      --bg-dark-2: #1b1815;
+      --card: #ffffff;
+      --text: #191715;
+      --text-soft: #5f5a55;
+      --muted: #817870;
+      --line: #e7e0d8;
+      --brand: #c65f22;
+      --brand-dark: #944314;
+      --brand-light: #e47c3c;
+      --brand-soft: #fff0e7;
+      --graphite: #25211e;
+      --radius: 24px;
+      --shadow: 0 18px 45px rgba(21, 18, 15, 0.10);
+      --shadow-soft: 0 10px 28px rgba(21, 18, 15, 0.08);
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    p { margin: 0 0 1rem; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231, 224, 216, 0.78);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      font-size: 1.08rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(198, 95, 34, 0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--brand); }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      border-radius: 999px;
+      padding: 13px 20px;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.96rem;
+      font-weight: 820;
+      white-space: nowrap;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(198, 95, 34, 0.25);
+    }
+
+    .btn-primary:hover { background: var(--brand-dark); }
+
+    .btn-secondary {
+      background: var(--graphite);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(21, 18, 15, 0.18);
+    }
+
+    .btn-light {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 86px 0 62px;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(198, 95, 34, 0.16), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(37, 33, 30, 0.10), transparent 30%),
+        linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      border: 1px solid #ffd7c1;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 0.88rem;
+      font-weight: 840;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow-home {
+      background: linear-gradient(135deg, rgba(37, 33, 30, 0.98), rgba(68, 58, 50, 0.96));
+      color: #fff;
+      border: 1px solid rgba(198, 95, 34, 0.42);
+      box-shadow: 0 14px 32px rgba(21, 18, 15, 0.16);
+      padding: 10px 15px;
+      letter-spacing: 0.01em;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(198, 95, 34, 0.14);
+    }
+
+    .eyebrow-home .dot {
+      background: var(--brand-light);
+      box-shadow: 0 0 0 5px rgba(228, 124, 60, 0.18);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+      color: var(--text);
+    }
+
+    h1 { font-size: clamp(2.6rem, 5vw, 4.8rem); max-width: 980px; }
+    h2 { font-size: clamp(2rem, 3.4vw, 3.2rem); }
+    h3 { font-size: 1.32rem; }
+
+    .lead {
+      font-size: clamp(1.08rem, 1.45vw, 1.3rem);
+      color: var(--text-soft);
+      max-width: 760px;
+      margin: 24px 0 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .hero-panel {
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(231,224,216,.92);
+      border-radius: 34px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .topic-panel {
+      border-radius: 26px;
+      background: var(--graphite);
+      color: #fff;
+      padding: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .topic-panel::before {
+      content: "";
+      position: absolute;
+      inset: -80px -80px auto auto;
+      width: 190px;
+      height: 190px;
+      background: radial-gradient(circle, rgba(198,95,34,.36), transparent 60%);
+    }
+
+    .topic-panel > * { position: relative; z-index: 1; }
+
+    .topic-panel h2 {
+      color: #fff;
+      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+      margin-bottom: 12px;
+    }
+
+    .topic-panel p { color: #d8d0c8; }
+
+    .topic-list {
+      display: grid;
+      gap: 10px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .topic-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 13px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      color: #efe7df;
+    }
+
+    .topic-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-top: 0.55em;
+      background: var(--brand-light);
+      flex-shrink: 0;
+    }
+
+    section { padding: 76px 0; }
+    .section-soft { background: var(--bg-soft); }
+    .section-dark { background: var(--bg-dark); color: #fff; }
+    .section-dark h2, .section-dark h3 { color: #fff; }
+    .section-dark p, .section-dark li, .section-dark .section-intro { color: #d8d0c8; }
+
+    .section-head {
+      max-width: 810px;
+      margin-bottom: 36px;
+    }
+
+    .section-kicker {
+      color: var(--brand);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      margin-bottom: 10px;
+    }
+
+    .section-intro {
+      color: var(--text-soft);
+      font-size: 1.06rem;
+      margin-top: 16px;
+      max-width: 810px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .blog-list {
+      display: grid;
+      gap: 22px;
+    }
+
+    .blog-card {
+      display: grid;
+      grid-template-columns: 0.76fr 1.24fr;
+      gap: 22px;
+      align-items: stretch;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-2px);
+      border-color: #ffd0b8;
+      box-shadow: 0 16px 34px rgba(21, 18, 15, 0.10);
+    }
+
+    .blog-card.featured {
+      grid-template-columns: 1fr 1.32fr;
+      padding: 28px;
+      background:
+        radial-gradient(circle at 95% 0%, rgba(198, 95, 34, 0.10), transparent 34%),
+        #fff;
+    }
+
+    .post-visual {
+      min-height: 210px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(228,124,60,.34), transparent 28%),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,.18), transparent 24%),
+        linear-gradient(135deg, #12100f, #2b2520);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .post-visual::after {
+      content: "";
+      position: absolute;
+      right: -28px;
+      bottom: -28px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.16);
+    }
+
+    .post-visual span {
+      position: relative;
+      z-index: 1;
+      font-weight: 900;
+      color: #ffd7c1;
+    }
+
+    .post-visual strong {
+      position: relative;
+      z-index: 1;
+      max-width: 300px;
+      font-size: 1.18rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .post-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 720;
+      margin-bottom: 14px;
+    }
+
+    .post-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .post-meta span + span::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.72;
+    }
+
+    .post-body h2,
+    .post-body h3 { margin-bottom: 12px; }
+
+    .post-body p {
+      color: var(--text-soft);
+      margin-bottom: 18px;
+    }
+
+    .post-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      color: var(--brand-dark);
+      font-weight: 900;
+      margin-top: auto;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card h3 { margin-bottom: 11px; }
+    .card p { color: var(--text-soft); }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      font-size: 0.78rem;
+      font-weight: 900;
+      margin-bottom: 13px;
+    }
+
+    .highlight-band {
+      background:
+        radial-gradient(circle at 10% 15%, rgba(198,95,34,.24), transparent 32%),
+        linear-gradient(135deg, #201c19, #11100f);
+      color: #fff;
+      border-radius: 34px;
+      padding: 44px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .highlight-band h2 {
+      color: #fff;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 12px;
+    }
+
+    .highlight-band p {
+      color: #d8d0c8;
+      max-width: 760px;
+    }
+
+    .footer {
+      background: #11100f;
+      color: #cfc7bf;
+      padding: 40px 0;
+    }
+
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer a { color: #fff; font-weight: 760; }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .socials a {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .socials a:hover {
+      transform: translateY(-1px);
+      background: rgba(198,95,34,.82);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .socials svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 1040px) {
+      .blog-card,
+      .blog-card.featured { grid-template-columns: 1fr; }
+      .post-visual { min-height: 180px; }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 20px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow-soft);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open { display: flex; }
+      .menu-btn { display: inline-flex; }
+      .nav-actions .btn { display: none; }
+      .highlight-band { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .hero { padding: 62px 0 44px; }
+      section { padding: 56px 0; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .hero-actions, .btn, .highlight-band .btn { width: 100%; }
+      .brand span:last-child { display: none; }
+      .hero-panel, .highlight-band { padding: 24px; border-radius: 26px; }
+      .blog-card, .blog-card.featured { padding: 18px; }
+      .footer-grid { align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="Intellih Tecnologia">
+        <span class="brand-mark">I</span>
+        <span>Intellih Tecnologia</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Menu principal">
+        <a href="/#solucoes">Soluções</a>
+        <a href="/#frentes">Frentes</a>
+        <a href="/#publicos">Para quem</a>
+        <a href="/#como-funciona">Como funciona</a>
+        <a class="active" href="/blog/">Blog</a>
+        <a href="/#contato">Contato</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="/#contato">Fale com a Intellih</a>
+        <button class="menu-btn" type="button" aria-label="Abrir menu" id="menuBtn">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow eyebrow-home"><span class="dot"></span> Blog Intellih</div>
+          <h1>IA aplicada com método para negócios reais</h1>
+          <p class="lead">Artigos práticos sobre inteligência artificial, automação, assistentes inteligentes, processos e oportunidades reais de aplicação da IA em pequenos negócios e rotinas profissionais.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#artigos">Ler artigos</a>
+            <button class="btn btn-light" type="button" data-open-intellih-chat>Conversar com o assistente</button>
+          </div>
+        </div>
+
+        <div class="hero-panel" aria-label="Temas do blog da Intellih">
+          <div class="topic-panel">
+            <h2>Conteúdo para sair do improviso</h2>
+            <p>O foco do blog é mostrar onde a IA faz sentido, onde ainda não faz e como transformar ideias soltas em processos, fluxos e soluções aplicáveis.</p>
+            <ul class="topic-list">
+              <li>Diagnóstico de oportunidades reais de IA</li>
+              <li>Automação, atendimento e assistentes inteligentes</li>
+              <li>Processos, fluxos e bases de conhecimento</li>
+              <li>Uso responsável, limites e controle humano</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="artigos">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Artigos</div>
+          <h2>Comece por estes temas</h2>
+          <p class="section-intro">A seleção inicial organiza as principais dúvidas de quem quer usar IA no negócio sem cair em modismo, promessa vaga ou ferramenta solta.</p>
+        </div>
+
+        <div class="blog-list">
+          <article class="blog-card featured">
+            <a class="post-visual" href="/blog/antes-da-ia-vem-o-fluxo.html" aria-label="Ler artigo: Antes da IA, vem o fluxo">
+              <span>Artigo em destaque</span>
+              <strong>Antes da IA, vem o fluxo</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>IA aplicada</span>
+                <span>Processos e automação</span>
+              </div>
+              <h2>Antes da IA, vem o fluxo: como identificar oportunidades reais de automação no seu negócio</h2>
+              <p>Entenda por que aplicar inteligência artificial no negócio não deve começar pela ferramenta, mas pela análise do processo, das repetições, dos gargalos e dos pontos de improviso.</p>
+              <a class="post-link" href="/blog/antes-da-ia-vem-o-fluxo.html">Ler artigo →</a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a class="post-visual" href="/blog/como-saber-se-minha-empresa-precisa-de-ia.html" aria-label="Ler artigo: Como saber se minha empresa precisa de IA">
+              <span>Diagnóstico</span>
+              <strong>Sua empresa precisa de IA ou de processo?</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>Diagnóstico</span>
+                <span>IA nos negócios</span>
+              </div>
+              <h3>Como saber se minha empresa precisa de IA?</h3>
+              <p>Sinais práticos para identificar quando a IA pode ajudar — e quando o problema ainda é falta de processo, regra, clareza ou organização.</p>
+              <a class="post-link" href="/blog/como-saber-se-minha-empresa-precisa-de-ia.html">Ler artigo →</a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a class="post-visual" href="/blog/quando-criar-assistente-inteligente.html" aria-label="Ler artigo: Quando vale a pena criar um assistente inteligente">
+              <span>Assistentes inteligentes</span>
+              <strong>Quando um assistente realmente ajuda?</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>Assistentes</span>
+                <span>Atendimento</span>
+              </div>
+              <h3>Quando vale a pena criar um assistente inteligente?</h3>
+              <p>Critérios para decidir se um assistente pode melhorar atendimento, triagem, qualificação de leads, FAQ ou suporte inicial.</p>
+              <a class="post-link" href="/blog/quando-criar-assistente-inteligente.html">Ler artigo →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-soft">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Próximas publicações</div>
+          <h2>Temas recomendados para fortalecer autoridade</h2>
+          <p class="section-intro">Estes temas podem virar os próximos artigos do blog e também alimentar LinkedIn, Threads, Instagram e YouTube.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <span class="tag">Automação</span>
+            <h3>Quais processos de um pequeno negócio podem ser automatizados com IA?</h3>
+            <p>Um guia prático para identificar tarefas repetitivas, gargalos, oportunidades e limites antes de implementar ferramentas.</p>
+          </article>
+
+          <article class="card">
+            <span class="tag">Atendimento</span>
+            <h3>Como usar IA no atendimento sem perder controle humano?</h3>
+            <p>Como combinar respostas automáticas, regras, base de conhecimento, encaminhamento e supervisão para reduzir improviso.</p>
+          </article>
+
+          <article class="card">
+            <span class="tag">Estratégia</span>
+            <h3>O que uma consultoria de IA entrega na prática?</h3>
+            <p>Uma explicação objetiva sobre diagnóstico, desenho de solução, fluxos, prompts, assistentes, testes e evolução.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-dark">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Método Intellih</div>
+          <h2>IA não começa pela ferramenta. Começa pelo problema.</h2>
+          <p class="section-intro">O blog reforça a visão da Intellih: aplicar inteligência artificial exige contexto, processo, regra, base de conhecimento, controle humano e objetivo claro.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card" style="background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); box-shadow: none;">
+            <h3>1. Entender</h3>
+            <p>Mapear rotina, canais, informações, gargalos e pontos em que o negócio depende demais de improviso.</p>
+          </article>
+
+          <article class="card" style="background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); box-shadow: none;">
+            <h3>2. Estruturar</h3>
+            <p>Transformar o problema em fluxo, regra, base de conhecimento, mensagens de apoio e critérios de qualidade.</p>
+          </article>
+
+          <article class="card" style="background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); box-shadow: none;">
+            <h3>3. Aplicar</h3>
+            <p>Usar IA, automação, assistentes ou agentes quando fizer sentido para o objetivo e para a maturidade do negócio.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="highlight-band">
+          <div>
+            <h2>Quer identificar oportunidades reais de IA no seu negócio?</h2>
+            <p>Converse com o assistente da Intellih ou envie uma solicitação. A primeira etapa é entender o processo antes de escolher a tecnologia.</p>
+          </div>
+          <button class="btn btn-primary" type="button" data-open-intellih-chat>Conversar com o assistente</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Intellih Tecnologia</strong>
+        <p style="margin: 6px 0 0;">Soluções com IA para facilitar rotinas, organizar informações e transformar oportunidades em resultado.</p>
+        <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+      </div>
+
+      <div class="socials" aria-label="Redes sociais">
+        <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Carrega o assistente da Intellih. Confirme que chat-widget.js está publicado na raiz do site. -->
+  <script src="/chat-widget.js"></script>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const year = document.getElementById('year');
+
+    year.textContent = new Date().getFullYear();
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    document.querySelectorAll('[data-open-intellih-chat]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const chatButton = document.getElementById('intellih-chat-button');
+
+        if (chatButton) {
+          chatButton.click();
+        } else {
+          window.location.href = '/#contato';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
