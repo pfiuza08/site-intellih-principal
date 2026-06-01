@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quando vale a pena criar um assistente inteligente? | Blog Intellih</title>
+  <meta name="description" content="Veja critérios práticos para decidir quando um assistente inteligente pode melhorar atendimento, triagem, qualificação de leads, FAQ ou suporte inicial." />
+  <link rel="canonical" href="https://www.intellih.com.br/blog/quando-vale-a-pena-criar-um-assistente-inteligente.html" />
+
+  <meta property="og:title" content="Quando vale a pena criar um assistente inteligente? | Blog Intellih" />
+  <meta property="og:description" content="Critérios práticos para decidir se um assistente inteligente pode melhorar atendimento, triagem, qualificação de leads, FAQ ou suporte inicial." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.intellih.com.br/blog/quando-vale-a-pena-criar-um-assistente-inteligente.html" />
+  <meta property="og:image" content="https://www.intellih.com.br/og-image.jpg" />
+
+  <link rel="icon" href="/favicon_intellih.ico" />
+
+  <!-- Meta Pixel Code - Intellih Principal -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}
+  (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1240394014783181');
+  fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1240394014783181&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Quando vale a pena criar um assistente inteligente?",
+    "description": "Critérios práticos para decidir se um assistente inteligente pode melhorar atendimento, triagem, qualificação de leads, FAQ ou suporte inicial.",
+    "author": {
+      "@type": "Organization",
+      "name": "Intellih Tecnologia",
+      "url": "https://www.intellih.com.br/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Intellih Tecnologia",
+      "url": "https://www.intellih.com.br/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.intellih.com.br/og-image.jpg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.intellih.com.br/blog/quando-vale-a-pena-criar-um-assistente-inteligente.html"
+    },
+    "datePublished": "2026-06-01",
+    "dateModified": "2026-06-01"
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f5f2;
+      --text: #191715;
+      --text-soft: #5f5a55;
+      --muted: #817870;
+      --line: #e7e0d8;
+      --brand: #c65f22;
+      --brand-dark: #944314;
+      --brand-light: #e47c3c;
+      --brand-soft: #fff0e7;
+      --graphite: #25211e;
+      --radius: 24px;
+      --shadow-soft: 0 10px 28px rgba(21, 18, 15, 0.08);
+      --max: 1160px;
+      --article-max: 820px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.72;
+    }
+    a { color: inherit; text-decoration: none; }
+    p { margin: 0 0 1.1rem; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231, 224, 216, 0.78);
+    }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      font-size: 1.08rem;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(198, 95, 34, 0.24);
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: var(--brand); }
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 800;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      border-radius: 999px;
+      padding: 13px 20px;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.96rem;
+      font-weight: 820;
+      white-space: nowrap;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(198, 95, 34, 0.25);
+    }
+    .btn-primary:hover { background: var(--brand-dark); }
+    .btn-light {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .article-hero {
+      padding: 74px 0 46px;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(198, 95, 34, 0.16), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(37, 33, 30, 0.10), transparent 30%),
+        linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .article-hero-inner { max-width: var(--article-max); }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      border: 1px solid #ffd7c1;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 0.88rem;
+      font-weight: 840;
+      margin-bottom: 20px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(198, 95, 34, 0.14);
+    }
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+      color: var(--text);
+    }
+    h1 {
+      font-size: clamp(2.35rem, 4.7vw, 4.5rem);
+      margin-bottom: 22px;
+    }
+    h2 {
+      font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+      margin: 42px 0 16px;
+    }
+    .article-meta {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-top: 18px;
+    }
+    .lead {
+      font-size: clamp(1.08rem, 1.45vw, 1.28rem);
+      color: var(--text-soft);
+      max-width: 760px;
+    }
+    .article-wrap { padding: 56px 0 76px; }
+    .article-content {
+      max-width: var(--article-max);
+      margin: 0 auto;
+      font-size: 1.06rem;
+    }
+    .article-content strong { color: var(--text); }
+    .article-content ul {
+      margin: 18px 0 24px;
+      padding-left: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .article-content li {
+      position: relative;
+      padding-left: 28px;
+      color: var(--text-soft);
+    }
+    .article-content li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+    .callout {
+      margin: 32px 0;
+      padding: 24px;
+      border-radius: var(--radius);
+      background: var(--brand-soft);
+      border: 1px solid #ffd7c1;
+      box-shadow: var(--shadow-soft);
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    .article-cta {
+      margin-top: 52px;
+      padding: 34px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(198,95,34,.24), transparent 32%),
+        linear-gradient(135deg, #201c19, #11100f);
+      color: #fff;
+      box-shadow: 0 18px 45px rgba(21, 18, 15, 0.14);
+    }
+    .article-cta h2 { margin-top: 0; color: #fff; }
+    .article-cta p { color: #d8d0c8; }
+    .article-nav {
+      max-width: var(--article-max);
+      margin: 40px auto 0;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer {
+      background: #11100f;
+      color: #cfc7bf;
+      padding: 40px 0;
+    }
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer a { color: #fff; font-weight: 760; }
+    .socials { display: flex; gap: 10px; align-items: center; }
+    .socials a {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .socials a:hover {
+      transform: translateY(-1px);
+      background: rgba(198,95,34,.82);
+      border-color: rgba(255,255,255,.18);
+    }
+    .socials svg { width: 20px; height: 20px; fill: currentColor; }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 20px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow-soft);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: inline-flex; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .article-hero { padding: 56px 0 36px; }
+      .article-wrap { padding: 42px 0 58px; }
+      .brand span:last-child { display: none; }
+      .btn, .article-nav .btn { width: 100%; }
+      .article-cta { padding: 24px; border-radius: 26px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="Intellih Tecnologia">
+        <span class="brand-mark">I</span>
+        <span>Intellih Tecnologia</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Menu principal">
+        <a href="/">Início</a>
+        <a href="/#solucoes">Soluções</a>
+        <a href="/#como-funciona">Como funciona</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contato">Contato</a>
+      </nav>
+
+      <button class="menu-btn" type="button" aria-label="Abrir menu" id="menuBtn">Menu</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container article-hero-inner">
+        <div class="eyebrow"><span class="dot"></span> Assistentes inteligentes</div>
+        <h1>Quando vale a pena criar um assistente inteligente?</h1>
+        <p class="lead">
+          Um assistente inteligente pode melhorar atendimento, triagem, FAQ, qualificação de leads e suporte inicial.
+          Mas ele só faz sentido quando existe um fluxo de trabalho claro, informações confiáveis e um objetivo prático a apoiar.
+        </p>
+        <p class="article-meta">Publicado por Intellih Tecnologia · 1 de junho de 2026 · Leitura de 6 minutos</p>
+      </div>
+    </section>
+
+    <section class="article-wrap">
+      <div class="container">
+        <article class="article-content">
+          <p>
+            Criar um assistente inteligente virou uma ideia atraente para muitos negócios. Afinal, parece simples: colocar uma IA no site, no WhatsApp ou no Instagram e deixar que ela responda clientes, tire dúvidas e encaminhe demandas.
+          </p>
+
+          <p>
+            Mas a decisão não deve começar pela ferramenta. Antes de criar um assistente, a pergunta principal é: <strong>existe um fluxo de trabalho claro que ele pode apoiar?</strong>
+          </p>
+
+          <p>
+            Um assistente inteligente pode ser muito útil quando existe repetição, volume de perguntas, necessidade de triagem ou dificuldade para acompanhar leads. Mas ele não resolve sozinho atendimento confuso, informações contraditórias ou ausência de regra.
+          </p>
+
+          <div class="callout">
+            <p>
+              <strong>Um assistente inteligente não deve ser criado apenas porque a tecnologia está disponível.</strong> Ele deve existir porque há uma rotina real que pode ficar mais clara, mais rápida ou mais consistente com apoio de IA.
+            </p>
+          </div>
+
+          <h2>O que é um assistente inteligente no contexto do negócio?</h2>
+
+          <p>
+            No contexto de pequenas empresas, profissionais e prestadores de serviço, um assistente inteligente é uma solução que usa inteligência artificial para apoiar uma interação ou rotina específica.
+          </p>
+
+          <p>
+            Ele pode responder dúvidas frequentes, coletar informações iniciais, orientar o cliente, organizar uma triagem, consultar uma base de conhecimento ou encaminhar a pessoa para o próximo passo.
+          </p>
+
+          <p>
+            O ponto essencial é que ele não deve atuar de forma solta. Um bom assistente precisa ter objetivo, escopo, limites, base de informação e critérios de encaminhamento.
+          </p>
+
+          <h2>Quando um assistente inteligente faz sentido</h2>
+
+          <p>
+            Um assistente inteligente costuma fazer sentido quando existe uma demanda recorrente e relativamente previsível. Não precisa ser algo complexo. Muitas vezes, o melhor primeiro assistente é aquele que resolve uma etapa simples, mas frequente.
+          </p>
+
+          <p>Alguns sinais indicam que vale avaliar a criação de um assistente:</p>
+
+          <ul>
+            <li>as pessoas fazem perguntas parecidas todos os dias;</li>
+            <li>o atendimento inicial consome muito tempo da equipe ou do dono;</li>
+            <li>há muitos contatos que precisam ser qualificados antes de uma conversa humana;</li>
+            <li>leads chegam por canais diferentes e parte deles se perde;</li>
+            <li>a empresa precisa explicar sempre as mesmas etapas, preços, prazos ou condições;</li>
+            <li>o FAQ existe, mas ninguém consulta ou ele não está integrado ao atendimento;</li>
+            <li>o suporte inicial depende de respostas repetitivas;</li>
+            <li>há demora para responder dúvidas simples fora do horário comercial.</li>
+          </ul>
+
+          <p>
+            Quando esses sinais aparecem, o assistente pode ajudar a reduzir atrito, organizar informações e melhorar a experiência inicial do cliente.
+          </p>
+
+          <h2>Quando ainda não vale criar um assistente</h2>
+
+          <p>
+            Também existem situações em que criar um assistente inteligente pode ser precipitado. Isso acontece quando a empresa ainda não tem clareza mínima sobre o que será respondido, como será respondido e com quais limites.
+          </p>
+
+          <p>O assistente provavelmente não é o melhor primeiro passo quando:</p>
+
+          <ul>
+            <li>as informações sobre o negócio estão espalhadas e desatualizadas;</li>
+            <li>não existem respostas padrão para dúvidas recorrentes;</li>
+            <li>ninguém definiu quais promessas podem ou não ser feitas;</li>
+            <li>cada pessoa da equipe responde de um jeito diferente;</li>
+            <li>não está claro o que deve acontecer depois da primeira conversa;</li>
+            <li>a empresa quer “colocar IA” sem saber qual métrica pretende melhorar;</li>
+            <li>não haverá acompanhamento humano para revisar e ajustar o funcionamento.</li>
+          </ul>
+
+          <p>
+            Nesses casos, o problema não é falta de IA. O problema é falta de estrutura. Antes de automatizar, é preciso organizar informações, regras e fluxo de trabalho.
+          </p>
+
+          <h2>Assistente para atendimento inicial</h2>
+
+          <p>
+            O atendimento inicial é uma das aplicações mais comuns. O assistente pode receber o visitante, responder dúvidas básicas, explicar como o serviço funciona e coletar informações essenciais antes do contato humano.
+          </p>
+
+          <p>
+            Esse uso faz sentido quando a empresa recebe perguntas repetidas e quer evitar que cada atendimento comece do zero. Também ajuda quando há muitos contatos fora do horário comercial ou quando o primeiro atendimento precisa apenas orientar o próximo passo.
+          </p>
+
+          <p>
+            Mas o assistente precisa saber seus limites. Ele não deve prometer o que a empresa não definiu, inventar condições comerciais ou responder temas que exigem avaliação humana.
+          </p>
+
+          <h2>Assistente para triagem</h2>
+
+          <p>
+            A triagem é útil quando a empresa precisa entender rapidamente quem está entrando em contato, qual é a demanda, qual o nível de urgência e qual encaminhamento faz sentido.
+          </p>
+
+          <p>
+            Um assistente pode fazer perguntas iniciais, organizar respostas e indicar se o contato deve seguir para vendas, suporte, orçamento, agendamento ou outro canal.
+          </p>
+
+          <p>
+            Para isso funcionar, a empresa precisa definir quais perguntas importam. Sem critérios claros, o assistente apenas conversa, mas não melhora a decisão.
+          </p>
+
+          <h2>Assistente para qualificação de leads</h2>
+
+          <p>
+            Em vendas, um assistente pode ajudar a qualificar leads antes de uma conversa comercial. Ele pode identificar interesse, perfil, necessidade, prazo, orçamento aproximado ou serviço desejado.
+          </p>
+
+          <p>
+            Esse tipo de solução é útil quando muitos contatos chegam com pouca informação e a equipe perde tempo tentando entender se existe uma oportunidade real.
+          </p>
+
+          <p>
+            A qualificação, porém, não deve ser invasiva nem excessiva. O assistente precisa coletar apenas o que é necessário para orientar o próximo passo.
+          </p>
+
+          <h2>Assistente para FAQ</h2>
+
+          <p>
+            Muitas empresas têm dúvidas frequentes espalhadas em posts, mensagens antigas, PDFs, propostas e páginas do site. Um assistente pode transformar esse conhecimento em uma experiência mais acessível.
+          </p>
+
+          <p>
+            Nesse caso, a base de conhecimento é tão importante quanto a tecnologia. Se as informações estão incompletas ou contraditórias, o assistente não terá uma referência confiável.
+          </p>
+
+          <p>
+            Um bom FAQ inteligente deve responder com objetividade, indicar limites e encaminhar para atendimento humano quando a dúvida depender de contexto específico.
+          </p>
+
+          <h2>Assistente para suporte inicial</h2>
+
+          <p>
+            No suporte inicial, o assistente pode ajudar a identificar o tipo de problema, orientar primeiros passos, coletar dados do caso e reduzir o número de atendimentos simples que chegam diretamente para a equipe.
+          </p>
+
+          <p>
+            Esse uso é útil quando existem dúvidas operacionais recorrentes, solicitações simples ou procedimentos que podem ser explicados de forma padronizada.
+          </p>
+
+          <p>
+            Mas suporte exige cuidado. Se o tema envolve risco, decisão sensível, informação pessoal ou interpretação complexa, o assistente deve atuar apenas como apoio inicial e encaminhar para uma pessoa.
+          </p>
+
+          <div class="callout">
+            <p>
+              <strong>O melhor assistente não é o que tenta responder tudo.</strong> É o que sabe o que responder, o que perguntar, quando parar e quando encaminhar para atendimento humano.
+            </p>
+          </div>
+
+          <h2>Critérios práticos para decidir</h2>
+
+          <p>
+            Antes de criar um assistente inteligente, vale passar por uma análise simples. Ela evita desperdício de tempo e reduz o risco de criar uma solução bonita, mas pouco útil.
+          </p>
+
+          <p>Algumas perguntas ajudam nessa decisão:</p>
+
+          <ul>
+            <li>qual rotina o assistente vai apoiar?</li>
+            <li>essa rotina acontece com frequência suficiente?</li>
+            <li>quais perguntas ou demandas se repetem?</li>
+            <li>quais informações a IA pode usar como base?</li>
+            <li>quais respostas devem ser evitadas?</li>
+            <li>quando o atendimento humano deve assumir?</li>
+            <li>qual resultado será medido: tempo de resposta, organização, conversão, satisfação ou redução de retrabalho?</li>
+          </ul>
+
+          <p>
+            Se essas perguntas não têm resposta, talvez o projeto ainda não esteja pronto para virar assistente. Se têm resposta, existe uma base mais segura para testar.
+          </p>
+
+          <h2>Comece pequeno</h2>
+
+          <p>
+            Um erro comum é querer criar um assistente que faz tudo: atende, vende, agenda, responde suporte, produz conteúdo e resolve qualquer dúvida. Na prática, isso aumenta risco e dificulta o controle.
+          </p>
+
+          <p>
+            O caminho mais viável é começar por um recorte claro. Por exemplo: atendimento inicial no site, triagem de leads, FAQ de serviços ou suporte básico para dúvidas frequentes.
+          </p>
+
+          <p>
+            Depois de testar, medir e ajustar, a empresa pode ampliar o escopo com mais segurança.
+          </p>
+
+          <h2>Conclusão: assistente inteligente precisa de função clara</h2>
+
+          <p>
+            Vale a pena criar um assistente inteligente quando ele apoia uma rotina real, recorrente e relevante para o negócio.
+          </p>
+
+          <p>
+            Ele pode melhorar atendimento, triagem, qualificação de leads, FAQ e suporte inicial. Mas precisa operar com regras, limites, base de conhecimento e encaminhamento humano quando necessário.
+          </p>
+
+          <p>
+            Antes de criar um assistente, a pergunta não deve ser apenas “qual IA usar?”. A pergunta mais importante é: <strong>qual parte da experiência do cliente ou do fluxo de trabalho precisa funcionar melhor?</strong>
+          </p>
+
+          <p>
+            Quando essa resposta está clara, o assistente deixa de ser uma novidade tecnológica e passa a ser uma ferramenta de apoio ao negócio.
+          </p>
+
+          <div class="article-cta">
+            <h2>Quer avaliar se seu negócio precisa de um assistente inteligente?</h2>
+            <p>
+              A Intellih ajuda negócios a identificar oportunidades reais de IA, organizar fluxos de trabalho e estruturar assistentes inteligentes com escopo, limites e aplicação prática.
+            </p>
+            <a class="btn btn-primary" href="/#contato">Fale com a Intellih</a>
+          </div>
+        </article>
+
+        <div class="article-nav">
+          <a class="btn btn-light" href="/blog/">Voltar para o blog</a>
+          <a class="btn btn-light" href="/">Voltar para o site</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Intellih Tecnologia</strong>
+        <p style="margin: 6px 0 0;">Soluções com IA para facilitar rotinas, organizar informações e transformar oportunidades em resultado.</p>
+        <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+      </div>
+
+      <div class="socials" aria-label="Redes sociais">
+        <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/chat-widget.js"></script>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const year = document.getElementById('year');
+
+    year.textContent = new Date().getFullYear();
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>
