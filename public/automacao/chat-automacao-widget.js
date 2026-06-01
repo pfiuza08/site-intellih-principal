@@ -35,7 +35,12 @@
       } catch (e) {}
     }
 
-    if (document.getElementById("intellih-automation-chat-button")) return;
+    if (document.getElementById("intellih-automation-chat-button")) {
+      window.openIntellihAutomationChat = function () {
+        document.getElementById("intellih-automation-chat-button")?.click();
+      };
+      return;
+    }
 
     const style = document.createElement("style");
     style.textContent = `
