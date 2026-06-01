@@ -1,9 +1,9 @@
-// === Chat Widget Intellih Automação Inteligente (v1) ===
-// Assistente para a página de automação: identifica situações do negócio,
-// sugere fluxos de trabalho inteligentes e coleta dados para orientação inicial.
+// === Chat Widget Intellih Automação Inteligente (v2) ===
+// Arquivo esperado em: public/automacao/chat-automacao-widget.js
+// A página deve carregar com: <script src="./chat-automacao-widget.js"></script>
 
 (function () {
-  document.addEventListener("DOMContentLoaded", () => {
+  function initIntellihAutomationChat() {
     const BRAND = "#c65f22";
     const BRAND_DARK = "#944314";
     const BRAND_LIGHT = "#e47c3c";
@@ -12,7 +12,6 @@
     const PANEL = "#ffffff";
     const TEXT = "#191715";
     const TEXT_SOFT = "#5f5a55";
-    const MUTED = "#817870";
     const LINE = "#e7e0d8";
     const SOFT_BG = "#f7f5f2";
 
@@ -211,10 +210,7 @@
         background: linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
       }
 
-      #intellih-automation-chat-body::-webkit-scrollbar {
-        width: 8px;
-      }
-
+      #intellih-automation-chat-body::-webkit-scrollbar { width: 8px; }
       #intellih-automation-chat-body::-webkit-scrollbar-thumb {
         background: #d9cfc6;
         border-radius: 999px;
@@ -243,9 +239,7 @@
         box-shadow: 0 10px 22px rgba(198,95,34,.20);
       }
 
-      .intellih-automation-msg small {
-        color: ${TEXT_SOFT};
-      }
+      .intellih-automation-msg small { color: ${TEXT_SOFT}; }
 
       .intellih-automation-options {
         display: grid;
@@ -307,9 +301,7 @@
       }
 
       .intellih-automation-form,
-      .intellih-automation-form * {
-        box-sizing: border-box;
-      }
+      .intellih-automation-form * { box-sizing: border-box; }
 
       .intellih-automation-form-intro {
         padding: 12px;
@@ -391,14 +383,8 @@
         box-shadow: 0 12px 28px rgba(198,95,34,.24);
       }
 
-      .intellih-automation-submit:hover {
-        background: ${BRAND_DARK};
-      }
-
-      .intellih-automation-submit:disabled {
-        opacity: .72;
-        cursor: not-allowed;
-      }
+      .intellih-automation-submit:hover { background: ${BRAND_DARK}; }
+      .intellih-automation-submit:disabled { opacity: .72; cursor: not-allowed; }
 
       .intellih-automation-success,
       .intellih-automation-error {
@@ -466,18 +452,6 @@
     chatBubble.textContent = "Quer descobrir o que pode ser automatizado?";
     document.body.appendChild(chatBubble);
 
-    setTimeout(() => {
-      chatButton.style.opacity = "1";
-      chatButton.style.transform = "translateY(0)";
-      chatBubble.style.opacity = "1";
-      chatBubble.style.transform = "translateY(0)";
-    }, 700);
-
-    setTimeout(() => {
-      chatBubble.style.opacity = "0";
-      chatBubble.style.transform = "translateY(10px)";
-    }, 8500);
-
     const chatWindow = document.createElement("section");
     chatWindow.id = "intellih-automation-chat-window";
     chatWindow.setAttribute("aria-label", "Assistente Intellih Automação");
@@ -498,7 +472,6 @@
 
     const chatBody = chatWindow.querySelector("#intellih-automation-chat-body");
     const closeButton = chatWindow.querySelector("#intellih-automation-chat-close");
-
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     function scrollToBottom() {
@@ -582,11 +555,9 @@
       renderOptions(options, async (option) => {
         selectedArea = option.label;
         track("AutomationChatAreaSelected", { area: selectedArea });
-
         const typing = addTyping();
         await sleep(620);
         typing.remove();
-
         showSituationOptions(option.key);
       });
     }
@@ -641,7 +612,6 @@
         renderOptions(options, async (option) => {
           selectedSituation = option.label;
           selectedApplication = option.app;
-
           track("AutomationChatSituationSelected", {
             area: selectedArea,
             situation: selectedSituation,
@@ -651,7 +621,6 @@
           const typing = addTyping();
           await sleep(680);
           typing.remove();
-
           showRecommendation();
         });
       });
@@ -803,11 +772,7 @@
           showSuccess("Solicitação enviada com sucesso.");
         } catch (err) {
           sending.remove();
-
-          track("AutomationChatLeadError", {
-            message: String(err && err.message ? err.message : err)
-          });
-
+          track("AutomationChatLeadError", { message: String(err && err.message ? err.message : err) });
           showError("Não consegui enviar agora. Tente novamente em instantes ou chame a Intellih pelo WhatsApp.");
         } finally {
           submitButton.disabled = false;
@@ -869,6 +834,8 @@
       track("AutomationChatClose");
     }
 
+    window.openIntellihAutomationChat = openChat;
+
     chatButton.addEventListener("click", () => {
       const isOpen = chatWindow.style.display === "flex";
       if (isOpen) closeChat();
@@ -877,10 +844,32 @@
 
     closeButton.addEventListener("click", closeChat);
 
+    document.querySelectorAll("[data-open-intellih-automation-chat]").forEach((button) => {
+      button.addEventListener("click", openChat);
+    });
+
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && chatWindow.style.display === "flex") {
         closeChat();
       }
     });
-  });
+
+    setTimeout(() => {
+      chatButton.style.opacity = "1";
+      chatButton.style.transform = "translateY(0)";
+      chatBubble.style.opacity = "1";
+      chatBubble.style.transform = "translateY(0)";
+    }, 700);
+
+    setTimeout(() => {
+      chatBubble.style.opacity = "0";
+      chatBubble.style.transform = "translateY(10px)";
+    }, 8500);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initIntellihAutomationChat);
+  } else {
+    initIntellihAutomationChat();
+  }
 })();
