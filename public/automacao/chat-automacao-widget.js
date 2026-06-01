@@ -1,9 +1,10 @@
-// === Chat Widget Intellih Automação Inteligente (v1) ===
+// === Chat Widget Intellih Automação Inteligente (v2 - fix WhatsApp copy) ===
 // Assistente para a página de automação: identifica situações do negócio,
-// sugere fluxos de trabalho inteligentes e coleta dados para orientação inicial.
+// sugere fluxos de trabalho inteligentes, permite copiar mensagem para WhatsApp
+// e coleta dados para orientação inicial.
 
 (function () {
-  document.addEventListener("DOMContentLoaded", () => {
+  function initIntellihAutomationChat() {
     const BRAND = "#c65f22";
     const BRAND_DARK = "#944314";
     const BRAND_LIGHT = "#e47c3c";
@@ -12,15 +13,14 @@
     const PANEL = "#ffffff";
     const TEXT = "#191715";
     const TEXT_SOFT = "#5f5a55";
-    const MUTED = "#817870";
     const LINE = "#e7e0d8";
     const SOFT_BG = "#f7f5f2";
+    const WHATSAPP_URL = "https://wa.me/5521995558808";
 
     let selectedArea = "";
     let selectedSituation = "";
     let selectedApplication = "";
     let selectedUrgency = "";
-    const WHATSAPP_URL = "https://wa.me/5521995558808";
 
     const isMobile = () => window.innerWidth <= 520;
 
@@ -37,6 +37,7 @@
       } catch (e) {}
     }
 
+    // Evita duplicação caso o script seja carregado mais de uma vez.
     if (document.getElementById("intellih-automation-chat-button")) return;
 
     const style = document.createElement("style");
@@ -212,14 +213,8 @@
         background: linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
       }
 
-      #intellih-automation-chat-body::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      #intellih-automation-chat-body::-webkit-scrollbar-thumb {
-        background: #d9cfc6;
-        border-radius: 999px;
-      }
+      #intellih-automation-chat-body::-webkit-scrollbar { width: 8px; }
+      #intellih-automation-chat-body::-webkit-scrollbar-thumb { background: #d9cfc6; border-radius: 999px; }
 
       .intellih-automation-msg {
         margin: 0 0 10px;
@@ -244,9 +239,7 @@
         box-shadow: 0 10px 22px rgba(198,95,34,.20);
       }
 
-      .intellih-automation-msg small {
-        color: ${TEXT_SOFT};
-      }
+      .intellih-automation-msg small { color: ${TEXT_SOFT}; }
 
       .intellih-automation-options {
         display: grid;
@@ -308,7 +301,7 @@
 
       .intellih-automation-copy-text {
         width: 100%;
-        min-height: 104px;
+        min-height: 112px;
         resize: vertical;
         padding: 12px;
         border-radius: 13px;
@@ -332,9 +325,7 @@
         font-family: inherit;
       }
 
-      .intellih-automation-copy-btn:hover {
-        background: #11100f;
-      }
+      .intellih-automation-copy-btn:hover { background: #11100f; }
 
       .intellih-automation-form {
         display: grid;
@@ -347,10 +338,7 @@
         box-shadow: 0 10px 28px rgba(21,18,15,.08);
       }
 
-      .intellih-automation-form,
-      .intellih-automation-form * {
-        box-sizing: border-box;
-      }
+      .intellih-automation-form, .intellih-automation-form * { box-sizing: border-box; }
 
       .intellih-automation-form-intro {
         padding: 12px;
@@ -413,10 +401,7 @@
         opacity: 1;
       }
 
-      .intellih-automation-form textarea {
-        resize: vertical;
-        min-height: 96px;
-      }
+      .intellih-automation-form textarea { resize: vertical; min-height: 96px; }
 
       .intellih-automation-submit {
         width: 100%;
@@ -432,14 +417,8 @@
         box-shadow: 0 12px 28px rgba(198,95,34,.24);
       }
 
-      .intellih-automation-submit:hover {
-        background: ${BRAND_DARK};
-      }
-
-      .intellih-automation-submit:disabled {
-        opacity: .72;
-        cursor: not-allowed;
-      }
+      .intellih-automation-submit:hover { background: ${BRAND_DARK}; }
+      .intellih-automation-submit:disabled { opacity: .72; cursor: not-allowed; }
 
       .intellih-automation-success,
       .intellih-automation-error {
@@ -483,15 +462,14 @@
           height: 64px;
         }
 
-        #intellih-automation-chat-bubble {
-          display: none;
-        }
+        #intellih-automation-chat-bubble { display: none; }
       }
     `;
     document.head.appendChild(style);
 
     const chatButton = document.createElement("button");
     chatButton.id = "intellih-automation-chat-button";
+    chatButton.type = "button";
     chatButton.setAttribute("aria-label", "Abrir assistente de automação da Intellih");
     chatButton.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -531,7 +509,7 @@
             <span>Automação com IA para fluxos de trabalho</span>
           </div>
         </div>
-        <button id="intellih-automation-chat-close" aria-label="Fechar chat">×</button>
+        <button id="intellih-automation-chat-close" type="button" aria-label="Fechar chat">×</button>
       </div>
       <div id="intellih-automation-chat-body"></div>
     `;
@@ -733,11 +711,11 @@
         });
 
         await say(`Perfeito. Agora posso encaminhar essas informações para uma orientação inicial.`);
-        await say(`Quer deixar seus dados para avaliarmos o melhor próximo passo?`);
+        await say(`Como você prefere continuar?`);
 
         renderOptions([
-          { label: "Sim, quero uma orientação inicial", key: "lead" },
-          { label: "Prefiro chamar no WhatsApp", key: "whatsapp" },
+          { label: "Enviar meus dados pelo formulário", key: "lead" },
+          { label: "Copiar mensagem e chamar no WhatsApp", key: "whatsapp" },
           { label: "Quero revisar as opções", key: "review" }
         ], async (next) => {
           if (next.key === "review") {
@@ -750,8 +728,7 @@
               application: selectedApplication,
               urgency: selectedUrgency
             });
-
-            await say(`Perfeito. Preparei uma mensagem para você enviar no WhatsApp da Intellih.`);
+            await say(`Preparei uma mensagem para você enviar no WhatsApp da Intellih.`);
             showWhatsAppCopyBox();
           } else {
             showLeadForm();
@@ -770,8 +747,7 @@
         `Momento: ${selectedUrgency || "não informado"}`,
         "",
         "Gostaria de uma orientação inicial sobre viabilidade e próximo passo."
-      ].join("
-");
+      ].join("\n");
     }
 
     function showWhatsAppCopyBox() {
@@ -781,22 +757,31 @@
 
       const box = document.createElement("div");
       box.className = "intellih-automation-copy-box intellih-automation-fade";
-      box.innerHTML = `
-        <textarea class="intellih-automation-copy-text" readonly>${escapeHtml(message)}</textarea>
-        <button type="button" class="intellih-automation-copy-btn">Copiar mensagem e abrir WhatsApp</button>
-      `;
 
-      const copyButton = box.querySelector(".intellih-automation-copy-btn");
-      const textArea = box.querySelector(".intellih-automation-copy-text");
+      const textArea = document.createElement("textarea");
+      textArea.className = "intellih-automation-copy-text";
+      textArea.readOnly = true;
+      textArea.value = message;
+
+      const copyButton = document.createElement("button");
+      copyButton.type = "button";
+      copyButton.className = "intellih-automation-copy-btn";
+      copyButton.textContent = "Copiar mensagem e abrir WhatsApp";
 
       copyButton.addEventListener("click", async () => {
         try {
-          await navigator.clipboard.writeText(message);
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(message);
+          } else {
+            textArea.focus();
+            textArea.select();
+            document.execCommand("copy");
+          }
           copyButton.textContent = "Mensagem copiada. Abrindo WhatsApp...";
         } catch (e) {
+          textArea.focus();
           textArea.select();
-          document.execCommand("copy");
-          copyButton.textContent = "Mensagem pronta. Abrindo WhatsApp...";
+          copyButton.textContent = "Copie a mensagem acima. Abrindo WhatsApp...";
         }
 
         track("AutomationChatWhatsAppCopy", {
@@ -809,6 +794,8 @@
         window.open(whatsappWithText, "_blank", "noopener,noreferrer");
       });
 
+      box.appendChild(textArea);
+      box.appendChild(copyButton);
       chatBody.appendChild(box);
       scrollToBottom();
     }
@@ -913,8 +900,8 @@
             message: String(err && err.message ? err.message : err)
           });
 
-          showError("Não consegui enviar agora. Tente novamente em instantes ou chame a Intellih pelo WhatsApp.");
-          window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+          showError("Não consegui enviar agora. Você pode chamar a Intellih pelo WhatsApp usando a mensagem abaixo.");
+          showWhatsAppCopyBox();
         } finally {
           submitButton.disabled = false;
           submitButton.textContent = originalText;
@@ -975,6 +962,9 @@
       track("AutomationChatClose");
     }
 
+    // Exposição global para botões do HTML, caso prefira usar onclick="window.openIntellihAutomationChat()".
+    window.openIntellihAutomationChat = openChat;
+
     chatButton.addEventListener("click", () => {
       const isOpen = chatWindow.style.display === "flex";
       if (isOpen) closeChat();
@@ -988,5 +978,11 @@
         closeChat();
       }
     });
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initIntellihAutomationChat);
+  } else {
+    initIntellihAutomationChat();
+  }
 })();
