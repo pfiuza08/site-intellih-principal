@@ -494,7 +494,12 @@
       display: none;
       margin-top: 24px;
       border-color: #ffd0b8;
-      background: linear-gradient(180deg, #fff 0%, #fff8f3 100%);
+      background:
+        radial-gradient(circle at 92% 6%, rgba(198,95,34,.14), transparent 28%),
+        linear-gradient(180deg, #fff 0%, #fff8f3 100%);
+      box-shadow: 0 18px 42px rgba(198, 95, 34, 0.12);
+      position: relative;
+      overflow: hidden;
     }
 
     .result-card.show { display: block; }
@@ -502,6 +507,43 @@
     .result-pill { flex-shrink: 0; border-radius: 999px; padding: 8px 12px; background: var(--brand); color: #fff; font-weight: 900; font-size: .82rem; }
     .result-card h3 { margin-bottom: 10px; }
     .result-card p { color: var(--text-soft); }
+
+    .next-step-box {
+      margin-top: 22px;
+      border: 1px solid #ffd0b8;
+      background: #fff0e7;
+      border-radius: 22px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .next-step-box strong {
+      display: block;
+      color: var(--brand-dark);
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .next-step-box p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: .96rem;
+    }
+
+    .next-step-box .btn {
+      min-height: 54px;
+      padding-inline: 24px;
+      box-shadow: 0 16px 34px rgba(198, 95, 34, 0.28);
+    }
+
+    .next-step-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
 
     .lead-card {
       display: none;
@@ -614,6 +656,8 @@
       .brand span:last-child { display: none; }
       .hero-panel, .highlight-band { padding: 24px; border-radius: 26px; }
       .result-top { flex-direction: column; }
+      .next-step-box { grid-template-columns: 1fr; }
+      .next-step-box .btn { width: 100%; }
     }
   </style>
 </head>
@@ -893,8 +937,17 @@
               </div>
               <p id="resultText"></p>
               <p id="resultNext"></p>
+
+              <div class="next-step-box" aria-label="Próximo passo recomendado">
+                <div>
+                  <strong>Próximo passo recomendado</strong>
+                  <p>Para receber uma análise inicial, envie seus dados e o link do seu site ou Instagram. O formulário será aberto logo abaixo.</p>
+                  <div class="next-step-note">Suas respostas serão usadas para organizar os principais pontos de clareza digital do seu negócio.</div>
+                </div>
+                <button class="btn btn-primary" type="button" id="showLeadFormBtn">Receber minha análise inicial</button>
+              </div>
+
               <div class="quiz-actions">
-                <button class="btn btn-primary" type="button" id="showLeadFormBtn">Receber análise inicial</button>
                 <a class="btn btn-light" href="#contato">Ver próximos passos</a>
               </div>
             </article>
