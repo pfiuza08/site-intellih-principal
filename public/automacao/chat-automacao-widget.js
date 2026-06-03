@@ -37,6 +37,14 @@
       } catch (e) {}
     }
 
+    function trackStandard(eventName, params = {}) {
+      try {
+        if (typeof fbq === "function") {
+          fbq("track", eventName, params);
+        }
+      } catch (e) {}
+    }
+
     // Evita duplicação caso o script seja carregado mais de uma vez.
     if (document.getElementById("intellih-automation-chat-button")) return;
 
@@ -820,6 +828,15 @@
           urgency: selectedUrgency
         });
 
+        trackStandard("Contact", {
+          content_name: "WhatsApp Automacao Inteligente",
+          content_category: "Automacao com IA",
+          selected_area: selectedArea,
+          selected_situation: selectedSituation,
+          recommended_application: selectedApplication,
+          selected_urgency: selectedUrgency
+        });
+
         window.open(whatsappWithText, "_blank", "noopener,noreferrer");
       });
 
@@ -916,6 +933,15 @@
             situation: selectedSituation,
             application: selectedApplication,
             urgency: selectedUrgency
+          });
+
+          trackStandard("Lead", {
+            content_name: "Lead Automacao Inteligente",
+            content_category: "Automacao com IA",
+            selected_area: selectedArea,
+            selected_situation: selectedSituation,
+            recommended_application: selectedApplication,
+            selected_urgency: selectedUrgency
           });
 
           await say(`Obrigado, <strong>${escapeHtml(data.name)}</strong>. Recebemos sua solicitação.`);
