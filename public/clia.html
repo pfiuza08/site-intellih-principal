@@ -6,22 +6,20 @@
   <title>Checklist CLIA Ready | Intellih Tecnologia</title>
   <meta name="description" content="Checklist CLIA Ready para avaliar se seu negócio está claro para pessoas, buscadores e IAs." />
 
-  <!--
-    Meta Pixel
-    Se quiser usar o pixel nesta página, substitua PIXEL_ID_AQUI pelo ID do pixel.
-    Eventos disparados no JS: CLIA_Start, CLIA_Result, Lead, CLIA_WhatsApp.
-
-    <script>
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'PIXEL_ID_AQUI');
-      fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1" /></noscript>
-  -->
+  <!-- Meta Pixel CLIA -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/pt_BR/fbevents.js');
+    fbq('init', '1043008554724776');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1043008554724776&ev=PageView&noscript=1" />
+  </noscript>
+  <!-- Fim Meta Pixel CLIA -->
 
   <style>
     :root {
@@ -1101,6 +1099,9 @@
     const whatsBtn = document.getElementById("whatsBtn");
 
     let currentResult = null;
+    let cliaStartTracked = false;
+    let cliaResultTracked = false;
+    let cliaLeadTracked = false;
 
     function trackEvent(name, params = {}) {
       if (typeof fbq === "function") {
@@ -1181,7 +1182,10 @@
 
     quiz.addEventListener("change", () => {
       const data = getQuizData();
-      if (data.answered === 1) trackEvent("CLIA_Start");
+      if (!cliaStartTracked && data.answered === 1) {
+        cliaStartTracked = true;
+        trackEvent("CLIA_Start", { content_name: "Checklist CLIA Ready" });
+      }
       updateScore();
       quizMessage.style.display = "none";
     });
@@ -1202,12 +1206,16 @@
       resultCard.classList.add("show");
       resultCard.scrollIntoView({ behavior: "smooth", block: "start" });
 
-      trackEvent("CLIA_Result", { score: data.score, level: result.level });
+      if (!cliaResultTracked) {
+        cliaResultTracked = true;
+        trackEvent("CLIA_Result", { content_name: "Checklist CLIA Ready", score: data.score, level: result.level });
+      }
     });
 
     resetBtn.addEventListener("click", () => {
       quiz.reset();
       currentResult = null;
+      cliaResultTracked = false;
       resultCard.classList.remove("show");
       leadCard.classList.remove("show");
       successBox.classList.remove("show");
@@ -1270,7 +1278,10 @@
 
       whatsBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
       successBox.classList.add("show");
-      trackEvent("Lead", { content_name: "Checklist CLIA Ready", score: payload.pontuacao, level: payload.resultado });
+      if (!cliaLeadTracked) {
+        cliaLeadTracked = true;
+        trackEvent("Lead", { content_name: "Checklist CLIA Ready", score: payload.pontuacao, level: payload.resultado });
+      }
     });
 
     whatsBtn.addEventListener("click", () => {
