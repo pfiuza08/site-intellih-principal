@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intellih Automação Inteligente</title>
   <meta name="description" content="Automações, assistentes e agentes de IA para fluxos de trabalho reais." />
+  <!-- Meta Pixel Code - Intellih Automação -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}
+  (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '994381110224258');
+  fbq('track', 'PageView');
+  fbq('track', 'ViewContent', {
+    content_name: 'Intellih Automação Inteligente',
+    content_category: 'Automação com IA'
+  });
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=994381110224258&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
   <style>
     :root {
       --bg: #ffffff;
@@ -889,6 +920,62 @@
       year.textContent = new Date().getFullYear();
     }
 
+
+    function trackAutomationEvent(eventName, params = {}) {
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: eventName, ...params });
+      } catch (e) {}
+
+      try {
+        if (typeof fbq === "function") {
+          fbq("trackCustom", eventName, params);
+        }
+      } catch (e) {}
+    }
+
+    function trackMetaStandard(eventName, params = {}) {
+      try {
+        if (typeof fbq === "function") {
+          fbq("track", eventName, params);
+        }
+      } catch (e) {}
+    }
+
+    document.querySelectorAll('a[href="#exemplos"]').forEach((link) => {
+      link.addEventListener("click", () => {
+        trackAutomationEvent("AutomationExploreExamplesClick", {
+          content_name: "Explorar exemplos",
+          content_category: "Automacao Inteligente"
+        });
+      });
+    });
+
+    document.querySelectorAll('button').forEach((button) => {
+      const text = (button.textContent || "").trim();
+      if (text === "Conversar com o assistente") {
+        button.addEventListener("click", () => {
+          trackAutomationEvent("AutomationAssistantCtaClick", {
+            content_name: "Conversar com o assistente",
+            content_category: "Automacao Inteligente"
+          });
+        });
+      }
+    });
+
+    document.querySelectorAll('a[href*="wa.me"]').forEach((link) => {
+      link.addEventListener("click", () => {
+        trackAutomationEvent("AutomationWhatsAppDirectClick", {
+          content_name: "Chamar no WhatsApp",
+          content_category: "Automacao Inteligente"
+        });
+        trackMetaStandard("Contact", {
+          content_name: "WhatsApp Automacao Inteligente",
+          content_category: "Automacao com IA"
+        });
+      });
+    });
+
     renderCards();
         });
         cardsGrid.appendChild(card);
@@ -900,6 +987,11 @@
         filterButtons.forEach(btn => btn.classList.remove("active"));
         button.classList.add("active");
         activeFilter = button.dataset.filter;
+
+        trackAutomationEvent("AutomationFilterClick", {
+          filter: activeFilter
+        });
+
         const firstVisible = examples.find(item => activeFilter === "todos" || item.category === activeFilter);
         activeIndex = firstVisible ? examples.indexOf(firstVisible) : -1;
         renderCards();
