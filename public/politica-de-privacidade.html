@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Política de Privacidade | Intellih Tecnologia</title>
+  <meta name="description" content="Política de Privacidade da Intellih Tecnologia. Entenda como coletamos, usamos e protegemos seus dados pessoais." />
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f5f2;
+      --text: #191715;
+      --text-soft: #5f5a55;
+      --line: #e7e0d8;
+      --brand: #c65f22;
+      --brand-dark: #944314;
+      --graphite: #25211e;
+      --radius: 22px;
+      --shadow-soft: 0 10px 28px rgba(21, 18, 15, 0.08);
+      --max: 980px;
+      --font: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    a:hover {
+      color: var(--brand-dark);
+      text-decoration: underline;
+    }
+
+    .topbar {
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), #e47c3c);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(198, 95, 34, 0.24);
+    }
+
+    .back-link {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      font-weight: 750;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 12% 12%, rgba(198, 95, 34, 0.14), transparent 30%),
+        linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
+      padding: 72px 0 46px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff0e7;
+      color: var(--brand-dark);
+      border: 1px solid #ffd7c1;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 0.86rem;
+      font-weight: 850;
+      margin-bottom: 18px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(198, 95, 34, 0.16);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      max-width: 820px;
+    }
+
+    .lead {
+      margin: 20px 0 0;
+      color: var(--text-soft);
+      font-size: clamp(1.04rem, 1.6vw, 1.22rem);
+      max-width: 760px;
+    }
+
+    main {
+      padding: 52px 0 76px;
+    }
+
+    .policy-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: clamp(24px, 4vw, 42px);
+    }
+
+    .update-note {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 18px;
+      color: var(--text-soft);
+      margin-bottom: 28px;
+      font-size: 0.96rem;
+    }
+
+    section {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    h2 {
+      font-size: clamp(1.45rem, 2.2vw, 2rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      margin: 22px 0 8px;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: var(--text-soft);
+    }
+
+    ul {
+      margin: 10px 0 0;
+      padding-left: 22px;
+      color: var(--text-soft);
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--bg-soft);
+      color: var(--text);
+    }
+
+    td {
+      color: var(--text-soft);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .contact-box {
+      background: var(--graphite);
+      color: #fff;
+      border-radius: 22px;
+      padding: 24px;
+      margin-top: 18px;
+    }
+
+    .contact-box p,
+    .contact-box li {
+      color: #d8d0c8;
+    }
+
+    .contact-box strong {
+      color: #fff;
+    }
+
+    .contact-box a {
+      color: #ffd7c1;
+    }
+
+    .footer {
+      background: #11100f;
+      color: #cfc7bf;
+      padding: 34px 0;
+      font-size: 0.92rem;
+    }
+
+    .footer-grid {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: #fff;
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        min-height: 66px;
+      }
+
+      .brand span:last-child {
+        display: none;
+      }
+
+      .hero {
+        padding: 54px 0 34px;
+      }
+
+      main {
+        padding: 34px 0 56px;
+      }
+
+      .policy-card {
+        border-radius: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="nav">
+      <a class="brand" href="/" aria-label="Voltar para a página inicial da Intellih">
+        <span class="brand-mark">I</span>
+        <span>Intellih Tecnologia</span>
+      </a>
+
+      <a class="back-link" href="/">Voltar ao site</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow"><span class="dot"></span> Privacidade e proteção de dados</div>
+      <h1>Política de Privacidade</h1>
+      <p class="lead">
+        Esta política explica como a Intellih Tecnologia coleta, usa, armazena e protege dados pessoais enviados em nossos sites, formulários, diagnósticos, checklists, páginas de campanhas e canais de contato.
+      </p>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+      <article class="policy-card">
+        <div class="update-note">
+          <strong>Última atualização:</strong> 04 de junho de 2026.
+        </div>
+
+        <section>
+          <h2>1. Quem somos</h2>
+          <p>
+            A <strong>Intellih Tecnologia</strong> atua com soluções, diagnósticos, consultoria, automação, inteligência artificial aplicada a negócios, assistentes inteligentes, análise de dados, treinamentos e conteúdos educacionais.
+          </p>
+          <p>
+            Para fins desta Política de Privacidade, a Intellih Tecnologia é responsável pelo tratamento dos dados pessoais coletados por meio de seus sites, formulários, páginas de campanha, canais digitais e comunicações comerciais.
+          </p>
+
+          <div class="contact-box">
+            <p><strong>Controladora dos dados:</strong> Intellih Tecnologia Ltda.</p>
+            <p><strong>CNPJ:</strong>54.804.397/0001-01</p>
+            <p><strong>E-mail para contato sobre privacidade:</strong> <a href="mailto:">contato@intellih.com.br</a></p>
+            <p><strong>Site:</strong> <a href="https://www.intellih.com.br" target="_blank" rel="noopener">www.intellih.com.br</a></p>
+          </div>
+        </section>
+
+        <section>
+          <h2>2. Quais dados podemos coletar</h2>
+          <p>
+            Podemos coletar dados fornecidos diretamente por você e dados gerados durante a navegação em nossos sites e páginas.
+          </p>
+
+          <h3>Dados fornecidos em formulários, checklists e diagnósticos</h3>
+          <ul>
+            <li>Nome;</li>
+            <li>E-mail;</li>
+            <li>Telefone ou WhatsApp;</li>
+            <li>Nome do negócio ou empresa;</li>
+            <li>Segmento de atuação;</li>
+            <li>Site, Instagram ou outro canal informado;</li>
+            <li>Respostas enviadas em checklists, diagnósticos e formulários;</li>
+            <li>Informações sobre necessidades, objetivos, processos, presença digital, automação ou uso de IA no negócio.</li>
+          </ul>
+
+          <h3>Dados coletados automaticamente</h3>
+          <ul>
+            <li>Endereço IP;</li>
+            <li>Informações sobre dispositivo, navegador e sistema operacional;</li>
+            <li>Páginas acessadas;</li>
+            <li>Cliques em botões e links;</li>
+            <li>Eventos de navegação, como visualização de página, envio de formulário, clique para WhatsApp ou interação com páginas de campanha;</li>
+            <li>Cookies e identificadores similares usados para medição, análise e publicidade.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>3. Como usamos seus dados</h2>
+          <p>
+            Usamos os dados coletados para finalidades relacionadas ao atendimento, análise inicial, comunicação, melhoria dos serviços e mensuração de campanhas.
+          </p>
+
+          <ul>
+            <li>Responder solicitações enviadas por formulários, WhatsApp, e-mail ou páginas de campanha;</li>
+            <li>Organizar resultados de checklists, diagnósticos e análises iniciais;</li>
+            <li>Entrar em contato sobre oportunidades de IA, automação, clareza digital, assistentes inteligentes, treinamentos e serviços da Intellih;</li>
+            <li>Enviar materiais, conteúdos, propostas, comunicações comerciais ou informações solicitadas;</li>
+            <li>Melhorar nossos sites, páginas, formulários, campanhas, conteúdos e fluxos de atendimento;</li>
+            <li>Medir o desempenho de anúncios, páginas, eventos e conversões;</li>
+            <li>Criar públicos de remarketing ou públicos semelhantes em plataformas de anúncios, quando permitido;</li>
+            <li>Cumprir obrigações legais, regulatórias ou solicitações legítimas de autoridades competentes.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>4. Base legal para tratamento dos dados</h2>
+          <p>
+            O tratamento dos dados pode ocorrer com base em consentimento, execução de procedimentos preliminares relacionados a uma possível contratação, legítimo interesse da Intellih, cumprimento de obrigação legal ou exercício regular de direitos.
+          </p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Finalidade</th>
+                  <th>Exemplo</th>
+                  <th>Base legal provável</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Responder contatos e solicitações</td>
+                  <td>Quando você preenche um formulário ou chama no WhatsApp</td>
+                  <td>Procedimentos preliminares ou consentimento</td>
+                </tr>
+                <tr>
+                  <td>Enviar comunicações sobre conteúdos e serviços</td>
+                  <td>Envio de materiais, convites, propostas ou informações relacionadas à Intellih</td>
+                  <td>Consentimento ou legítimo interesse</td>
+                </tr>
+                <tr>
+                  <td>Analisar respostas de checklists e diagnósticos</td>
+                  <td>OPA, CLIA, automação, presença digital ou outros formulários</td>
+                  <td>Consentimento ou procedimentos preliminares</td>
+                </tr>
+                <tr>
+                  <td>Medição de campanhas e navegação</td>
+                  <td>Meta Pixel, Google Analytics, Google Tag Manager, Microsoft Clarity e eventos de conversão</td>
+                  <td>Legítimo interesse ou consentimento, conforme o caso</td>
+                </tr>
+                <tr>
+                  <td>Cumprimento de obrigações legais</td>
+                  <td>Registros necessários para fins fiscais, jurídicos ou regulatórios</td>
+                  <td>Cumprimento de obrigação legal</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section>
+          <h2>5. Uso de cookies, pixels e ferramentas de análise</h2>
+          <p>
+            Nossos sites e páginas podem usar cookies, pixels e tecnologias semelhantes para funcionamento técnico, análise de navegação, medição de campanhas e publicidade.
+          </p>
+
+          <p>Podemos usar ferramentas como:</p>
+          <ul>
+            <li><strong>Google Tag Manager</strong>, para gerenciar tags e eventos;</li>
+            <li><strong>Google Analytics 4</strong>, para medir acessos, páginas visitadas, eventos e desempenho;</li>
+            <li><strong>Meta Pixel</strong>, para medir visualizações, leads, conversões e desempenho de anúncios no ecossistema Meta;</li>
+            <li><strong>Meta Conversions API</strong>, quando configurada, para melhorar a medição de eventos;</li>
+            <li><strong>Microsoft Clarity</strong>, para entender padrões de navegação, cliques, rolagem e interação com páginas;</li>
+            <li><strong>UTMs</strong> e parâmetros de campanha, para identificar origem, mídia e campanha de acesso.</li>
+          </ul>
+
+          <p>
+            Você pode bloquear ou apagar cookies nas configurações do seu navegador. Essa escolha pode afetar algumas funcionalidades e a precisão da medição de campanhas.
+          </p>
+        </section>
+
+        <section>
+          <h2>6. Compartilhamento de dados</h2>
+          <p>
+            A Intellih não vende dados pessoais. Podemos compartilhar dados apenas quando necessário para operação, atendimento, análise, publicidade, cumprimento legal ou prestação dos serviços solicitados.
+          </p>
+
+          <p>Os dados podem ser tratados por ferramentas e fornecedores como:</p>
+          <ul>
+            <li>Serviços de hospedagem e infraestrutura do site;</li>
+            <li>Google Sheets, Google Apps Script, Google Analytics e Google Tag Manager;</li>
+            <li>Meta Ads, Meta Pixel e ferramentas de anúncios;</li>
+            <li>Microsoft Clarity;</li>
+            <li>Serviços de e-mail, automação, CRM ou atendimento;</li>
+            <li>WhatsApp ou plataformas de comunicação usadas para continuidade do atendimento.</li>
+          </ul>
+
+          <p>
+            Esses fornecedores podem tratar dados conforme suas próprias políticas, termos e medidas de segurança.
+          </p>
+        </section>
+
+        <section>
+          <h2>7. Armazenamento e segurança</h2>
+          <p>
+            Adotamos medidas razoáveis para proteger os dados pessoais contra acessos não autorizados, perda, alteração, divulgação indevida ou uso inadequado.
+          </p>
+
+          <p>
+            Os dados podem ser armazenados em ferramentas digitais usadas pela Intellih para atendimento, gestão de leads, análise, comunicação e prestação de serviços.
+          </p>
+
+          <p>
+            Nenhum sistema é absolutamente imune a riscos. Por isso, buscamos limitar o acesso aos dados a pessoas e ferramentas necessárias para as finalidades descritas nesta política.
+          </p>
+        </section>
+
+        <section>
+          <h2>8. Prazo de retenção</h2>
+          <p>
+            Os dados serão mantidos pelo tempo necessário para cumprir as finalidades informadas nesta política, atender solicitações, manter histórico de relacionamento, cumprir obrigações legais ou preservar direitos da Intellih.
+          </p>
+
+          <p>
+            Quando os dados deixarem de ser necessários, poderão ser excluídos, anonimizados ou mantidos apenas quando houver base legal adequada.
+          </p>
+        </section>
+
+        <section>
+          <h2>9. Comunicações por e-mail e WhatsApp</h2>
+          <p>
+            Ao enviar seus dados em nossos formulários, checklists, diagnósticos ou canais de contato, você poderá receber comunicações relacionadas ao tema solicitado, como análise inicial, materiais, propostas, conteúdos, convites ou informações sobre serviços da Intellih.
+          </p>
+
+          <p>
+            Você pode solicitar a interrupção dessas comunicações a qualquer momento pelos canais indicados nesta política.
+          </p>
+        </section>
+
+        <section>
+          <h2>10. Seus direitos</h2>
+          <p>
+            Nos termos da LGPD, você pode solicitar informações e providências relacionadas aos seus dados pessoais.
+          </p>
+
+          <ul>
+            <li>Confirmação sobre a existência de tratamento dos seus dados;</li>
+            <li>Acesso aos dados pessoais tratados pela Intellih;</li>
+            <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
+            <li>Anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade;</li>
+            <li>Informação sobre compartilhamento de dados;</li>
+            <li>Revogação de consentimento, quando o tratamento depender de consentimento;</li>
+            <li>Solicitação de eliminação dos dados tratados com base em consentimento, quando aplicável;</li>
+            <li>Oposição a determinados tratamentos, conforme previsto em lei.</li>
+          </ul>
+
+          <p>
+            Para exercer seus direitos, entre em contato pelo e-mail indicado nesta política.
+          </p>
+        </section>
+
+        <section>
+          <h2>11. Links para sites de terceiros</h2>
+          <p>
+            Nossos sites podem conter links para páginas externas, redes sociais, WhatsApp, plataformas de pagamento, ferramentas de agenda, serviços de vídeo ou outros ambientes digitais.
+          </p>
+
+          <p>
+            A Intellih não controla as práticas de privacidade desses terceiros. Recomendamos que você leia as políticas de privacidade de cada plataforma acessada.
+          </p>
+        </section>
+
+        <section>
+          <h2>12. Alterações nesta política</h2>
+          <p>
+            Esta Política de Privacidade pode ser atualizada para refletir mudanças em nossos serviços, ferramentas, campanhas, práticas de tratamento de dados ou exigências legais.
+          </p>
+
+          <p>
+            A versão atualizada será publicada nesta página, com indicação da data da última atualização.
+          </p>
+        </section>
+
+        <section>
+          <h2>13. Contato sobre privacidade</h2>
+          <p>
+            Para dúvidas, solicitações ou exercício de direitos relacionados a dados pessoais, entre em contato:
+          </p>
+
+          <div class="contact-box">
+            <p><strong>Intellih Tecnologia Ltda.</strong></p>
+            <p><strong>E-mail:</strong> <a href="mailto:">contato@intellih.com.br</a></p>
+            <p><strong>Site:</strong> <a href="https://www.intellih.com.br" target="_blank" rel="noopener">www.intellih.com.br</a></p>
+            <p><strong>WhatsApp:</strong> (21) 9 9555 8808 </p>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <strong>Intellih Tecnologia</strong><br />
+        IA aplicada a negócios reais, com método, processo e clareza.
+      </div>
+
+      <div>
+        <a href="/">Voltar ao site</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
