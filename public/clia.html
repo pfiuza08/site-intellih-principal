@@ -994,7 +994,7 @@
                     <textarea id="observacao" name="observacao" placeholder="Ex.: site confuso, pouca clareza na oferta, Instagram desorganizado, dúvidas repetidas, baixa conversão..."></textarea>
                   </div>
                 </div>
-                <p class="consent">Ao enviar, você concorda em receber uma análise inicial e comunicações da Intellih sobre clareza digital, IA e automação aplicada a negócios.</p>
+                <p class="consent">Ao enviar, você concorda em receber uma análise inicial e comunicações da Intellih sobre clareza digital, IA e automação aplicada a negócios. Consulte nossa <a href="https://www.intellih.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
                 <div class="quiz-actions">
                   <button class="btn btn-primary" type="submit">Enviar e organizar resultado</button>
                   <a class="btn btn-light" id="whatsBtn" href="https://wa.me/5521995558808" target="_blank" rel="noreferrer">Chamar no WhatsApp</a>
@@ -1057,6 +1057,7 @@
         <strong>Intellih Tecnologia</strong>
         <p style="margin: 6px 0 0;">CLIA Ready — clareza digital para pessoas, buscadores e sistemas de IA.</p>
         <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+        <p style="margin: 6px 0 0;"><a href="https://www.intellih.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a></p>
       </div>
 
       <div class="socials" aria-label="Redes sociais">
@@ -1284,8 +1285,11 @@
       }
     });
 
-    whatsBtn.addEventListener("click", () => {
-      trackEvent("CLIA_WhatsApp", { source: "lead_form" });
+    document.querySelectorAll('a[href^="https://wa.me/"]').forEach((link) => {
+      link.addEventListener("click", () => {
+        const source = link.id === "whatsBtn" ? "lead_form" : "page_cta";
+        trackEvent("CLIA_WhatsApp", { source });
+      });
     });
 
     const year = document.getElementById("year");
