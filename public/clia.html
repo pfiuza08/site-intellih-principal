@@ -1248,6 +1248,8 @@
       event.preventDefault();
       const formData = new FormData(leadForm);
       const message = buildWhatsappMessage(formData);
+      const urlParams = new URLSearchParams(window.location.search);
+
       const payload = {
         origem: "Landing CLIA Ready",
         nome: formData.get("nome"),
@@ -1260,27 +1262,58 @@
         pontuacao: currentResult?.score || getQuizData().score,
         resultado: currentResult?.level || "Resultado não calculado",
         respostas: currentResult?.answers || getQuizData().answers,
+
+        page_url: window.location.href,
+        referrer: document.referrer || "",
+        utm_source: urlParams.get("utm_source") || "",
+        utm_medium: urlParams.get("utm_medium") || "",
+        utm_campaign: urlParams.get("utm_campaign") || "",
+        utm_content: urlParams.get("utm_content") || "",
+        utm_term: urlParams.get("utm_term") || "",
+        origem_campanha: urlParams.get("utm_campaign") || "",
+
         data: new Date().toISOString()
       };
 
-      if (APPS_SCRIPT_ENDPOINT) {
-        try {
-          await fetch(APPS_SCRIPT_ENDPOINT, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-        } catch (error) {
-          console.warn("Não foi possível enviar para o endpoint configurado.", error);
+      let leadRegistered = false;
+
+      try {
+        const response = await fetch(LEADS_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || "Erro ao registrar lead.");
         }
+
+        leadRegistered = true;
+      } catch (error) {
+        console.error("Não foi possível registrar o lead:", error);
       }
 
       whatsBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      successBox.classList.add("show");
-      if (!cliaLeadTracked) {
-        cliaLeadTracked = true;
-        trackEvent("Lead", { content_name: "Checklist CLIA Ready", score: payload.pontuacao, level: payload.resultado });
+
+      if (leadRegistered) {
+        successBox.textContent = "Resultado registrado. Você pode continuar pelo WhatsApp usando a mensagem preparada.";
+        successBox.classList.add("show");
+
+        if (!cliaLeadTracked) {
+          cliaLeadTracked = true;
+          trackEvent("Lead", {
+            content_name: "Checklist CLIA Ready",
+            score: payload.pontuacao,
+            level: payload.resultado
+          });
+        }
+      } else {
+        successBox.textContent = "Não foi possível registrar seus dados agora. Você pode continuar pelo WhatsApp.";
+        successBox.classList.add("show");
       }
     });
 
