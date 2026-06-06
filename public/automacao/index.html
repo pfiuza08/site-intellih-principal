@@ -796,6 +796,7 @@
         <strong>Intellih Tecnologia</strong>
         <p style="margin: 6px 0 0;">Automação Inteligente — IA aplicada a fluxos de trabalho, automações e agentes especializados.</p>
         <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+        <p style="margin: 6px 0 0;"><a href="https://www.intellih.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a></p>
       </div>
 
       <div class="socials" aria-label="Redes sociais">
@@ -813,6 +814,9 @@
   </footer>
 
   <script>
+    const LEADS_ENDPOINT = "/api/leads";
+    const WHATSAPP_NUMBER = "5521995558808";
+
     const examples = [
       {
         category: "atendimento",
@@ -893,33 +897,17 @@
     let activeFilter = "todos";
     let activeIndex = 0;
 
-    function renderCards() {
-      cardsGrid.innerHTML = "";
-      const visible = examples.filter(item => activeFilter === "todos" || item.category === activeFilter);
-
-      visible.forEach((item) => {
-        const realIndex = examples.indexOf(item);
-        const card = document.createElement("article");
-        card.className = "automation-card" + (realIndex === activeIndex ? " active" : "");
-        card.innerHTML = `
-          <span class="tag">${item.label}</span>
-          <h3>${item.situation}</h3>
-          <p>${item.description}</p>
-          <div class="card-solution">
-            <div class="solution-title">${item.solution}</div>
-            <p>${item.text}</p>
-            <ul class="bullet-list">
-              ${item.bullets.map(bullet => `<li>${bullet}</li>`).join("")}
-            </ul>
-          </div>
-        `;
-        card.addEventListener("click", () => {
-          activeIndex = activeIndex === realIndex ? -1 : realIndex;
-          const year = document.getElementById("year");
-    if (year) {
-      year.textContent = new Date().getFullYear();
+    function getUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        utm_source: params.get("utm_source") || "",
+        utm_medium: params.get("utm_medium") || "",
+        utm_campaign: params.get("utm_campaign") || "",
+        utm_content: params.get("utm_content") || "",
+        utm_term: params.get("utm_term") || "",
+        origem_campanha: params.get("utm_campaign") || ""
+      };
     }
-
 
     function trackAutomationEvent(eventName, params = {}) {
       try {
@@ -942,42 +930,116 @@
       } catch (e) {}
     }
 
-    document.querySelectorAll('a[href="#exemplos"]').forEach((link) => {
-      link.addEventListener("click", () => {
-        trackAutomationEvent("AutomationExploreExamplesClick", {
-          content_name: "Explorar exemplos",
-          content_category: "Automacao Inteligente"
-        });
-      });
-    });
+    async function registerAutomationLead(payload = {}) {
+      const leadPayload = {
+        origem: payload.origem || "Landing Automação",
+        nome: payload.nome || "",
+        email: payload.email || "",
+        whatsapp: payload.whatsapp || "",
+        segmento: payload.segmento || "",
+        negocio: payload.negocio || "",
+        canal: payload.canal || "",
+        observacao: payload.observacao || payload.mensagem || "",
+        pontuacao: payload.pontuacao ?? null,
+        resultado: payload.resultado || "",
+        respostas: payload.respostas || null,
 
-    document.querySelectorAll('button').forEach((button) => {
-      const text = (button.textContent || "").trim();
-      if (text === "Conversar com o assistente") {
-        button.addEventListener("click", () => {
-          trackAutomationEvent("AutomationAssistantCtaClick", {
-            content_name: "Conversar com o assistente",
-            content_category: "Automacao Inteligente"
-          });
-        });
+        page_url: window.location.href,
+        referrer: document.referrer || "",
+        ...getUrlParams(),
+
+        data: new Date().toISOString()
+      };
+
+      const response = await fetch(LEADS_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(leadPayload)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Erro ao registrar lead de automação.");
+      }
+
+      trackMetaStandard("Lead", {
+        content_name: "Automação Inteligente",
+        content_category: "Automação com IA"
+      });
+
+      trackAutomationEvent("AutomationLeadRegistered", {
+        content_name: "Automação Inteligente",
+        content_category: "Automação com IA"
+      });
+
+      return result;
+    }
+
+    window.intellihRegisterAutomationLead = registerAutomationLead;
+
+    window.addEventListener("intellihAutomationLead", async (event) => {
+      try {
+        await registerAutomationLead(event.detail || {});
+      } catch (error) {
+        console.error("Não foi possível registrar o lead de automação:", error);
       }
     });
 
-    document.querySelectorAll('a[href*="wa.me"]').forEach((link) => {
-      link.addEventListener("click", () => {
-        trackAutomationEvent("AutomationWhatsAppDirectClick", {
-          content_name: "Chamar no WhatsApp",
-          content_category: "Automacao Inteligente"
-        });
-        trackMetaStandard("Contact", {
-          content_name: "WhatsApp Automacao Inteligente",
-          content_category: "Automacao com IA"
-        });
+    function openAutomationAssistant() {
+      trackAutomationEvent("AutomationAssistantCtaClick", {
+        content_name: "Conversar com o assistente",
+        content_category: "Automacao Inteligente"
       });
-    });
 
-    renderCards();
+      if (window.openIntellihAutomationChat) {
+        window.openIntellihAutomationChat();
+        return;
+      }
+
+      document.getElementById("intellih-automation-chat-button")?.click();
+    }
+
+    window.openAutomationAssistant = openAutomationAssistant;
+
+    function renderCards() {
+      if (!cardsGrid) return;
+
+      cardsGrid.innerHTML = "";
+      const visible = examples.filter(item => activeFilter === "todos" || item.category === activeFilter);
+
+      visible.forEach((item) => {
+        const realIndex = examples.indexOf(item);
+        const card = document.createElement("article");
+        card.className = "automation-card" + (realIndex === activeIndex ? " active" : "");
+        card.innerHTML = `
+          <span class="tag">${item.label}</span>
+          <h3>${item.situation}</h3>
+          <p>${item.description}</p>
+          <div class="card-solution">
+            <div class="solution-title">${item.solution}</div>
+            <p>${item.text}</p>
+            <ul class="bullet-list">
+              ${item.bullets.map(bullet => `<li>${bullet}</li>`).join("")}
+            </ul>
+          </div>
+        `;
+
+        card.addEventListener("click", () => {
+          activeIndex = activeIndex === realIndex ? -1 : realIndex;
+
+          trackAutomationEvent("AutomationExampleCardClick", {
+            category: item.category,
+            label: item.label,
+            situation: item.situation,
+            solution: item.solution
+          });
+
+          renderCards();
         });
+
         cardsGrid.appendChild(card);
       });
     }
@@ -998,8 +1060,46 @@
       });
     });
 
+    document.querySelectorAll('a[href="#exemplos"]').forEach((link) => {
+      link.addEventListener("click", () => {
+        trackAutomationEvent("AutomationExploreExamplesClick", {
+          content_name: "Explorar exemplos",
+          content_category: "Automacao Inteligente"
+        });
+      });
+    });
+
+    document.querySelectorAll("button").forEach((button) => {
+      const text = (button.textContent || "").trim();
+      if (text === "Conversar com o assistente") {
+        button.addEventListener("click", openAutomationAssistant);
+        button.removeAttribute("onclick");
+      }
+    });
+
+    document.querySelectorAll('a[href*="wa.me"]').forEach((link) => {
+      link.addEventListener("click", () => {
+        trackAutomationEvent("Automation_WhatsApp", {
+          source: link.id || "page_cta",
+          content_name: "Chamar no WhatsApp",
+          content_category: "Automacao Inteligente"
+        });
+
+        trackMetaStandard("Contact", {
+          content_name: "WhatsApp Automação Inteligente",
+          content_category: "Automação com IA"
+        });
+      });
+    });
+
+    const year = document.getElementById("year");
+    if (year) {
+      year.textContent = new Date().getFullYear();
+    }
+
     renderCards();
   </script>
+
   <script src="/automacao/chat-automacao-widget.js"></script>
 </body>
 </html>
