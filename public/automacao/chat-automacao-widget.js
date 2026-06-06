@@ -1,4 +1,4 @@
-// === Chat Widget Intellih Automação Inteligente (v2 - fix WhatsApp copy) ===
+// === Chat Widget Intellih Automação Inteligente (v3 - Supabase leads) ===
 // Assistente para a página de automação: identifica situações do negócio,
 // sugere fluxos de trabalho inteligentes, permite copiar mensagem para WhatsApp
 // e coleta dados para orientação inicial.
@@ -16,6 +16,7 @@
     const LINE = "#e7e0d8";
     const SOFT_BG = "#f7f5f2";
     const WHATSAPP_URL = "https://wa.me/5521995558808";
+    const LEADS_ENDPOINT = "/api/leads";
 
     let selectedArea = "";
     let selectedSituation = "";
@@ -43,6 +44,102 @@
           fbq("track", eventName, params);
         }
       } catch (e) {}
+    }
+
+    function getUtmParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        utm_source: params.get("utm_source") || "",
+        utm_medium: params.get("utm_medium") || "",
+        utm_campaign: params.get("utm_campaign") || "",
+        utm_content: params.get("utm_content") || "",
+        utm_term: params.get("utm_term") || ""
+      };
+    }
+
+    function buildLeadPayload(data) {
+      const utms = getUtmParams();
+
+      return {
+        origem: "Landing Automação - Assistente",
+        nome: data.name || "",
+        email: data.email || "",
+        whatsapp: data.whatsapp || "",
+        segmento: selectedArea || "",
+        negocio: data.company || "",
+        canal: data.channel || "",
+        observacao: data.details || "",
+
+        pontuacao: null,
+        resultado: selectedApplication || "Orientação inicial de automação",
+        respostas: [
+          {
+            question: "Área de interesse",
+            answer: selectedArea || "não informado",
+            score: null
+          },
+          {
+            question: "Situação atual",
+            answer: selectedSituation || "não informado",
+            score: null
+          },
+          {
+            question: "Aplicação sugerida",
+            answer: selectedApplication || "não informado",
+            score: null
+          },
+          {
+            question: "Momento",
+            answer: selectedUrgency || "não informado",
+            score: null
+          },
+          {
+            question: "Onde esse fluxo de trabalho acontece hoje?",
+            answer: data.channel || "não informado",
+            score: null
+          },
+          {
+            question: "Detalhes informados",
+            answer: data.details || "não informado",
+            score: null
+          }
+        ],
+
+        page_url: window.location.href,
+        referrer: document.referrer || "",
+        utm_source: utms.utm_source,
+        utm_medium: utms.utm_medium,
+        utm_campaign: utms.utm_campaign,
+        utm_content: utms.utm_content,
+        utm_term: utms.utm_term,
+        origem_campanha: utms.utm_campaign,
+
+        data: new Date().toISOString()
+      };
+    }
+
+    async function registerAutomationLead(payload) {
+      const response = await fetch(LEADS_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Erro ao registrar lead.");
+      }
+
+      try {
+        window.dispatchEvent(new CustomEvent("intellihAutomationLead", {
+          detail: payload
+        }));
+      } catch (e) {}
+
+      return result;
     }
 
     // Evita duplicação caso o script seja carregado mais de uma vez.
@@ -890,7 +987,7 @@
         </label>
 
         <button type="submit" class="intellih-automation-submit">Enviar orientação</button>
-        <div class="intellih-automation-mini-note">A resposta inicial considera viabilidade, melhor caminho e possíveis próximos passos. A automação só faz sentido quando o fluxo de trabalho está minimamente claro.</div>
+        <div class="intellih-automation-mini-note">A resposta inicial considera viabilidade, melhor caminho e possíveis próximos passos. A automação só faz sentido quando o fluxo de trabalho está minimamente claro. Ao enviar, você concorda em receber contato da Intellih. Consulte nossa <a href="https://www.intellih.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</div>
       `;
 
       form.onsubmit = async (e) => {
@@ -904,26 +1001,8 @@
         const sending = addTyping();
 
         try {
-          const response = await fetch("https://formsubmit.co/ajax/contato@intellih.com.br", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              _subject: "Novo lead via Assistente Intellih Automação",
-              name: data.name,
-              company: data.company,
-              email: data.email,
-              whatsapp: data.whatsapp,
-              channel: data.channel,
-              details: data.details,
-              selected_area: selectedArea,
-              selected_situation: selectedSituation,
-              recommended_application: selectedApplication,
-              selected_urgency: selectedUrgency,
-              source: "Chat Widget Intellih - Automação Inteligente"
-            })
-          });
-
-          if (!response.ok) throw new Error("Falha no envio");
+          const payload = buildLeadPayload(data);
+          await registerAutomationLead(payload);
 
           sending.remove();
           form.remove();
@@ -945,9 +1024,9 @@
           });
 
           await say(`Obrigado, <strong>${escapeHtml(data.name)}</strong>. Recebemos sua solicitação.`);
-          await say(`O foco inicial ficou assim: <strong>${escapeHtml(selectedApplication)}</strong>.`);
+          await say(`O foco inicial ficou assim: <strong>${escapeHtml(selectedApplication || "orientação inicial de automação")}</strong>.`);
           await say(`Para preparar a próxima conversa, vale reunir exemplos reais do fluxo de trabalho atual: mensagens, documentos, perguntas frequentes, etapas manuais e ferramentas usadas.`);
-          showSuccess("Solicitação enviada com sucesso.");
+          showSuccess("Solicitação registrada com sucesso.");
         } catch (err) {
           sending.remove();
 
