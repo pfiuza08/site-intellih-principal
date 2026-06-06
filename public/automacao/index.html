@@ -814,8 +814,6 @@
   </footer>
 
   <script>
-    const LEADS_ENDPOINT = "/api/leads";
-    const WHATSAPP_NUMBER = "5521995558808";
 
     const examples = [
       {
@@ -929,64 +927,6 @@
         }
       } catch (e) {}
     }
-
-    async function registerAutomationLead(payload = {}) {
-      const leadPayload = {
-        origem: payload.origem || "Landing Automação",
-        nome: payload.nome || "",
-        email: payload.email || "",
-        whatsapp: payload.whatsapp || "",
-        segmento: payload.segmento || "",
-        negocio: payload.negocio || "",
-        canal: payload.canal || "",
-        observacao: payload.observacao || payload.mensagem || "",
-        pontuacao: payload.pontuacao ?? null,
-        resultado: payload.resultado || "",
-        respostas: payload.respostas || null,
-
-        page_url: window.location.href,
-        referrer: document.referrer || "",
-        ...getUrlParams(),
-
-        data: new Date().toISOString()
-      };
-
-      const response = await fetch(LEADS_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(leadPayload)
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || "Erro ao registrar lead de automação.");
-      }
-
-      trackMetaStandard("Lead", {
-        content_name: "Automação Inteligente",
-        content_category: "Automação com IA"
-      });
-
-      trackAutomationEvent("AutomationLeadRegistered", {
-        content_name: "Automação Inteligente",
-        content_category: "Automação com IA"
-      });
-
-      return result;
-    }
-
-    window.intellihRegisterAutomationLead = registerAutomationLead;
-
-    window.addEventListener("intellihAutomationLead", async (event) => {
-      try {
-        await registerAutomationLead(event.detail || {});
-      } catch (error) {
-        console.error("Não foi possível registrar o lead de automação:", error);
-      }
-    });
 
     function openAutomationAssistant() {
       trackAutomationEvent("AutomationAssistantCtaClick", {
