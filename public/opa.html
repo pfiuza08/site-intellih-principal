@@ -978,7 +978,7 @@
                     <textarea id="observacao" name="observacao" placeholder="Ex.: atendimento inicial, follow-up, propostas, agendamentos, documentos, respostas repetidas, organização de informações..."></textarea>
                   </div>
                 </div>
-                <p class="consent">Ao enviar, você concorda em receber uma análise inicial e comunicações da Intellih sobre IA, automação e fluxos de trabalho aplicados a negócios.</p>
+                <p class="consent">Ao enviar, você concorda em receber uma análise inicial e comunicações da Intellih sobre IA, automação e fluxos de trabalho aplicados a negócios. Consulte nossa <a href="https://www.intellih.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
                 <div class="quiz-actions">
                   <button class="btn btn-primary" type="submit">Enviar e organizar resultado</button>
                   <a class="btn btn-light" id="whatsBtn" href="https://wa.me/5521995558808" target="_blank" rel="noreferrer">Chamar no WhatsApp</a>
@@ -1040,6 +1040,7 @@
         <strong>Intellih Tecnologia</strong>
         <p style="margin: 6px 0 0;">OPA — Oportunidade, Processo e Aplicação para IA em fluxos de trabalho reais.</p>
         <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+        <p style="margin: 6px 0 0;"><a href="https://www.intellih.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a></p>
       </div>
 
       <div class="socials" aria-label="Redes sociais">
@@ -1061,7 +1062,7 @@
     const TOTAL_QUESTIONS = 12;
     const MAX_SCORE = 24;
     const WHATSAPP_NUMBER = "5521995558808";
-    const APPS_SCRIPT_ENDPOINT = ""; 
+    const LEADS_ENDPOINT = "/api/leads";
     const quiz = document.getElementById("opaQuiz");
     const calculateBtn = document.getElementById("calculateBtn");
     const resetBtn = document.getElementById("resetBtn");
@@ -1243,37 +1244,65 @@
         pontuacao: currentResult?.score || getQuizData().score,
         resultado: currentResult?.level || "Resultado não calculado",
         respostas: currentResult?.answers || getQuizData().answers,
+
+        page_url: window.location.href,
+        referrer: document.referrer || "",
+        utm_source: new URLSearchParams(window.location.search).get("utm_source") || "",
+        utm_medium: new URLSearchParams(window.location.search).get("utm_medium") || "",
+        utm_campaign: new URLSearchParams(window.location.search).get("utm_campaign") || "",
+        utm_content: new URLSearchParams(window.location.search).get("utm_content") || "",
+        utm_term: new URLSearchParams(window.location.search).get("utm_term") || "",
+        origem_campanha: new URLSearchParams(window.location.search).get("utm_campaign") || "",
+
         data: new Date().toISOString()
       };
 
-      if (APPS_SCRIPT_ENDPOINT) {
-        try {
-          await fetch(APPS_SCRIPT_ENDPOINT, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-        } catch (error) {
-          console.warn("Não foi possível enviar para o endpoint configurado.", error);
+      let leadRegistered = false;
+
+      try {
+        const response = await fetch(LEADS_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || "Erro ao registrar lead.");
         }
+
+        leadRegistered = true;
+      } catch (error) {
+        console.error("Não foi possível registrar o lead:", error);
       }
 
       whatsBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      successBox.classList.add("show");
-      if (!opaLeadTracked) {
-        opaLeadTracked = true;
-        trackEvent("Lead", { content_name: "Checklist OPA", score: payload.pontuacao, level: payload.resultado });
-      }
-    });
 
-    whatsBtn.addEventListener("click", () => {
-      trackEvent("OPA_WhatsApp", { source: "lead_form" });
+      if (leadRegistered) {
+        successBox.textContent = "Resultado registrado. Você pode continuar pelo WhatsApp usando a mensagem preparada.";
+        successBox.classList.add("show");
+
+        if (!opaLeadTracked) {
+          opaLeadTracked = true;
+          trackEvent("Lead", {
+            content_name: "Checklist OPA",
+            score: payload.pontuacao,
+            level: payload.resultado
+          });
+        }
+      } else {
+        successBox.textContent = "Não foi possível registrar seus dados agora. Você pode continuar pelo WhatsApp.";
+        successBox.classList.add("show");
+      }
     });
 
     document.querySelectorAll('a[href^="https://wa.me/"]').forEach((link) => {
       link.addEventListener("click", () => {
-        trackEvent("OPA_WhatsApp", { source: "page_cta" });
+        const source = link.id === "whatsBtn" ? "lead_form" : "page_cta";
+        trackEvent("OPA_WhatsApp", { source });
       });
     });
 
