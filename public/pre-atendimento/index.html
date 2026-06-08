@@ -231,15 +231,19 @@
 
     .section-lead {
       color: var(--muted);
-      max-width: 740px;
+      max-width: 850px;
       font-size: 1.08rem;
       margin: 0;
+    }
+
+    .section-lead p {
+      margin: 0 0 14px;
     }
 
     .cards {
       margin-top: 26px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
     }
 
@@ -248,7 +252,7 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: var(--radius);
       padding: 22px;
-      min-height: 170px;
+      min-height: 190px;
     }
 
     .card-number {
@@ -265,12 +269,13 @@
 
     .card h3 {
       margin: 0 0 8px;
-      font-size: 1.15rem;
+      font-size: 1.08rem;
     }
 
     .card p {
       margin: 0;
       color: var(--muted);
+      font-size: 0.95rem;
     }
 
     .chat-section {
@@ -542,6 +547,12 @@
       display: none;
     }
 
+    @media (max-width: 1050px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 900px) {
       .hero,
       .chat-shell {
@@ -621,11 +632,17 @@
           <div class="eyebrow">Protótipo demonstrativo</div>
           <h1>Seu negócio recebe contatos pelo WhatsApp, site ou Instagram?</h1>
           <p>
-            Veja como um assistente inteligente pode organizar essas mensagens antes do atendimento humano.
+            Veja como um assistente inteligente pode fazer as primeiras perguntas,
+            organizar as informações e encaminhar um resumo antes do atendimento humano.
           </p>
           <p>
-            Muitos contatos chegam incompletos: pedidos de orçamento sem detalhes, dúvidas repetidas,
-            solicitações sem urgência definida e mensagens espalhadas em vários canais.
+            Este protótipo mostra uma estrutura simples. Em uma versão real, o assistente
+            pode ser adaptado ao seu negócio: seus serviços, suas perguntas frequentes,
+            seus critérios de atendimento e o melhor caminho para cada tipo de contato.
+          </p>
+          <p>
+            As informações coletadas também podem ficar registradas automaticamente em uma
+            base de dados, facilitando acompanhamento, retornos, filtros e próximas ações.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#teste" id="heroStartBtn">Testar o protótipo</a>
@@ -641,40 +658,58 @@
               <span class="dot"></span>
             </div>
             <div class="mini-body">
-              <div class="mini-message">Olá. Vou organizar as informações antes do atendimento.</div>
-              <div class="mini-message user">Recebo muitos pedidos incompletos pelo WhatsApp.</div>
-              <div class="mini-message">Entendi. Vou identificar canal, tipo de contato, informações ausentes e próximo passo.</div>
-              <div class="mini-message user">Isso ajudaria a responder melhor.</div>
+              <div class="mini-message">Olá. Vou fazer as primeiras perguntas antes do atendimento.</div>
+              <div class="mini-message user">Recebo muitos contatos incompletos pelo WhatsApp.</div>
+              <div class="mini-message">Entendi. Vou organizar as respostas e registrar os dados para o próximo passo.</div>
+              <div class="mini-message user">Isso ajudaria a acompanhar melhor cada contato.</div>
             </div>
           </div>
         </div>
       </section>
 
       <section class="section" id="como-funciona">
-        <h2 class="section-title">O que este assistente faz?</h2>
-        <p class="section-lead">
-          Este é um exemplo simples de assistente de pré-atendimento. Ele conversa com a pessoa interessada,
-          coleta informações importantes e entrega um resumo para quem vai responder. A ideia não é substituir
-          o atendimento humano. É organizar melhor o início da conversa.
-        </p>
+        <h2 class="section-title">O que este assistente pode fazer?</h2>
+
+        <div class="section-lead">
+          <p>
+            Ele funciona como uma primeira camada de atendimento. Antes de você responder manualmente,
+            o assistente conversa com a pessoa, entende o que ela procura, organiza as informações
+            mais importantes e gera um resumo claro.
+          </p>
+          <p>
+            Em uma clínica, ele pode perguntar sobre serviço, convênio, horário e tipo de atendimento.
+            Em um curso, pode perguntar sobre interesse, nível, turma e modalidade. Em uma empresa de
+            serviços, pode coletar prazo, localização, orçamento e tipo de solicitação.
+          </p>
+          <p>
+            Além da conversa, as respostas podem ficar salvas em uma base de dados. Isso cria um histórico
+            organizado dos contatos recebidos e facilita os processos depois do primeiro contato.
+          </p>
+        </div>
 
         <div class="cards">
           <div class="card">
             <div class="card-number">1</div>
-            <h3>Organiza contatos soltos</h3>
-            <p>Transforma mensagens incompletas em informações estruturadas.</p>
+            <h3>Faz as primeiras perguntas</h3>
+            <p>Coleta informações básicas antes da resposta humana, como interesse, urgência, serviço desejado, prazo ou melhor canal de retorno.</p>
           </div>
 
           <div class="card">
             <div class="card-number">2</div>
-            <h3>Ajuda a priorizar respostas</h3>
-            <p>Identifica se o contato envolve orçamento, agendamento, dúvida, suporte ou interesse comercial.</p>
+            <h3>Organiza cada contato</h3>
+            <p>Transforma mensagens soltas em um resumo claro, com o que a pessoa procura e quais informações ainda faltam.</p>
           </div>
 
           <div class="card">
             <div class="card-number">3</div>
-            <h3>Facilita o atendimento humano</h3>
-            <p>Gera um resumo claro para você responder com mais contexto.</p>
+            <h3>Registra os dados</h3>
+            <p>As informações coletadas ficam salvas em uma base de dados para consulta, acompanhamento, filtros e futuras automações.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">4</div>
+            <h3>Encaminha melhor o atendimento</h3>
+            <p>Ajuda você ou sua equipe a responder com mais contexto, priorizar contatos e evitar perguntas repetidas.</p>
           </div>
         </div>
       </section>
@@ -682,14 +717,16 @@
       <section class="chat-section" id="teste">
         <div class="chat-shell">
           <aside class="chat-info">
-            <h2 class="section-title">Teste como se fosse no seu negócio</h2>
+            <h2 class="section-title">Teste pensando no seu atendimento</h2>
             <p>
-              Responda algumas perguntas rápidas. Ao final, o protótipo vai mostrar um resumo do contato
-              e indicar o potencial de automação desse tipo de atendimento.
+              Responda como se estivesse avaliando seu próprio negócio. O protótipo vai mostrar
+              como um assistente poderia organizar contatos que chegam incompletos ou repetitivos.
             </p>
             <div class="small-note">
-              Este é um protótipo demonstrativo. A versão real pode ser adaptada ao seu negócio,
-              seus serviços, suas perguntas e seus canais de atendimento.
+              A versão final poderia ter perguntas específicas para sua área, como agendamentos,
+              orçamento, inscrição, avaliação inicial, suporte, localização, prazo ou tipo de serviço.
+              As respostas também poderiam ser registradas automaticamente em uma base de dados e
+              integradas a planilhas, CRM, WhatsApp, e-mail ou outros sistemas usados pela equipe.
             </div>
 
             <button class="btn btn-primary chat-info-start" type="button" id="chatInfoStartBtn">
@@ -845,7 +882,11 @@
       trackEvent("PreAtendimentoPageView");
 
       addBotMessage(
-        "Olá. Vou fazer algumas perguntas rápidas para entender como chegam os contatos no seu negócio e mostrar como isso poderia ser organizado antes do atendimento humano."
+        "Olá. Este é um exemplo de assistente de pré-atendimento. Vou fazer algumas perguntas para entender como os contatos chegam no seu negócio. Em uma versão real, essas perguntas seriam adaptadas aos seus serviços, canais e forma de atendimento."
+      );
+
+      addBotMessage(
+        "As respostas também poderiam ficar registradas automaticamente em uma base de dados, criando um histórico organizado para consulta, acompanhamento e próximas ações."
       );
 
       renderStartButton();
@@ -985,6 +1026,7 @@
       answers.mensagem_whatsapp = whatsappMessage;
 
       addBotMessage("Obrigado. Com base nas suas respostas, gerei um resumo do pré-atendimento.");
+      addBotMessage("Em uma implantação real, esse resumo poderia ser enviado para WhatsApp, e-mail, CRM, planilha, painel interno ou outro sistema usado pela equipe.");
 
       renderResult(result);
 
@@ -1036,7 +1078,7 @@
           potential: "alto",
           label: "Potencial de automação: alto",
           eventName: "PreAtendimentoHighPotential",
-          text: "Seu cenário indica que um assistente de pré-atendimento pode ajudar a organizar melhor os contatos, coletar informações antes da resposta humana e reduzir retrabalho no atendimento inicial.",
+          text: "Seu cenário indica que um assistente de pré-atendimento pode ajudar a organizar melhor os contatos, coletar informações antes da resposta humana, registrar dados e reduzir retrabalho no atendimento inicial.",
           nextStep: "Mapear o fluxo de trabalho de pré-atendimento: quais contatos chegam, quais perguntas precisam ser feitas, quais informações devem ser registradas e quando o atendimento humano deve assumir."
         };
       }
@@ -1055,7 +1097,7 @@
         potential: "inicial",
         label: "Potencial de automação: inicial",
         eventName: "PreAtendimentoInitialPotential",
-        text: "Talvez este não seja o primeiro ponto a automatizar agora, mas um mapeamento simples pode indicar se existe alguma etapa repetitiva no atendimento que vale organizar melhor.",
+        text: "Talvez este não seja o primeiro ponto a automatizar agora, mas um mapeamento simples pode indicar se existe alguma etapa repetitiva no atendimento ou no registro dos contatos que vale organizar melhor.",
         nextStep: "Avaliar se existem tarefas repetitivas no atendimento ou na organização dos contatos que ainda tomam tempo da equipe."
       };
     }
@@ -1065,6 +1107,7 @@
         <div class="result" id="resultBox" style="display:block;">
           <h3>Resumo do pré-atendimento</h3>
           <p>Com base nas suas respostas, este é um exemplo de como o assistente poderia organizar as informações antes do atendimento humano.</p>
+          <p>Em uma versão real, essas informações também poderiam ficar registradas em uma base de dados para acompanhamento, filtros, retornos e futuras automações.</p>
 
           <div class="summary-list">
             ${summaryItem("Nome", answers.nome)}
