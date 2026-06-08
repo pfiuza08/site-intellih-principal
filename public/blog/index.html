@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Blog Intellih — IA aplicada com método para negócios reais</title>
-  <meta name="description" content="Artigos práticos da Intellih sobre inteligência artificial aplicada, automação, assistentes inteligentes, processos e oportunidades reais de uso da IA em negócios." />
+  <meta name="description" content="Artigos práticos da Intellih sobre inteligência artificial aplicada, automação, assistentes inteligentes, processos, arquiteturas RAG e oportunidades reais de uso da IA em negócios." />
   <link rel="canonical" href="https://www.intellih.com.br/blog/" />
 
   <meta property="og:title" content="Blog Intellih — IA aplicada com método para negócios reais" />
-  <meta property="og:description" content="Conteúdos práticos sobre IA aplicada, automação, assistentes inteligentes, processos e oportunidades reais de uso da inteligência artificial em negócios." />
+  <meta property="og:description" content="Conteúdos práticos sobre IA aplicada, automação, assistentes inteligentes, processos, arquiteturas RAG e oportunidades reais de uso da inteligência artificial em negócios." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.intellih.com.br/blog/" />
   <meta property="og:image" content="https://www.intellih.com.br/og-image.jpg" />
@@ -47,7 +47,7 @@
     "@context": "https://schema.org",
     "@type": "Blog",
     "name": "Blog Intellih",
-    "description": "Artigos práticos sobre inteligência artificial aplicada, automação, assistentes inteligentes, processos e oportunidades reais de uso da IA em negócios.",
+    "description": "Artigos práticos sobre inteligência artificial aplicada, automação, assistentes inteligentes, processos, arquiteturas RAG e oportunidades reais de uso da IA em negócios.",
     "url": "https://www.intellih.com.br/blog/",
     "publisher": {
       "@type": "Organization",
@@ -73,6 +73,41 @@
         "@type": "BlogPosting",
         "headline": "Quando vale a pena criar um assistente inteligente?",
         "url": "https://www.intellih.com.br/blog/quando-vale-a-pena-criar-um-assistente-inteligente.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "RAG: quando a IA precisa consultar conhecimento antes de responder",
+        "url": "https://www.intellih.com.br/blog/rag-quando-a-ia-consulta-conhecimento.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Hybrid RAG: por que a IA nem sempre deve buscar só por significado",
+        "url": "https://www.intellih.com.br/blog/hybrid-rag-busca-semantica-e-palavra-chave.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "GraphRAG: quando a IA precisa entender relações, não apenas textos soltos",
+        "url": "https://www.intellih.com.br/blog/graphrag-relacoes-entre-informacoes.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Agentic RAG: quando a IA precisa planejar antes de responder",
+        "url": "https://www.intellih.com.br/blog/agentic-rag-planejar-antes-de-responder.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Corrective RAG: por que a IA precisa avaliar a informação antes de responder",
+        "url": "https://www.intellih.com.br/blog/corrective-rag-avaliar-antes-de-responder.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Multimodal RAG: quando a IA precisa consultar textos, imagens, tabelas e gráficos",
+        "url": "https://www.intellih.com.br/blog/multimodal-rag-textos-imagens-tabelas.html"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Como escolher uma arquitetura de RAG para o seu negócio",
+        "url": "https://www.intellih.com.br/blog/como-escolher-arquitetura-rag-para-negocio.html"
       }
     ]
   }
@@ -697,7 +732,7 @@
         <div>
           <div class="eyebrow eyebrow-home"><span class="dot"></span> Blog Intellih</div>
           <h1>IA aplicada com método para negócios reais</h1>
-          <p class="lead">Artigos práticos sobre inteligência artificial, automação, assistentes inteligentes, processos e oportunidades reais de aplicação da IA em pequenos negócios e rotinas profissionais.</p>
+          <p class="lead">Artigos práticos sobre inteligência artificial, automação, assistentes inteligentes, processos, arquiteturas RAG e oportunidades reais de aplicação da IA em pequenos negócios e rotinas profissionais.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#artigos">Ler artigos</a>
             <button class="btn btn-light" type="button" data-open-intellih-chat>Conversar com o assistente</button>
@@ -707,11 +742,11 @@
         <div class="hero-panel" aria-label="Temas do blog da Intellih">
           <div class="topic-panel">
             <h2>Conteúdo para sair do improviso</h2>
-            <p>O foco do blog é mostrar onde a IA faz sentido, onde ainda não faz e como transformar ideias soltas em processos, fluxos e soluções aplicáveis.</p>
+            <p>O foco do blog é mostrar onde a IA faz sentido, onde ainda não faz e como transformar ideias soltas em processos, fluxos de trabalho e soluções aplicáveis.</p>
             <ul class="topic-list">
               <li>Diagnóstico de oportunidades reais de IA</li>
               <li>Automação, atendimento e assistentes inteligentes</li>
-              <li>Processos, fluxos e bases de conhecimento</li>
+              <li>Processos, fluxos de trabalho, bases de conhecimento e arquiteturas RAG</li>
               <li>Uso responsável, limites e controle humano</li>
             </ul>
           </div>
@@ -776,6 +811,126 @@
             </div>
           </article>
         </div>
+
+        <div class="section-head" style="margin-top: 70px;">
+          <div class="section-kicker">Série especial</div>
+          <h2>RAG com método: arquiteturas para assistentes inteligentes</h2>
+          <p class="section-intro">Uma linha de artigos para entender como a IA pode consultar bases de conhecimento, documentos, dados e relações antes de responder. A ideia é subir a régua sem perder a conexão com negócios reais.</p>
+        </div>
+
+        <div class="blog-list">
+          <article class="blog-card featured">
+            <a class="post-visual" href="/blog/rag-quando-a-ia-consulta-conhecimento.html" aria-label="Ler artigo: RAG quando a IA consulta conhecimento antes de responder">
+              <span>Série RAG · Parte 1</span>
+              <strong>RAG não é só colocar documentos no ChatGPT</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>RAG</span>
+                <span>Base de conhecimento</span>
+              </div>
+              <h2>RAG: quando a IA precisa consultar conhecimento antes de responder</h2>
+              <p>Entenda o conceito essencial de RAG, por que ele é útil em assistentes inteligentes e quais limites aparecem quando documentos, regras e informações não estão bem estruturados.</p>
+              <a class="post-link" href="/blog/rag-quando-a-ia-consulta-conhecimento.html">Ler artigo →</a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a class="post-visual" href="/blog/hybrid-rag-busca-semantica-e-palavra-chave.html" aria-label="Ler artigo: Hybrid RAG busca semântica e palavra-chave">
+              <span>Série RAG · Parte 2</span>
+              <strong>Quando sentido e palavra exata precisam trabalhar juntos</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>Hybrid RAG</span>
+                <span>Busca inteligente</span>
+              </div>
+              <h3>Hybrid RAG: por que a IA nem sempre deve buscar só por significado</h3>
+              <p>A busca semântica entende o sentido da pergunta. A busca por palavra-chave encontra termos exatos. Em muitos projetos reais, as duas precisam atuar juntas.</p>
+              <a class="post-link" href="/blog/hybrid-rag-busca-semantica-e-palavra-chave.html">Ler artigo →</a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a class="post-visual" href="/blog/graphrag-relacoes-entre-informacoes.html" aria-label="Ler artigo: GraphRAG relações entre informações">
+              <span>Série RAG · Parte 3</span>
+              <strong>Quando a IA precisa entender relações</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>GraphRAG</span>
+                <span>Conhecimento conectado</span>
+              </div>
+              <h3>GraphRAG: quando a IA precisa entender relações, não apenas textos soltos</h3>
+              <p>Algumas respostas dependem de conexões entre clientes, processos, produtos, documentos, áreas e regras. É nesse tipo de cenário que GraphRAG ganha força.</p>
+              <a class="post-link" href="/blog/graphrag-relacoes-entre-informacoes.html">Ler artigo →</a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a class="post-visual" href="/blog/agentic-rag-planejar-antes-de-responder.html" aria-label="Ler artigo: Agentic RAG planejar antes de responder">
+              <span>Série RAG · Parte 4</span>
+              <strong>Quando buscar informação vira parte de um plano</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>Agentic RAG</span>
+                <span>Agentes de IA</span>
+              </div>
+              <h3>Agentic RAG: quando a IA precisa planejar antes de responder</h3>
+              <p>Em vez de fazer uma única busca e responder, a IA pode decidir quais ferramentas consultar, em que ordem e quando precisa refazer a busca.</p>
+              <a class="post-link" href="/blog/agentic-rag-planejar-antes-de-responder.html">Ler artigo →</a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a class="post-visual" href="/blog/corrective-rag-avaliar-antes-de-responder.html" aria-label="Ler artigo: Corrective RAG avaliar antes de responder">
+              <span>Série RAG · Parte 5</span>
+              <strong>Quando a IA precisa desconfiar da própria busca</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>Corrective RAG</span>
+                <span>Qualidade da resposta</span>
+              </div>
+              <h3>Corrective RAG: por que a IA precisa avaliar a informação antes de responder</h3>
+              <p>Não basta recuperar documentos. É preciso avaliar se os trechos encontrados são relevantes, suficientes e confiáveis para sustentar a resposta.</p>
+              <a class="post-link" href="/blog/corrective-rag-avaliar-antes-de-responder.html">Ler artigo →</a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a class="post-visual" href="/blog/multimodal-rag-textos-imagens-tabelas.html" aria-label="Ler artigo: Multimodal RAG textos imagens e tabelas">
+              <span>Série RAG · Parte 6</span>
+              <strong>Quando a base de conhecimento não está só em texto</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>Multimodal RAG</span>
+                <span>PDFs, imagens e tabelas</span>
+              </div>
+              <h3>Multimodal RAG: quando a IA precisa consultar textos, imagens, tabelas e gráficos</h3>
+              <p>Muitas informações de negócio estão em PDFs, prints, apresentações, gráficos, catálogos e planilhas. Isso muda a forma de recuperar conhecimento.</p>
+              <a class="post-link" href="/blog/multimodal-rag-textos-imagens-tabelas.html">Ler artigo →</a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a class="post-visual" href="/blog/como-escolher-arquitetura-rag-para-negocio.html" aria-label="Ler artigo: Como escolher uma arquitetura de RAG para o seu negócio">
+              <span>Série RAG · Fechamento</span>
+              <strong>Nem todo projeto precisa da arquitetura mais complexa</strong>
+            </a>
+            <div class="post-body">
+              <div class="post-meta">
+                <span>Arquitetura de IA</span>
+                <span>Decisão prática</span>
+              </div>
+              <h3>Como escolher uma arquitetura de RAG para o seu negócio</h3>
+              <p>Um guia prático para decidir quando usar RAG simples, Hybrid RAG, GraphRAG, Agentic RAG, Corrective RAG ou Multimodal RAG em projetos reais.</p>
+              <a class="post-link" href="/blog/como-escolher-arquitetura-rag-para-negocio.html">Ler artigo →</a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -783,7 +938,7 @@
       <div class="container">
         <div class="section-head">
           <div class="section-kicker">Método Intellih</div>
-          <h2>IA não começa pela ferramenta. Começa pelo problema.</h2>
+          <h2>IA não começa pela ferramenta. Começa pelo processo.</h2>
           <p class="section-intro">O blog reforça a visão da Intellih: aplicar inteligência artificial exige contexto, processo, regra, base de conhecimento, controle humano e objetivo claro.</p>
         </div>
 
@@ -795,7 +950,7 @@
 
           <article class="card" style="background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); box-shadow: none;">
             <h3>2. Estruturar</h3>
-            <p>Transformar o problema em fluxo, regra, base de conhecimento, mensagens de apoio e critérios de qualidade.</p>
+            <p>Transformar o problema em fluxo de trabalho, regra, base de conhecimento, mensagens de apoio e critérios de qualidade.</p>
           </article>
 
           <article class="card" style="background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); box-shadow: none;">
