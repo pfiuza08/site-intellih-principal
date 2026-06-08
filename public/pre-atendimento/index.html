@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Assistente Inteligente de Pré-Atendimento | Intellih</title>
+  <meta name="description" content="Teste um protótipo de assistente inteligente para organizar contatos antes do atendimento humano." />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-soft: #111111;
+      --card: #171717;
+      --card-2: #202020;
+      --text: #f5f5f5;
+      --muted: #b8b8b8;
+      --muted-2: #8a8a8a;
+      --line: #303030;
+      --accent: #c44b04;
+      --accent-soft: rgba(196, 75, 4, 0.18);
+      --success: #f5f5f5;
+      --radius: 22px;
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
+      --max: 1120px;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background:
+        radial-gradient(circle at top left, rgba(196, 75, 4, 0.18), transparent 35%),
+        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.05), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 28px 0 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #7e2e02);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 40px rgba(196, 75, 4, 0.25);
+    }
+
+    .brand-mark span {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .hero {
+      padding: 70px 0 54px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(196, 75, 4, 0.45);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      color: #f6d4c1;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(2.25rem, 5vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero p {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      max-width: 680px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 750;
+      font-size: 0.98rem;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 16px 40px rgba(196, 75, 4, 0.28);
+    }
+
+    .btn-secondary {
+      background: #242424;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .hero-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .mini-window {
+      background: #0b0b0b;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .mini-top {
+      display: flex;
+      gap: 7px;
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      background: #141414;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      background: #555;
+    }
+
+    .dot:first-child {
+      background: var(--accent);
+    }
+
+    .mini-body {
+      padding: 18px;
+    }
+
+    .mini-message {
+      padding: 14px 15px;
+      border-radius: 16px;
+      background: #1c1c1c;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .mini-message.user {
+      background: var(--accent-soft);
+      border: 1px solid rgba(196, 75, 4, 0.28);
+      color: #f4f4f4;
+      margin-left: 42px;
+    }
+
+    .section {
+      padding: 48px 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+      margin: 0 0 14px;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      max-width: 740px;
+      font-size: 1.08rem;
+      margin: 0;
+    }
+
+    .cards {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 22px;
+      min-height: 170px;
+    }
+
+    .card-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-soft);
+      color: #f2c7ad;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .chat-section {
+      padding: 56px 0 72px;
+    }
+
+    .chat-shell {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .chat-info {
+      position: sticky;
+      top: 24px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .chat-info p {
+      color: var(--muted);
+      margin: 12px 0 0;
+    }
+
+    .small-note {
+      margin-top: 18px;
+      color: var(--muted-2);
+      font-size: 0.92rem;
+    }
+
+    .chat-box {
+      background: rgba(12,12,12,0.88);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #121212;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-header strong {
+      display: block;
+    }
+
+    .chat-header span {
+      display: block;
+      color: var(--muted-2);
+      font-size: 0.9rem;
+      margin-top: 2px;
+    }
+
+    .status {
+      font-size: 0.82rem;
+      color: #f1c3a9;
+      border: 1px solid rgba(196,75,4,0.35);
+      background: var(--accent-soft);
+      padding: 7px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .chat-body {
+      padding: 20px;
+      min-height: 440px;
+    }
+
+    .message {
+      max-width: 86%;
+      padding: 14px 16px;
+      border-radius: 18px;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .message.bot {
+      background: #1b1b1b;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-top-left-radius: 6px;
+    }
+
+    .message.user {
+      background: var(--accent);
+      margin-left: auto;
+      border-top-right-radius: 6px;
+    }
+
+    .input-area {
+      padding: 18px 20px 22px;
+      border-top: 1px solid var(--line);
+      background: #101010;
+    }
+
+    .field-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    input {
+      width: 100%;
+      background: #1b1b1b;
+      border: 1px solid #343434;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 14px 16px;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    input:focus {
+      border-color: rgba(196,75,4,0.8);
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      background: #1b1b1b;
+      border: 1px solid #343434;
+      color: var(--text);
+      border-radius: 16px;
+      padding: 13px 14px;
+      cursor: pointer;
+      font-size: 0.98rem;
+      transition: border 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+
+    .option-btn:hover {
+      border-color: rgba(196,75,4,0.85);
+      background: #242424;
+      transform: translateY(-1px);
+    }
+
+    .result {
+      display: none;
+      margin-top: 18px;
+      background: linear-gradient(180deg, rgba(196,75,4,0.14), rgba(255,255,255,0.04));
+      border: 1px solid rgba(196,75,4,0.28);
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .result h3 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 9px;
+      margin: 16px 0;
+    }
+
+    .summary-item {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 9px;
+    }
+
+    .summary-item span:first-child {
+      color: var(--muted-2);
+    }
+
+    .potential-badge {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      margin: 8px 0 12px;
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    footer {
+      padding: 36px 0 44px;
+      color: var(--muted-2);
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .chat-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-info {
+        position: static;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-item {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .hero {
+        padding-top: 46px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-mark"><span>I</span></div>
+        <div>Intellih Tecnologia</div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Protótipo demonstrativo</div>
+          <h1>Seu negócio recebe contatos pelo WhatsApp, site ou Instagram?</h1>
+          <p>
+            Veja como um assistente inteligente pode organizar essas mensagens antes do atendimento humano.
+          </p>
+          <p>
+            Muitos contatos chegam incompletos: pedidos de orçamento sem detalhes, dúvidas repetidas,
+            solicitações sem urgência definida e mensagens espalhadas em vários canais.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#teste" id="heroStartBtn">Testar o protótipo</a>
+            <a class="btn btn-secondary" href="#como-funciona">Entender a ideia</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="mini-window">
+            <div class="mini-top">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="mini-body">
+              <div class="mini-message">Olá. Vou organizar as informações antes do atendimento.</div>
+              <div class="mini-message user">Recebo muitos pedidos incompletos pelo WhatsApp.</div>
+              <div class="mini-message">Entendi. Vou identificar canal, tipo de contato, informações ausentes e próximo passo.</div>
+              <div class="mini-message user">Isso ajudaria a responder melhor.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="como-funciona">
+        <h2 class="section-title">O que este assistente faz?</h2>
+        <p class="section-lead">
+          Este é um exemplo simples de assistente de pré-atendimento. Ele conversa com a pessoa interessada,
+          coleta informações importantes e entrega um resumo para quem vai responder. A ideia não é substituir
+          o atendimento humano. É organizar melhor o início da conversa.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <div class="card-number">1</div>
+            <h3>Organiza contatos soltos</h3>
+            <p>Transforma mensagens incompletas em informações estruturadas.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">2</div>
+            <h3>Ajuda a priorizar respostas</h3>
+            <p>Identifica se o contato envolve orçamento, agendamento, dúvida, suporte ou interesse comercial.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">3</div>
+            <h3>Facilita o atendimento humano</h3>
+            <p>Gera um resumo claro para você responder com mais contexto.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chat-section" id="teste">
+        <div class="chat-shell">
+          <aside class="chat-info">
+            <h2 class="section-title">Teste como se fosse no seu negócio</h2>
+            <p>
+              Responda algumas perguntas rápidas. Ao final, o protótipo vai mostrar um resumo do contato
+              e indicar o potencial de automação desse tipo de atendimento.
+            </p>
+            <div class="small-note">
+              Este é um protótipo demonstrativo. A versão real pode ser adaptada ao seu negócio,
+              seus serviços, suas perguntas e seus canais de atendimento.
+            </div>
+          </aside>
+
+          <div class="chat-box">
+            <div class="chat-header">
+              <div>
+                <strong>Assistente de Pré-Atendimento</strong>
+                <span>Protótipo Intellih</span>
+              </div>
+              <div class="status" id="statusLabel">Pronto para iniciar</div>
+            </div>
+
+            <div class="chat-body" id="chatBody"></div>
+
+            <div class="input-area" id="inputArea"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <strong>Intellih Tecnologia</strong><br />
+      IA aplicada a negócios reais, com método, clareza e foco em fluxo de trabalho.
+    </footer>
+  </div>
+
+  <script>
+    // ======================================================
+    // CONFIGURAÇÕES
+    // ======================================================
+
+    // SUBSTITUIR pelo seu número com DDI + DDD, somente números.
+    // Exemplo: "5521999999999"
+    const WHATSAPP_NUMBER = "55SEUNUMEROAQUI";
+
+    const questions = [
+      {
+        key: "nome",
+        type: "text",
+        question: "Qual é o seu nome?",
+        placeholder: "Digite seu nome"
+      },
+      {
+        key: "empresa",
+        type: "text",
+        question: "Qual é o nome da sua empresa ou atividade profissional?",
+        placeholder: "Digite o nome da empresa ou atividade"
+      },
+      {
+        key: "tipo_contato",
+        type: "options",
+        question: "Que tipo de contato você mais recebe hoje?",
+        options: [
+          "Pedidos de orçamento",
+          "Dúvidas sobre serviços",
+          "Solicitações de agendamento",
+          "Interessados que ainda não sabem exatamente o que precisam",
+          "Pedidos de suporte ou acompanhamento",
+          "Outros tipos de contato"
+        ]
+      },
+      {
+        key: "canal_principal",
+        type: "options",
+        question: "Por onde esses contatos costumam chegar?",
+        options: [
+          "WhatsApp",
+          "Instagram",
+          "Site",
+          "E-mail",
+          "Telefone",
+          "Tudo misturado"
+        ]
+      },
+      {
+        key: "informacao_faltante",
+        type: "options",
+        question: "O que costuma faltar nessas mensagens?",
+        options: [
+          "Informações sobre o que a pessoa realmente precisa",
+          "Urgência ou prazo",
+          "Dados para orçamento",
+          "Localização",
+          "Melhor canal de retorno",
+          "As mensagens chegam completas, mas são muitas"
+        ]
+      },
+      {
+        key: "organizacao_atual",
+        type: "options",
+        question: "Hoje, como você organiza esses contatos?",
+        options: [
+          "Respondo manualmente",
+          "Anoto em planilha",
+          "Uso CRM",
+          "Fica tudo no WhatsApp ou Instagram",
+          "Tenho equipe para responder",
+          "Ainda não tenho um processo claro"
+        ]
+      },
+      {
+        key: "interesse",
+        type: "options",
+        question: "Você gostaria de entender como isso poderia ser adaptado para o seu negócio?",
+        options: [
+          "Sim, quero conversar",
+          "Talvez, quero entender melhor",
+          "Não agora"
+        ]
+      }
+    ];
+
+    const chatBody = document.getElementById("chatBody");
+    const inputArea = document.getElementById("inputArea");
+    const statusLabel = document.getElementById("statusLabel");
+
+    let currentQuestionIndex = 0;
+    let answers = {};
+    let sessionId = getOrCreateSessionId();
+    let leadId = null;
+    let started = false;
+
+    const utms = getUtmParams();
+
+    // ======================================================
+    // INICIALIZAÇÃO
+    // ======================================================
+
+    document.addEventListener("DOMContentLoaded", () => {
+      trackEvent("PreAtendimentoPageView");
+
+      addBotMessage(
+        "Olá. Vou fazer algumas perguntas rápidas para entender como chegam os contatos no seu negócio e mostrar como isso poderia ser organizado antes do atendimento humano."
+      );
+
+      renderStartButton();
+
+      const heroStartBtn = document.getElementById("heroStartBtn");
+      if (heroStartBtn) {
+        heroStartBtn.addEventListener("click", () => {
+          trackEvent("PreAtendimentoHeroStartClick");
+        });
+      }
+    });
+
+    // ======================================================
+    // CHAT
+    // ======================================================
+
+    function renderStartButton() {
+      inputArea.innerHTML = `
+        <button class="btn btn-primary" type="button" id="startChatBtn">
+          Iniciar teste
+        </button>
+      `;
+
+      document.getElementById("startChatBtn").addEventListener("click", () => {
+        if (!started) {
+          started = true;
+          statusLabel.textContent = "Teste iniciado";
+          trackEvent("PreAtendimentoStart");
+          askCurrentQuestion();
+        }
+      });
+    }
+
+    function askCurrentQuestion() {
+      const question = questions[currentQuestionIndex];
+
+      if (!question) {
+        finishChat();
+        return;
+      }
+
+      addBotMessage(question.question);
+
+      if (question.type === "text") {
+        renderTextInput(question);
+      } else {
+        renderOptions(question);
+      }
+    }
+
+    function renderTextInput(question) {
+      inputArea.innerHTML = `
+        <div class="field-row">
+          <input id="textAnswer" type="text" placeholder="${escapeHtml(question.placeholder)}" autocomplete="off" />
+          <button class="btn btn-primary" type="button" id="sendTextAnswer">Enviar</button>
+        </div>
+      `;
+
+      const input = document.getElementById("textAnswer");
+      const button = document.getElementById("sendTextAnswer");
+
+      input.focus();
+
+      button.addEventListener("click", () => {
+        const value = input.value.trim();
+
+        if (!value) {
+          input.focus();
+          return;
+        }
+
+        saveAnswer(question, value);
+      });
+
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          button.click();
+        }
+      });
+    }
+
+    function renderOptions(question) {
+      const buttons = question.options.map(option => {
+        return `<button class="option-btn" type="button" data-answer="${escapeHtml(option)}">${escapeHtml(option)}</button>`;
+      }).join("");
+
+      inputArea.innerHTML = `<div class="options">${buttons}</div>`;
+
+      document.querySelectorAll(".option-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const value = button.getAttribute("data-answer");
+          saveAnswer(question, value);
+        });
+      });
+    }
+
+    function saveAnswer(question, value) {
+      answers[question.key] = value;
+
+      addUserMessage(value);
+
+      trackEvent("PreAtendimentoQuestionAnswered", {
+        step: question.key,
+        answer: value
+      });
+
+      currentQuestionIndex += 1;
+
+      setTimeout(() => {
+        askCurrentQuestion();
+      }, 350);
+    }
+
+    async function finishChat() {
+      statusLabel.textContent = "Resumo gerado";
+
+      const result = calculatePotential(answers);
+      answers.potencial_automacao = result.potential;
+      answers.proximo_passo = result.nextStep;
+
+      const whatsappMessage = buildWhatsAppMessage(answers);
+      answers.mensagem_whatsapp = whatsappMessage;
+
+      addBotMessage("Obrigado. Com base nas suas respostas, gerei um resumo do pré-atendimento.");
+
+      renderResult(result);
+
+      trackEvent("PreAtendimentoCompleted", {
+        step: "completed",
+        answer: result.potential
+      });
+
+      trackEvent(result.eventName);
+
+      await saveLead();
+    }
+
+    // ======================================================
+    // RESULTADO
+    // ======================================================
+
+    function calculatePotential(data) {
+      let score = 0;
+
+      const highChannels = ["WhatsApp", "Instagram", "Tudo misturado"];
+      const highOrganization = [
+        "Respondo manualmente",
+        "Fica tudo no WhatsApp ou Instagram",
+        "Ainda não tenho um processo claro"
+      ];
+      const highMissing = [
+        "Informações sobre o que a pessoa realmente precisa",
+        "Urgência ou prazo",
+        "Dados para orçamento",
+        "Localização",
+        "Melhor canal de retorno",
+        "As mensagens chegam completas, mas são muitas"
+      ];
+      const highContactTypes = [
+        "Pedidos de orçamento",
+        "Dúvidas sobre serviços",
+        "Solicitações de agendamento",
+        "Interessados que ainda não sabem exatamente o que precisam"
+      ];
+
+      if (highChannels.includes(data.canal_principal)) score += 2;
+      if (highOrganization.includes(data.organizacao_atual)) score += 3;
+      if (highMissing.includes(data.informacao_faltante)) score += 2;
+      if (highContactTypes.includes(data.tipo_contato)) score += 2;
+      if (data.interesse === "Sim, quero conversar") score += 3;
+      if (data.interesse === "Talvez, quero entender melhor") score += 1;
+      if (data.organizacao_atual === "Uso CRM") score -= 2;
+      if (data.interesse === "Não agora") score -= 3;
+
+      if (score >= 8) {
+        return {
+          potential: "alto",
+          label: "Potencial de automação: alto",
+          eventName: "PreAtendimentoHighPotential",
+          text: "Seu cenário indica que um assistente de pré-atendimento pode ajudar a organizar melhor os contatos, coletar informações antes da resposta humana e reduzir retrabalho no atendimento inicial.",
+          nextStep: "Mapear o fluxo de trabalho de pré-atendimento: quais contatos chegam, quais perguntas precisam ser feitas, quais informações devem ser registradas e quando o atendimento humano deve assumir."
+        };
+      }
+
+      if (score >= 4) {
+        return {
+          potential: "médio",
+          label: "Potencial de automação: médio",
+          eventName: "PreAtendimentoMediumPotential",
+          text: "Seu cenário já tem algum nível de organização, mas ainda pode se beneficiar de um assistente para padronizar perguntas, registrar informações e facilitar o encaminhamento dos contatos.",
+          nextStep: "Revisar o processo atual de atendimento e identificar quais etapas podem ser padronizadas ou automatizadas sem perder o controle humano."
+        };
+      }
+
+      return {
+        potential: "inicial",
+        label: "Potencial de automação: inicial",
+        eventName: "PreAtendimentoInitialPotential",
+        text: "Talvez este não seja o primeiro ponto a automatizar agora, mas um mapeamento simples pode indicar se existe alguma etapa repetitiva no atendimento que vale organizar melhor.",
+        nextStep: "Avaliar se existem tarefas repetitivas no atendimento ou na organização dos contatos que ainda tomam tempo da equipe."
+      };
+    }
+
+    function renderResult(result) {
+      const summaryHtml = `
+        <div class="result" id="resultBox" style="display:block;">
+          <h3>Resumo do pré-atendimento</h3>
+          <p>Com base nas suas respostas, este é um exemplo de como o assistente poderia organizar as informações antes do atendimento humano.</p>
+
+          <div class="summary-list">
+            ${summaryItem("Nome", answers.nome)}
+            ${summaryItem("Empresa ou atividade", answers.empresa)}
+            ${summaryItem("Tipo de contato mais comum", answers.tipo_contato)}
+            ${summaryItem("Canal principal", answers.canal_principal)}
+            ${summaryItem("Principal informação que costuma faltar", answers.informacao_faltante)}
+            ${summaryItem("Forma atual de organização", answers.organizacao_atual)}
+            ${summaryItem("Interesse em adaptar", answers.interesse)}
+          </div>
+
+          <div class="potential-badge">${escapeHtml(result.label)}</div>
+          <p>${escapeHtml(result.text)}</p>
+
+          <h3>Próximo passo sugerido</h3>
+          <p>${escapeHtml(result.nextStep)}</p>
+
+          <div class="result-actions">
+            <button class="btn btn-secondary" type="button" id="copySummaryBtn">Copiar resumo gerado</button>
+            <a class="btn btn-primary" id="whatsappBtn" target="_blank" rel="noopener noreferrer">
+              Quero adaptar isso ao meu negócio
+            </a>
+          </div>
+        </div>
+      `;
+
+      inputArea.innerHTML = summaryHtml;
+
+      const whatsappBtn = document.getElementById("whatsappBtn");
+      whatsappBtn.href = buildWhatsAppUrl(answers.mensagem_whatsapp);
+
+      whatsappBtn.addEventListener("click", () => {
+        trackEvent("PreAtendimentoWhatsAppClick", {
+          lead_id: leadId,
+          step: "whatsapp",
+          answer: answers.potencial_automacao
+        });
+      });
+
+      document.getElementById("copySummaryBtn").addEventListener("click", async () => {
+        const summaryText = buildPlainSummary(answers);
+
+        try {
+          await navigator.clipboard.writeText(summaryText);
+          trackEvent("PreAtendimentoSummaryCopy", {
+            lead_id: leadId,
+            step: "copy_summary",
+            answer: answers.potencial_automacao
+          });
+          alert("Resumo copiado.");
+        } catch (error) {
+          alert("Não foi possível copiar automaticamente. Selecione o resumo manualmente.");
+        }
+      });
+    }
+
+    function summaryItem(label, value) {
+      return `
+        <div class="summary-item">
+          <span>${escapeHtml(label)}</span>
+          <strong>${escapeHtml(value || "-")}</strong>
+        </div>
+      `;
+    }
+
+    // ======================================================
+    // SUPABASE VIA VERCEL API
+    // ======================================================
+
+    async function saveLead() {
+      const payload = {
+        ...answers,
+        ...utms,
+        page_url: window.location.href,
+        user_agent: navigator.userAgent,
+        session_id: sessionId
+      };
+
+      try {
+        const response = await fetch("/api/pre-atendimento-lead", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (data.ok && data.lead && data.lead.id) {
+          leadId = data.lead.id;
+        }
+      } catch (error) {
+        console.error("Erro ao salvar lead:", error);
+      }
+    }
+
+    async function trackEvent(eventName, extra = {}) {
+      const payload = {
+        event_name: eventName,
+        session_id: sessionId,
+        lead_id: extra.lead_id || leadId || null,
+        step: extra.step || null,
+        answer: extra.answer || null,
+        ...utms,
+        page_url: window.location.href,
+        user_agent: navigator.userAgent
+      };
+
+      try {
+        await fetch("/api/pre-atendimento-event", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (error) {
+        console.error("Erro ao registrar evento:", error);
+      }
+    }
+
+    // ======================================================
+    // WHATSAPP
+    // ======================================================
+
+    function buildWhatsAppMessage(data) {
+      return `Olá, Patrícia. Testei o protótipo do Assistente Inteligente de Pré-Atendimento.
+
+Resumo do meu cenário:
+- Nome: ${data.nome || "-"}
+- Empresa ou atividade: ${data.empresa || "-"}
+- Tipo de contato mais comum: ${data.tipo_contato || "-"}
+- Canal principal: ${data.canal_principal || "-"}
+- Principal dificuldade: ${data.informacao_faltante || "-"}
+- Organização atual: ${data.organizacao_atual || "-"}
+- Potencial de automação: ${data.potencial_automacao || "-"}
+
+Quero entender como isso poderia ser adaptado ao meu negócio.`;
+    }
+
+    function buildWhatsAppUrl(message) {
+      const encoded = encodeURIComponent(message);
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+    }
+
+    function buildPlainSummary(data) {
+      return `Resumo do pré-atendimento
+
+Nome: ${data.nome || "-"}
+Empresa ou atividade: ${data.empresa || "-"}
+Tipo de contato mais comum: ${data.tipo_contato || "-"}
+Canal principal: ${data.canal_principal || "-"}
+Principal informação que costuma faltar: ${data.informacao_faltante || "-"}
+Forma atual de organização: ${data.organizacao_atual || "-"}
+Interesse em adaptar: ${data.interesse || "-"}
+Potencial de automação: ${data.potencial_automacao || "-"}
+Próximo passo sugerido: ${data.proximo_passo || "-"}`;
+    }
+
+    // ======================================================
+    // HELPERS
+    // ======================================================
+
+    function addBotMessage(text) {
+      const el = document.createElement("div");
+      el.className = "message bot";
+      el.textContent = text;
+      chatBody.appendChild(el);
+      scrollChat();
+    }
+
+    function addUserMessage(text) {
+      const el = document.createElement("div");
+      el.className = "message user";
+      el.textContent = text;
+      chatBody.appendChild(el);
+      scrollChat();
+    }
+
+    function scrollChat() {
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function getUtmParams() {
+      const params = new URLSearchParams(window.location.search);
+
+      return {
+        utm_source: params.get("utm_source") || null,
+        utm_medium: params.get("utm_medium") || null,
+        utm_campaign: params.get("utm_campaign") || null,
+        utm_content: params.get("utm_content") || null,
+        utm_term: params.get("utm_term") || null
+      };
+    }
+
+    function getOrCreateSessionId() {
+      const key = "intellih_pre_atendimento_session_id";
+      let value = localStorage.getItem(key);
+
+      if (!value) {
+        value = crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + "-" + Math.random().toString(16).slice(2);
+        localStorage.setItem(key, value);
+      }
+
+      return value;
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+  </script>
+</body>
+</html>
