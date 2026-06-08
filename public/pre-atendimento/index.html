@@ -469,9 +469,59 @@
     }
 
     footer {
-      padding: 36px 0 44px;
+      padding: 42px 0 46px;
       color: var(--muted-2);
       border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .footer-brand {
+      color: var(--text);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .footer-text {
+      max-width: 460px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .footer-col h4 {
+      margin: 0 0 10px;
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+
+    .footer-col a,
+    .footer-col span {
+      display: block;
+      color: var(--muted-2);
+      font-size: 0.94rem;
+      margin: 7px 0;
+    }
+
+    .footer-col a:hover {
+      color: var(--text);
+    }
+
+    .footer-bottom {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--muted-2);
     }
 
     .hidden {
@@ -500,8 +550,37 @@
       .hero {
         padding-top: 46px;
       }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
     }
   </style>
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
+    n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '1006338955220980');
+    fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1006338955220980&ev=PageView&noscript=1" />
+  </noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -609,8 +688,33 @@
     </main>
 
     <footer>
-      <strong>Intellih Tecnologia</strong><br />
-      IA aplicada a negócios reais, com método, clareza e foco em fluxo de trabalho.
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Intellih Tecnologia</div>
+          <p class="footer-text">
+            IA aplicada a negócios reais, com método, clareza e foco em fluxo de trabalho.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Projetos</h4>
+          <a href="https://intellih.com.br/automacao">Automação com IA</a>
+          <a href="https://intellih.com.br">Site Intellih</a>
+          <a href="https://intellih.com.br/pre-atendimento">Pré-atendimento inteligente</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <a href="mailto:contato@intellih.com.br">contato@intellih.com.br</a>
+          <a href="https://www.linkedin.com/company/intellih-tecnologia/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://www.instagram.com/intellih.tecnologia/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Intellih Tecnologia. Todos os direitos reservados.</span>
+        <span>IA, automação e agentes inteligentes para fluxos de trabalho reais.</span>
+      </div>
     </footer>
   </div>
 
@@ -621,7 +725,7 @@
 
     // SUBSTITUIR pelo seu número com DDI + DDD, somente números.
     // Exemplo: "5521999999999"
-    const WHATSAPP_NUMBER = "55SEUNUMEROAQUI";
+    const WHATSAPP_NUMBER = "5521995558808";
 
     const questions = [
       {
@@ -1037,6 +1141,36 @@
         page_url: window.location.href,
         user_agent: navigator.userAgent
       };
+
+      // Envia eventos personalizados para o Meta Pixel
+      if (typeof fbq === "function") {
+        fbq("trackCustom", eventName, {
+          session_id: sessionId,
+          lead_id: extra.lead_id || leadId || null,
+          step: extra.step || null,
+          answer: extra.answer || null,
+          potential: answers?.potencial_automacao || null,
+          utm_source: utms.utm_source,
+          utm_medium: utms.utm_medium,
+          utm_campaign: utms.utm_campaign,
+          utm_content: utms.utm_content,
+          utm_term: utms.utm_term
+        });
+
+        if (eventName === "PreAtendimentoCompleted") {
+          fbq("track", "Lead", {
+            content_name: "Assistente Inteligente de Pré-Atendimento",
+            potential: extra.answer || answers?.potencial_automacao || null
+          });
+        }
+
+        if (eventName === "PreAtendimentoWhatsAppClick") {
+          fbq("track", "Contact", {
+            content_name: "Clique WhatsApp - Pré-Atendimento",
+            potential: extra.answer || answers?.potencial_automacao || null
+          });
+        }
+      }
 
       try {
         await fetch("/api/pre-atendimento-event", {
