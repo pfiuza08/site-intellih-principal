@@ -468,60 +468,69 @@
       margin-top: 18px;
     }
 
-    footer {
+    .footer {
       padding: 42px 0 46px;
       color: var(--muted-2);
       border-top: 1px solid rgba(255,255,255,0.07);
     }
 
+    .footer .container {
+      width: 100%;
+    }
+
     .footer-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      grid-template-columns: 1fr auto;
       gap: 28px;
-      align-items: start;
+      align-items: center;
     }
 
-    .footer-brand {
+    .footer strong {
       color: var(--text);
       font-weight: 800;
-      margin-bottom: 8px;
     }
 
-    .footer-text {
-      max-width: 460px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .footer-col h4 {
-      margin: 0 0 10px;
-      color: var(--text);
-      font-size: 0.98rem;
-    }
-
-    .footer-col a,
-    .footer-col span {
-      display: block;
+    .footer p {
       color: var(--muted-2);
       font-size: 0.94rem;
-      margin: 7px 0;
     }
 
-    .footer-col a:hover {
+    .footer a {
+      color: var(--muted);
+      transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+
+    .footer a:hover {
       color: var(--text);
     }
 
-    .footer-bottom {
-      margin-top: 28px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.07);
+    .socials {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: flex-end;
       gap: 12px;
-      font-size: 0.88rem;
-      color: var(--muted-2);
+    }
+
+    .socials a {
+      width: 42px;
+      height: 42px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.045);
+    }
+
+    .socials a:hover {
+      border-color: rgba(196, 75, 4, 0.65);
+      background: var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    .socials svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
 
     .hidden {
@@ -553,10 +562,11 @@
 
       .footer-grid {
         grid-template-columns: 1fr;
+        align-items: start;
       }
 
-      .footer-bottom {
-        flex-direction: column;
+      .socials {
+        justify-content: flex-start;
       }
     }
   </style>
@@ -687,33 +697,28 @@
       </section>
     </main>
 
-    <footer>
-      <div class="footer-grid">
+    <footer class="footer">
+      <div class="container footer-grid">
         <div>
-          <div class="footer-brand">Intellih Tecnologia</div>
-          <p class="footer-text">
-            IA aplicada a negócios reais, com método, clareza e foco em fluxo de trabalho.
+          <strong>Intellih Tecnologia</strong>
+          <p style="margin: 6px 0 0;">Automação Inteligente — IA aplicada a fluxos de trabalho, automações e agentes especializados.</p>
+          <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+          <p style="margin: 6px 0 0;">
+            <a href="https://www.intellih.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
           </p>
         </div>
 
-        <div class="footer-col">
-          <h4>Projetos</h4>
-          <a href="https://intellih.com.br/automacao">Automação com IA</a>
-          <a href="https://intellih.com.br">Site Intellih</a>
-          <a href="https://intellih.com.br/pre-atendimento">Pré-atendimento inteligente</a>
+        <div class="socials" aria-label="Redes sociais">
+          <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram da Intellih">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn da Intellih">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube da Intellih">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"/></svg>
+          </a>
         </div>
-
-        <div class="footer-col">
-          <h4>Contato</h4>
-          <a href="mailto:contato@intellih.com.br">contato@intellih.com.br</a>
-          <a href="https://www.linkedin.com/company/intellih-tecnologia/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://www.instagram.com/intellih.tecnologia/" target="_blank" rel="noopener noreferrer">Instagram</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <span>© 2026 Intellih Tecnologia. Todos os direitos reservados.</span>
-        <span>IA, automação e agentes inteligentes para fluxos de trabalho reais.</span>
       </div>
     </footer>
   </div>
@@ -725,7 +730,7 @@
 
     // SUBSTITUIR pelo seu número com DDI + DDD, somente números.
     // Exemplo: "5521999999999"
-    const WHATSAPP_NUMBER = "5521995558808";
+    const WHATSAPP_NUMBER = "55SEUNUMEROAQUI";
 
     const questions = [
       {
@@ -816,11 +821,12 @@
 
     const utms = getUtmParams();
 
-    // ======================================================
-    // INICIALIZAÇÃO
-    // ======================================================
-
     document.addEventListener("DOMContentLoaded", () => {
+      const yearEl = document.getElementById("year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+
       trackEvent("PreAtendimentoPageView");
 
       addBotMessage(
@@ -836,10 +842,6 @@
         });
       }
     });
-
-    // ======================================================
-    // CHAT
-    // ======================================================
 
     function renderStartButton() {
       inputArea.innerHTML = `
@@ -961,10 +963,6 @@
 
       await saveLead();
     }
-
-    // ======================================================
-    // RESULTADO
-    // ======================================================
 
     function calculatePotential(data) {
       let score = 0;
@@ -1098,10 +1096,6 @@
       `;
     }
 
-    // ======================================================
-    // SUPABASE VIA VERCEL API
-    // ======================================================
-
     async function saveLead() {
       const payload = {
         ...answers,
@@ -1142,7 +1136,6 @@
         user_agent: navigator.userAgent
       };
 
-      // Envia eventos personalizados para o Meta Pixel
       if (typeof fbq === "function") {
         fbq("trackCustom", eventName, {
           session_id: sessionId,
@@ -1185,10 +1178,6 @@
       }
     }
 
-    // ======================================================
-    // WHATSAPP
-    // ======================================================
-
     function buildWhatsAppMessage(data) {
       return `Olá! Testei o protótipo do Assistente Inteligente de Pré-Atendimento.
 
@@ -1222,10 +1211,6 @@ Interesse em adaptar: ${data.interesse || "-"}
 Potencial de automação: ${data.potencial_automacao || "-"}
 Próximo passo sugerido: ${data.proximo_passo || "-"}`;
     }
-
-    // ======================================================
-    // HELPERS
-    // ======================================================
 
     function addBotMessage(text) {
       const el = document.createElement("div");
