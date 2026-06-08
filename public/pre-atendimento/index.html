@@ -278,6 +278,69 @@
       font-size: 0.95rem;
     }
 
+    .examples {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .example-card {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 22px;
+      min-height: 100%;
+    }
+
+    .example-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(196, 75, 4, 0.35);
+      color: #f6d4c1;
+      font-size: 0.82rem;
+      font-weight: 750;
+      margin-bottom: 14px;
+    }
+
+    .example-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.16rem;
+    }
+
+    .example-step {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .example-step strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 5px;
+      font-size: 0.94rem;
+    }
+
+    .example-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .example-quote {
+      color: var(--text);
+      background: rgba(196,75,4,0.12);
+      border: 1px solid rgba(196,75,4,0.28);
+      border-radius: 16px;
+      padding: 12px 13px;
+      margin: 10px 0 0;
+      font-size: 0.94rem;
+    }
+
     .chat-section {
       padding: 56px 0 72px;
     }
@@ -548,7 +611,8 @@
     }
 
     @media (max-width: 1050px) {
-      .cards {
+      .cards,
+      .examples {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -563,7 +627,8 @@
         position: static;
       }
 
-      .cards {
+      .cards,
+      .examples {
         grid-template-columns: 1fr;
       }
 
@@ -646,7 +711,7 @@
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#teste" id="heroStartBtn">Testar o protótipo</a>
-            <a class="btn btn-secondary" href="#como-funciona">Entender a ideia</a>
+            <a class="btn btn-secondary" href="#exemplos">Ver exemplos</a>
           </div>
         </div>
 
@@ -714,19 +779,90 @@
         </div>
       </section>
 
+      <section class="section" id="exemplos">
+        <h2 class="section-title">Veja como isso funciona em negócios reais</h2>
+        <p class="section-lead">
+          A lógica é a mesma, mas as perguntas mudam conforme o tipo de atendimento. Abaixo estão três exemplos de como um assistente pode conduzir o primeiro contato, registrar informações e facilitar o trabalho depois da conversa.
+        </p>
+
+        <div class="examples">
+          <div class="example-card">
+            <div class="example-tag">Exemplo 1</div>
+            <h3>Clínica ou consultório</h3>
+            <p class="example-quote">“Olá, vocês atendem convênio? Queria saber sobre consulta.”</p>
+
+            <div class="example-step">
+              <strong>O assistente pergunta</strong>
+              <p>Qual serviço a pessoa procura, se é particular ou convênio, preferência de horário e melhor canal de retorno.</p>
+            </div>
+
+            <div class="example-step">
+              <strong>O que fica registrado</strong>
+              <p>Nome, serviço procurado, convênio, preferência de horário, canal de retorno e observações importantes.</p>
+            </div>
+
+            <div class="example-step">
+              <strong>Finalidade</strong>
+              <p>A clínica recebe um resumo organizado e consegue responder com mais contexto, sem começar a conversa do zero.</p>
+            </div>
+          </div>
+
+          <div class="example-card">
+            <div class="example-tag">Exemplo 2</div>
+            <h3>Curso, escola ou mentoria</h3>
+            <p class="example-quote">“Oi, queria saber mais sobre o curso. Ainda tem vaga?”</p>
+
+            <div class="example-step">
+              <strong>O assistente pergunta</strong>
+              <p>Qual curso interessa, modalidade desejada, nível de conhecimento, dúvida principal e momento de decisão.</p>
+            </div>
+
+            <div class="example-step">
+              <strong>O que fica registrado</strong>
+              <p>Curso de interesse, modalidade, nível do interessado, tipo de dúvida, intenção de matrícula e canal de retorno.</p>
+            </div>
+
+            <div class="example-step">
+              <strong>Finalidade</strong>
+              <p>A equipe separa interessados em pesquisa inicial de contatos mais próximos da inscrição ou matrícula.</p>
+            </div>
+          </div>
+
+          <div class="example-card">
+            <div class="example-tag">Exemplo 3</div>
+            <h3>Serviço com orçamento</h3>
+            <p class="example-quote">“Boa tarde. Quanto fica para fazer esse serviço?”</p>
+
+            <div class="example-step">
+              <strong>O assistente pergunta</strong>
+              <p>Que serviço a pessoa precisa, onde será realizado, se há urgência, quais dados faltam e melhor horário de retorno.</p>
+            </div>
+
+            <div class="example-step">
+              <strong>O que fica registrado</strong>
+              <p>Tipo de serviço, localização, urgência, dados para orçamento, observações e melhor horário de contato.</p>
+            </div>
+
+            <div class="example-step">
+              <strong>Finalidade</strong>
+              <p>O pedido chega mais completo para quem vai atender, reduzindo mensagens repetidas e retrabalho.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="chat-section" id="teste">
         <div class="chat-shell">
           <aside class="chat-info">
-            <h2 class="section-title">Teste pensando no seu atendimento</h2>
+            <h2 class="section-title">Teste o pré-atendimento da Intellih</h2>
             <p>
-              Responda como se estivesse avaliando seu próprio negócio. O protótipo vai mostrar
-              como um assistente poderia organizar contatos que chegam incompletos ou repetitivos.
+              Nesta demonstração, você vai conversar com um assistente da Intellih. Ele vai fazer algumas perguntas para entender seu contexto, organizar as informações e ajudar nossa equipe a responder melhor.
+            </p>
+            <p>
+              A ideia é mostrar, na prática, como um assistente semelhante poderia atender os contatos do seu próprio negócio.
             </p>
             <div class="small-note">
-              A versão final poderia ter perguntas específicas para sua área, como agendamentos,
-              orçamento, inscrição, avaliação inicial, suporte, localização, prazo ou tipo de serviço.
-              As respostas também poderiam ser registradas automaticamente em uma base de dados e
-              integradas a planilhas, CRM, WhatsApp, e-mail ou outros sistemas usados pela equipe.
+              Esse é o mesmo princípio que um agente poderia aplicar no seu negócio: coletar dados, organizar o contato, registrar informações e facilitar o próximo passo do atendimento.
             </div>
 
             <button class="btn btn-primary chat-info-start" type="button" id="chatInfoStartBtn">
@@ -737,7 +873,7 @@
           <div class="chat-box">
             <div class="chat-header">
               <div>
-                <strong>Assistente de Pré-Atendimento</strong>
+                <strong>Pré-atendimento da Intellih</strong>
                 <span>Protótipo Intellih</span>
               </div>
               <div class="status" id="statusLabel">Pronto para iniciar</div>
@@ -800,7 +936,7 @@
       {
         key: "tipo_contato",
         type: "options",
-        question: "Que tipo de contato você mais recebe hoje?",
+        question: "No seu negócio, que tipo de contato você mais recebe hoje?",
         options: [
           "Pedidos de orçamento",
           "Dúvidas sobre serviços",
@@ -813,7 +949,7 @@
       {
         key: "canal_principal",
         type: "options",
-        question: "Por onde esses contatos costumam chegar?",
+        question: "Por onde seus clientes ou interessados costumam entrar em contato?",
         options: [
           "WhatsApp",
           "Instagram",
@@ -839,7 +975,7 @@
       {
         key: "organizacao_atual",
         type: "options",
-        question: "Hoje, como você organiza esses contatos?",
+        question: "Hoje, como você organiza esses contatos depois que eles chegam?",
         options: [
           "Respondo manualmente",
           "Anoto em planilha",
@@ -882,11 +1018,11 @@
       trackEvent("PreAtendimentoPageView");
 
       addBotMessage(
-        "Olá. Este é um exemplo de assistente de pré-atendimento. Vou fazer algumas perguntas para entender como os contatos chegam no seu negócio. Em uma versão real, essas perguntas seriam adaptadas aos seus serviços, canais e forma de atendimento."
+        "Olá. Sou o assistente de pré-atendimento da Intellih. Vou fazer algumas perguntas rápidas para entender seu negócio e organizar as informações para que possamos te atender melhor."
       );
 
       addBotMessage(
-        "As respostas também poderiam ficar registradas automaticamente em uma base de dados, criando um histórico organizado para consulta, acompanhamento e próximas ações."
+        "Em um projeto real, um assistente semelhante poderia fazer esse mesmo papel com os seus clientes, usando perguntas adaptadas aos seus serviços, canais e forma de atendimento. As respostas também poderiam ficar registradas em uma base de dados para acompanhamento e próximas ações."
       );
 
       renderStartButton();
@@ -1025,8 +1161,8 @@
       const whatsappMessage = buildWhatsAppMessage(answers);
       answers.mensagem_whatsapp = whatsappMessage;
 
-      addBotMessage("Obrigado. Com base nas suas respostas, gerei um resumo do pré-atendimento.");
-      addBotMessage("Em uma implantação real, esse resumo poderia ser enviado para WhatsApp, e-mail, CRM, planilha, painel interno ou outro sistema usado pela equipe.");
+      addBotMessage("Obrigado. Com base nas suas respostas, gerei um resumo do pré-atendimento da Intellih.");
+      addBotMessage("Este é o tipo de resumo que nossa equipe receberia para entender melhor seu cenário. Em um projeto real, o seu próprio assistente poderia gerar esse tipo de resumo para cada novo contato recebido pelo seu negócio.");
 
       renderResult(result);
 
@@ -1105,9 +1241,9 @@
     function renderResult(result) {
       const summaryHtml = `
         <div class="result" id="resultBox" style="display:block;">
-          <h3>Resumo do pré-atendimento</h3>
-          <p>Com base nas suas respostas, este é um exemplo de como o assistente poderia organizar as informações antes do atendimento humano.</p>
-          <p>Em uma versão real, essas informações também poderiam ficar registradas em uma base de dados para acompanhamento, filtros, retornos e futuras automações.</p>
+          <h3>Resumo do pré-atendimento da Intellih</h3>
+          <p>Este é o resumo que a Intellih receberia para entender melhor seu cenário e te atender com mais contexto.</p>
+          <p>Em um projeto real, o seu próprio assistente poderia gerar esse tipo de resumo para cada novo contato recebido pelo seu negócio. As informações também poderiam ficar registradas em uma base de dados para acompanhamento, filtros, retornos e futuras automações.</p>
 
           <div class="summary-list">
             ${summaryItem("Nome", answers.nome)}
