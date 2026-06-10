@@ -799,21 +799,35 @@
   </footer>
 
   <script>
-    function trackEvent(eventName, eventParams = {}) {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: eventName,
-        ...eventParams
-      });
+  function trackEvent(eventName, eventParams = {}) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: eventName,
+      ...eventParams
+    });
 
-      if (typeof fbq === "function") {
-        fbq("trackCustom", eventName, eventParams);
+    if (typeof fbq === "function") {
+      fbq("trackCustom", eventName, eventParams);
+
+      const whatsappEvents = [
+        "CliaMiniAulaHeaderWhatsAppClick",
+        "CliaMiniAulaWhatsAppDepoisVideoClick",
+        "CliaMiniAulaFinalWhatsAppClick"
+      ];
+
+      if (whatsappEvents.includes(eventName)) {
+        fbq("track", "Lead", {
+          content_name: "Mini aula CLIA Ready",
+          content_category: "CLIA Ready",
+          lead_source: eventName
+        });
       }
-
-      console.log("Evento:", eventName, eventParams);
     }
 
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+    console.log("Evento:", eventName, eventParams);
+  }
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
