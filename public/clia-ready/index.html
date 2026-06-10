@@ -557,15 +557,29 @@
         <div class="video-box">
           <div class="video-ratio">
             <iframe
-              src="https://www.youtube.com/embed/Q2mDgYgnB-8?rel=0"
-              title="Mini aula CLIA Ready"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-              onload="trackEvent('CliaMiniAulaVideoLoaded')"
-            ></iframe>
+                src="https://www.youtube.com/embed/Q2mDgYgnB-8?rel=0&playsinline=1"
+                title="Mini aula CLIA Ready"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                onload="trackEvent('CliaMiniAulaVideoLoaded')"
+              ></iframe>
           </div>
         </div>
-
+        <p class="microcopy" style="margin-top: 12px;">
+          Se o vídeo não abrir no celular,
+          <a
+            href="https://youtu.be/Q2mDgYgnB-8"
+            target="_blank"
+            rel="noopener"
+            onclick="trackEvent('CliaMiniAulaAbrirYoutubeClick')"
+            style="color: #c44b04; font-weight: 700; text-decoration: underline;"
+          >
+            toque aqui para assistir diretamente no YouTube
+          </a>.
+        </p>
+        
         <div class="after-video-cta">
           <a
             class="btn btn-primary"
