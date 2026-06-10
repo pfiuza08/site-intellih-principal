@@ -8,12 +8,37 @@
 
   <meta name="description" content="Assista à mini aula gratuita da Intellih e entenda se a presença digital do seu negócio está clara para pessoas, buscadores e sistemas de IA." />
 
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '988880650593378');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', {
+      content_name: 'Mini aula CLIA Ready',
+      content_category: 'CLIA Ready'
+    });
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=988880650593378&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
   <style>
     :root {
       --black: #111111;
       --charcoal: #1c1c1c;
       --gray: #666666;
-      --light-gray: #f5f5f2;
+      --light-gray: #f6f4f1;
       --border: #e5e1dc;
       --orange: #c44b04;
       --orange-dark: #9f3b00;
@@ -58,7 +83,7 @@
     }
 
     .header-inner {
-      min-height: 72px;
+      min-height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -73,7 +98,7 @@
 
     .brand strong {
       color: var(--orange);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       letter-spacing: 0.02em;
     }
 
@@ -100,67 +125,6 @@
       background: var(--orange);
     }
 
-    main {
-      overflow: hidden;
-    }
-
-    .hero {
-      padding: 72px 0 48px;
-      position: relative;
-      background:
-        radial-gradient(circle at 85% 20%, rgba(196, 75, 4, 0.08), transparent 30%),
-        linear-gradient(180deg, #ffffff 0%, #faf9f7 100%);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 56px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
-      color: var(--orange);
-      font-weight: 700;
-      font-size: 0.88rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background: var(--orange);
-      display: inline-block;
-    }
-
-    h1 {
-      font-size: clamp(2.35rem, 5vw, 4.8rem);
-      line-height: 0.98;
-      letter-spacing: -0.055em;
-      margin-bottom: 24px;
-      max-width: 760px;
-    }
-
-    .hero p {
-      font-size: clamp(1.05rem, 2vw, 1.24rem);
-      color: #333333;
-      max-width: 650px;
-      margin-bottom: 30px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-    }
-
     .btn {
       display: inline-flex;
       justify-content: center;
@@ -173,6 +137,7 @@
       cursor: pointer;
       transition: 0.2s ease;
       border: 1px solid transparent;
+      text-align: center;
     }
 
     .btn-primary {
@@ -196,97 +161,81 @@
       transform: translateY(-1px);
     }
 
-    .hero-card {
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      background: rgba(255, 255, 255, 0.82);
-      padding: 28px;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.07);
-      position: relative;
+    .hero-video {
+      padding: 48px 0 64px;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(196, 75, 4, 0.08), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #faf9f7 100%);
     }
 
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 18px;
-      border: 1px solid rgba(196, 75, 4, 0.14);
-      border-radius: 22px;
-      pointer-events: none;
-    }
-
-    .diagram {
-      min-height: 360px;
-      position: relative;
-    }
-
-    .node {
-      position: absolute;
-      width: 128px;
-      height: 128px;
-      border-radius: 50%;
-      border: 1px solid rgba(17, 17, 17, 0.28);
-      display: flex;
+    .eyebrow {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      background: #ffffff;
-      color: var(--black);
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-align: center;
-      padding: 16px;
-    }
-
-    .node span {
-      display: block;
+      gap: 8px;
+      margin-bottom: 16px;
       color: var(--orange);
-      font-size: 1.55rem;
-      line-height: 1;
-      margin-bottom: 4px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    .node-1 { left: 8%; top: 12%; }
-    .node-2 { right: 8%; top: 6%; }
-    .node-3 { left: 18%; bottom: 6%; }
-    .node-4 { right: 12%; bottom: 12%; }
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--orange);
+      display: inline-block;
+    }
 
-    .line {
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 4.6rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      margin-bottom: 18px;
+      max-width: 920px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
+      color: #333333;
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .video-box {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--black);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
+    }
+
+    .video-ratio {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+    }
+
+    .video-ratio iframe {
       position: absolute;
-      height: 1px;
-      background: rgba(17, 17, 17, 0.16);
-      transform-origin: left center;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
-    .line-1 {
-      width: 220px;
-      left: 32%;
-      top: 35%;
-      transform: rotate(-15deg);
+    .after-video-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-top: 24px;
     }
 
-    .line-2 {
-      width: 230px;
-      left: 30%;
-      bottom: 35%;
-      transform: rotate(15deg);
-    }
-
-    .line-3 {
-      width: 150px;
-      left: 46%;
-      top: 50%;
-      transform: rotate(90deg);
-    }
-
-    .center-dot {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid var(--orange);
-      background: #ffffff;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+    .microcopy {
+      color: var(--gray);
+      font-size: 0.92rem;
     }
 
     section {
@@ -314,33 +263,12 @@
       color: #3a3a3a;
     }
 
-    .video-box {
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--black);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
-    }
-
-    .video-ratio {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-    }
-
-    .video-ratio iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .below-video {
+    .below-video,
+    .plans,
+    .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      margin-top: 32px;
+      gap: 24px;
     }
 
     .info-card {
@@ -390,19 +318,11 @@
       top: -90px;
     }
 
-    .critical h2 {
-      max-width: 820px;
-    }
-
     .critical p {
-      max-width: 820px;
+      max-width: 850px;
       color: #e4e4e4;
       font-size: 1.05rem;
       margin-bottom: 16px;
-    }
-
-    .critical strong {
-      color: #ffffff;
     }
 
     .clia-grid {
@@ -437,11 +357,40 @@
       font-size: 0.95rem;
     }
 
-    .plans {
+    .steps {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      align-items: stretch;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      background: var(--white);
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--black);
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: #444444;
+      font-size: 0.95rem;
     }
 
     .plan {
@@ -507,42 +456,6 @@
       color: #333333;
     }
 
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .step {
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 24px;
-      background: var(--white);
-    }
-
-    .step-number {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--black);
-      color: var(--white);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .step h3 {
-      font-size: 1.05rem;
-      margin-bottom: 8px;
-    }
-
-    .step p {
-      color: #444444;
-      font-size: 0.95rem;
-    }
-
     .final-cta {
       background:
         radial-gradient(circle at 80% 0%, rgba(196, 75, 4, 0.14), transparent 32%),
@@ -580,9 +493,9 @@
     }
 
     @media (max-width: 900px) {
-      .hero-grid,
       .below-video,
-      .plans {
+      .plans,
+      .two-col {
         grid-template-columns: 1fr;
       }
 
@@ -591,18 +504,14 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .hero {
-        padding-top: 48px;
-      }
-
-      .diagram {
-        min-height: 300px;
+      .hero-video {
+        padding-top: 34px;
       }
     }
 
     @media (max-width: 620px) {
       .header-inner {
-        min-height: 66px;
+        min-height: 64px;
       }
 
       .brand strong {
@@ -617,36 +526,17 @@
         padding: 54px 0;
       }
 
-      .hero {
-        padding: 50px 0 36px;
+      .hero-video {
+        padding: 34px 0 48px;
       }
 
-      .hero-actions {
+      .after-video-cta {
         flex-direction: column;
         align-items: stretch;
       }
 
       .btn {
         width: 100%;
-      }
-
-      .hero-card {
-        padding: 18px;
-        border-radius: 22px;
-      }
-
-      .diagram {
-        min-height: 260px;
-      }
-
-      .node {
-        width: 104px;
-        height: 104px;
-        font-size: 0.68rem;
-      }
-
-      .node span {
-        font-size: 1.3rem;
       }
 
       .critical,
@@ -674,7 +564,7 @@
       <a
         class="header-cta"
         href="#planos"
-        onclick="trackEvent('CliaMiniAulaHeaderCtaClick')"
+        onclick="trackEvent('CliaMiniAulaHeaderPlanosClick')"
       >
         Conhecer o CLIA Ready
       </a>
@@ -682,87 +572,16 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Mini aula gratuita</div>
-
-          <h1>Seu negócio está claro para pessoas, buscadores e IAs?</h1>
-
-          <p>
-            Assista à mini aula da Intellih e entenda por que estar online não significa,
-            necessariamente, ser compreendido.
-          </p>
-
-          <div class="hero-actions">
-            <a
-              class="btn btn-primary"
-              href="#video"
-              onclick="trackEvent('CliaMiniAulaHeroWatchClick')"
-            >
-              Assistir à mini aula
-            </a>
-
-            <a
-              class="btn btn-secondary"
-              href="#planos"
-              onclick="trackEvent('CliaMiniAulaHeroPlansClick')"
-            >
-              Ver diagnóstico CLIA Ready
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-card" aria-hidden="true">
-          <div class="diagram">
-            <div class="line line-1"></div>
-            <div class="line line-2"></div>
-            <div class="line line-3"></div>
-            <div class="center-dot"></div>
-
-            <div class="node node-1">
-              <div>
-                <span>C</span>
-                Clareza
-              </div>
-            </div>
-
-            <div class="node node-2">
-              <div>
-                <span>L</span>
-                Linguagem
-              </div>
-            </div>
-
-            <div class="node node-3">
-              <div>
-                <span>I</span>
-                Informação
-              </div>
-            </div>
-
-            <div class="node node-4">
-              <div>
-                <span>A</span>
-                Assistentes
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="video">
+    <section class="hero-video" id="video">
       <div class="container">
-        <div class="section-header">
-          <span class="eyebrow">Assista agora</span>
-          <h2>Clareza digital antes de tráfego, conteúdo e IA.</h2>
-          <p>
-            Em poucos minutos, você vai entender por que a presença digital precisa ser
-            clara, consistente e organizada antes de investir em mais alcance, automação
-            ou assistentes inteligentes.
-          </p>
-        </div>
+        <div class="eyebrow">Assista agora</div>
+
+        <h1>Seu negócio está claro para pessoas, buscadores e IAs?</h1>
+
+        <p class="hero-subtitle">
+          Mini aula gratuita da Intellih para entender por que estar online não significa,
+          necessariamente, ser compreendido.
+        </p>
 
         <div class="video-box">
           <div class="video-ratio">
@@ -776,6 +595,34 @@
           </div>
         </div>
 
+        <div class="after-video-cta">
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/5521995558808?text=Ol%C3%A1%2C%20assisti%20%C3%A0%20mini%20aula%20CLIA%20Ready%20e%20quero%20entender%20se%20faz%20sentido%20para%20meu%20neg%C3%B3cio."
+            target="_blank"
+            rel="noopener"
+            onclick="trackEvent('CliaMiniAulaWhatsAppDepoisVideoClick')"
+          >
+            Quero avaliar meu negócio
+          </a>
+
+          <a
+            class="btn btn-secondary"
+            href="#planos"
+            onclick="trackEvent('CliaMiniAulaVerPlanosClick')"
+          >
+            Ver opções do CLIA Ready
+          </a>
+
+          <span class="microcopy">
+            Diagnóstico de clareza digital para pessoas, buscadores e sistemas de IA.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-light">
+      <div class="container">
         <div class="below-video">
           <div class="info-card">
             <h3>Nesta aula, você vai entender:</h3>
@@ -799,7 +646,7 @@
       </div>
     </section>
 
-    <section class="section-light">
+    <section>
       <div class="container">
         <div class="critical">
           <h2>Não é sobre “hackear” a IA. É sobre organizar a informação.</h2>
@@ -819,7 +666,7 @@
       </div>
     </section>
 
-    <section id="clia">
+    <section id="clia" class="section-light">
       <div class="container">
         <div class="section-header">
           <span class="eyebrow">Diagnóstico CLIA Ready</span>
@@ -870,7 +717,7 @@
       </div>
     </section>
 
-    <section class="section-light">
+    <section>
       <div class="container">
         <div class="section-header">
           <span class="eyebrow">Como a análise é feita</span>
@@ -914,7 +761,7 @@
       </div>
     </section>
 
-    <section id="planos">
+    <section id="planos" class="section-light">
       <div class="container">
         <div class="section-header">
           <span class="eyebrow">Planos</span>
@@ -950,7 +797,7 @@
 
             <a
               class="btn btn-secondary"
-              href="https://wa.me/5599999999999?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CLIA%20Ready%20Diagn%C3%B3stico."
+              href="https://wa.me/5521995558808?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CLIA%20Ready%20Diagn%C3%B3stico."
               target="_blank"
               rel="noopener"
               onclick="trackEvent('CliaMiniAulaWhatsAppDiagnosticoClick')"
@@ -981,7 +828,7 @@
 
             <a
               class="btn btn-primary"
-              href="https://wa.me/5599999999999?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CLIA%20Ready%20com%20acompanhamento."
+              href="https://wa.me/5521995558808?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CLIA%20Ready%20com%20acompanhamento."
               target="_blank"
               rel="noopener"
               onclick="trackEvent('CliaMiniAulaWhatsAppAcompanhamentoClick')"
@@ -993,7 +840,7 @@
       </div>
     </section>
 
-    <section class="section-light">
+    <section>
       <div class="container">
         <div class="section-header">
           <span class="eyebrow">Depois dos ajustes</span>
@@ -1004,7 +851,7 @@
           </p>
         </div>
 
-        <div class="below-video">
+        <div class="two-col">
           <div class="info-card">
             <h3>O que pode ser observado?</h3>
             <ul>
@@ -1030,7 +877,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="section-light">
       <div class="container">
         <div class="final-cta">
           <h2>Antes de aparecer mais, seu negócio precisa ser entendido melhor.</h2>
@@ -1041,7 +888,7 @@
 
           <a
             class="btn btn-primary"
-            href="https://wa.me/5599999999999?text=Ol%C3%A1%2C%20assisti%20%C3%A0%20mini%20aula%20CLIA%20Ready%20e%20quero%20entender%20se%20faz%20sentido%20para%20meu%20neg%C3%B3cio."
+            href="https://wa.me/5521995558808?text=Ol%C3%A1%2C%20assisti%20%C3%A0%20mini%20aula%20CLIA%20Ready%20e%20quero%20entender%20se%20faz%20sentido%20para%20meu%20neg%C3%B3cio."
             target="_blank"
             rel="noopener"
             onclick="trackEvent('CliaMiniAulaFinalWhatsAppClick')"
