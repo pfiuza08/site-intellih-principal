@@ -1,667 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Assistente Inteligente de Pré-Atendimento | Intellih</title>
-  <meta name="description" content="Teste um protótipo de assistente inteligente para organizar contatos antes do atendimento humano." />
-
-  <style>
-    :root {
-      --bg: #050505;
-      --bg-soft: #111111;
-      --card: #171717;
-      --card-2: #202020;
-      --text: #f5f5f5;
-      --muted: #b8b8b8;
-      --muted-2: #8a8a8a;
-      --line: #303030;
-      --accent: #c44b04;
-      --accent-soft: rgba(196, 75, 4, 0.18);
-      --success: #f5f5f5;
-      --radius: 22px;
-      --shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
-      --max: 1120px;
-      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: var(--font);
-      background:
-        radial-gradient(circle at top left, rgba(196, 75, 4, 0.18), transparent 35%),
-        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.05), transparent 25%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    header {
-      padding: 28px 0 10px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--text);
-      font-weight: 700;
-      letter-spacing: 0.3px;
-    }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), #7e2e02);
-      display: grid;
-      place-items: center;
-      box-shadow: 0 12px 40px rgba(196, 75, 4, 0.25);
-    }
-
-    .brand-mark span {
-      font-size: 17px;
-      font-weight: 800;
-    }
-
-    .hero {
-      padding: 70px 0 54px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 42px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border: 1px solid rgba(196, 75, 4, 0.45);
-      background: var(--accent-soft);
-      border-radius: 999px;
-      color: #f6d4c1;
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 999px;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 760px;
-      font-size: clamp(2.25rem, 5vw, 5rem);
-      line-height: 0.98;
-      letter-spacing: -0.06em;
-    }
-
-    .hero p {
-      margin: 22px 0 0;
-      color: var(--muted);
-      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
-      max-width: 680px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 30px;
-    }
-
-    .btn {
-      border: 0;
-      cursor: pointer;
-      padding: 14px 20px;
-      border-radius: 999px;
-      font-weight: 750;
-      font-size: 0.98rem;
-      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 16px 40px rgba(196, 75, 4, 0.28);
-    }
-
-    .btn-secondary {
-      background: #242424;
-      color: var(--text);
-      border: 1px solid var(--line);
-    }
-
-    .hero-panel {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .mini-window {
-      background: #0b0b0b;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      overflow: hidden;
-    }
-
-    .mini-top {
-      display: flex;
-      gap: 7px;
-      padding: 14px;
-      border-bottom: 1px solid var(--line);
-      background: #141414;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 99px;
-      background: #555;
-    }
-
-    .dot:first-child {
-      background: var(--accent);
-    }
-
-    .mini-body {
-      padding: 18px;
-    }
-
-    .mini-message {
-      padding: 14px 15px;
-      border-radius: 16px;
-      background: #1c1c1c;
-      color: var(--muted);
-      margin-bottom: 12px;
-      font-size: 0.95rem;
-    }
-
-    .mini-message.user {
-      background: var(--accent-soft);
-      border: 1px solid rgba(196, 75, 4, 0.28);
-      color: #f4f4f4;
-      margin-left: 42px;
-    }
-
-    .section {
-      padding: 48px 0;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 3vw, 3rem);
-      line-height: 1.04;
-      letter-spacing: -0.045em;
-      margin: 0 0 14px;
-    }
-
-    .section-lead {
-      color: var(--muted);
-      max-width: 850px;
-      font-size: 1.08rem;
-      margin: 0;
-    }
-
-    .section-lead p {
-      margin: 0 0 14px;
-    }
-
-    .cards {
-      margin-top: 26px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.045);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius);
-      padding: 22px;
-      min-height: 190px;
-    }
-
-    .card-number {
-      width: 36px;
-      height: 36px;
-      border-radius: 13px;
-      display: grid;
-      place-items: center;
-      background: var(--accent-soft);
-      color: #f2c7ad;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 1.08rem;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .examples {
-      margin-top: 34px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .example-card {
-      background: rgba(255,255,255,0.045);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius);
-      padding: 22px;
-      min-height: 100%;
-    }
-
-    .example-tag {
-      display: inline-flex;
-      align-items: center;
-      width: fit-content;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      border: 1px solid rgba(196, 75, 4, 0.35);
-      color: #f6d4c1;
-      font-size: 0.82rem;
-      font-weight: 750;
-      margin-bottom: 14px;
-    }
-
-    .example-card h3 {
-      margin: 0 0 12px;
-      font-size: 1.16rem;
-    }
-
-    .example-step {
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .example-step strong {
-      display: block;
-      color: var(--text);
-      margin-bottom: 5px;
-      font-size: 0.94rem;
-    }
-
-    .example-step p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .example-quote {
-      color: var(--text);
-      background: rgba(196,75,4,0.12);
-      border: 1px solid rgba(196,75,4,0.28);
-      border-radius: 16px;
-      padding: 12px 13px;
-      margin: 10px 0 0;
-      font-size: 0.94rem;
-    }
-
-    .chat-section {
-      padding: 56px 0 72px;
-    }
-
-    .chat-shell {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 26px;
-      align-items: start;
-    }
-
-    .chat-info {
-      position: sticky;
-      top: 24px;
-      background: rgba(255,255,255,0.045);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius);
-      padding: 24px;
-    }
-
-    .chat-info p {
-      color: var(--muted);
-      margin: 12px 0 0;
-    }
-
-    .small-note {
-      margin-top: 18px;
-      color: var(--muted-2);
-      font-size: 0.92rem;
-    }
-
-    .chat-info-start {
-      margin-top: 20px;
-      width: 100%;
-    }
-
-    .chat-box {
-      background: rgba(12,12,12,0.88);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .chat-header {
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--line);
-      background: #121212;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .chat-header strong {
-      display: block;
-    }
-
-    .chat-header span {
-      display: block;
-      color: var(--muted-2);
-      font-size: 0.9rem;
-      margin-top: 2px;
-    }
-
-    .status {
-      font-size: 0.82rem;
-      color: #f1c3a9;
-      border: 1px solid rgba(196,75,4,0.35);
-      background: var(--accent-soft);
-      padding: 7px 10px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-
-    .chat-body {
-      padding: 20px;
-      min-height: 440px;
-    }
-
-    .message {
-      max-width: 86%;
-      padding: 14px 16px;
-      border-radius: 18px;
-      margin-bottom: 14px;
-      color: var(--text);
-    }
-
-    .message.bot {
-      background: #1b1b1b;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-top-left-radius: 6px;
-    }
-
-    .message.user {
-      background: var(--accent);
-      margin-left: auto;
-      border-top-right-radius: 6px;
-    }
-
-    .input-area {
-      padding: 18px 20px 22px;
-      border-top: 1px solid var(--line);
-      background: #101010;
-    }
-
-    .field-row {
-      display: flex;
-      gap: 10px;
-    }
-
-    input {
-      width: 100%;
-      background: #1b1b1b;
-      border: 1px solid #343434;
-      color: var(--text);
-      border-radius: 999px;
-      padding: 14px 16px;
-      outline: none;
-      font-size: 1rem;
-    }
-
-    input:focus {
-      border-color: rgba(196,75,4,0.8);
-    }
-
-    .options {
-      display: grid;
-      gap: 10px;
-    }
-
-    .option-btn {
-      width: 100%;
-      text-align: left;
-      background: #1b1b1b;
-      border: 1px solid #343434;
-      color: var(--text);
-      border-radius: 16px;
-      padding: 13px 14px;
-      cursor: pointer;
-      font-size: 0.98rem;
-      transition: border 0.18s ease, background 0.18s ease, transform 0.18s ease;
-    }
-
-    .option-btn:hover {
-      border-color: rgba(196,75,4,0.85);
-      background: #242424;
-      transform: translateY(-1px);
-    }
-
-    .result {
-      display: none;
-      margin-top: 18px;
-      background: linear-gradient(180deg, rgba(196,75,4,0.14), rgba(255,255,255,0.04));
-      border: 1px solid rgba(196,75,4,0.28);
-      border-radius: 20px;
-      padding: 20px;
-    }
-
-    .result h3 {
-      margin: 0 0 10px;
-      font-size: 1.35rem;
-    }
-
-    .summary-list {
-      display: grid;
-      gap: 9px;
-      margin: 16px 0;
-    }
-
-    .summary-item {
-      display: grid;
-      grid-template-columns: 190px 1fr;
-      gap: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding-bottom: 9px;
-    }
-
-    .summary-item span:first-child {
-      color: var(--muted-2);
-    }
-
-    .potential-badge {
-      display: inline-flex;
-      width: fit-content;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 800;
-      margin: 8px 0 12px;
-    }
-
-    .result-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .footer {
-      padding: 42px 0 46px;
-      color: var(--muted-2);
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-
-    .footer .container {
-      width: 100%;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .footer strong {
-      color: var(--text);
-      font-weight: 800;
-    }
-
-    .footer p {
-      color: var(--muted-2);
-      font-size: 0.94rem;
-    }
-
-    .footer a {
-      color: var(--muted);
-      transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
-    }
-
-    .footer a:hover {
-      color: var(--text);
-    }
-
-    .socials {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 12px;
-    }
-
-    .socials a {
-      width: 42px;
-      height: 42px;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.045);
-    }
-
-    .socials a:hover {
-      border-color: rgba(196, 75, 4, 0.65);
-      background: var(--accent-soft);
-      transform: translateY(-1px);
-    }
-
-    .socials svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    @media (max-width: 1050px) {
-      .cards,
-      .examples {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 900px) {
-      .hero,
-      .chat-shell {
-        grid-template-columns: 1fr;
-      }
-
-      .chat-info {
-        position: static;
-      }
-
-      .cards,
-      .examples {
-        grid-template-columns: 1fr;
-      }
-
-      .summary-item {
-        grid-template-columns: 1fr;
-        gap: 2px;
-      }
-
-      .hero {
-        padding-top: 46px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-        align-items: start;
-      }
-
-      .socials {
-        justify-content: flex-start;
-      }
-
-      .field-row {
-        flex-direction: column;
-      }
-
-      .field-row .btn {
-        width: 100%;
-      }
-    }
-  </style>
-
-  <!-- Meta Pixel Code -->
-  <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IA aplicada ao pré-atendimento | Demonstração Intellih</title>
+<meta content="Veja uma aplicação real de inteligência artificial usada para organizar o pré-atendimento, qualificar contatos, registrar informações e definir próximas ações." name="description"/>
+<style>
+:root{--bg:#fff;--bg-soft:#f7f5f2;--bg-dark:#12100f;--card:#fff;--text:#191715;--text-soft:#5f5a55;--muted:#817870;--line:#e7e0d8;--accent:#c65f22;--accent-dark:#944314;--accent-light:#e47c3c;--accent-soft:#fff0e7;--graphite:#25211e;--radius:24px;--shadow:0 18px 45px rgba(21,18,15,.10);--shadow-soft:0 10px 28px rgba(21,18,15,.08);--max:1160px;--font:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;max-width:100%;overflow-x:hidden}a{color:inherit;text-decoration:none}.page{width:100%;margin:0}header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(231,224,216,.82)}header>.brand{width:min(var(--max),calc(100% - 40px));min-height:76px;margin:0 auto}.brand{display:flex;align-items:center;gap:12px;color:var(--text);font-weight:850;letter-spacing:-.03em}.brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px rgba(198,95,34,.24)}.brand-mark span{font-size:18px;font-weight:900}main>section,footer>.container{width:min(var(--max),calc(100% - 40px));margin-left:auto;margin-right:auto}.hero{width:100%;max-width:none;padding:92px max(20px,calc((100vw - var(--max))/2)) 70px;display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center;background:radial-gradient(circle at 12% 12%,rgba(198,95,34,.16),transparent 30%),radial-gradient(circle at 90% 0%,rgba(37,33,30,.10),transparent 30%),linear-gradient(180deg,#fff 0%,#fbf8f5 100%)}.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:10px 15px;margin-bottom:20px;border-radius:999px;background:linear-gradient(135deg,rgba(37,33,30,.98),rgba(68,58,50,.96));color:#fff;border:1px solid rgba(198,95,34,.42);box-shadow:0 14px 32px rgba(21,18,15,.16);font-size:.88rem;font-weight:840}.eyebrow:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent-light);box-shadow:0 0 0 5px rgba(228,124,60,.18)}h1,h2,h3{margin:0;line-height:1.08;letter-spacing:-.045em;color:var(--text)}h1{max-width:820px;font-size:clamp(2.6rem,5.2vw,5rem)}.hero p{margin:22px 0 0;color:var(--text-soft);font-size:clamp(1.05rem,1.5vw,1.22rem);max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}.btn{border:0;cursor:pointer;min-height:48px;padding:13px 20px;border-radius:999px;font:inherit;font-size:.96rem;font-weight:820;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{transform:translateY(-1px)}.btn-primary{background:var(--accent);color:#fff;box-shadow:0 14px 30px rgba(198,95,34,.25)}.btn-primary:hover{background:var(--accent-dark)}.btn-secondary{background:var(--graphite);color:#fff;box-shadow:0 14px 30px rgba(21,18,15,.18)}.hero-panel{background:rgba(255,255,255,.86);border:1px solid rgba(231,224,216,.92);border-radius:34px;padding:24px;box-shadow:var(--shadow)}.mini-window{background:var(--graphite);border:1px solid rgba(255,255,255,.10);border-radius:26px;overflow:hidden}.mini-top{display:flex;gap:7px;padding:14px;border-bottom:1px solid rgba(255,255,255,.10);background:#1b1815}.dot{width:10px;height:10px;border-radius:99px;background:#6d655e}.dot:first-child{background:var(--accent-light)}.mini-body{padding:20px}.mini-message{padding:14px 15px;border-radius:16px;background:rgba(255,255,255,.07);color:#d8d0c8;margin-bottom:12px;font-size:.95rem}.mini-message.user{margin-left:42px;background:rgba(198,95,34,.20);border:1px solid rgba(228,124,60,.28);color:#fff}.section{padding:76px 0}#exemplos{width:100%;max-width:none;padding:76px max(20px,calc((100vw - var(--max))/2));background:var(--bg-soft)}.section-title{font-size:clamp(2rem,3.4vw,3.2rem);margin:0 0 16px}.section-lead{color:var(--text-soft);max-width:850px;font-size:1.06rem;margin:0}.section-lead p{margin:0 0 14px}.cards{margin-top:30px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.card,.example-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-soft)}.card{min-height:210px}.card-number{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-dark);font-weight:900;margin-bottom:16px}.card h3,.example-card h3{margin:0 0 10px;font-size:1.18rem}.card p,.example-card p{margin:0;color:var(--text-soft);font-size:.96rem}.examples{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.example-tag{display:inline-flex;align-items:center;width:fit-content;padding:7px 10px;border-radius:999px;background:var(--accent-soft);border:1px solid #ffd7c1;color:var(--accent-dark);font-size:.82rem;font-weight:850;margin-bottom:14px}.example-step{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}.example-step strong{display:block;color:var(--text);margin-bottom:5px;font-size:.94rem}.example-quote{color:var(--text)!important;background:var(--accent-soft);border:1px solid #ffd7c1;border-radius:16px;padding:13px 14px;margin:10px 0 0!important;font-size:.94rem}.chat-section{width:100%;max-width:none;padding:76px max(20px,calc((100vw - var(--max))/2));background:var(--bg-dark)}.chat-shell{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}.chat-info{position:sticky;top:100px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:26px}.chat-info .section-title{color:#fff}.chat-info p{color:#d8d0c8;margin:12px 0 0}.small-note{margin-top:18px;color:#aaa198;font-size:.92rem}.chat-info-start{margin-top:20px;width:100%}.chat-box{background:#171411;border:1px solid rgba(255,255,255,.10);border-radius:var(--radius);box-shadow:0 22px 60px rgba(0,0,0,.36);overflow:hidden}.chat-header{padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.10);background:#1d1916;display:flex;justify-content:space-between;align-items:center;gap:12px}.chat-header strong{display:block;color:#fff}.chat-header span{display:block;color:#aaa198;font-size:.9rem;margin-top:2px}.status{font-size:.82rem;color:#ffd7c1;border:1px solid rgba(198,95,34,.42);background:rgba(198,95,34,.16);padding:7px 10px;border-radius:999px;white-space:nowrap}.chat-body{padding:20px;min-height:440px;max-height:580px;overflow-y:auto}.message{max-width:86%;padding:14px 16px;border-radius:18px;margin-bottom:14px;color:#fff}.message.bot{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-top-left-radius:6px}.message.user{background:var(--accent);margin-left:auto;border-top-right-radius:6px}.input-area{padding:18px 20px 22px;border-top:1px solid rgba(255,255,255,.10);background:#14110f}.field-row{display:flex;gap:10px}input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:999px;padding:14px 16px;outline:none;font:inherit}input:focus{border-color:var(--accent-light);box-shadow:0 0 0 4px rgba(198,95,34,.14)}.options{display:grid;gap:10px}.option-btn{width:100%;text-align:left;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:16px;padding:13px 14px;cursor:pointer;font:inherit;font-size:.97rem;transition:border .18s ease,background .18s ease,transform .18s ease}.option-btn:hover{border-color:var(--accent-light);background:rgba(198,95,34,.13);transform:translateY(-1px)}.result{display:none;margin-top:18px;background:linear-gradient(180deg,rgba(198,95,34,.18),rgba(255,255,255,.05));border:1px solid rgba(198,95,34,.34);border-radius:20px;padding:20px;color:#fff}.result h3{color:#fff;margin:0 0 10px;font-size:1.35rem}.result p{color:#d8d0c8}.summary-list{display:grid;gap:9px;margin:16px 0}.summary-item{display:grid;grid-template-columns:190px 1fr;gap:12px;border-bottom:1px solid rgba(255,255,255,.10);padding-bottom:9px}.summary-item span:first-child{color:#aaa198}.potential-badge{display:inline-flex;width:fit-content;padding:8px 12px;border-radius:999px;background:var(--accent);color:#fff;font-weight:850;margin:8px 0 12px}.result-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.footer{padding:42px 0 46px;background:#11100f;color:#cfc7bf;border-top:1px solid rgba(255,255,255,.07)}.footer .container{width:min(var(--max),calc(100% - 40px))}.footer-grid{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}.footer strong{color:#fff;font-weight:850}.footer p{color:#cfc7bf;font-size:.94rem}.footer a{color:#fff}.socials{display:flex;align-items:center;justify-content:flex-end;gap:12px}.socials a{width:42px;height:42px;display:inline-grid;place-items:center;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.08)}.socials a:hover{background:rgba(198,95,34,.82);transform:translateY(-1px)}.socials svg{width:20px;height:20px;fill:currentColor}.hidden{display:none}@media(max-width:1050px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.examples{grid-template-columns:1fr}}@media(max-width:900px){.hero,.chat-shell{grid-template-columns:1fr}.chat-info{position:static}.hero{padding-top:62px}.footer-grid{grid-template-columns:1fr;align-items:start}.socials{justify-content:flex-start}.field-row{flex-direction:column}.field-row .btn{width:100%}}@media(max-width:640px){header>.brand,main>section,footer>.container{width:min(var(--max),calc(100% - 28px))}.hero,#exemplos,.chat-section{padding-left:14px;padding-right:14px}.cards{grid-template-columns:1fr}.hero-actions,.hero-actions .btn,.result-actions .btn,.result-actions a{width:100%}h1{font-size:clamp(2.15rem,12vw,3.2rem)}.summary-item{grid-template-columns:1fr;gap:2px}.hero-panel,.chat-info{padding:22px}}
+</style>
+<!-- Meta Pixel Code -->
+<script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
     n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
@@ -674,246 +23,179 @@
     fbq('init', '1006338955220980');
     fbq('track', 'PageView');
   </script>
-
-  <noscript>
-    <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1006338955220980&ev=PageView&noscript=1" />
-  </noscript>
-  <!-- End Meta Pixel Code -->
+<noscript>
+<img height="1" src="https://www.facebook.com/tr?id=1006338955220980&amp;ev=PageView&amp;noscript=1" style="display:none" width="1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
 </head>
-
 <body>
-  <div class="page">
-    <header>
-      <div class="brand">
-        <div class="brand-mark"><span>I</span></div>
-        <div>Intellih Tecnologia</div>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div>
-          <div class="eyebrow">Protótipo demonstrativo</div>
-          <h1>Seu negócio recebe contatos pelo WhatsApp, site ou Instagram?</h1>
-          <p>
-            Veja como um assistente inteligente pode fazer as primeiras perguntas,
-            organizar as informações e encaminhar um resumo antes do atendimento humano.
-          </p>
-          <p>
-            Este protótipo mostra uma estrutura simples. Em uma versão real, o assistente
-            pode ser adaptado ao seu negócio: seus serviços, suas perguntas frequentes,
-            seus critérios de atendimento e o melhor caminho para cada tipo de contato.
-          </p>
-          <p>
-            As informações coletadas também podem ficar registradas automaticamente em uma
-            base de dados, facilitando acompanhamento, retornos, filtros e próximas ações.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#teste" id="heroStartBtn">Testar o protótipo</a>
-            <a class="btn btn-secondary" href="#exemplos">Ver exemplos</a>
-          </div>
-        </div>
-
-        <div class="hero-panel">
-          <div class="mini-window">
-            <div class="mini-top">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-            <div class="mini-body">
-              <div class="mini-message">Olá. Vou fazer as primeiras perguntas antes do atendimento.</div>
-              <div class="mini-message user">Recebo muitos contatos incompletos pelo WhatsApp.</div>
-              <div class="mini-message">Entendi. Vou organizar as respostas e registrar os dados para o próximo passo.</div>
-              <div class="mini-message user">Isso ajudaria a acompanhar melhor cada contato.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="como-funciona">
-        <h2 class="section-title">O que este assistente pode fazer?</h2>
-
-        <div class="section-lead">
-          <p>
-            Ele funciona como uma primeira camada de atendimento. Antes de você responder manualmente,
-            o assistente conversa com a pessoa, entende o que ela procura, organiza as informações
-            mais importantes e gera um resumo claro.
-          </p>
-          <p>
-            Em uma clínica, ele pode perguntar sobre serviço, convênio, horário e tipo de atendimento.
-            Em um curso, pode perguntar sobre interesse, nível, turma e modalidade. Em uma empresa de
-            serviços, pode coletar prazo, localização, orçamento e tipo de solicitação.
-          </p>
-          <p>
-            Além da conversa, as respostas podem ficar salvas em uma base de dados. Isso cria um histórico
-            organizado dos contatos recebidos e facilita os processos depois do primeiro contato.
-          </p>
-        </div>
-
-        <div class="cards">
-          <div class="card">
-            <div class="card-number">1</div>
-            <h3>Faz as primeiras perguntas</h3>
-            <p>Coleta informações básicas antes da resposta humana, como interesse, urgência, serviço desejado, prazo ou melhor canal de retorno.</p>
-          </div>
-
-          <div class="card">
-            <div class="card-number">2</div>
-            <h3>Organiza cada contato</h3>
-            <p>Transforma mensagens soltas em um resumo claro, com o que a pessoa procura e quais informações ainda faltam.</p>
-          </div>
-
-          <div class="card">
-            <div class="card-number">3</div>
-            <h3>Registra os dados</h3>
-            <p>As informações coletadas ficam salvas em uma base de dados para consulta, acompanhamento, filtros e futuras automações.</p>
-          </div>
-
-          <div class="card">
-            <div class="card-number">4</div>
-            <h3>Encaminha melhor o atendimento</h3>
-            <p>Ajuda você ou sua equipe a responder com mais contexto, priorizar contatos e evitar perguntas repetidas.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="exemplos">
-        <h2 class="section-title">Veja como isso funciona em negócios reais</h2>
-        <p class="section-lead">
-          A lógica é a mesma, mas as perguntas mudam conforme o tipo de atendimento. Abaixo estão três exemplos de como um assistente pode conduzir o primeiro contato, registrar informações e facilitar o trabalho depois da conversa.
-        </p>
-
-        <div class="examples">
-          <div class="example-card">
-            <div class="example-tag">Exemplo 1</div>
-            <h3>Clínica ou consultório</h3>
-            <p class="example-quote">“Olá, vocês atendem convênio? Queria saber sobre consulta.”</p>
-
-            <div class="example-step">
-              <strong>O assistente pergunta</strong>
-              <p>Qual serviço a pessoa procura, se é particular ou convênio, preferência de horário e melhor canal de retorno.</p>
-            </div>
-
-            <div class="example-step">
-              <strong>O que fica registrado</strong>
-              <p>Nome, serviço procurado, convênio, preferência de horário, canal de retorno e observações importantes.</p>
-            </div>
-
-            <div class="example-step">
-              <strong>Finalidade</strong>
-              <p>A clínica recebe um resumo organizado e consegue responder com mais contexto, sem começar a conversa do zero.</p>
-            </div>
-          </div>
-
-          <div class="example-card">
-            <div class="example-tag">Exemplo 2</div>
-            <h3>Curso, escola ou mentoria</h3>
-            <p class="example-quote">“Oi, queria saber mais sobre o curso. Ainda tem vaga?”</p>
-
-            <div class="example-step">
-              <strong>O assistente pergunta</strong>
-              <p>Qual curso interessa, modalidade desejada, nível de conhecimento, dúvida principal e momento de decisão.</p>
-            </div>
-
-            <div class="example-step">
-              <strong>O que fica registrado</strong>
-              <p>Curso de interesse, modalidade, nível do interessado, tipo de dúvida, intenção de matrícula e canal de retorno.</p>
-            </div>
-
-            <div class="example-step">
-              <strong>Finalidade</strong>
-              <p>A equipe separa interessados em pesquisa inicial de contatos mais próximos da inscrição ou matrícula.</p>
-            </div>
-          </div>
-
-          <div class="example-card">
-            <div class="example-tag">Exemplo 3</div>
-            <h3>Serviço com orçamento</h3>
-            <p class="example-quote">“Boa tarde. Quanto fica para fazer esse serviço?”</p>
-
-            <div class="example-step">
-              <strong>O assistente pergunta</strong>
-              <p>Que serviço a pessoa precisa, onde será realizado, se há urgência, quais dados faltam e melhor horário de retorno.</p>
-            </div>
-
-            <div class="example-step">
-              <strong>O que fica registrado</strong>
-              <p>Tipo de serviço, localização, urgência, dados para orçamento, observações e melhor horário de contato.</p>
-            </div>
-
-            <div class="example-step">
-              <strong>Finalidade</strong>
-              <p>O pedido chega mais completo para quem vai atender, reduzindo mensagens repetidas e retrabalho.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="chat-section" id="teste">
-        <div class="chat-shell">
-          <aside class="chat-info">
-            <h2 class="section-title">Teste o pré-atendimento da Intellih</h2>
-            <p>
-              Nesta demonstração, você vai conversar com um assistente da Intellih. Ele vai fazer algumas perguntas para entender seu contexto, organizar as informações e ajudar nossa equipe a responder melhor.
-            </p>
-            <p>
-              A ideia é mostrar, na prática, como um assistente semelhante poderia atender os contatos do seu próprio negócio.
-            </p>
-            <div class="small-note">
-              Esse é o mesmo princípio que um agente poderia aplicar no seu negócio: coletar dados, organizar o contato, registrar informações e facilitar o próximo passo do atendimento.
-            </div>
-
-            <button class="btn btn-primary chat-info-start" type="button" id="chatInfoStartBtn">
-              Iniciar teste agora
-            </button>
-          </aside>
-
-          <div class="chat-box">
-            <div class="chat-header">
-              <div>
-                <strong>Pré-atendimento da Intellih</strong>
-                <span>Protótipo Intellih</span>
-              </div>
-              <div class="status" id="statusLabel">Pronto para iniciar</div>
-            </div>
-
-            <div class="chat-body" id="chatBody"></div>
-
-            <div class="input-area" id="inputArea"></div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div>
-          <strong>Intellih Tecnologia</strong>
-          <p style="margin: 6px 0 0;">Automação Inteligente — IA aplicada a fluxos de trabalho, automações e agentes especializados.</p>
-          <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
-          <p style="margin: 6px 0 0;">
-            <a href="https://www.intellih.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
-          </p>
-        </div>
-
-        <div class="socials" aria-label="Redes sociais">
-          <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram da Intellih">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn da Intellih">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"/></svg>
-          </a>
-          <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube da Intellih">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"/></svg>
-          </a>
-        </div>
-      </div>
-    </footer>
-  </div>
-
-  <script>
+<div class="page">
+<header>
+<div class="brand">
+<div class="brand-mark"><span>I</span></div>
+<div>Intellih Tecnologia</div>
+</div>
+</header>
+<main>
+<section class="hero">
+<div>
+<div class="eyebrow">Demonstração real da Intellih</div>
+<h1>Do contato desorganizado a um fluxo de atendimento estruturado</h1>
+<p>Esta aplicação mostra como a Intellih usa inteligência artificial no próprio pré-atendimento: o assistente coleta contexto, organiza as respostas, identifica o potencial de aplicação e define o próximo passo.</p>
+<p>O objetivo não é substituir uma conversa humana. É fazer com que ela comece com informações suficientes, sem depender de mensagens soltas, perguntas repetidas ou anotações dispersas.</p>
+<p>A mesma estrutura pode ser adaptada a clínicas, cursos, consultorias e empresas de serviços, com perguntas, regras, critérios e encaminhamentos próprios.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="#teste" id="heroStartBtn">Ver a aplicação funcionando</a>
+<a class="btn btn-secondary" href="#exemplos">Entender o fluxo</a>
+</div>
+</div>
+<div class="hero-panel">
+<div class="mini-window">
+<div class="mini-top">
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+<div class="mini-body">
+<div class="mini-message">Olá. Vou entender como os contatos chegam ao seu negócio.</div>
+<div class="mini-message user">Recebo muitas mensagens incompletas pelo WhatsApp.</div>
+<div class="mini-message">Vou organizar o cenário, registrar as informações e indicar o próximo passo.</div>
+<div class="mini-message user">Assim, a conversa humana já começa com contexto.</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="como-funciona">
+<h2 class="section-title">O que acontece antes, durante e depois da conversa</h2>
+<div class="section-lead"><p>A aplicação não começa pela escolha de uma ferramenta. Primeiro, define quais informações precisam ser coletadas, quais critérios serão usados e o que deve acontecer ao final.</p><p>Durante a conversa, cada resposta é registrada de forma estruturada. Ao final, o sistema gera um resumo, classifica o cenário e sugere uma próxima ação.</p><p>Esse é o ponto central da demonstração: a IA participa de um fluxo de trabalho. A conversa é apenas a interface visível.</p></div>
+<div class="cards">
+<div class="card">
+<div class="card-number">1</div>
+<h3>Entender o problema</h3>
+<p>Identifica que tipo de contato chega, por qual canal, quais informações faltam e como o atendimento é organizado hoje.</p>
+</div>
+<div class="card">
+<div class="card-number">2</div>
+<h3>Estruturar as informações</h3>
+<p>Transforma respostas soltas em dados comparáveis, com campos definidos e critérios claros para análise.</p>
+</div>
+<div class="card">
+<div class="card-number">3</div>
+<h3>Aplicar regras</h3>
+<p>Avalia o cenário, identifica o nível de oportunidade e sugere uma ação coerente com as respostas recebidas.</p>
+</div>
+<div class="card">
+<div class="card-number">4</div>
+<h3>Registrar e acompanhar</h3>
+<p>Salva o contato, a origem, o resumo e os próximos passos para que o trabalho continue depois da conversa.</p>
+</div>
+</div>
+</section>
+<section class="section" id="exemplos">
+<h2 class="section-title">O que esta aplicação demonstra na prática</h2>
+<p class="section-lead">O mesmo protótipo permite mostrar três camadas de uma aplicação real: a experiência do usuário, a lógica de decisão e o trabalho que continua nos bastidores.</p>
+<div class="examples">
+<div class="example-card">
+<div class="example-tag">Camada 1</div>
+<h3>Conversa orientada</h3>
+<p class="example-quote">“Recebo pedidos de orçamento, mas quase nunca chegam com as informações necessárias.”</p>
+<div class="example-step">
+<strong>O sistema faz</strong>
+<p>Perguntas objetivas sobre canal, tipo de contato, informações ausentes e forma atual de organização.</p>
+</div>
+<div class="example-step">
+<strong>O que evita</strong>
+<p>Conversas que começam do zero e dependem de várias mensagens para reunir o contexto mínimo.</p>
+</div>
+<div class="example-step">
+<strong>O que entrega</strong>
+<p>Um conjunto estruturado de respostas que pode ser usado nas próximas etapas.</p>
+</div>
+</div>
+<div class="example-card">
+<div class="example-tag">Camada 2</div>
+<h3>Classificação com critérios</h3>
+<p class="example-quote">“Tudo chega pelo WhatsApp, é respondido manualmente e não existe um processo claro.”</p>
+<div class="example-step">
+<strong>O sistema avalia</strong>
+<p>Canal, volume, organização atual, tipo de solicitação e interesse declarado.</p>
+</div>
+<div class="example-step">
+<strong>O que produz</strong>
+<p>Uma classificação inicial de potencial, baseada em regras explícitas e ajustáveis.</p>
+</div>
+<div class="example-step">
+<strong>O que não faz</strong>
+<p>Não fecha diagnóstico definitivo nem substitui o levantamento detalhado do processo.</p>
+</div>
+</div>
+<div class="example-card">
+<div class="example-tag">Camada 3</div>
+<h3>Registro e próxima ação</h3>
+<p class="example-quote">“Quero entender como isso poderia ser adaptado ao meu negócio.”</p>
+<div class="example-step">
+<strong>O sistema registra</strong>
+<p>Dados do contato, respostas, origem da visita, sessão, resultado e eventos da jornada.</p>
+</div>
+<div class="example-step">
+<strong>O que a equipe recebe</strong>
+<p>Um resumo organizado e uma sugestão de próximo passo para continuar o atendimento.</p>
+</div>
+<div class="example-step">
+<strong>Onde está o valor</strong>
+<p>Na continuidade do fluxo: acompanhamento, priorização, análise e implantação.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="chat-section" id="teste">
+<div class="chat-shell">
+<aside class="chat-info">
+<h2 class="section-title">Teste a aplicação usada pela Intellih</h2>
+<p>Responda às perguntas como se você estivesse avaliando uma oportunidade de IA no seu negócio. O assistente organizará as informações e produzirá um resumo do cenário.</p>
+<p>Durante a demonstração, observe não apenas a conversa, mas também o que é estruturado, classificado e preparado para a continuidade do atendimento.</p>
+<div class="small-note">Em um projeto real, perguntas, critérios, integrações e próximos passos são modelados conforme o fluxo de trabalho de cada negócio.</div>
+<button class="btn btn-primary chat-info-start" id="chatInfoStartBtn" type="button">Iniciar demonstração</button>
+</aside>
+<div class="chat-box">
+<div class="chat-header">
+<div>
+<strong>IA aplicada ao pré-atendimento</strong>
+<span>Demonstração Intellih</span>
+</div>
+<div class="status" id="statusLabel">Pronto para iniciar</div>
+</div>
+<div class="chat-body" id="chatBody"></div>
+<div class="input-area" id="inputArea"></div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container footer-grid">
+<div>
+<strong>Intellih Tecnologia</strong>
+<p style="margin: 6px 0 0;">IA aplicada a fluxos de trabalho reais, com informações, regras e limites definidos.</p>
+<p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+<p style="margin: 6px 0 0;">
+<a href="https://www.intellih.com.br/politica-de-privacidade" rel="noopener" target="_blank">Política de Privacidade</a>
+</p>
+</div>
+<div aria-label="Redes sociais" class="socials">
+<a aria-label="Instagram da Intellih" href="https://www.instagram.com/intellih.tecnologia" rel="noopener" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path></svg>
+</a>
+<a aria-label="LinkedIn da Intellih" href="https://www.linkedin.com/company/intellih-tecnologia" rel="noopener" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"></path></svg>
+</a>
+<a aria-label="YouTube da Intellih" href="https://www.youtube.com/@IntellihTecnologia" rel="noopener" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+</div>
+<script>
     // ======================================================
     // CONFIGURAÇÕES
     // ======================================================
@@ -1018,11 +300,11 @@
       trackEvent("PreAtendimentoPageView");
 
       addBotMessage(
-        "Olá. Sou o assistente de pré-atendimento da Intellih. Vou fazer algumas perguntas rápidas para entender seu negócio e organizar as informações para que possamos te atender melhor."
+        "Olá. Esta demonstração mostra como a Intellih organiza o próprio pré-atendimento. Vou fazer algumas perguntas para entender seu cenário, estruturar as informações e indicar um próximo passo."
       );
 
       addBotMessage(
-        "Em um projeto real, um assistente semelhante poderia fazer esse mesmo papel com os seus clientes, usando perguntas adaptadas aos seus serviços, canais e forma de atendimento. As respostas também poderiam ficar registradas em uma base de dados para acompanhamento e próximas ações."
+        "Observe que a conversa é apenas uma parte da aplicação. As respostas serão transformadas em dados estruturados, registradas e usadas para gerar um resumo e uma classificação inicial."
       );
 
       renderStartButton();
@@ -1161,8 +443,8 @@
       const whatsappMessage = buildWhatsAppMessage(answers);
       answers.mensagem_whatsapp = whatsappMessage;
 
-      addBotMessage("Obrigado. Com base nas suas respostas, gerei um resumo do pré-atendimento da Intellih.");
-      addBotMessage("Este é o tipo de resumo que nossa equipe receberia para entender melhor seu cenário. Em um projeto real, o seu próprio assistente poderia gerar esse tipo de resumo para cada novo contato recebido pelo seu negócio.");
+      addBotMessage("Obrigado. Com base nas suas respostas, a aplicação estruturou o cenário e gerou um resumo do contato.");
+      addBotMessage("Este é o tipo de informação que pode seguir para uma equipe, um painel ou outra etapa do fluxo. Em um projeto real, critérios e encaminhamentos seriam definidos conforme a operação do negócio.");
 
       renderResult(result);
 
@@ -1212,7 +494,7 @@
       if (score >= 8) {
         return {
           potential: "alto",
-          label: "Potencial de automação: alto",
+          label: "Potencial de aplicação: alto",
           eventName: "PreAtendimentoHighPotential",
           text: "Seu cenário indica que um assistente de pré-atendimento pode ajudar a organizar melhor os contatos, coletar informações antes da resposta humana, registrar dados e reduzir retrabalho no atendimento inicial.",
           nextStep: "Mapear o fluxo de trabalho de pré-atendimento: quais contatos chegam, quais perguntas precisam ser feitas, quais informações devem ser registradas e quando o atendimento humano deve assumir."
@@ -1222,7 +504,7 @@
       if (score >= 4) {
         return {
           potential: "médio",
-          label: "Potencial de automação: médio",
+          label: "Potencial de aplicação: médio",
           eventName: "PreAtendimentoMediumPotential",
           text: "Seu cenário já tem algum nível de organização, mas ainda pode se beneficiar de um assistente para padronizar perguntas, registrar informações e facilitar o encaminhamento dos contatos.",
           nextStep: "Revisar o processo atual de atendimento e identificar quais etapas podem ser padronizadas ou automatizadas sem perder o controle humano."
@@ -1231,7 +513,7 @@
 
       return {
         potential: "inicial",
-        label: "Potencial de automação: inicial",
+        label: "Potencial de aplicação: inicial",
         eventName: "PreAtendimentoInitialPotential",
         text: "Talvez este não seja o primeiro ponto a automatizar agora, mas um mapeamento simples pode indicar se existe alguma etapa repetitiva no atendimento ou no registro dos contatos que vale organizar melhor.",
         nextStep: "Avaliar se existem tarefas repetitivas no atendimento ou na organização dos contatos que ainda tomam tempo da equipe."
@@ -1241,9 +523,9 @@
     function renderResult(result) {
       const summaryHtml = `
         <div class="result" id="resultBox" style="display:block;">
-          <h3>Resumo do pré-atendimento da Intellih</h3>
-          <p>Este é o resumo que a Intellih recebe para entender melhor seu cenário e te atender com mais contexto.</p>
-          <p>Em um projeto personalizado, o seu próprio assistente poderia gerar esse tipo de resumo para cada novo contato recebido pelo seu negócio. As informações também poderiam ficar registradas em uma base de dados para acompanhamento, filtros, retornos e futuras automações.</p>
+          <h3>Resumo estruturado do contato</h3>
+          <p>Este resumo reúne as informações necessárias para que o atendimento continue com mais contexto.</p>
+          <p>Em uma aplicação personalizada, esses dados podem alimentar painéis, filas de atendimento, acompanhamento comercial, relatórios e outras automações.</p>
 
           <div class="summary-list">
             ${summaryItem("Nome", answers.nome)}
@@ -1264,7 +546,7 @@
           <div class="result-actions">
             <button class="btn btn-secondary" type="button" id="copySummaryBtn">Copiar resumo gerado</button>
             <a class="btn btn-primary" id="whatsappBtn" target="_blank" rel="noopener noreferrer">
-              Quero adaptar isso ao meu negócio
+              Conversar sobre uma aplicação
             </a>
           </div>
         </div>
