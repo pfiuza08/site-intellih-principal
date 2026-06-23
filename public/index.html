@@ -483,6 +483,13 @@
       max-width: 790px;
     }
 
+    .grid-1 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 28px;
+      max-width: 760px;
+    }
+
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1022,14 +1029,6 @@
         "description": "Organização de um fluxo de trabalho e implantação de uma aplicação prática de inteligência artificial, como assistente, automação simples, base de consulta ou geração assistida de documentos."
       },
       {
-        "@type": "Service",
-        "@id": "https://www.intellih.com.br/#clareza-digital",
-        "name": "Clareza digital para negócios",
-        "provider": {"@id": "https://www.intellih.com.br/#organization"},
-        "areaServed": "BR",
-        "description": "Organização e correção das informações do negócio em site, Google, Instagram e WhatsApp para melhorar a compreensão por pessoas, buscadores e assistentes de inteligência artificial."
-      },
-      {
         "@type": "FAQPage",
         "@id": "https://www.intellih.com.br/#faq",
         "mainEntity": [
@@ -1063,14 +1062,6 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Sim. A Intellih atende pequenos negócios, clínicas, consultórios, profissionais liberais e prestadores de serviços que precisam organizar informações, atendimento e rotinas antes de aplicar inteligência artificial."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Como preparar um negócio para ser compreendido por buscadores e assistentes de IA?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "É necessário publicar informações claras e consistentes sobre o que o negócio faz, para quem, onde atende, quais serviços oferece, como funciona a contratação e como entrar em contato, distribuindo essas respostas nos canais adequados."
             }
           }
         ]
@@ -1159,7 +1150,6 @@
         <div>
           <p>A Intellih é uma empresa brasileira de serviços em inteligência artificial aplicada. Atendemos pequenos negócios, clínicas, consultórios, profissionais liberais e prestadores de serviços.</p>
           <p>Nosso trabalho começa pela organização das informações e do fluxo de trabalho. Em seguida, implantamos a aplicação adequada: assistente de IA, automação simples, base de consulta, geração assistida de documentos ou solução sob medida.</p>
-          <p>Também organizamos e corrigimos as informações digitais do negócio para que pessoas, buscadores e assistentes de IA compreendam com mais clareza o que ele oferece, para quem, onde e como contratar.</p>
         </div>
       </div>
     </section>
@@ -1168,26 +1158,11 @@
       <div class="container">
         <div class="section-head">
           <div class="section-kicker">Serviços principais</div>
-          <h2>Organização, correção e implantação</h2>
-          <p class="section-intro">A Intellih atua em duas frentes complementares: clareza digital para negócios e aplicação prática de inteligência artificial em um fluxo de trabalho real.</p>
+          <h2>Organização e implantação</h2>
+          <p class="section-intro">A Intellih organiza informações e regras e implanta uma aplicação prática de inteligência artificial em um fluxo de trabalho real.</p>
         </div>
 
-        <div class="grid-2">
-          <article class="card service-card">
-            <span class="tag">Clareza digital</span>
-            <div class="icon">C</div>
-            <h3>Clareza Digital para Negócios</h3>
-            <p>Organizamos e corrigimos as informações da empresa em seus canais digitais para melhorar a compreensão por clientes, buscadores e assistentes de IA.</p>
-            <ul class="list">
-              <li>clareza da oferta e do público atendido;</li>
-              <li>organização de serviços, diferenciais e perguntas frequentes;</li>
-              <li>consistência entre site, Google, Instagram e WhatsApp;</li>
-              <li>orientação sobre páginas, conteúdos e informações prioritárias;</li>
-              <li>correções nos canais definidos no escopo.</li>
-            </ul>
-            <a class="btn btn-secondary" href="/clareza-digital">Conhecer o projeto</a>
-          </article>
-
+        <div class="grid-1">
           <article class="card service-card">
             <span class="tag">IA aplicada</span>
             <div class="icon">I</div>
@@ -1200,7 +1175,6 @@
               <li>consulta a informações e bases internas;</li>
               <li>assistentes, automações simples e fluxos guiados.</li>
             </ul>
-            <a class="btn btn-secondary" href="/ia-aplicada-negocio">Conhecer o projeto</a>
           </article>
         </div>
       </div>
@@ -1325,7 +1299,7 @@
         <div class="section-head">
           <div class="section-kicker">Perguntas frequentes</div>
           <h2>Perguntas que pequenos negócios fazem antes de aplicar IA</h2>
-          <p class="section-intro">Respostas diretas sobre automação, assistentes, organização de processos e clareza digital.</p>
+          <p class="section-intro">Respostas diretas sobre automação, assistentes e organização de processos.</p>
         </div>
 
         <div class="grid-2">
@@ -1347,11 +1321,6 @@
           <article class="card">
             <h3>A IA substitui o atendimento humano?</h3>
             <p>Não necessariamente. Em muitos projetos, a IA cuida da coleta, organização e preparação das informações, enquanto a equipe confirma, decide, negocia ou assume situações sensíveis e excepcionais.</p>
-          </article>
-
-          <article class="card">
-            <h3>Como preparar meu negócio para buscadores e assistentes de IA?</h3>
-            <p>É preciso publicar informações claras e consistentes sobre o que o negócio faz, para quem, onde atende, quais serviços oferece, como funciona a contratação e como entrar em contato.</p>
           </article>
 
           <article class="card">
@@ -1377,7 +1346,7 @@
         <div class="section-head">
           <div class="section-kicker">Blog</div>
           <h2>IA aplicada com método para negócios reais</h2>
-          <p class="section-intro">Conteúdos que respondem a dúvidas reais sobre aplicação de IA, automação de tarefas, assistentes, organização de informações, clareza digital e fluxos de trabalho em pequenos negócios.</p>
+          <p class="section-intro">Conteúdos que respondem a dúvidas reais sobre aplicação de IA, automação de tarefas, assistentes, organização de informações e fluxos de trabalho em pequenos negócios.</p>
         </div>
 
         <div class="blog-grid">
@@ -1432,10 +1401,9 @@
         <div>
           <div class="section-kicker">Contato</div>
           <h2>Fale com a Intellih</h2>
-          <p class="section-intro">Descreva uma tarefa, fluxo ou problema específico. Avaliaremos se o caso se encaixa em clareza digital, assistente, automação, base de consulta ou geração assistida de documentos.</p>
+          <p class="section-intro">Descreva uma tarefa, fluxo ou problema específico. Avaliaremos se o caso se encaixa em assistente, automação, base de consulta ou geração assistida de documentos.</p>
 
           <ul class="list">
-            <li>organização e correção das informações digitais;</li>
             <li>assistente para atendimento e perguntas frequentes;</li>
             <li>automação de uma tarefa ou fluxo delimitado;</li>
             <li>base de consulta para equipe ou clientes;</li>
@@ -1471,7 +1439,6 @@
             O que você procura?
             <select name="interesse" required>
               <option value="">Selecione uma opção</option>
-              <option>Clareza Digital para Negócios</option>
               <option>Assistente de IA</option>
               <option>Automação de um fluxo de trabalho</option>
               <option>Base de consulta ou documentos</option>
