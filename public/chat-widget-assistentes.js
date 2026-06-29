@@ -44,6 +44,7 @@
     document.getElementById('assistDemoClose').addEventListener('click',close);
     modal.addEventListener('click',e=>{if(e.target===modal)close();});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+    const form=document.getElementById('contactForm'); if(form) form.addEventListener('submit',()=>track('formulario_assistente_enviado',{origem:current?.key||'pagina'}));
     const requested=new URLSearchParams(location.search).get('demo'); if(requested&&demos[requested]) setTimeout(()=>open(requested),250);
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
