@@ -1,4 +1,7 @@
-const NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || 'contato@intellih.com.br';
+const NOTIFICATION_EMAIL =
+  process.env.LEAD_NOTIFICATION_TO ||
+  process.env.LEAD_NOTIFICATION_EMAIL ||
+  'contato@intellih.com.br';
 
 function json(res, status, body) {
   res.statusCode = status;
@@ -37,13 +40,15 @@ async function saveToSupabase(lead) {
 
 async function notifyByEmail(lead) {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.LEAD_FROM_EMAIL;
+  const from =
+    process.env.LEAD_NOTIFICATION_FROM ||
+    process.env.LEAD_FROM_EMAIL;
 
   if (!apiKey) {
     throw new Error('RESEND_API_KEY não configurada na Vercel');
   }
   if (!from) {
-    throw new Error('LEAD_FROM_EMAIL não configurado na Vercel');
+    throw new Error('LEAD_NOTIFICATION_FROM não configurado na Vercel');
   }
 
   const subject = `Novo lead — Assistentes Inteligentes — ${lead.nome}`;
