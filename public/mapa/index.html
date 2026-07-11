@@ -168,11 +168,45 @@
     .flow-card.application { top: 270px; left: 50%; transform: translateX(-50%); min-width: 198px; justify-content: center; color: var(--primary); border-color: rgba(196,75,4,.35); animation-name: riseInCentered; }
     .flow-card.test { bottom: 8px; left: 50%; transform: translateX(-50%); min-width: 210px; justify-content: center; color: #fff; background: var(--primary); border-color: var(--primary); box-shadow: 0 12px 30px rgba(196,75,4,.2); animation-name: riseInCentered; }
     .flow-lines { position: absolute; inset: 0; width: 100%; height: 100%; color: #bcb7ae; }
-    .flow-lines path { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-dasharray: 5 7; }
-    @keyframes riseIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes riseInCentered { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }
-
-    /* Principle section */
+    .flow-lines path {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.4;
+        stroke-dasharray: 5 7;
+      }
+      
+      @keyframes riseIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+      
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* Mantém as caixas centrais alinhadas durante a animação */
+      .flow-card.task,
+      .flow-card.application,
+      .flow-card.test {
+        animation-name: riseInCentered;
+      }
+      
+      @keyframes riseInCentered {
+        from {
+          opacity: 0;
+          transform: translate(-50%, 10px);
+        }
+      
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+      
+      /* Principle section */
     .principle-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: start; }
     .principle-copy p { font-size: 1.08rem; }
     .steps-stack { display: grid; gap: 14px; }
