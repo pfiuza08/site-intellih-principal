@@ -161,11 +161,11 @@
     }
     .flow-card svg { width: 25px; height: 25px; }
     .flow-card.document { top: 8px; left: 4px; color: var(--process); animation-delay: .05s; }
-    .flow-card.sheet { top: 42px; right: 0; color: var(--data); animation-delay: .13s; }
-    .flow-card.image { top: 147px; left: 16px; color: var(--multimodal); animation-delay: .21s; }
-    .flow-card.audio { top: 178px; right: 5px; color: var(--multimodal); animation-delay: .29s; }
-    .flow-card.task { top: 107px; left: 50%; transform: translateX(-50%); min-width: 178px; justify-content: center; color: var(--text); border-color: #b8b3aa; animation-name: riseInCentered; }
-    .flow-card.application { top: 270px; left: 50%; transform: translateX(-50%); min-width: 198px; justify-content: center; color: var(--primary); border-color: rgba(196,75,4,.35); animation-name: riseInCentered; }
+    .flow-card.sheet { top: 8px; right: 0; color: var(--data); animation-delay: .13s; }
+    .flow-card.image { top: 112px; left: 16px; color: var(--multimodal); animation-delay: .21s; }
+    .flow-card.audio { top: 112px; right: 5px; color: var(--multimodal); animation-delay: .29s; }
+    .flow-card.task { top: 205px; left: 50%; transform: translateX(-50%); min-width: 178px; justify-content: center; color: var(--text); border-color: #b8b3aa; animation-name: riseInCentered; }
+    .flow-card.application { top: 280px; left: 50%; transform: translateX(-50%); min-width: 198px; justify-content: center; color: var(--primary); border-color: rgba(196,75,4,.35); animation-name: riseInCentered; }
     .flow-card.test { bottom: 8px; left: 50%; transform: translateX(-50%); min-width: 210px; justify-content: center; color: #fff; background: var(--primary); border-color: var(--primary); box-shadow: 0 12px 30px rgba(196,75,4,.2); animation-name: riseInCentered; }
     .flow-lines { position: absolute; inset: 0; width: 100%; height: 100%; color: #bcb7ae; }
     .flow-lines path {
@@ -403,8 +403,12 @@
       .hero-grid { gap: 46px; }
       .flow-map { min-height: 440px; }
       .flow-canvas { height: 360px; }
-      .flow-card.task { top: 105px; }
-      .flow-card.application { top: 230px; }
+      .flow-lines { display: none; }
+      .flow-card.document, .flow-card.sheet { top: 5px; }
+      .flow-card.image, .flow-card.audio { top: 100px; }
+      .flow-card.task { top: 190px; }
+      .flow-card.application { top: 245px; }
+      .flow-card.test { bottom: 0; }
       .choice-grid, .media-grid { grid-template-columns: 1fr; }
       .objective-grid { grid-template-columns: repeat(2, 1fr); }
       .process-line { grid-template-columns: 1fr; gap: 20px; }
@@ -428,13 +432,12 @@
       .flow-canvas { height: 335px; }
       .flow-card { min-width: 124px; padding: 11px; font-size: .76rem; }
       .flow-card svg { width: 20px; height: 20px; }
-      .flow-card.document { top: 5px; }
-      .flow-card.sheet { top: 52px; }
-      .flow-card.image { top: 136px; left: 2px; }
-      .flow-card.audio { top: 182px; }
-      .flow-card.task { top: 104px; min-width: 148px; }
-      .flow-card.application { top: 234px; min-width: 172px; }
-      .flow-card.test { min-width: 184px; }
+      .flow-card.document, .flow-card.sheet { top: 5px; }
+      .flow-card.image, .flow-card.audio { top: 92px; }
+      .flow-card.image { left: 2px; }
+      .flow-card.task { top: 180px; min-width: 148px; }
+      .flow-card.application { top: 235px; min-width: 172px; }
+      .flow-card.test { bottom: 0; min-width: 184px; }
       .objective-grid, .applications-grid, .trail-grid { grid-template-columns: 1fr; }
       .applications-toolbar { align-items: flex-start; flex-direction: column; }
       .application-card { min-height: 0; }
@@ -527,9 +530,9 @@
           <span class="flow-label">materiais → tarefa → aplicação</span>
           <div class="flow-canvas">
             <svg class="flow-lines" viewBox="0 0 500 420" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M80 40 C125 60 145 90 210 135"/><path d="M420 65 C360 80 340 100 290 135"/>
-              <path d="M90 175 C150 170 175 155 215 145"/><path d="M420 205 C355 190 330 165 286 145"/>
-              <path d="M250 170 C250 215 250 225 250 268"/><path d="M250 310 C250 340 250 350 250 388"/>
+              <path d="M80 40 C125 75 165 135 220 205"/><path d="M420 40 C375 75 335 135 280 205"/>
+              <path d="M90 145 C145 155 180 180 220 210"/><path d="M410 145 C355 155 320 180 280 210"/>
+              <path d="M250 258 C250 266 250 272 250 280"/><path d="M250 333 C250 346 250 358 250 388"/>
             </svg>
             <div class="flow-card document"><svg><use href="#i-doc"/></svg>Documento</div>
             <div class="flow-card sheet"><svg><use href="#i-sheet"/></svg>Planilha</div>
