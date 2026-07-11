@@ -56,7 +56,7 @@
     }
     body.menu-open, body.dialog-open { overflow: hidden; }
     a { color: inherit; text-decoration: none; }
-    button, input, select { font: inherit; }
+    button, input, select, textarea { font: inherit; }
     button { cursor: pointer; }
     img, svg { display: block; max-width: 100%; }
     h1, h2, h3, p { margin-top: 0; }
@@ -383,6 +383,40 @@
     }
     .prototype-toast.show { opacity: 1; transform: translate(-50%, 0); }
 
+
+    /* Contact */
+    .contact-section { background: var(--surface-secondary); }
+    .contact-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 68px; align-items: start; }
+    .contact-copy { position: sticky; top: 108px; }
+    .contact-copy p { font-size: 1.02rem; }
+    .contact-points { display: grid; gap: 12px; margin-top: 28px; }
+    .contact-point { display: flex; gap: 11px; align-items: flex-start; color: var(--text-secondary); font-size: .9rem; }
+    .contact-point svg { flex: 0 0 19px; width: 19px; height: 19px; margin-top: 3px; color: var(--process); }
+    .contact-card { padding: 30px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-sm); }
+    .contact-form { display: grid; gap: 18px; }
+    .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .field { display: grid; gap: 7px; }
+    .field label { color: var(--text); font-size: .83rem; font-weight: 750; }
+    .field input, .field select, .field textarea {
+      width: 100%; min-height: 48px; padding: 12px 13px; border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text); background: var(--surface); transition: border-color .18s, box-shadow .18s;
+    }
+    .field textarea { min-height: 132px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--primary); box-shadow: 0 0 0 3px rgba(196,75,4,.12); outline: 0;
+    }
+    .field-help { color: var(--text-secondary); font-size: .74rem; }
+    .checkbox-field { display: flex; gap: 10px; align-items: flex-start; }
+    .checkbox-field input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--primary); }
+    .checkbox-field label { color: var(--text-secondary); font-size: .8rem; }
+    .form-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .form-status { min-height: 24px; margin: 0; font-size: .83rem; }
+    .form-status.success { color: var(--process); }
+    .form-status.error { color: var(--danger); }
+    .honeypot {
+      position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; overflow: hidden !important;
+    }
+
     /* Mobile sticky CTA */
     .mobile-cta { display: none; position: fixed; z-index: 35; left: 14px; right: 14px; bottom: 12px; }
     .mobile-cta .button { width: 100%; box-shadow: 0 12px 30px rgba(196,75,4,.28); }
@@ -399,7 +433,8 @@
     @media (max-width: 820px) {
       .section { padding: 76px 0; }
       .hero { padding: 64px 0 76px; }
-      .hero-grid, .principle-grid, .plan-grid, .lab-grid { grid-template-columns: 1fr; }
+      .hero-grid, .principle-grid, .plan-grid, .lab-grid, .contact-grid { grid-template-columns: 1fr; }
+      .contact-copy { position: static; }
       .hero-grid { gap: 46px; }
       .flow-map { min-height: 440px; }
       .flow-canvas { height: 360px; }
@@ -438,7 +473,7 @@
       .flow-card.task { top: 180px; min-width: 148px; }
       .flow-card.application { top: 235px; min-width: 172px; }
       .flow-card.test { bottom: 0; min-width: 184px; }
-      .objective-grid, .applications-grid, .trail-grid { grid-template-columns: 1fr; }
+      .objective-grid, .applications-grid, .trail-grid, .form-row { grid-template-columns: 1fr; }
       .applications-toolbar { align-items: flex-start; flex-direction: column; }
       .application-card { min-height: 0; }
       .metric-list { grid-template-columns: 1fr; }
@@ -450,6 +485,7 @@
       .dialog-body { padding: 28px 20px; }
       .dialog-header, .dialog-footer { padding-left: 20px; padding-right: 20px; }
       .consent-banner.show { grid-template-columns: 1fr; }
+      .contact-card { padding: 22px; }
       .consent-actions button { flex: 1; }
     }
 
@@ -492,6 +528,7 @@
         <a href="#aprender">Aprender</a>
         <a href="#laboratorio">Laboratório</a>
         <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
       </nav>
       <div class="header-actions">
         <button class="button button-primary js-open-diagnosis" type="button" data-meta-event="StartDiagnosis">Gerar meu plano <svg class="arrow"><use href="#i-arrow"/></svg></button>
@@ -509,6 +546,7 @@
       <a href="#aprender">Aprender</a>
       <a href="#laboratorio">Laboratório</a>
       <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
       <button class="button button-primary js-open-diagnosis" type="button" data-meta-event="StartDiagnosis">Iniciar diagnóstico</button>
     </nav>
   </div>
@@ -682,6 +720,83 @@
       </div>
     </section>
 
+
+    <section class="section contact-section" id="contato">
+      <div class="container contact-grid">
+        <div class="contact-copy">
+          <span class="eyebrow">Contato</span>
+          <h2>Quer conversar sobre uma tarefa do seu trabalho?</h2>
+          <p>Descreva brevemente o que você gostaria de melhorar. O contato será registrado para que a Intellih possa responder e avaliar o próximo passo mais adequado.</p>
+          <div class="contact-points">
+            <div class="contact-point"><svg><use href="#i-check"/></svg><span>Você não precisa enviar arquivos ou informações confidenciais.</span></div>
+            <div class="contact-point"><svg><use href="#i-check"/></svg><span>Os dados serão usados apenas para responder ao contato e acompanhar a oportunidade.</span></div>
+            <div class="contact-point"><svg><use href="#i-check"/></svg><span>O envio não representa contratação nem seleção automática para o laboratório.</span></div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <form class="contact-form" id="contactForm">
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Não preencha este campo</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="contactName">Nome *</label>
+                <input id="contactName" name="name" type="text" autocomplete="name" minlength="2" maxlength="120" required>
+              </div>
+              <div class="field">
+                <label for="contactEmail">E-mail *</label>
+                <input id="contactEmail" name="email" type="email" autocomplete="email" maxlength="180" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="contactPhone">Telefone ou WhatsApp</label>
+                <input id="contactPhone" name="phone" type="tel" autocomplete="tel" maxlength="40">
+              </div>
+              <div class="field">
+                <label for="contactBusiness">Contexto profissional</label>
+                <input id="contactBusiness" name="business" type="text" maxlength="160" placeholder="Ex.: clínica, consultoria, comércio">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="contactInterest">Assunto</label>
+              <select id="contactInterest" name="interest">
+                <option value="">Selecione uma opção</option>
+                <option value="Quero entender por onde começar">Quero entender por onde começar</option>
+                <option value="Quero testar uma aplicação">Quero testar uma aplicação</option>
+                <option value="Tenho interesse no laboratório">Tenho interesse no laboratório</option>
+                <option value="Quero conversar sobre implantação">Quero conversar sobre implantação</option>
+                <option value="Outro assunto">Outro assunto</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="contactMessage">Descreva a tarefa ou necessidade *</label>
+              <textarea id="contactMessage" name="message" minlength="15" maxlength="1800" required placeholder="Ex.: toda semana recebo uma planilha e preciso preparar um resumo para a equipe."></textarea>
+              <span class="field-help">Não inclua nomes de clientes, senhas, documentos ou dados confidenciais.</span>
+            </div>
+
+            <div class="checkbox-field">
+              <input id="contactConsent" name="consent" type="checkbox" required>
+              <label for="contactConsent">Autorizo a Intellih a usar estas informações para responder ao meu contato e acompanhar esta solicitação. *</label>
+            </div>
+
+            <div class="form-actions">
+              <button class="button button-primary" id="contactSubmit" type="submit">
+                Enviar mensagem <svg class="arrow"><use href="#i-arrow"/></svg>
+              </button>
+              <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <section class="final-cta">
       <div class="container"><h2>Comece por uma tarefa real, não por uma ferramenta.</h2><p>Em poucos minutos, você identifica uma aplicação possível e recebe um primeiro teste adaptado ao seu contexto.</p><div class="final-actions"><button class="button button-light js-open-diagnosis" type="button" data-meta-event="StartDiagnosis">Descobrir por onde começar</button><a class="button button-ghost-light" href="#aplicacoes" data-meta-event="ViewApplications">Explorar aplicações</a></div><div class="final-note">As recomendações servem como orientação inicial. Todo resultado deverá ser revisado antes do uso.</div></div>
     </section>
@@ -693,7 +808,7 @@
         <div class="footer-brand"><a class="brand" href="#inicio"><svg class="brand-mark"><use href="#i-map"/></svg><span class="brand-copy"><span class="brand-name">Mapa de Aplicações</span><span class="brand-signature">por IA com Método</span></span></a><p>Orientação inicial para aplicações de inteligência artificial em tarefas reais.</p></div>
         <div><div class="footer-title">Mapa</div><div class="footer-links"><a href="#inicio">Início</a><a href="#descobrir">Descobrir</a><a href="#aplicacoes">Aplicações</a><a href="#laboratorio">Laboratório</a></div></div>
         <div><div class="footer-title">Conteúdo</div><div class="footer-links"><a href="#aprender">Aprender</a><a href="#">Canal IA com Método</a><a href="#candidatura">Casos reais</a></div></div>
-        <div><div class="footer-title">Projeto</div><div class="footer-links"><a href="#sobre">Sobre</a><a href="#">Intellih</a><a href="mailto:pfiuza.castro@gmail.com">Contato</a></div></div>
+        <div><div class="footer-title">Projeto</div><div class="footer-links"><a href="#sobre">Sobre</a><a href="#">Intellih</a><a href="#contato">Contato</a></div></div>
         <div><div class="footer-title">Informações</div><div class="footer-links"><a href="#">Privacidade</a><a href="#">Termos de uso</a><a href="#">Uso responsável</a><a href="#">Imagem e voz</a></div></div>
       </div>
       <div class="footer-bottom"><span>© 2026 Mapa de Aplicações — IA com Método.</span><span>Resultados gerados devem ser revisados antes do uso.</span></div>
@@ -752,6 +867,10 @@
     function trackMeta(eventName, params = {}) {
       if (metaReady && window.fbq) fbq('trackCustom', eventName, params);
     }
+    function trackMetaStandard(eventName, params = {}) {
+      if (metaReady && window.fbq) fbq('track', eventName, params);
+    }
+
 
     const consentBanner = document.getElementById('consentBanner');
     function safeStorageGet(key) { try { return localStorage.getItem(key); } catch (_) { return null; } }
@@ -790,6 +909,73 @@
       document.body.classList.toggle('menu-open', isOpen);
     });
     mobileMenu.querySelectorAll('a, button').forEach(item => item.addEventListener('click', closeMenu));
+
+
+    /* Formulário de contato */
+    const contactForm = document.getElementById('contactForm');
+    const contactSubmit = document.getElementById('contactSubmit');
+    const contactStatus = document.getElementById('contactStatus');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        contactStatus.className = 'form-status';
+        contactStatus.textContent = '';
+
+        if (!contactForm.checkValidity()) {
+          contactForm.reportValidity();
+          return;
+        }
+
+        const formData = new FormData(contactForm);
+        const params = new URLSearchParams(window.location.search);
+        const payload = {
+          name: String(formData.get('name') || '').trim(),
+          email: String(formData.get('email') || '').trim(),
+          phone: String(formData.get('phone') || '').trim(),
+          business: String(formData.get('business') || '').trim(),
+          interest: String(formData.get('interest') || '').trim(),
+          message: String(formData.get('message') || '').trim(),
+          consent: formData.get('consent') === 'on',
+          website: String(formData.get('website') || '').trim(),
+          source: 'mapa-aplicacoes',
+          page_url: window.location.href,
+          referrer: document.referrer || '',
+          utm_source: params.get('utm_source') || '',
+          utm_medium: params.get('utm_medium') || '',
+          utm_campaign: params.get('utm_campaign') || '',
+          utm_content: params.get('utm_content') || ''
+        };
+
+        contactSubmit.disabled = true;
+        contactSubmit.textContent = 'Enviando...';
+
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok) {
+            throw new Error(result.error || 'Não foi possível enviar sua mensagem.');
+          }
+
+          contactForm.reset();
+          contactStatus.classList.add('success');
+          contactStatus.textContent = 'Mensagem enviada. A Intellih recebeu seu contato.';
+          trackMetaStandard('Lead', { content_name: 'Contato Mapa de Aplicações' });
+          trackMeta('SubmitContact', { interest: payload.interest || 'nao_informado' });
+        } catch (error) {
+          contactStatus.classList.add('error');
+          contactStatus.textContent = error.message || 'Não foi possível enviar. Tente novamente.';
+        } finally {
+          contactSubmit.disabled = false;
+          contactSubmit.innerHTML = 'Enviar mensagem <svg class="arrow"><use href="#i-arrow"/></svg>';
+        }
+      });
+    }
 
     /* Filtros */
     const filterButtons = document.querySelectorAll('.filter-button');
