@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Transformamos histórias reais de pessoas, negócios e lugares em vídeos curtos que despertam curiosidade." />
+  <title>Sua história parece inventada?</title>
+
+  <style>
+    :root {
+      --bg: #0b0b0c;
+      --surface: #151517;
+      --surface-2: #1d1d20;
+      --text: #f7f4ee;
+      --muted: #b9b4aa;
+      --accent: #e86d1f;
+      --accent-hover: #ff8133;
+      --line: rgba(255,255,255,.10);
+      --max: 1180px;
+      --radius: 22px;
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      color: #ffd2b3;
+      font-weight: 800;
+      font-size: .82rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    h1, h2, h3 {
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 7.2rem);
+      max-width: 980px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4.8vw, 4.4rem);
+      max-width: 880px;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .lead {
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      max-width: 760px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .7rem;
+      background: var(--accent);
+      color: white;
+      padding: 1rem 1.35rem;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: .2s ease;
+      border: 1px solid transparent;
+      box-shadow: 0 10px 30px rgba(232,109,31,.22);
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border-color: var(--line);
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      border-color: rgba(255,255,255,.3);
+      background: rgba(255,255,255,.04);
+    }
+
+    header {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 5;
+      padding: 1.2rem 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: white;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      color: #ddd7cc;
+      font-size: .95rem;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      padding: 9rem 0 5rem;
+      position: relative;
+      isolation: isolate;
+      background:
+        linear-gradient(to top, rgba(11,11,12,1) 0%, rgba(11,11,12,.35) 52%, rgba(11,11,12,.25) 100%),
+        radial-gradient(circle at 72% 25%, rgba(232,109,31,.28), transparent 28%),
+        linear-gradient(135deg, #151517, #080809);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: .16;
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    .hero-content {
+      display: grid;
+      gap: 1.75rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+      margin-top: .5rem;
+    }
+
+    .hero-note {
+      color: #9f988d;
+      font-size: .9rem;
+    }
+
+    section {
+      padding: 7rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .intro-grid,
+    .split {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .story-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .story-card {
+      padding: 1.3rem 1.4rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .story-card strong {
+      display: block;
+      margin-bottom: .35rem;
+      color: #fff;
+    }
+
+    .quote {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-left: 4px solid var(--accent);
+      background: rgba(255,255,255,.035);
+      border-radius: 0 16px 16px 0;
+      color: #f5eee5;
+      font-size: 1.2rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      min-height: 260px;
+    }
+
+    .step-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(232,109,31,.45);
+      line-height: 1;
+      margin-bottom: 2rem;
+    }
+
+    .step p {
+      margin-top: .8rem;
+      font-size: .98rem;
+    }
+
+    .deliverables {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: .85rem;
+      margin-top: 2rem;
+    }
+
+    .deliverable {
+      display: flex;
+      gap: .8rem;
+      align-items: flex-start;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .check {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .audience {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 2rem;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      color: #e8e2d7;
+      background: rgba(255,255,255,.03);
+      padding: .7rem 1rem;
+      border-radius: 999px;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .example {
+      background: linear-gradient(145deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      min-height: 280px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      box-shadow: var(--shadow);
+    }
+
+    .example span {
+      color: #f0b28a;
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 800;
+    }
+
+    .example h3 {
+      font-size: 1.6rem;
+      margin-top: .8rem;
+    }
+
+    .method {
+      background: #f2eee7;
+      color: #161616;
+    }
+
+    .method p {
+      color: #5c574f;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .method-item {
+      padding: 1.4rem;
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 18px;
+      background: rgba(255,255,255,.45);
+    }
+
+    .method-item b {
+      display: block;
+      margin-bottom: .45rem;
+      font-size: 1.15rem;
+    }
+
+    .faq {
+      display: grid;
+      gap: .8rem;
+      margin-top: 2rem;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 1.1rem 1.2rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    details p {
+      margin-top: .8rem;
+    }
+
+    .cta {
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(232,109,31,.28), transparent 35%),
+        var(--surface);
+    }
+
+    .cta h2,
+    .cta p {
+      margin-inline: auto;
+    }
+
+    .cta p {
+      max-width: 700px;
+      margin-top: 1rem;
+    }
+
+    .cta .btn {
+      margin-top: 2rem;
+      font-size: 1.05rem;
+      padding: 1.1rem 1.6rem;
+    }
+
+    footer {
+      padding: 2.5rem 0;
+      color: #8e887f;
+      font-size: .9rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 920px) {
+      .nav-links {
+        display: none;
+      }
+
+      .intro-grid,
+      .split {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .steps,
+      .method-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .examples {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      section {
+        padding: 5rem 0;
+      }
+
+      .hero {
+        padding-bottom: 3.5rem;
+      }
+
+      .steps,
+      .method-grid,
+      .deliverables {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        min-height: auto;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#inicio">
+        <span class="brand-mark">?</span>
+        <span>Parece Inventado?</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#entregas">O que você recebe</a>
+        <a href="#exemplos">Exemplos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-content">
+        <div>
+          <span class="eyebrow">Histórias reais. Narrativas memoráveis.</span>
+          <h1>Sua história parece inventada?</h1>
+        </div>
+
+        <p class="lead">
+          Transformamos histórias reais de pessoas, negócios e lugares em vídeos
+          que despertam curiosidade — sem inventar fatos e sem transformar tudo em propaganda.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#contato">Quero descobrir minha história</a>
+          <a class="btn secondary" href="#como-funciona">Entender como funciona</a>
+        </div>
+
+        <p class="hero-note">Pesquisa, narrativa, roteiro e orientação de publicação.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container intro-grid">
+        <div>
+          <span class="eyebrow">O detalhe que muda tudo</span>
+          <h2>Nem toda boa história é conhecida.</h2>
+
+          <p class="lead" style="margin-top:1.5rem">
+            Às vezes ela está escondida na origem do negócio, em uma decisão improvável,
+            em uma tradição, em um objeto ou em um acontecimento tão inesperado que parece ficção.
+          </p>
+
+          <div class="quote">
+            Você não precisa inventar uma história para chamar atenção.
+            Precisa descobrir qual história real ainda não contou.
+          </div>
+        </div>
+
+        <div class="story-list">
+          <div class="story-card">
+            <strong>Uma origem inesperada</strong>
+            <p>Por que esse negócio começou justamente daquele jeito?</p>
+          </div>
+          <div class="story-card">
+            <strong>Uma pessoa improvável</strong>
+            <p>Quem tomou a decisão que mudou o rumo da história?</p>
+          </div>
+          <div class="story-card">
+            <strong>Um detalhe esquecido</strong>
+            <p>Que fato aparentemente pequeno pode prender a atenção?</p>
+          </div>
+          <div class="story-card">
+            <strong>Uma história que merece permanecer</strong>
+            <p>O que precisa ser registrado antes que se perca?</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona">
+      <div class="container">
+        <span class="eyebrow">Como funciona</span>
+        <h2>Da conversa inicial ao roteiro pronto.</h2>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-number">01</div>
+            <h3>Você conta</h3>
+            <p>Pode ser por texto, áudio, documentos, imagens ou uma conversa. Não precisa chegar com tudo organizado.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">02</div>
+            <h3>Nós pesquisamos</h3>
+            <p>Buscamos referências, verificamos fatos e identificamos detalhes que enriquecem a narrativa.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">03</div>
+            <h3>Encontramos o ângulo</h3>
+            <p>Definimos a pergunta e o ponto de vista que tornam a história interessante desde os primeiros segundos.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">04</div>
+            <h3>Transformamos em conteúdo</h3>
+            <p>Entregamos a história estruturada para vídeo, com título, roteiro e orientação de publicação.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="entregas">
+      <div class="container split">
+        <div>
+          <span class="eyebrow">O que você recebe</span>
+          <h2>Mais do que um texto bonito.</h2>
+          <p class="lead" style="margin-top:1.5rem">
+            O trabalho começa antes do roteiro: na seleção do fato, na verificação das informações
+            e na construção da pergunta que fará alguém querer ouvir a resposta.
+          </p>
+        </div>
+
+        <div class="deliverables">
+          <div class="deliverable"><span class="check">✓</span><span>Pesquisa complementar</span></div>
+          <div class="deliverable"><span class="check">✓</span><span>Definição do melhor ângulo</span></div>
+          <div class="deliverable"><span class="check">✓</span><span>Roteiro completo</span></div>
+          <div class="deliverable"><span class="check">✓</span><span>Título em forma de pergunta</span></div>
+          <div class="deliverable"><span class="check">✓</span><span>Frase para thumbnail</span></div>
+          <div class="deliverable"><span class="check">✓</span><span>Descrição para publicação</span></div>
+          <div class="deliverable"><span class="check">✓</span><span>Sugestão de imagens e cenas</span></div>
+          <div class="deliverable"><span class="check">✓</span><span>Chamada para interação</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <span class="eyebrow">Para quem é</span>
+        <h2>Histórias de pessoas, negócios e lugares.</h2>
+
+        <div class="audience">
+          <span class="tag">Pequenas empresas</span>
+          <span class="tag">Restaurantes</span>
+          <span class="tag">Hotéis e pousadas</span>
+          <span class="tag">Vinícolas</span>
+          <span class="tag">Museus</span>
+          <span class="tag">Artesãos</span>
+          <span class="tag">Profissionais</span>
+          <span class="tag">Projetos culturais</span>
+          <span class="tag">Destinos turísticos</span>
+          <span class="tag">Instituições</span>
+          <span class="tag">Famílias</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="exemplos">
+      <div class="container">
+        <span class="eyebrow">Exemplos de abordagem</span>
+        <h2>Uma pergunta simples pode abrir uma grande história.</h2>
+
+        <div class="examples">
+          <article class="example">
+            <span>Restaurante</span>
+            <h3>O prato mais famoso nasceu por causa de um erro?</h3>
+          </article>
+
+          <article class="example">
+            <span>Vinícola</span>
+            <h3>Por que esta vinícola enterra parte das garrafas?</h3>
+          </article>
+
+          <article class="example">
+            <span>Empresa</span>
+            <h3>O produto mais vendido surgiu de um acidente?</h3>
+          </article>
+
+          <article class="example">
+            <span>Destino</span>
+            <h3>Como este lugar muda completamente durante uma parte do ano?</h3>
+          </article>
+
+          <article class="example">
+            <span>Profissional</span>
+            <h3>Por que ela começou uma nova carreira depois dos 50?</h3>
+          </article>
+
+          <article class="example">
+            <span>Família</span>
+            <h3>Como uma receita atravessou três países e quatro gerações?</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="method">
+      <div class="container">
+        <span class="eyebrow" style="color:#9a3e06">Método Parece Inventado</span>
+        <h2>Descobrir. Pesquisar. Narrar. Publicar.</h2>
+
+        <div class="method-grid">
+          <div class="method-item">
+            <b>Descobrir</b>
+            <p>Identificar o fato, personagem ou detalhe que merece ser contado.</p>
+          </div>
+          <div class="method-item">
+            <b>Pesquisar</b>
+            <p>Confirmar informações e aprofundar o contexto da história.</p>
+          </div>
+          <div class="method-item">
+            <b>Narrar</b>
+            <p>Construir uma sequência que desperte curiosidade e mantenha atenção.</p>
+          </div>
+          <div class="method-item">
+            <b>Publicar</b>
+            <p>Adaptar a narrativa para vídeo curto, título, thumbnail e descrição.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div>
+          <span class="eyebrow">Perguntas frequentes</span>
+          <h2>O que você precisa saber antes de começar.</h2>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Vocês inventam histórias?</summary>
+            <p>Não. O trabalho parte de fatos reais. Quando necessário, as informações são verificadas e contextualizadas antes da produção.</p>
+          </details>
+
+          <details>
+            <summary>Preciso ter tudo documentado?</summary>
+            <p>Não. Podemos começar com relatos, áudios, fotos, links ou documentos disponíveis e avaliar o que precisa ser pesquisado.</p>
+          </details>
+
+          <details>
+            <summary>Vocês também produzem o vídeo?</summary>
+            <p>O projeto pode incluir apenas pesquisa e roteiro ou também orientação visual e produção, conforme a necessidade.</p>
+          </details>
+
+          <details>
+            <summary>Posso usar o conteúdo nas minhas redes?</summary>
+            <p>Sim. O material é desenvolvido para o projeto contratado e pode ser publicado nos canais definidos na proposta.</p>
+          </details>
+
+          <details>
+            <summary>Quanto custa?</summary>
+            <p>O valor depende da profundidade da pesquisa, do número de histórias e do formato de entrega. O primeiro passo é entender o material disponível.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contato">
+      <div class="container">
+        <span class="eyebrow">Vamos conversar</span>
+        <h2>Talvez a melhor história do seu negócio ainda não tenha sido contada.</h2>
+        <p class="lead">
+          Envie uma mensagem contando brevemente quem você é, o que faz e qual história acredita que pode existir por trás do seu negócio, projeto ou trajetória.
+        </p>
+
+        <!-- Substitua 5521999999999 pelo seu número com DDI e DDD, sem espaços ou símbolos -->
+        <a
+          class="btn"
+          href="https://wa.me/5521999999999?text=Ol%C3%A1%21%20Conheci%20o%20servi%C3%A7o%20pelo%20canal%20Parece%20Inventado%3F%20e%20quero%20entender%20como%20podemos%20transformar%20minha%20hist%C3%B3ria%20em%20conte%C3%BAdo."
+          target="_blank"
+          rel="noopener"
+        >
+          Quero descobrir minha história
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <span>© 2026 Parece Inventado?</span>
+      <span>Histórias reais. Narrativas que despertam curiosidade.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
