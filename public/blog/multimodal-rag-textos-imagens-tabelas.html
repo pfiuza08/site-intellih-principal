@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multimodal RAG: quando a IA precisa consultar textos, imagens, tabelas e gráficos | Blog Intellih</title>
+  <meta name="description" content="Entenda o que é Multimodal RAG, quando a IA precisa consultar textos, imagens, tabelas e gráficos, e quais cuidados são necessários para preservar contexto e rastreabilidade." />
+  <link rel="canonical" href="https://www.intellih.com.br/blog/multimodal-rag-textos-imagens-tabelas.html" />
+
+  <meta property="og:title" content="Multimodal RAG: quando a IA precisa consultar textos, imagens, tabelas e gráficos | Blog Intellih" />
+  <meta property="og:description" content="Nem toda informação importante está em texto corrido. Veja como o Multimodal RAG pode recuperar evidências em imagens, tabelas, gráficos e documentos complexos." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.intellih.com.br/blog/multimodal-rag-textos-imagens-tabelas.html" />
+  <meta property="og:image" content="https://www.intellih.com.br/og-image.jpg" />
+
+  <link rel="icon" href="/favicon_intellih.ico" />
+
+  <!-- Meta Pixel Code - Intellih Principal -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}
+  (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1240394014783181');
+  fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1240394014783181&ev=PageView&noscript=1"
+    alt="" />
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Multimodal RAG: quando a IA precisa consultar textos, imagens, tabelas e gráficos",
+    "description": "Entenda o que é Multimodal RAG, quando a IA precisa consultar textos, imagens, tabelas e gráficos, e quais cuidados são necessários para preservar contexto e rastreabilidade.",
+    "author": {
+      "@type": "Organization",
+      "name": "Intellih Tecnologia",
+      "url": "https://www.intellih.com.br/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Intellih Tecnologia",
+      "url": "https://www.intellih.com.br/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.intellih.com.br/og-image.jpg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.intellih.com.br/blog/multimodal-rag-textos-imagens-tabelas.html"
+    },
+    "datePublished": "2026-07-20",
+    "dateModified": "2026-07-20",
+    "keywords": [
+      "Multimodal RAG",
+      "RAG multimodal",
+      "tabelas e gráficos",
+      "documentos multimodais",
+      "retrieval augmented generation",
+      "assistentes inteligentes",
+      "inteligência artificial aplicada"
+    ],
+    "articleSection": "RAG com método"
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f5f2;
+      --text: #191715;
+      --text-soft: #5f5a55;
+      --muted: #817870;
+      --line: #e7e0d8;
+      --brand: #c65f22;
+      --brand-dark: #944314;
+      --brand-light: #e47c3c;
+      --brand-soft: #fff0e7;
+      --graphite: #25211e;
+      --radius: 24px;
+      --shadow-soft: 0 10px 28px rgba(21, 18, 15, 0.08);
+      --max: 1160px;
+      --article-max: 820px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.72;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    p { margin: 0 0 1.1rem; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231, 224, 216, 0.78);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      font-size: 1.08rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(198, 95, 34, 0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--brand); }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      border-radius: 999px;
+      padding: 13px 20px;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.96rem;
+      font-weight: 820;
+      white-space: nowrap;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(198, 95, 34, 0.25);
+    }
+
+    .btn-primary:hover { background: var(--brand-dark); }
+
+    .btn-light {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .article-hero {
+      padding: 74px 0 46px;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(198, 95, 34, 0.16), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(37, 33, 30, 0.10), transparent 30%),
+        linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .article-hero-inner { max-width: var(--article-max); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      border: 1px solid #ffd7c1;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 0.88rem;
+      font-weight: 840;
+      margin-bottom: 20px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(198, 95, 34, 0.14);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: clamp(2.35rem, 4.7vw, 4.5rem);
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+      margin: 42px 0 16px;
+    }
+
+    h3 {
+      font-size: 1.28rem;
+      margin: 30px 0 12px;
+    }
+
+    .article-meta {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-top: 18px;
+    }
+
+    .lead {
+      font-size: clamp(1.08rem, 1.45vw, 1.28rem);
+      color: var(--text-soft);
+      max-width: 760px;
+    }
+
+    .article-wrap { padding: 56px 0 76px; }
+
+    .article-content {
+      max-width: var(--article-max);
+      margin: 0 auto;
+      font-size: 1.06rem;
+    }
+
+    .article-content strong { color: var(--text); }
+
+    .article-content a {
+      color: var(--brand-dark);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: 18px 0 24px;
+      padding-left: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .article-content li {
+      position: relative;
+      padding-left: 28px;
+      color: var(--text-soft);
+    }
+
+    .article-content ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+
+    .article-content ol { counter-reset: article-list; }
+
+    .article-content ol li {
+      counter-increment: article-list;
+      padding-left: 38px;
+    }
+
+    .article-content ol li::before {
+      content: counter(article-list);
+      position: absolute;
+      left: 0;
+      top: 0.08em;
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .callout {
+      margin: 32px 0;
+      padding: 24px;
+      border-radius: var(--radius);
+      background: var(--brand-soft);
+      border: 1px solid #ffd7c1;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .comparison-card {
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+    }
+
+    .comparison-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.14rem;
+    }
+
+    .comparison-card p:last-child { margin-bottom: 0; }
+
+    .article-cta {
+      margin-top: 52px;
+      padding: 34px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(198,95,34,.24), transparent 32%),
+        linear-gradient(135deg, #201c19, #11100f);
+      color: #fff;
+      box-shadow: 0 18px 45px rgba(21, 18, 15, 0.14);
+    }
+
+    .article-cta h2 { margin-top: 0; color: #fff; }
+    .article-cta p { color: #d8d0c8; }
+
+    .article-nav {
+      max-width: var(--article-max);
+      margin: 40px auto 0;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer {
+      background: #11100f;
+      color: #cfc7bf;
+      padding: 40px 0;
+    }
+
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer a { color: #fff; font-weight: 760; }
+
+    .socials { display: flex; gap: 10px; align-items: center; }
+
+    .socials a {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .socials a:hover {
+      transform: translateY(-1px);
+      background: rgba(198,95,34,.82);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .socials svg { width: 20px; height: 20px; fill: currentColor; }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 20px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow-soft);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open { display: flex; }
+      .menu-btn { display: inline-flex; }
+    }
+
+    @media (max-width: 700px) {
+      .comparison { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .article-hero { padding: 56px 0 36px; }
+      .article-wrap { padding: 42px 0 58px; }
+      .brand span:last-child { display: none; }
+      .btn, .article-nav .btn { width: 100%; }
+      .article-cta { padding: 24px; border-radius: 26px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="Intellih Tecnologia">
+        <span class="brand-mark">I</span>
+        <span>Intellih Tecnologia</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Menu principal">
+        <a href="/">Início</a>
+        <a href="/#solucoes">Soluções</a>
+        <a href="/#como-funciona">Como funciona</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contato">Contato</a>
+      </nav>
+
+      <button
+        class="menu-btn"
+        type="button"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="navLinks"
+        id="menuBtn"
+      >
+        Menu
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container article-hero-inner">
+        <div class="eyebrow"><span class="dot"></span> Série RAG com método · Parte 7</div>
+
+        <h1>Multimodal RAG: quando a IA precisa consultar textos, imagens, tabelas e gráficos</h1>
+
+        <p class="lead">
+          Nem toda informação importante está em texto corrido. Em muitos documentos,
+          a resposta depende de tabelas, gráficos, imagens, diagramas e da relação entre
+          esses elementos.
+        </p>
+
+        <p class="article-meta">
+          Publicado por Intellih Tecnologia · 20 de julho de 2026 · Leitura de 10 minutos
+        </p>
+      </div>
+    </section>
+
+    <section class="article-wrap">
+      <div class="container">
+        <article class="article-content">
+
+          <p>
+            Durante muito tempo, muitos projetos de RAG trataram documentos como se fossem apenas texto.
+            O arquivo era quebrado em trechos, os trechos eram indexados e a IA respondia com base no
+            que fosse recuperado.
+          </p>
+
+          <p>
+            Essa abordagem resolve muitos casos. Mas ela começa a falhar quando a informação importante
+            não está apenas em parágrafos.
+          </p>
+
+          <p>
+            Em empresas, grande parte do conhecimento aparece em imagens, tabelas, gráficos, fluxogramas,
+            capturas de tela, apresentações, relatórios em PDF, formulários, diagramas técnicos e documentos
+            mistos.
+          </p>
+
+          <p>
+            Uma política pode estar em texto. Um resultado pode estar em uma tabela. Uma tendência pode
+            aparecer em um gráfico. Uma etapa de processo pode estar em um fluxograma. Uma evidência pode
+            estar em uma imagem.
+          </p>
+
+          <p>
+            Se o sistema só enxerga texto corrido, ele pode ignorar justamente a parte mais importante do
+            documento.
+          </p>
+
+          <div class="callout">
+            <p>
+              <strong>Multimodal RAG é uma abordagem para recuperar e usar informações presentes em diferentes modalidades.</strong>
+              Em vez de consultar apenas texto, o sistema pode considerar imagens, tabelas, gráficos,
+              páginas renderizadas, legendas, metadados e descrições visuais para construir uma resposta
+              mais completa.
+            </p>
+          </div>
+
+          <h2>O que significa “multimodal” neste contexto?</h2>
+
+          <p>
+            Em inteligência artificial, o termo multimodal se refere ao uso de mais de um tipo de dado.
+            Texto é uma modalidade. Imagem é outra. Áudio, vídeo, tabelas e gráficos também podem ser
+            tratados como modalidades diferentes, dependendo da aplicação.
+          </p>
+
+          <p>
+            No caso do Multimodal RAG, a ideia é permitir que a recuperação de informação considere
+            conteúdos que não aparecem apenas como texto linear.
+          </p>
+
+          <p>
+            Isso inclui, por exemplo:
+          </p>
+
+          <ul>
+            <li>parágrafos e seções de documentos;</li>
+            <li>tabelas extraídas de PDFs, planilhas ou relatórios;</li>
+            <li>gráficos de linha, barra, dispersão ou pizza;</li>
+            <li>diagramas, fluxogramas e organogramas;</li>
+            <li>imagens com informação visual relevante;</li>
+            <li>capturas de tela de sistemas;</li>
+            <li>slides com texto, ícones e elementos visuais;</li>
+            <li>formulários e documentos com layout complexo;</li>
+            <li>páginas escaneadas ou fotografadas.</li>
+          </ul>
+
+          <p>
+            O objetivo não é apenas “colocar imagens na IA”. O objetivo é preservar e recuperar evidências
+            que podem estar distribuídas entre texto, estrutura visual e dados tabulares.
+          </p>
+
+          <h2>Por que transformar tudo em texto pode ser insuficiente?</h2>
+
+          <p>
+            Uma estratégia comum é extrair o texto do documento e indexar apenas esse conteúdo.
+          </p>
+
+          <p>
+            Isso funciona quando a informação essencial está bem representada em texto. Mas muitos
+            documentos empresariais dependem do layout e da relação entre elementos.
+          </p>
+
+          <p>
+            Uma tabela, por exemplo, não é apenas uma sequência de palavras. Ela tem linhas, colunas,
+            cabeçalhos, unidades, totais, subtotais e relações entre células.
+          </p>
+
+          <p>
+            Um gráfico não é apenas uma imagem decorativa. Ele pode mostrar tendência, comparação,
+            queda, crescimento, concentração ou anomalia.
+          </p>
+
+          <p>
+            Um fluxograma não é apenas um desenho. Ele representa sequência, decisão, desvio, exceção e
+            dependência entre etapas.
+          </p>
+
+          <div class="callout">
+            <p>
+              <strong>Quando a extração transforma tudo em texto sem preservar estrutura, parte do significado pode desaparecer.</strong>
+              O desafio do Multimodal RAG é manter a relação entre conteúdo, forma e contexto.
+            </p>
+          </div>
+
+          <h2>Exemplo simples: uma pergunta sobre um relatório</h2>
+
+          <p>
+            Imagine um relatório mensal de vendas com três partes:
+          </p>
+
+          <ul>
+            <li>um resumo executivo em texto;</li>
+            <li>uma tabela com vendas por região;</li>
+            <li>um gráfico mostrando a evolução mensal.</li>
+          </ul>
+
+          <p>
+            A pergunta é:
+          </p>
+
+          <p>
+            “Qual região cresceu mais e esse crescimento parece fazer parte de uma tendência?”
+          </p>
+
+          <p>
+            A resposta talvez não esteja escrita em uma frase. Ela pode exigir comparar os valores da
+            tabela com o comportamento do gráfico.
+          </p>
+
+          <p>
+            Um RAG baseado apenas em texto pode recuperar o resumo executivo e deixar de lado a evidência
+            numérica. Um Multimodal RAG bem construído deve conseguir recuperar a tabela, interpretar a
+            relação com o gráfico e usar esse contexto para formular uma resposta mais fundamentada.
+          </p>
+
+          <h2>Como um pipeline Multimodal RAG pode funcionar?</h2>
+
+          <p>
+            Não existe uma única arquitetura. Mas, em uma visão prática, um pipeline pode seguir estas
+            etapas:
+          </p>
+
+          <ol>
+            <li>coletar documentos em diferentes formatos, como PDFs, imagens, slides e planilhas;</li>
+            <li>separar texto, tabelas, imagens, gráficos e páginas renderizadas;</li>
+            <li>extrair texto por OCR quando necessário;</li>
+            <li>converter tabelas para uma representação estruturada;</li>
+            <li>gerar descrições ou resumos de imagens, gráficos e diagramas;</li>
+            <li>preservar metadados de página, seção, posição e origem;</li>
+            <li>indexar cada modalidade de forma adequada;</li>
+            <li>recuperar os elementos mais relevantes para a pergunta;</li>
+            <li>enviar ao modelo o contexto textual, visual ou estruturado necessário;</li>
+            <li>gerar a resposta com indicação de limites e, quando possível, referência à fonte.</li>
+          </ol>
+
+          <p>
+            O desenho exato depende do tipo de documento, do modelo utilizado, do volume de dados e do
+            risco associado à resposta.
+          </p>
+
+          <h2>Duas estratégias comuns</h2>
+
+          <p>
+            Há diferentes formas de lidar com conteúdo multimodal em RAG. Duas estratégias aparecem com
+            frequência em projetos práticos.
+          </p>
+
+          <div class="comparison">
+            <div class="comparison-card">
+              <h3>Converter para texto enriquecido</h3>
+              <p>
+                Imagens, gráficos e tabelas são descritos em texto, preservando metadados e referências
+                ao documento original. A busca acontece principalmente sobre representações textuais.
+              </p>
+            </div>
+
+            <div class="comparison-card">
+              <h3>Indexar múltiplas modalidades</h3>
+              <p>
+                Texto e imagem podem ter índices, embeddings ou representações próprias. A recuperação
+                combina resultados de diferentes modalidades antes da resposta final.
+              </p>
+            </div>
+          </div>
+
+          <p>
+            A primeira estratégia costuma ser mais simples de operar. A segunda pode preservar melhor a
+            informação visual, mas exige modelos e infraestrutura mais específicos.
+          </p>
+
+          <p>
+            Em muitos casos, a melhor solução é híbrida: descrever elementos visuais em texto, manter o
+            arquivo ou imagem original acessível e preservar metadados para rastreabilidade.
+          </p>
+
+          <h2>O papel das tabelas</h2>
+
+          <p>
+            Tabelas são um dos maiores desafios em documentos corporativos.
+          </p>
+
+          <p>
+            Elas aparecem em propostas, relatórios financeiros, planilhas exportadas, documentos técnicos,
+            contratos, comparativos comerciais, laudos, catálogos e apresentações.
+          </p>
+
+          <p>
+            O problema é que a tabela pode perder sentido quando extraída como texto simples.
+          </p>
+
+          <p>
+            Veja a diferença:
+          </p>
+
+          <ul>
+            <li>extrair apenas os valores soltos;</li>
+            <li>preservar linhas, colunas, cabeçalhos e unidades;</li>
+            <li>associar cada célula ao seu contexto;</li>
+            <li>manter a referência à página e ao documento original;</li>
+            <li>permitir cálculos ou comparações quando necessário.</li>
+          </ul>
+
+          <p>
+            Para perguntas como “qual opção tem maior custo-benefício?”, “qual região teve maior queda?”
+            ou “qual produto atende todos os critérios?”, a estrutura da tabela pode ser mais importante
+            que a similaridade semântica entre palavras.
+          </p>
+
+          <h2>O papel dos gráficos</h2>
+
+          <p>
+            Gráficos apresentam informação de forma visual. Muitas vezes, a conclusão não está escrita
+            diretamente no texto.
+          </p>
+
+          <p>
+            Um gráfico pode mostrar:
+          </p>
+
+          <ul>
+            <li>tendência de crescimento ou queda;</li>
+            <li>comparação entre categorias;</li>
+            <li>mudança de comportamento ao longo do tempo;</li>
+            <li>concentração de resultados;</li>
+            <li>pontos fora da curva;</li>
+            <li>relações entre variáveis.</li>
+          </ul>
+
+          <p>
+            Um Multimodal RAG pode usar modelos de visão para descrever o gráfico, extrair seus elementos
+            principais ou recuperar a imagem original para análise no momento da resposta.
+          </p>
+
+          <p>
+            Mas é preciso cuidado. Interpretar gráficos exige reconhecer eixos, escalas, unidades,
+            legendas, período, tipo de visualização e fonte dos dados.
+          </p>
+
+          <p>
+            Uma descrição visual genérica pode ser insuficiente para perguntas analíticas.
+          </p>
+
+          <h2>O papel das imagens e diagramas</h2>
+
+          <p>
+            Imagens podem carregar informação objetiva ou apenas ilustrativa. Essa distinção importa.
+          </p>
+
+          <p>
+            Uma foto decorativa em uma apresentação talvez não precise entrar na base. Já uma captura de
+            tela de sistema, um diagrama de arquitetura, um fluxograma operacional ou uma imagem técnica
+            pode ser essencial para a resposta.
+          </p>
+
+          <p>
+            Em um fluxo multimodal, imagens podem ser tratadas de diferentes formas:
+          </p>
+
+          <ul>
+            <li>armazenadas como referência visual;</li>
+            <li>descritas por um modelo de visão;</li>
+            <li>associadas ao texto ao redor;</li>
+            <li>indexadas com embeddings multimodais;</li>
+            <li>vinculadas a entidades, processos ou etapas;</li>
+            <li>recuperadas junto com a página original.</li>
+          </ul>
+
+          <p>
+            O ponto principal é não perder a conexão entre imagem, legenda, seção e documento.
+          </p>
+
+          <h2>O desafio dos PDFs complexos</h2>
+
+          <p>
+            PDFs são uma fonte frequente de problemas em RAG.
+          </p>
+
+          <p>
+            Eles podem ter múltiplas colunas, cabeçalhos, rodapés, tabelas quebradas entre páginas,
+            gráficos, notas, boxes laterais, imagens, legendas e elementos de layout.
+          </p>
+
+          <p>
+            Se a extração for ruim, a indexação também será ruim.
+          </p>
+
+          <p>
+            Por isso, em documentos complexos, a etapa de ingestão não deve ser tratada como detalhe técnico.
+            Ela faz parte da qualidade da resposta.
+          </p>
+
+          <p>
+            Algumas decisões importantes:
+          </p>
+
+          <ul>
+            <li>extrair texto por página ou por seção?</li>
+            <li>preservar a imagem da página renderizada?</li>
+            <li>separar tabelas como objetos próprios?</li>
+            <li>gerar resumos por figura ou gráfico?</li>
+            <li>manter coordenadas e posição dos elementos?</li>
+            <li>permitir que o modelo veja a página original quando necessário?</li>
+          </ul>
+
+          <p>
+            Essas escolhas influenciam diretamente o que a IA conseguirá recuperar depois.
+          </p>
+
+          <h2>Multimodal RAG não é apenas usar um modelo que enxerga imagens</h2>
+
+          <p>
+            Modelos multimodais são importantes, mas eles não resolvem o problema sozinhos.
+          </p>
+
+          <p>
+            A pergunta central continua sendo arquitetural:
+            <strong>como a informação será preparada, indexada, recuperada e validada?</strong>
+          </p>
+
+          <p>
+            Um modelo pode interpretar uma imagem enviada diretamente no prompt. Mas, em uma base com
+            milhares de documentos, o sistema precisa decidir quais imagens, tabelas ou páginas devem ser
+            recuperadas antes da resposta.
+          </p>
+
+          <p>
+            Sem um bom pipeline de ingestão e recuperação, a capacidade multimodal do modelo pode ficar
+            subutilizada.
+          </p>
+
+          <div class="callout">
+            <p>
+              <strong>Multimodal RAG não começa na resposta. Começa na preparação da base.</strong>
+              O sistema precisa saber que elementos existem, onde estão, como se relacionam e quando
+              devem ser recuperados.
+            </p>
+          </div>
+
+          <h2>Exemplo prático: assistente para documentos técnicos</h2>
+
+          <p>
+            Imagine um assistente que responde perguntas sobre manuais de equipamentos.
+          </p>
+
+          <p>
+            Uma pergunta pode ser:
+          </p>
+
+          <p>
+            “Qual componente devo verificar se o indicador X acender depois da etapa Y?”
+          </p>
+
+          <p>
+            A resposta pode depender de:
+          </p>
+
+          <ul>
+            <li>um trecho textual explicando o alerta;</li>
+            <li>uma tabela com códigos de erro;</li>
+            <li>um diagrama identificando o componente;</li>
+            <li>uma imagem mostrando a posição física da peça;</li>
+            <li>uma observação de segurança em outra seção.</li>
+          </ul>
+
+          <p>
+            Um RAG textual pode recuperar apenas a explicação do alerta. Um Multimodal RAG deve ser capaz
+            de reunir o conjunto de evidências necessário para orientar a resposta com mais precisão.
+          </p>
+
+          <h2>Exemplo prático: análise de relatórios de negócio</h2>
+
+          <p>
+            Em relatórios de negócio, a informação costuma vir misturada.
+          </p>
+
+          <p>
+            O texto apresenta a interpretação. A tabela mostra os números. O gráfico mostra a evolução.
+            O apêndice traz os critérios. O slide destaca uma conclusão visual.
+          </p>
+
+          <p>
+            Uma pergunta como “o resultado melhorou de forma consistente?” pode exigir mais do que
+            recuperar uma frase otimista no resumo executivo.
+          </p>
+
+          <p>
+            O sistema precisa cruzar texto, números e tendência visual.
+          </p>
+
+          <p>
+            Esse é um caso típico em que a IA deve consultar diferentes formatos antes de responder.
+          </p>
+
+          <h2>Riscos e limitações</h2>
+
+          <p>
+            Multimodal RAG aumenta a capacidade do sistema, mas também aumenta a complexidade.
+          </p>
+
+          <p>Alguns riscos importantes:</p>
+
+          <ul>
+            <li>OCR com erro, especialmente em documentos escaneados;</li>
+            <li>tabelas extraídas com colunas desalinhadas;</li>
+            <li>gráficos descritos de forma genérica ou imprecisa;</li>
+            <li>imagens relevantes tratadas como decoração;</li>
+            <li>perda de relação entre legenda e figura;</li>
+            <li>metadados insuficientes para rastrear a fonte;</li>
+            <li>alto custo de processamento na ingestão;</li>
+            <li>latência maior na consulta;</li>
+            <li>dificuldade de avaliar se a resposta usou corretamente elementos visuais.</li>
+          </ul>
+
+          <p>
+            Por isso, não basta adicionar modelos de visão ao fluxo. É preciso testar a extração, a
+            recuperação e a resposta final com perguntas reais.
+          </p>
+
+          <h2>Quando Multimodal RAG faz sentido?</h2>
+
+          <p>
+            Essa abordagem tende a fazer sentido quando documentos importantes dependem de elementos não
+            textuais.
+          </p>
+
+          <p>Alguns cenários possíveis:</p>
+
+          <ul>
+            <li>manuais técnicos com diagramas, imagens e tabelas;</li>
+            <li>relatórios financeiros com gráficos e demonstrativos;</li>
+            <li>apresentações corporativas com slides visuais;</li>
+            <li>documentos médicos, laudos e formulários com imagens ou tabelas;</li>
+            <li>catálogos de produtos com fotos, especificações e comparativos;</li>
+            <li>documentos jurídicos ou regulatórios com quadros e anexos;</li>
+            <li>treinamentos internos com fluxogramas e capturas de tela;</li>
+            <li>bases de conhecimento construídas a partir de PDFs complexos.</li>
+          </ul>
+
+          <p>
+            O denominador comum é simples: a resposta correta depende de mais do que texto corrido.
+          </p>
+
+          <h2>Quando talvez não valha a complexidade?</h2>
+
+          <p>
+            Nem todo projeto precisa de Multimodal RAG.
+          </p>
+
+          <p>
+            Se a base é predominantemente textual, bem estruturada e as perguntas podem ser respondidas
+            com trechos claros, um RAG textual, híbrido ou corretivo pode ser suficiente.
+          </p>
+
+          <p>
+            A abordagem multimodal pode não valer a pena quando:
+          </p>
+
+          <ul>
+            <li>as imagens são apenas decorativas;</li>
+            <li>as tabelas já existem em formato estruturado melhor para consulta;</li>
+            <li>os gráficos apenas repetem números disponíveis em uma base de dados;</li>
+            <li>o custo de extração não se justifica;</li>
+            <li>a aplicação não exige precisão visual;</li>
+            <li>a empresa ainda não organizou as fontes textuais básicas.</li>
+          </ul>
+
+          <p>
+            A pergunta não é se a IA consegue ver imagens. A pergunta é se enxergar essas imagens melhora
+            a resposta que o negócio precisa entregar.
+          </p>
+
+          <h2>Como avaliar um Multimodal RAG?</h2>
+
+          <p>
+            A avaliação precisa ir além da fluência da resposta.
+          </p>
+
+          <p>Algumas perguntas úteis:</p>
+
+          <ul>
+            <li>o sistema recuperou a tabela, imagem ou gráfico correto?</li>
+            <li>a descrição visual preservou informações importantes?</li>
+            <li>os valores da tabela foram interpretados corretamente?</li>
+            <li>o gráfico foi lido com escala, eixo e legenda adequados?</li>
+            <li>a resposta combinou texto e elementos visuais sem distorcer o sentido?</li>
+            <li>é possível rastrear a fonte usada?</li>
+            <li>o sistema reconhece quando a imagem ou tabela não é suficiente?</li>
+            <li>o ganho de qualidade compensa custo e latência?</li>
+          </ul>
+
+          <p>
+            Testes devem incluir documentos fáceis, documentos complexos, imagens ruins, tabelas grandes,
+            gráficos ambíguos e perguntas que exigem combinação de evidências.
+          </p>
+
+          <h2>Como começar de forma prática</h2>
+
+          <p>
+            A melhor forma de começar não é processar todos os documentos de uma vez.
+          </p>
+
+          <p>
+            Um caminho mais seguro:
+          </p>
+
+          <ol>
+            <li>selecionar documentos em que o RAG textual falha;</li>
+            <li>identificar se a falha está em imagens, tabelas, gráficos ou layout;</li>
+            <li>escolher um conjunto pequeno de documentos representativos;</li>
+            <li>definir quais elementos precisam ser extraídos;</li>
+            <li>preservar metadados de origem, página e seção;</li>
+            <li>testar diferentes formas de representar tabelas e imagens;</li>
+            <li>comparar respostas com e sem conteúdo multimodal;</li>
+            <li>medir qualidade, custo, latência e rastreabilidade;</li>
+            <li>ampliar apenas onde houver ganho claro.</li>
+          </ol>
+
+          <p>
+            Esse processo evita transformar Multimodal RAG em uma camada sofisticada para resolver um
+            problema que talvez fosse de organização documental.
+          </p>
+
+          <h2>Conclusão: algumas informações não cabem em texto corrido</h2>
+
+          <p>
+            RAG textual é uma base importante. Mas, em muitos contextos, a informação relevante está
+            distribuída entre texto, imagem, tabela, gráfico e layout.
+          </p>
+
+          <p>
+            Multimodal RAG tenta recuperar essa informação sem reduzir tudo a parágrafos desconectados.
+          </p>
+
+          <p>
+            Sua força está em permitir que a IA consulte documentos mais próximos da forma como eles
+            realmente existem no negócio: mistos, visuais, estruturados e contextuais.
+          </p>
+
+          <p>
+            Mas essa capacidade exige cuidado. A ingestão precisa ser bem feita, as representações precisam
+            preservar contexto, as fontes precisam ser rastreáveis e as respostas precisam ser avaliadas.
+          </p>
+
+          <p>
+            Nem todo projeto precisa de Multimodal RAG. Mas, quando a resposta depende de tabelas, gráficos,
+            imagens ou diagramas, consultar apenas texto pode ser insuficiente.
+          </p>
+
+          <p>
+            Antes de escolher a arquitetura, vale perguntar:
+            <strong>a informação que sustenta a resposta está escrita, desenhada, estruturada ou distribuída entre tudo isso?</strong>
+          </p>
+
+          <h2>Referências</h2>
+
+          <ul>
+            <li>
+              <a href="https://arxiv.org/abs/2210.02928" target="_blank" rel="noopener noreferrer">
+                Chen et al.: MuRAG — Multimodal Retrieval-Augmented Generator for Open Question Answering over Images and Text
+              </a>
+            </li>
+            <li>
+              <a href="https://www.langchain.com/blog/semi-structured-multi-modal-rag" target="_blank" rel="noopener noreferrer">
+                LangChain: Multi-Vector Retriever for RAG on tables, text, and images
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.llamaindex.ai/en/v0.10.19/use_cases/multimodal.html" target="_blank" rel="noopener noreferrer">
+                LlamaIndex: Multi-modal applications and RAG concepts extended to images
+              </a>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2510.12323" target="_blank" rel="noopener noreferrer">
+                RAG-Anything: All-in-One RAG Framework for multimodal documents
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.langchain.com/langsmith/multimodal-content" target="_blank" rel="noopener noreferrer">
+                LangChain Docs: Include multimodal content in prompts
+              </a>
+            </li>
+          </ul>
+
+          <div class="article-cta">
+            <h2>Seus documentos têm informação que o texto sozinho não captura?</h2>
+
+            <p>
+              A Intellih ajuda negócios a organizar bases de conhecimento, documentos, tabelas,
+              imagens e fluxos de recuperação para aplicações de IA mais úteis, rastreáveis e
+              conectadas ao processo real.
+            </p>
+
+            <a class="btn btn-primary" href="/#contato">Fale com a Intellih</a>
+          </div>
+
+        </article>
+
+        <div class="article-nav">
+          <a class="btn btn-light" href="/blog/corrective-rag-avaliar-antes-de-responder.html">
+            ← Artigo anterior
+          </a>
+
+          <a class="btn btn-light" href="/blog/">
+            Voltar para o blog
+          </a>
+
+          <a class="btn btn-light" href="/blog/como-escolher-arquitetura-rag.html">
+            Próximo artigo →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Intellih Tecnologia</strong>
+        <p style="margin: 6px 0 0;">Soluções com IA para facilitar rotinas, organizar informações e transformar oportunidades em resultado.</p>
+        <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+      </div>
+
+      <div class="socials" aria-label="Redes sociais">
+        <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+        </a>
+
+        <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"/></svg>
+        </a>
+
+        <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/chat-widget.js"></script>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const year = document.getElementById('year');
+
+    year.textContent = new Date().getFullYear();
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
+</html>
