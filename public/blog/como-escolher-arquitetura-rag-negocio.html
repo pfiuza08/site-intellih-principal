@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Como escolher uma arquitetura de RAG para o seu negócio | Blog Intellih</title>
+  <meta name="description" content="Um guia prático para decidir quando usar RAG simples, RAG para recomendação, Hybrid RAG, GraphRAG, Agentic RAG, Corrective RAG ou Multimodal RAG em projetos reais." />
+  <link rel="canonical" href="https://www.intellih.com.br/blog/como-escolher-arquitetura-rag-negocio.html" />
+
+  <meta property="og:title" content="Como escolher uma arquitetura de RAG para o seu negócio | Blog Intellih" />
+  <meta property="og:description" content="Como escolher a arquitetura de RAG adequada depende do problema, do tipo de informação, do risco, do custo e da maturidade da base de conhecimento." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.intellih.com.br/blog/como-escolher-arquitetura-rag-negocio.html" />
+  <meta property="og:image" content="https://www.intellih.com.br/og-image.jpg" />
+
+  <link rel="icon" href="/favicon_intellih.ico" />
+
+  <!-- Meta Pixel Code - Intellih Principal -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}
+  (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1240394014783181');
+  fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1240394014783181&ev=PageView&noscript=1"
+    alt="" />
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Como escolher uma arquitetura de RAG para o seu negócio",
+    "description": "Um guia prático para decidir quando usar RAG simples, RAG para recomendação, Hybrid RAG, GraphRAG, Agentic RAG, Corrective RAG ou Multimodal RAG em projetos reais.",
+    "author": {
+      "@type": "Organization",
+      "name": "Intellih Tecnologia",
+      "url": "https://www.intellih.com.br/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Intellih Tecnologia",
+      "url": "https://www.intellih.com.br/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.intellih.com.br/og-image.jpg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.intellih.com.br/blog/como-escolher-arquitetura-rag-negocio.html"
+    },
+    "datePublished": "2026-07-28",
+    "dateModified": "2026-07-28",
+    "keywords": [
+      "RAG",
+      "arquitetura RAG",
+      "Hybrid RAG",
+      "GraphRAG",
+      "Agentic RAG",
+      "Corrective RAG",
+      "Multimodal RAG",
+      "assistentes inteligentes",
+      "inteligência artificial aplicada"
+    ],
+    "articleSection": "RAG com método"
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f5f2;
+      --text: #191715;
+      --text-soft: #5f5a55;
+      --muted: #817870;
+      --line: #e7e0d8;
+      --brand: #c65f22;
+      --brand-dark: #944314;
+      --brand-light: #e47c3c;
+      --brand-soft: #fff0e7;
+      --graphite: #25211e;
+      --radius: 24px;
+      --shadow-soft: 0 10px 28px rgba(21, 18, 15, 0.08);
+      --max: 1160px;
+      --article-max: 820px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.72;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    p { margin: 0 0 1.1rem; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231, 224, 216, 0.78);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      font-size: 1.08rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(198, 95, 34, 0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--brand); }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      border-radius: 999px;
+      padding: 13px 20px;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.96rem;
+      font-weight: 820;
+      white-space: nowrap;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(198, 95, 34, 0.25);
+    }
+
+    .btn-primary:hover { background: var(--brand-dark); }
+
+    .btn-light {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .article-hero {
+      padding: 74px 0 46px;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(198, 95, 34, 0.16), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(37, 33, 30, 0.10), transparent 30%),
+        linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .article-hero-inner { max-width: var(--article-max); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      border: 1px solid #ffd7c1;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 0.88rem;
+      font-weight: 840;
+      margin-bottom: 20px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(198, 95, 34, 0.14);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: clamp(2.35rem, 4.7vw, 4.5rem);
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+      margin: 42px 0 16px;
+    }
+
+    h3 {
+      font-size: 1.28rem;
+      margin: 30px 0 12px;
+    }
+
+    .article-meta {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-top: 18px;
+    }
+
+    .lead {
+      font-size: clamp(1.08rem, 1.45vw, 1.28rem);
+      color: var(--text-soft);
+      max-width: 760px;
+    }
+
+    .article-wrap { padding: 56px 0 76px; }
+
+    .article-content {
+      max-width: var(--article-max);
+      margin: 0 auto;
+      font-size: 1.06rem;
+    }
+
+    .article-content strong { color: var(--text); }
+
+    .article-content a {
+      color: var(--brand-dark);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: 18px 0 24px;
+      padding-left: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .article-content li {
+      position: relative;
+      padding-left: 28px;
+      color: var(--text-soft);
+    }
+
+    .article-content ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+
+    .article-content ol { counter-reset: article-list; }
+
+    .article-content ol li {
+      counter-increment: article-list;
+      padding-left: 38px;
+    }
+
+    .article-content ol li::before {
+      content: counter(article-list);
+      position: absolute;
+      left: 0;
+      top: 0.08em;
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .callout {
+      margin: 32px 0;
+      padding: 24px;
+      border-radius: var(--radius);
+      background: var(--brand-soft);
+      border: 1px solid #ffd7c1;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .comparison-card {
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+    }
+
+    .comparison-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.14rem;
+    }
+
+    .comparison-card p:last-child { margin-bottom: 0; }
+
+    .article-cta {
+      margin-top: 52px;
+      padding: 34px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(198,95,34,.24), transparent 32%),
+        linear-gradient(135deg, #201c19, #11100f);
+      color: #fff;
+      box-shadow: 0 18px 45px rgba(21, 18, 15, 0.14);
+    }
+
+    .article-cta h2 { margin-top: 0; color: #fff; }
+    .article-cta p { color: #d8d0c8; }
+
+    .article-nav {
+      max-width: var(--article-max);
+      margin: 40px auto 0;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer {
+      background: #11100f;
+      color: #cfc7bf;
+      padding: 40px 0;
+    }
+
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer a { color: #fff; font-weight: 760; }
+
+    .socials { display: flex; gap: 10px; align-items: center; }
+
+    .socials a {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .socials a:hover {
+      transform: translateY(-1px);
+      background: rgba(198,95,34,.82);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .socials svg { width: 20px; height: 20px; fill: currentColor; }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 20px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow-soft);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open { display: flex; }
+      .menu-btn { display: inline-flex; }
+    }
+
+    @media (max-width: 700px) {
+      .comparison { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .article-hero { padding: 56px 0 36px; }
+      .article-wrap { padding: 42px 0 58px; }
+      .brand span:last-child { display: none; }
+      .btn, .article-nav .btn { width: 100%; }
+      .article-cta { padding: 24px; border-radius: 26px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="Intellih Tecnologia">
+        <span class="brand-mark">I</span>
+        <span>Intellih Tecnologia</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Menu principal">
+        <a href="/">Início</a>
+        <a href="/#solucoes">Soluções</a>
+        <a href="/#como-funciona">Como funciona</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contato">Contato</a>
+      </nav>
+
+      <button
+        class="menu-btn"
+        type="button"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="navLinks"
+        id="menuBtn"
+      >
+        Menu
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container article-hero-inner">
+        <div class="eyebrow"><span class="dot"></span> Série RAG com método · Fechamento</div>
+
+        <h1>Como escolher uma arquitetura de RAG para o seu negócio</h1>
+
+        <p class="lead">
+          RAG não é uma única arquitetura. Dependendo do problema, a solução pode exigir busca simples,
+          recomendação, busca híbrida, grafos, agentes, correção, multimodalidade ou uma combinação controlada dessas abordagens.
+        </p>
+
+        <p class="article-meta">
+          Publicado por Intellih Tecnologia · 28 de julho de 2026 · Leitura de 11 minutos
+        </p>
+      </div>
+    </section>
+
+    <section class="article-wrap">
+      <div class="container">
+        <article class="article-content">
+
+          <p>
+            Ao longo desta série, vimos diferentes formas de construir sistemas RAG: o RAG mais direto,
+            o RAG voltado à recomendação, o Hybrid RAG, o GraphRAG, o Agentic RAG, o Corrective RAG e o
+            Multimodal RAG.
+          </p>
+
+          <p>
+            Todas essas abordagens têm algo em comum: ajudam modelos de inteligência artificial a consultar
+            informações externas antes de responder. Mas elas não resolvem o mesmo problema.
+          </p>
+
+          <p>
+            Escolher uma arquitetura de RAG não deve começar pela pergunta “qual é a técnica mais avançada?”.
+            Deve começar por uma pergunta mais simples e mais útil:
+            <strong>que tipo de resposta o negócio precisa produzir, com base em que tipo de informação?</strong>
+          </p>
+
+          <div class="callout">
+            <p>
+              <strong>A melhor arquitetura de RAG não é a mais sofisticada.</strong>
+              É a que recupera a informação certa, no contexto certo, com custo, controle e rastreabilidade compatíveis
+              com o problema real do negócio.
+            </p>
+          </div>
+
+          <h2>RAG não é uma solução única</h2>
+
+          <p>
+            Em muitos projetos, RAG aparece como se fosse uma receita: dividir documentos em chunks, criar embeddings,
+            indexar em um banco vetorial e enviar os trechos recuperados para o modelo responder.
+          </p>
+
+          <p>
+            Essa receita é um bom ponto de partida, mas não cobre todos os casos.
+          </p>
+
+          <p>
+            Uma coisa é responder uma dúvida direta a partir de uma política interna. Outra é recomendar um serviço,
+            comparar alternativas, interpretar uma tabela, verificar se a busca foi boa, consultar ferramentas em sequência
+            ou entender relações entre documentos.
+          </p>
+
+          <p>
+            Cada situação exige decisões diferentes sobre indexação, recuperação, metadados, validação, ferramentas,
+            custo, atualização e limites da resposta.
+          </p>
+
+          <h2>Antes da arquitetura, defina o problema</h2>
+
+          <p>
+            A escolha começa com diagnóstico. Algumas perguntas ajudam a separar o que realmente importa:
+          </p>
+
+          <ul>
+            <li>a resposta está em um trecho específico ou espalhada por vários documentos?</li>
+            <li>o usuário quer uma explicação, uma recomendação, uma comparação ou uma decisão assistida?</li>
+            <li>os dados são textos corridos ou incluem tabelas, gráficos, imagens e PDFs complexos?</li>
+            <li>termos exatos, códigos, siglas, datas e versões mudam a resposta?</li>
+            <li>as informações possuem relações importantes entre pessoas, produtos, contratos, projetos ou eventos?</li>
+            <li>a tarefa exige vários passos ou uma única busca basta?</li>
+            <li>uma resposta errada gera risco, retrabalho ou perda de confiança?</li>
+            <li>o sistema precisa reconhecer quando não há evidência suficiente?</li>
+            <li>qual custo e tempo de resposta são aceitáveis?</li>
+            <li>a base de conhecimento está atualizada, estruturada e minimamente confiável?</li>
+          </ul>
+
+          <p>
+            Essas perguntas evitam um erro comum: adotar uma arquitetura complexa para compensar falta de clareza no
+            conteúdo, no processo ou no objetivo do sistema.
+          </p>
+
+          <h2>Quando um RAG simples é suficiente?</h2>
+
+          <p>
+            Um RAG mais simples pode ser a melhor escolha quando as perguntas são diretas e a resposta costuma estar em
+            trechos bem definidos da base.
+          </p>
+
+          <p>
+            Ele funciona bem em cenários como:
+          </p>
+
+          <ul>
+            <li>perguntas frequentes sobre políticas, serviços ou procedimentos;</li>
+            <li>consulta a documentos internos bem organizados;</li>
+            <li>assistentes que explicam regras gerais;</li>
+            <li>recuperação de informações textuais relativamente estáveis;</li>
+            <li>bases pequenas ou médias com conteúdo homogêneo;</li>
+            <li>situações em que custo e simplicidade são prioridades.</li>
+          </ul>
+
+          <p>
+            Nesse caso, o foco deve estar em preparar bem a base: documentos atualizados, bons metadados, chunking adequado,
+            instruções claras e testes com perguntas reais.
+          </p>
+
+          <div class="callout">
+            <p>
+              <strong>Começar simples não é começar mal.</strong>
+              Em muitos negócios, um RAG bem organizado, com boa base e limites claros, entrega mais valor do que uma
+              arquitetura sofisticada construída sobre conteúdo confuso.
+            </p>
+          </div>
+
+          <h2>Quando usar RAG para recomendação?</h2>
+
+          <p>
+            RAG para recomendação faz sentido quando a IA precisa sugerir, comparar ou orientar escolhas dentro de um
+            conjunto de produtos, serviços, planos, conteúdos ou alternativas.
+          </p>
+
+          <p>
+            Nesse caso, não basta recuperar um trecho parecido com a pergunta. A base precisa representar critérios de
+            escolha, restrições, perfis de uso, diferenciais, preços, disponibilidade, limitações e regras comerciais.
+          </p>
+
+          <p>
+            Essa abordagem é útil quando o usuário pergunta coisas como:
+          </p>
+
+          <ul>
+            <li>qual serviço faz mais sentido para o meu caso?</li>
+            <li>qual plano atende melhor a esta necessidade?</li>
+            <li>qual produto combina com estas restrições?</li>
+            <li>quais opções devo comparar antes de decidir?</li>
+            <li>o que não é adequado para este perfil?</li>
+          </ul>
+
+          <p>
+            O cuidado principal é não transformar recomendação em promessa. O sistema deve explicar critérios, indicar
+            limites e deixar claro quando a decisão precisa de avaliação humana.
+          </p>
+
+          <h2>Quando usar Hybrid RAG?</h2>
+
+          <p>
+            Hybrid RAG combina busca semântica com busca lexical. Ele é útil quando o sistema precisa entender o sentido
+            da pergunta, mas também preservar termos exatos.
+          </p>
+
+          <p>
+            Essa arquitetura costuma fazer sentido quando a base contém:
+          </p>
+
+          <ul>
+            <li>códigos de produto;</li>
+            <li>números de contrato;</li>
+            <li>siglas;</li>
+            <li>nomes próprios;</li>
+            <li>versões;</li>
+            <li>normas;</li>
+            <li>cláusulas;</li>
+            <li>termos técnicos que não podem ser aproximados.</li>
+          </ul>
+
+          <p>
+            A busca semântica ajuda a encontrar conteúdo relacionado à intenção. A busca por palavra-chave ajuda a não
+            perder a precisão de termos que precisam bater exatamente.
+          </p>
+
+          <p>
+            Uma boa regra prática: se trocar uma sigla, um número, uma versão ou um nome altera completamente a resposta,
+            vale considerar busca híbrida.
+          </p>
+
+          <h2>Quando usar GraphRAG?</h2>
+
+          <p>
+            GraphRAG faz sentido quando a resposta depende de relações entre informações, e não apenas de trechos isolados.
+          </p>
+
+          <p>
+            Em vez de tratar documentos como pedaços independentes de texto, o sistema organiza entidades e conexões:
+            pessoas, empresas, produtos, projetos, contratos, eventos, processos, documentos e suas relações.
+          </p>
+
+          <p>
+            Essa abordagem é útil para perguntas como:
+          </p>
+
+          <ul>
+            <li>quais áreas são afetadas por esta decisão?</li>
+            <li>quais clientes, produtos e contratos estão conectados?</li>
+            <li>quais eventos contribuíram para este problema?</li>
+            <li>que temas aparecem de forma recorrente em todo o conjunto?</li>
+            <li>como diferentes documentos se relacionam?</li>
+          </ul>
+
+          <p>
+            GraphRAG pode ser poderoso, mas traz custo de construção e manutenção do grafo. Entidades precisam ser
+            extraídas, relações precisam ser validadas e a estrutura precisa acompanhar mudanças na base.
+          </p>
+
+          <h2>Quando usar Agentic RAG?</h2>
+
+          <p>
+            Agentic RAG é indicado quando recuperar informação não é uma etapa fixa, mas parte de um plano.
+          </p>
+
+          <p>
+            O sistema pode precisar decidir se deve buscar, onde buscar, como reformular a consulta, quando usar uma
+            ferramenta, quando pedir mais contexto e quando encaminhar para uma pessoa.
+          </p>
+
+          <p>
+            Essa abordagem tende a fazer sentido em tarefas como:
+          </p>
+
+          <ul>
+            <li>triagem de demandas complexas;</li>
+            <li>atendimento consultivo;</li>
+            <li>suporte técnico com diagnóstico em etapas;</li>
+            <li>assistentes internos que consultam sistemas diferentes;</li>
+            <li>fluxos que combinam busca, cálculo, leitura e decisão operacional;</li>
+            <li>pesquisa em várias fontes.</li>
+          </ul>
+
+          <p>
+            O risco é dar flexibilidade demais ao sistema. Agentic RAG precisa de ferramentas limitadas, critérios de parada,
+            rastreabilidade e regras claras sobre quando a IA pode agir e quando deve pedir confirmação.
+          </p>
+
+          <h2>Quando usar Corrective RAG?</h2>
+
+          <p>
+            Corrective RAG faz sentido quando a qualidade da recuperação precisa ser avaliada antes da resposta.
+          </p>
+
+          <p>
+            Ele é especialmente útil quando a busca pode recuperar trechos parecidos, mas insuficientes, antigos,
+            contraditórios ou inadequados.
+          </p>
+
+          <p>
+            Essa abordagem costuma ser importante em cenários como:
+          </p>
+
+          <ul>
+            <li>políticas comerciais e regras internas;</li>
+            <li>suporte técnico com versões específicas;</li>
+            <li>contratos, normas e procedimentos;</li>
+            <li>informações que mudam com frequência;</li>
+            <li>respostas com risco operacional, jurídico ou reputacional;</li>
+            <li>sistemas que precisam dizer “não encontrei evidência suficiente”.</li>
+          </ul>
+
+          <p>
+            A pergunta central do Corrective RAG é simples: o que foi recuperado sustenta a resposta?
+          </p>
+
+          <p>
+            Quando não sustenta, o sistema pode refazer a busca, consultar outra fonte, responder com ressalvas ou encaminhar
+            para revisão humana.
+          </p>
+
+          <h2>Quando usar Multimodal RAG?</h2>
+
+          <p>
+            Multimodal RAG é necessário quando a informação relevante não está apenas em texto corrido.
+          </p>
+
+          <p>
+            Em muitos negócios, documentos importantes incluem tabelas, gráficos, imagens, diagramas, apresentações,
+            PDFs escaneados, formulários e elementos visuais de layout.
+          </p>
+
+          <p>
+            Essa arquitetura faz sentido quando as perguntas dependem de:
+          </p>
+
+          <ul>
+            <li>valores em tabelas;</li>
+            <li>tendências em gráficos;</li>
+            <li>etapas em fluxogramas;</li>
+            <li>informações presentes em imagens;</li>
+            <li>layout de documentos;</li>
+            <li>relação entre texto, tabela e figura;</li>
+            <li>extração de dados de PDFs complexos.</li>
+          </ul>
+
+          <p>
+            Aqui, o desafio não é apenas “ler o PDF”. É preservar estrutura, página, legenda, cabeçalho, unidade, contexto e
+            rastreabilidade.
+          </p>
+
+          <h2>Na prática, arquiteturas podem ser combinadas</h2>
+
+          <p>
+            Em projetos reais, a escolha raramente é totalmente exclusiva.
+          </p>
+
+          <p>
+            Algumas combinações são comuns:
+          </p>
+
+          <ul>
+            <li><strong>Hybrid RAG + Corrective RAG:</strong> para recuperar melhor e avaliar se o resultado sustenta a resposta;</li>
+            <li><strong>Multimodal RAG + Hybrid RAG:</strong> para lidar com documentos complexos sem perder termos exatos;</li>
+            <li><strong>RAG para recomendação + Corrective RAG:</strong> para sugerir opções apenas quando os critérios estiverem claros;</li>
+            <li><strong>GraphRAG + Agentic RAG:</strong> para investigar relações em várias etapas;</li>
+            <li><strong>RAG simples + boa preparação da base:</strong> para resolver perguntas frequentes com custo menor e maior previsibilidade.</li>
+          </ul>
+
+          <p>
+            A questão não é acumular técnicas. É combinar apenas o que melhora a resposta para o caso de uso.
+          </p>
+
+          <div class="callout">
+            <p>
+              <strong>Complexidade precisa pagar aluguel.</strong>
+              Cada camada adicionada deve justificar seu custo em qualidade, segurança, cobertura, rastreabilidade ou valor operacional.
+            </p>
+          </div>
+
+          <h2>Critério 1: tipo de informação</h2>
+
+          <p>
+            O primeiro critério é observar onde a informação está.
+          </p>
+
+          <ul>
+            <li>Se está em texto corrido bem organizado, um RAG simples pode bastar.</li>
+            <li>Se depende de termos exatos, Hybrid RAG pode ser necessário.</li>
+            <li>Se está em tabelas, gráficos ou imagens, considere Multimodal RAG.</li>
+            <li>Se está nas relações entre elementos, GraphRAG pode fazer sentido.</li>
+            <li>Se está em sistemas diferentes, talvez seja preciso Agentic RAG com ferramentas.</li>
+          </ul>
+
+          <p>
+            Não adianta escolher uma arquitetura sem olhar para a natureza do conhecimento que será consultado.
+          </p>
+
+          <h2>Critério 2: tipo de pergunta</h2>
+
+          <p>
+            O segundo critério é o tipo de pergunta que o sistema precisa responder.
+          </p>
+
+          <ul>
+            <li>Perguntas diretas pedem recuperação direta.</li>
+            <li>Perguntas comparativas pedem critérios e estrutura.</li>
+            <li>Perguntas sobre relações pedem conexão entre entidades.</li>
+            <li>Perguntas de diagnóstico pedem etapas e ferramentas.</li>
+            <li>Perguntas de risco pedem verificação e limites.</li>
+            <li>Perguntas sobre documentos visuais pedem leitura multimodal.</li>
+          </ul>
+
+          <p>
+            Uma base pode ser a mesma, mas perguntas diferentes podem exigir estratégias diferentes de recuperação.
+          </p>
+
+          <h2>Critério 3: risco da resposta errada</h2>
+
+          <p>
+            Quanto maior o risco, maior deve ser o cuidado com validação, fonte, rastreabilidade e limites.
+          </p>
+
+          <p>
+            Se uma resposta errada apenas gera uma explicação imprecisa, talvez a consequência seja pequena.
+            Mas se ela afeta atendimento, contrato, saúde financeira, suporte técnico ou decisão operacional, a arquitetura
+            precisa tratar incerteza com mais rigor.
+          </p>
+
+          <p>
+            Nesses casos, Corrective RAG, filtros, versionamento, citações de fonte, logs e encaminhamento humano podem ser
+            mais importantes do que usar o modelo mais novo.
+          </p>
+
+          <h2>Critério 4: maturidade da base de conhecimento</h2>
+
+          <p>
+            Muitas falhas atribuídas ao modelo são, na verdade, falhas da base.
+          </p>
+
+          <p>
+            Documentos duplicados, desatualizados, contraditórios, mal nomeados ou sem metadados prejudicam qualquer arquitetura.
+          </p>
+
+          <p>
+            Antes de pensar em GraphRAG, Agentic RAG ou Multimodal RAG, vale verificar:
+          </p>
+
+          <ul>
+            <li>quais documentos são oficiais;</li>
+            <li>quais estão desatualizados;</li>
+            <li>quais precisam de metadados;</li>
+            <li>quais devem ficar fora da base;</li>
+            <li>quem é responsável por atualizar o conteúdo;</li>
+            <li>quais perguntas reais precisam ser atendidas.</li>
+          </ul>
+
+          <p>
+            Uma arquitetura avançada não corrige uma base sem curadoria. Ela apenas torna o problema mais caro.
+          </p>
+
+          <h2>Critério 5: custo, latência e manutenção</h2>
+
+          <p>
+            Cada camada do RAG tem impacto operacional.
+          </p>
+
+          <p>
+            Mais buscas, reranqueamento, extração de entidades, leitura multimodal, agentes e avaliações corretivas podem melhorar
+            a qualidade, mas também aumentam custo, tempo de resposta e complexidade de manutenção.
+          </p>
+
+          <p>
+            Por isso, a decisão precisa equilibrar:
+          </p>
+
+          <ul>
+            <li>qualidade da resposta;</li>
+            <li>custo por consulta;</li>
+            <li>tempo de resposta aceitável;</li>
+            <li>frequência de atualização da base;</li>
+            <li>facilidade de depuração;</li>
+            <li>necessidade de auditoria;</li>
+            <li>capacidade da equipe de manter o sistema.</li>
+          </ul>
+
+          <p>
+            Um sistema tecnicamente elegante, mas caro, lento e difícil de operar, pode ser uma má escolha para o negócio.
+          </p>
+
+          <h2>Um caminho prático de decisão</h2>
+
+          <p>
+            Para escolher a arquitetura, uma sequência simples ajuda:
+          </p>
+
+          <ol>
+            <li>liste as perguntas reais que o sistema deve responder;</li>
+            <li>separe perguntas diretas, comparativas, relacionais, multimodais e investigativas;</li>
+            <li>identifique quais fontes sustentam cada resposta;</li>
+            <li>avalie se termos exatos, datas, versões e metadados são decisivos;</li>
+            <li>verifique se a resposta depende de relações entre entidades;</li>
+            <li>defina o risco de responder errado;</li>
+            <li>comece pela arquitetura mais simples que atende ao caso;</li>
+            <li>teste com perguntas reais e casos de falha;</li>
+            <li>adicione camadas apenas quando houver ganho comprovado;</li>
+            <li>documente limites, fontes e critérios de resposta.</li>
+          </ol>
+
+          <p>
+            Essa sequência reduz o risco de transformar RAG em um projeto de tecnologia sem conexão com o processo real.
+          </p>
+
+          <h2>A arquitetura mínima viável</h2>
+
+          <p>
+            Em vez de buscar a arquitetura definitiva no início, muitas empresas deveriam buscar uma arquitetura mínima viável.
+          </p>
+
+          <p>
+            Ela deve responder bem a um conjunto pequeno de perguntas importantes, com fontes claras, custo aceitável e regras
+            de uso bem definidas.
+          </p>
+
+          <p>
+            Depois disso, o sistema pode evoluir:
+          </p>
+
+          <ul>
+            <li>se estiver perdendo termos exatos, adicionar busca híbrida;</li>
+            <li>se estiver recomendando mal, estruturar critérios e catálogo;</li>
+            <li>se estiver ignorando relações, testar grafo;</li>
+            <li>se precisar conduzir etapas, adicionar agente;</li>
+            <li>se estiver respondendo com evidência fraca, adicionar correção;</li>
+            <li>se estiver perdendo informação visual, adicionar multimodalidade.</li>
+          </ul>
+
+          <p>
+            Esse caminho é mais seguro do que tentar implantar tudo ao mesmo tempo.
+          </p>
+
+          <h2>O papel do método</h2>
+
+          <p>
+            No fim, escolher RAG é menos sobre nome de arquitetura e mais sobre método de construção.
+          </p>
+
+          <p>
+            Um bom projeto precisa organizar:
+          </p>
+
+          <ul>
+            <li>objetivo do assistente;</li>
+            <li>perguntas reais de uso;</li>
+            <li>bases autorizadas;</li>
+            <li>preparação e atualização dos documentos;</li>
+            <li>estratégia de chunking;</li>
+            <li>metadados;</li>
+            <li>tipo de busca;</li>
+            <li>critério de qualidade;</li>
+            <li>limites da resposta;</li>
+            <li>processo de melhoria contínua.</li>
+          </ul>
+
+          <p>
+            Sem isso, qualquer arquitetura vira tentativa e erro.
+          </p>
+
+          <h2>Conclusão: escolha pelo problema, não pela moda</h2>
+
+          <p>
+            RAG simples, RAG para recomendação, Hybrid RAG, GraphRAG, Agentic RAG, Corrective RAG e Multimodal RAG são
+            respostas diferentes para problemas diferentes.
+          </p>
+
+          <p>
+            A escolha correta depende do tipo de informação, do tipo de pergunta, do risco, do custo, da necessidade de
+            rastreabilidade e da maturidade da base de conhecimento.
+          </p>
+
+          <p>
+            Em muitos negócios, o melhor primeiro passo não é construir um sistema sofisticado. É organizar o conhecimento,
+            mapear perguntas reais e criar um fluxo simples que possa ser testado.
+          </p>
+
+          <p>
+            Depois, a arquitetura evolui conforme as falhas aparecem: busca híbrida quando a precisão lexical importa;
+            recomendação quando há critérios de escolha; grafo quando há relações; agente quando há etapas; correção quando
+            a evidência precisa ser avaliada; multimodalidade quando a informação não está apenas em texto.
+          </p>
+
+          <p>
+            A pergunta final não é “qual RAG está na moda?”.
+          </p>
+
+          <p>
+            É esta:
+            <strong>qual arquitetura ajuda a inteligência artificial a responder melhor, com base confiável, dentro do processo real do negócio?</strong>
+          </p>
+
+          <h2>Referências</h2>
+
+          <ul>
+            <li>
+              <a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener noreferrer">
+                Lewis et al.: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+              </a>
+            </li>
+            <li>
+              <a href="https://learn.microsoft.com/en-us/azure/search/hybrid-search-overview" target="_blank" rel="noopener noreferrer">
+                Microsoft Learn: Hybrid search using vectors and full text in Azure AI Search
+              </a>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2404.16130" target="_blank" rel="noopener noreferrer">
+                Edge et al.: From Local to Global — A Graph RAG Approach to Query-Focused Summarization
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.langchain.com/oss/python/langgraph/agentic-rag" target="_blank" rel="noopener noreferrer">
+                LangGraph: Build a custom RAG agent
+              </a>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2401.15884" target="_blank" rel="noopener noreferrer">
+                Yan et al.: Corrective Retrieval Augmented Generation
+              </a>
+            </li>
+            <li>
+              <a href="https://www.langchain.com/blog/semi-structured-multi-modal-rag" target="_blank" rel="noopener noreferrer">
+                LangChain: Multi-Vector Retriever for RAG on tables, text, and images
+              </a>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2407.01449" target="_blank" rel="noopener noreferrer">
+                Faysse et al.: ColPali — Efficient Document Retrieval with Vision Language Models
+              </a>
+            </li>
+          </ul>
+
+          <div class="article-cta">
+            <h2>Você quer saber qual arquitetura de RAG faz sentido para o seu negócio?</h2>
+
+            <p>
+              A Intellih ajuda empresas a organizar conhecimento, mapear processos, escolher arquiteturas de IA e construir
+              soluções com recuperação de informação alinhadas ao uso real do negócio.
+            </p>
+
+            <a class="btn btn-primary" href="/#contato">Fale com a Intellih</a>
+          </div>
+        </article>
+
+        <div class="article-nav">
+          <a class="btn btn-light" href="/blog/multimodal-rag-textos-imagens-tabelas.html">
+            ← Artigo anterior
+          </a>
+
+          <a class="btn btn-light" href="/blog/">
+            Voltar para o blog
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Intellih Tecnologia</strong>
+        <p style="margin: 6px 0 0;">Soluções com IA para facilitar rotinas, organizar informações e transformar oportunidades em resultado.</p>
+        <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+      </div>
+
+      <div class="socials" aria-label="Redes sociais">
+        <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+        </a>
+
+        <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"/></svg>
+        </a>
+
+        <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/chat-widget.js"></script>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const year = document.getElementById('year');
+
+    year.textContent = new Date().getFullYear();
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
+</html>
