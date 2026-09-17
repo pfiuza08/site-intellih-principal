@@ -1,5 +1,11 @@
 (function () {
   'use strict';
+  // Estilos adicionais exclusivos da edição de estreia; CSS mobile aprovado permanece inalterado.
+  if (document.querySelector('.editorial-figure')) {
+    const style = document.createElement('style');
+    style.textContent = '.editorial-figure{margin:0;min-width:0}.editorial-figure .image-credit{color:#4d4a46;font-size:11px;font-weight:500;line-height:1.45;margin:6px 0 0}.lead-card .editorial-figure .image-credit{margin-bottom:4px}.article-media .editorial-figure .image-credit{font-size:12px;margin-top:8px}.article-media .image-credit a{text-decoration:underline;text-underline-offset:2px;color:#844016}';
+    document.head.appendChild(style);
+  }
   const menu = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-primary-nav]');
   const searchToggle = document.querySelector('[data-search-toggle]');
