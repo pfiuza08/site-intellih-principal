@@ -1,0 +1,118 @@
+[
+  {
+    "slug":"lua-formacao-em-horas",
+    "titulo":"A Lua pode ter se formado em poucas horas?",
+    "subtitulo":"Uma simulação publicada em 2022 propôs uma origem muito mais rápida para o nosso satélite. A hipótese não encerra a discussão científica.",
+    "categoria":"Ciência",
+    "editoria":"Espaço",
+    "formato":"Verdade ou exagero?",
+    "chamada":"O que a simulação realmente mostrou — e o que ainda não sabemos.",
+    "destaque":true,
+    "parece":true,
+    "imagem":"lua-impacto.svg",
+    "credito_imagem":"Ilustração editorial produzida para o protótipo; não é imagem da simulação original.",
+    "leitura":"4 min",
+    "data":"2026-09-16",
+    "corpo":[
+      {"tipo":"p","texto":"A ideia de que a Lua surgiu em apenas algumas horas parece improvável à primeira vista. Mas ela vem de uma hipótese científica concreta: simulações computacionais divulgadas pela NASA em outubro de 2022 mostraram que material lançado para a órbita após uma colisão gigantesca poderia formar um satélite rapidamente."},
+      {"tipo":"h2","texto":"De onde vem essa hipótese?"},
+      {"tipo":"p","texto":"O cenário investigado parte de um impacto entre a Terra primitiva e um corpo aproximadamente do tamanho de Marte, frequentemente chamado Theia. Modelos anteriores costumavam representar a formação da Lua a partir de detritos que se agregariam ao longo de um período mais extenso. As simulações de alta resolução estudadas pela equipe apresentaram outra possibilidade: parte do material poderia entrar em órbita já reunida em um corpo semelhante à Lua."},
+      {"tipo":"callout","titulo":"O que o estudo indica","texto":"A formação em horas é um resultado possível dentro das condições simuladas. Não é uma observação direta do nascimento da Lua nem uma conclusão definitiva sobre o que realmente aconteceu."},
+      {"tipo":"h2","texto":"Por que ainda existe debate?"},
+      {"tipo":"p","texto":"A colisão ocorreu há bilhões de anos, e pesquisadores precisam confrontar modelos com evidências como a composição das rochas lunares e a dinâmica do sistema Terra–Lua. Simulações são ferramentas poderosas, mas dependem de hipóteses, resolução numérica e parâmetros escolhidos. Uma hipótese promissora precisa explicar o conjunto dessas observações."},
+      {"tipo":"h2","texto":"Então, é verdade ou exagero?"},
+      {"tipo":"p","texto":"É correto dizer que uma pesquisa propôs uma formação extremamente rápida da Lua. É exagerado apresentar a duração como um fato medido ou afirmar que o problema da origem lunar já está resolvido. A descoberta interessante está justamente na nova possibilidade que o modelo abre para a investigação."}
+    ],
+    "fontes":[
+      {"nome":"NASA — Collision May Have Formed the Moon in Mere Hours (2022)","url":"https://www.nasa.gov/solar-system/collision-may-have-formed-the-moon-in-mere-hours-simulations-reveal/"},
+      {"nome":"NASA Science — Moon Formation","url":"https://science.nasa.gov/moon/formation/"}
+    ]
+  },
+  {
+    "slug":"por-que-luz-nao-escapa-buraco-negro",
+    "titulo":"Se a luz não tem massa, por que não escapa de um buraco negro?",
+    "subtitulo":"A resposta está na geometria do espaço-tempo: gravidade não é simplesmente um puxão sobre objetos pesados.",
+    "categoria":"Ciência",
+    "editoria":"Física",
+    "formato":"Explicação",
+    "chamada":"O horizonte de eventos é uma fronteira sem caminho de saída.",
+    "destaque":false,
+    "parece":true,
+    "imagem":"buraco-negro.svg",
+    "credito_imagem":"Ilustração editorial conceitual; não é fotografia de um buraco negro.",
+    "leitura":"4 min",
+    "data":"2026-09-16",
+    "corpo":[
+      {"tipo":"p","texto":"É comum imaginar que só corpos com massa sofrem os efeitos da gravidade. Mas, na relatividade geral, a gravidade é descrita pela geometria do espaço-tempo. A luz segue trajetórias nesse espaço-tempo e, por isso, sua direção também pode mudar perto de objetos muito massivos."},
+      {"tipo":"h2","texto":"O que acontece perto do buraco negro?"},
+      {"tipo":"p","texto":"Fora do horizonte de eventos, raios de luz podem ser desviados e ainda alcançar observadores distantes. Esse desvio ajuda a produzir as imagens deformadas de discos de gás brilhante que vemos nas representações científicas de buracos negros."},
+      {"tipo":"callout","titulo":"A fronteira decisiva","texto":"O horizonte de eventos é o limite além do qual nenhum sinal luminoso consegue alcançar um observador externo. Não se trata de um vidro ou de uma parede material."},
+      {"tipo":"h2","texto":"A luz fica mais lenta?"},
+      {"tipo":"p","texto":"Não no sentido de um raio de luz localmente passar a viajar abaixo da velocidade da luz no vácuo. A questão é que, dentro do horizonte de eventos, os caminhos possíveis para o futuro não levam de volta à região externa. Ter massa zero não cria uma rota de fuga."},
+      {"tipo":"h2","texto":"Se nada escapa, como os observamos?"},
+      {"tipo":"p","texto":"Astrônomos investigam a matéria aquecida ao redor dos buracos negros, a influência gravitacional sobre estrelas e gases e outros sinais produzidos fora do horizonte de eventos. O brilho frequentemente retratado nas imagens vem do ambiente ao redor, não de luz que saiu do interior do buraco negro."}
+    ],
+    "fontes":[
+      {"nome":"NASA Science — Anatomy of a Black Hole","url":"https://science.nasa.gov/universe/black-holes/anatomy/"},
+      {"nome":"NASA — What Are Black Holes?","url":"https://www.nasa.gov/universe/what-are-black-holes/"}
+    ]
+  },
+  {
+    "slug":"nem-toda-ia-e-generativa",
+    "titulo":"Nem toda inteligência artificial é generativa",
+    "subtitulo":"Prever, classificar, reconhecer, recomendar e gerar são tarefas diferentes — e cada uma pede um tipo de solução.",
+    "categoria":"Tecnologia",
+    "editoria":"Inteligência artificial",
+    "formato":"IA com Método",
+    "chamada":"Antes de escolher um chatbot, entenda qual é a tarefa.",
+    "destaque":false,
+    "parece":false,
+    "imagem":"ia-modelos.svg",
+    "credito_imagem":"Ilustração editorial conceitual produzida para o protótipo.",
+    "leitura":"5 min",
+    "data":"2026-09-16",
+    "corpo":[
+      {"tipo":"p","texto":"A popularização dos chatbots fez muita gente associar inteligência artificial apenas à produção de textos e imagens. Mas esse é um recorte. Sistemas de IA também podem identificar padrões, estimar valores, reconhecer sinais e apoiar escolhas, mesmo sem produzir uma resposta em linguagem natural."},
+      {"tipo":"h2","texto":"Uma pergunta diferente, uma saída diferente"},
+      {"tipo":"p","texto":"Ao verificar se uma imagem mostra um gato, o sistema pode executar uma classificação: escolher uma categoria entre possibilidades. Ao estimar a temperatura de amanhã, a saída pode ser um número. Ao sugerir músicas com base no histórico de escuta, a tarefa envolve recomendação. Ao redigir um resumo, entramos em uma aplicação generativa."},
+      {"tipo":"callout","titulo":"O ponto de partida","texto":"Defina o que deve entrar no sistema, qual saída é necessária e como você verificará se ela está correta. Só depois escolha a tecnologia."},
+      {"tipo":"h2","texto":"Previsão e classificação podem se encontrar"},
+      {"tipo":"p","texto":"Uma previsão sobre chuva pode ter como resultado uma classe — 'vai chover' ou 'não vai chover' — ou uma quantidade numérica, como a precipitação esperada. O objetivo de negócio e a forma da resposta determinam como formulamos o problema."},
+      {"tipo":"h2","texto":"Por que isso importa?"},
+      {"tipo":"p","texto":"Quando confundimos todas as tarefas com geração de texto, corremos o risco de escolher ferramentas inadequadas e avaliações vagas. Para aplicar IA com método, precisamos entender o trabalho, os dados disponíveis e os critérios de qualidade da resposta."}
+    ],
+    "fontes":[
+      {"nome":"Google for Developers — Machine Learning Crash Course","url":"https://developers.google.com/machine-learning/crash-course"},
+      {"nome":"Google for Developers — Classificação","url":"https://developers.google.com/machine-learning/crash-course/classification?hl=pt-BR"}
+    ]
+  },
+  {
+    "slug":"quando-previsao-e-classificacao",
+    "titulo":"Prever chuva ou classificar o céu: qual é a diferença?",
+    "subtitulo":"Um exemplo cotidiano mostra por que o tipo de saída é tão importante ao formular uma tarefa de aprendizado de máquina.",
+    "categoria":"Tecnologia",
+    "editoria":"Inteligência artificial",
+    "formato":"Explicação",
+    "chamada":"A mesma situação pode ser formulada como classificação ou previsão numérica.",
+    "destaque":false,
+    "parece":false,
+    "imagem":"ia-modelos.svg",
+    "credito_imagem":"Ilustração editorial conceitual produzida para o protótipo.",
+    "leitura":"3 min",
+    "data":"2026-09-16",
+    "corpo":[
+      {"tipo":"p","texto":"Imagine observar umidade, temperatura e pressão atmosférica para responder a uma pergunta simples: vai chover? O cotidiano oferece um bom exemplo de como transformar uma situação em um problema de aprendizado de máquina."},
+      {"tipo":"h2","texto":"Quando a resposta é uma categoria"},
+      {"tipo":"p","texto":"Se o resultado esperado é 'sim' ou 'não', podemos formular a tarefa como classificação binária. O modelo pode estimar uma probabilidade, e uma regra definida para a aplicação transforma essa estimativa em uma das classes."},
+      {"tipo":"h2","texto":"Quando a resposta é um valor"},
+      {"tipo":"p","texto":"Se desejamos estimar quantos milímetros de chuva devem cair, a saída é numérica. Nesse caso, estamos tratando de uma tarefa de regressão. Os dados de entrada podem até ser semelhantes, mas a pergunta e a avaliação mudam."},
+      {"tipo":"callout","titulo":"Uma distinção útil","texto":"'Previsão' é uma palavra ampla. Em aprendizado de máquina, uma previsão pode ser uma categoria, uma probabilidade ou um valor numérico."},
+      {"tipo":"h2","texto":"Como avaliar?"},
+      {"tipo":"p","texto":"Para categorias, podemos observar erros de classificação e métricas como precisão e revocação, conforme o problema. Para valores numéricos, é comum medir o desvio entre o valor previsto e o observado. A escolha depende do custo de errar e da finalidade da aplicação."}
+    ],
+    "fontes":[
+      {"nome":"Google for Developers — Classificação","url":"https://developers.google.com/machine-learning/crash-course/classification?hl=pt-BR"},
+      {"nome":"Google for Developers — Regressão linear","url":"https://developers.google.com/machine-learning/crash-course/linear-regression?hl=pt-BR"}
+    ]
+  }
+]
