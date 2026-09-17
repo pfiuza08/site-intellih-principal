@@ -1,0 +1,60 @@
+{
+  "slug": "quando-previsao-e-classificacao",
+  "titulo": "Prever chuva ou classificar o céu: qual é a diferença?",
+  "subtitulo": "Um exemplo cotidiano mostra por que o tipo de saída é tão importante ao formular uma tarefa de aprendizado de máquina.",
+  "categoria": "Tecnologia",
+  "editoria": "Inteligência artificial",
+  "formato": "Explicação",
+  "chamada": "A mesma situação pode ser formulada como classificação ou previsão numérica.",
+  "destaque": false,
+  "parece": false,
+  "imagem": "ia-modelos.svg",
+  "credito_imagem": "Ilustração editorial conceitual produzida para o protótipo.",
+  "leitura": "3 min",
+  "data": "2026-09-16",
+  "corpo": [
+    {
+      "tipo": "p",
+      "texto": "Imagine observar umidade, temperatura e pressão atmosférica para responder a uma pergunta simples: vai chover? O cotidiano oferece um bom exemplo de como transformar uma situação em um problema de aprendizado de máquina."
+    },
+    {
+      "tipo": "h2",
+      "texto": "Quando a resposta é uma categoria"
+    },
+    {
+      "tipo": "p",
+      "texto": "Se o resultado esperado é 'sim' ou 'não', podemos formular a tarefa como classificação binária. O modelo pode estimar uma probabilidade, e uma regra definida para a aplicação transforma essa estimativa em uma das classes."
+    },
+    {
+      "tipo": "h2",
+      "texto": "Quando a resposta é um valor"
+    },
+    {
+      "tipo": "p",
+      "texto": "Se desejamos estimar quantos milímetros de chuva devem cair, a saída é numérica. Nesse caso, estamos tratando de uma tarefa de regressão. Os dados de entrada podem até ser semelhantes, mas a pergunta e a avaliação mudam."
+    },
+    {
+      "tipo": "callout",
+      "titulo": "Uma distinção útil",
+      "texto": "'Previsão' é uma palavra ampla. Em aprendizado de máquina, uma previsão pode ser uma categoria, uma probabilidade ou um valor numérico."
+    },
+    {
+      "tipo": "h2",
+      "texto": "Como avaliar?"
+    },
+    {
+      "tipo": "p",
+      "texto": "Para categorias, podemos observar erros de classificação e métricas como precisão e revocação, conforme o problema. Para valores numéricos, é comum medir o desvio entre o valor previsto e o observado. A escolha depende do custo de errar e da finalidade da aplicação."
+    }
+  ],
+  "fontes": [
+    {
+      "nome": "Google for Developers — Classificação",
+      "url": "https://developers.google.com/machine-learning/crash-course/classification?hl=pt-BR"
+    },
+    {
+      "nome": "Google for Developers — Regressão linear",
+      "url": "https://developers.google.com/machine-learning/crash-course/linear-regression?hl=pt-BR"
+    }
+  ]
+}
