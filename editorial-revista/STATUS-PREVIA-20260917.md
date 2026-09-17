@@ -1,11 +1,19 @@
-# Revista Intellih — estado da prévia após correção do upload
+# Revista Intellih — estado da prévia em 17/09/2026
 
 **Somente branch `revista-preview-20260917`. Não fazer merge na `main` nem publicar.**
 
-A tentativa de upload via navegador não havia incluído a matéria de estreia. A correção direta no GitHub atualizou o HTML da homepage, acrescentou a página do artigo Webb/IC 348, incluiu a matéria nas editorias Ciência e Parece Inventado? e adicionou estilos de crédito fotográfico ao JavaScript da revista, sem substituir o CSS mobile aprovado.
+## Atualização concluída
 
-**Importante:** o gerador em `editorial-revista/build.py` e os dados em `editorial-revista/conteudo/artigos.json` ainda descrevem a versão anterior (quatro artigos). **Não execute `python editorial-revista/build.py` nem sobrescreva os HTMLs até sincronizarmos o gerador e o acervo na próxima etapa**, pois isso retiraria a matéria de estreia da prévia.
+A matéria de estreia Webb/IC 348 está no HTML da homepage, em `/revista/artigos/webb-anas-marrons-duas-massas-jupiter.html` e nas editorias Ciência e Parece Inventado?. A foto é carregada da ESA/Webb por URL externa, com identificação e crédito visíveis. O CSS mobile aprovado não foi substituído.
 
-Os quatro artigos anteriores são demonstrações ainda sujeitas a revisão. Todos os HTMLs da prévia permanecem com `noindex,nofollow`; a imagem de IC 348 está carregada por URL externa da ESA/Webb e deve ser verificada visualmente, incluindo o crédito. Não alteramos `public/index.html`, `public/blog/`, `sitemap.xml` ou as páginas comerciais.
+A fonte editorial está agora separada por formato: `editorial-revista/conteudo/noticias.json` contém a notícia de estreia e `editorial-revista/conteudo/artigos.json` mantém os quatro explicadores. `editorial-revista/build.py` combina os arquivos, define a notícia como destaque e gera cinco artigos, seis editorias e a homepage. O gerador não modifica `public/index.html`, `public/blog/`, os serviços, o CSS, o sitemap nem `vercel.json`.
 
-**Próxima revisão:** confirmar imagem e navegação na Vercel, sincronizar fonte de dados e gerador, revisar texto e direitos, depois decidir com autorização separada sobre a publicação na `main`.
+**Comando para reconstrução da prévia:** `python3 editorial-revista/build.py`. Os HTMLs continuam com `noindex,nofollow` e o aviso de revisão. Não executar para publicar a revista: antes do lançamento será necessária uma etapa separada para aprovar os textos, conferir os direitos das imagens, definir as datas reais de publicação, gerar canonical/SEO e obter autorização expressa para a `main`.
+
+## Conferência final pendente
+
+1. Conferir visualmente, no computador e no celular, a imagem da ESA/Webb, a legenda e o título de destaque na prévia da Vercel.
+2. Revisar os quatro artigos demonstrativos e imagens ilustrativas antes do lançamento.
+3. Testar execução do gerador no clone do repositório e comparar os HTMLs gerados com a prévia aprovada antes de fazer qualquer merge.
+
+**Não houve alteração do site de soluções, do blog ou do domínio de produção.**
