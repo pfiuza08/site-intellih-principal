@@ -20,6 +20,6 @@ A geração grava arquivos apenas em `public/revista/`. Os caminhos internos usa
 
 ## Restrições da prévia
 
-Todos os HTMLs gerados contêm `noindex,nofollow` e aviso de revisão. Os quatro artigos demonstrativos e suas ilustrações ainda precisam de aprovação. A imagem de IC 348 é carregada por URL externa e deve ter sua exibição e atribuição verificadas visualmente. O resultado local foi conferido com os cinco artigos; não equivale a teste do deploy remoto.
+Todos os HTMLs gerados contêm `noindex,nofollow` e aviso de revisão. Os quatro artigos demonstrativos e suas ilustrações ainda precisam de aprovação. A imagem de IC 348 é carregada por URL externa e deve ter sua exibição e atribuição verificadas visualmente. A lógica do gerador foi reproduzida e testada localmente com os cinco artigos; não equivale a teste do deploy remoto.
 
 **Não faça merge na `main` nem remova os bloqueios de indexação sem aprovação explícita.** Antes de publicar, revisar conteúdo e licenças, registrar datas reais, incluir canonical/SEO/sitemap somente das páginas aprovadas, testar a prévia na Vercel e confirmar que `/`, `/blog/` e as páginas de soluções permanecem intactos.
