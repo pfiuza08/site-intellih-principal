@@ -1,19 +1,21 @@
-# Revista Intellih — estado da prévia em 17/09/2026
+# Revista Intellih — estado da primeira edição (prévia, 17/09/2026)
 
-**Somente branch `revista-preview-20260917`. Não fazer merge na `main` nem publicar.**
+**Somente na branch `revista-preview-20260917`. Não publicar nem fazer merge na `main` sem nova autorização.**
 
-## Atualização concluída
+## Seleção aprovada pela responsável editorial
 
-A matéria de estreia Webb/IC 348 está no HTML da homepage, em `/revista/artigos/webb-anas-marrons-duas-massas-jupiter.html` e nas editorias Ciência e Parece Inventado?. A foto é carregada da ESA/Webb por URL externa, com identificação e crédito visíveis. O CSS mobile aprovado não foi substituído.
+A homepage exibe **quatro matérias**: Webb e as anãs marrons (destaque), por que a luz não escapa de um buraco negro, a hipótese de formação da Lua em poucas horas (simulação de 2022) e nem toda IA é generativa. A pauta de classificação e previsão da chuva foi retirada das páginas da primeira edição e preservada em `editorial-revista/rascunhos/quando-previsao-e-classificacao.json` para uma edição futura.
 
-A fonte editorial está agora separada por formato: `editorial-revista/conteudo/noticias.json` contém a notícia de estreia e `editorial-revista/conteudo/artigos.json` mantém os quatro explicadores. `editorial-revista/build.py` combina os arquivos, define a notícia como destaque e gera cinco artigos, seis editorias e a homepage. O gerador não modifica `public/index.html`, `public/blog/`, os serviços, o CSS, o sitemap nem `vercel.json`.
+O gerador `editorial-revista/build.py` reúne `conteudo/noticias.json` e `conteudo/artigos.json`; executado nesta etapa, gerou homepage, quatro artigos e seis editorias. Todos os HTMLs permanecem com `noindex,nofollow` e aviso de prévia. A capa e o artigo Webb exibem a identificação da observação IC 348 e o crédito completo ESA/Webb, NASA, CSA, K. Luhman, C. Alves De Oliveira, M. Zamani (ESA/Webb), associado à imagem original. A ilustração não deve ser descrita como fotografia individual da anã marrom.
 
-**Comando para reconstrução da prévia:** `python3 editorial-revista/build.py`. Os HTMLs continuam com `noindex,nofollow` e o aviso de revisão. Não executar para publicar a revista: antes do lançamento será necessária uma etapa separada para aprovar os textos, conferir os direitos das imagens, definir as datas reais de publicação, gerar canonical/SEO e obter autorização expressa para a `main`.
+O CSS responsivo aprovado foi preservado. Um fluxo temporário de geração executou e validou a edição, depois foi removido; não há automação editorial permanente criada nesta etapa.
 
-## Conferência final pendente
+## Antes do lançamento
 
-1. Conferir visualmente, no computador e no celular, a imagem da ESA/Webb, a legenda e o título de destaque na prévia da Vercel.
-2. Revisar os quatro artigos demonstrativos e imagens ilustrativas antes do lançamento.
-3. Testar execução do gerador no clone do repositório e comparar os HTMLs gerados com a prévia aprovada antes de fazer qualquer merge.
+- Confirmar visualmente o crédito e o carregamento da imagem externa na prévia da Vercel, no computador e no celular.
+- Revisar e aprovar **os textos integrais** e as fontes; seleção das pautas não equivale a aprovação final dos textos.
+- Substituir ou aprovar as ilustrações conceituais dos três explicadores, com atribuição compatível; manter a Lua como hipótese de simulação publicada em 2022.
+- Definir datas reais de publicação, títulos/metadescrições definitivos, canonical, Open Graph e sitemap apenas dos textos aprovados.
+- Confirmar autorização expressa para merge/publicação. Até lá, não retirar `noindex,nofollow`.
 
-**Não houve alteração do site de soluções, do blog ou do domínio de produção.**
+**Não alterados:** `public/index.html`, `public/blog/`, serviços, `vercel.json`, `robots.txt` e `sitemap.xml`.
