@@ -22,7 +22,7 @@ EDITORIAS = {
     'natureza': ('Natureza', 'Animais, ambientes e fenômenos naturais que merecem ser compreendidos.', lambda a: a['categoria'] == 'Natureza'),
     'cultura': ('Cultura', 'Música, cinema, criatividade e histórias culturais.', lambda a: a['categoria'] == 'Cultura'),
     'parece-inventado': ('Parece Inventado?', 'O surpreendente encontra explicação: fatos curiosos, evidências e exageros.', lambda a: a.get('parece', False)),
-    'ia-com-metodo': ('IA com Método', 'O básico técnico e a aplicação prática da inteligência artificial, sem atalhos mágicos.', lambda a: a['categoria'] == 'Tecnologia'),
+    'inteligencia-artificial': ('Inteligência Artificial', 'Conceitos, aplicações e limites da inteligência artificial, explicados com clareza.', lambda a: a['categoria'] == 'Tecnologia'),
 }
 
 def h(value): return escape(str(value), quote=True)
@@ -42,7 +42,7 @@ def header(prefix='./', active='Revista'):
            ('Soluções','https://www.intellih.com.br/')]
     links=''.join(f'<a href="{h(link)}"'+(' class="active" aria-current="page"' if name==active else '')+f'>{h(name)}</a>' for name,link in nav[:-1])
     links += f'<a class="nav-action" href="{h(nav[-1][1])}">Soluções da Intellih ↗</a>'
-    sections=''.join(f'<a href="{prefix}editorias/{slug}.html">{h(EDITORIAS[slug][0])}</a>' for slug in ('ciencia','tecnologia','natureza','cultura','ia-com-metodo'))
+    sections=''.join(f'<a href="{prefix}editorias/{slug}.html">{h(EDITORIAS[slug][0])}</a>' for slug in ('ciencia','tecnologia','natureza','cultura','inteligencia-artificial'))
     return f'''<a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <div class="demo-bar">EDIÇÃO PILOTO · Protótipo para revisão — ainda não publicado na Intellih</div>
 <header class="header"><div class="wrap header-main">
@@ -56,7 +56,7 @@ def header(prefix='./', active='Revista'):
 def footer(prefix='./'):
     return f'''<footer class="footer"><div class="wrap"><div class="footer-grid">
 <div><img src="{asset('img/intellih-horizontal-dark.png',prefix)}" class="footer-logo" width="171" height="51" alt="Intellih"><p>Inteligência para entender o mundo. Ciência, tecnologia e ideias com contexto e fontes.</p></div>
-<div><b>Explore</b><a href="{prefix}index.html">Revista Intellih</a><a href="{prefix}editorias/ciencia.html">Ciência</a><a href="{prefix}editorias/tecnologia.html">Tecnologia</a><a href="{prefix}editorias/parece-inventado.html">Parece Inventado?</a><a href="{prefix}editorias/ia-com-metodo.html">IA com Método</a></div>
+<div><b>Explore</b><a href="{prefix}index.html">Revista Intellih</a><a href="{prefix}editorias/ciencia.html">Ciência</a><a href="{prefix}editorias/tecnologia.html">Tecnologia</a><a href="{prefix}editorias/parece-inventado.html">Parece Inventado?</a><a href="{prefix}editorias/inteligencia-artificial.html">Inteligência Artificial</a></div>
 <div><b>Intellih</b><a href="https://www.intellih.com.br/">Site institucional ↗</a><a href="https://www.intellih.com.br/analise-presenca-digital">Soluções para negócios ↗</a><a href="mailto:contato@intellih.com.br">Contato por e-mail</a><p>Este protótipo não possui newsletter nem sistema automático de publicação.</p></div></div>
 <div class="footer-end">© Intellih · Protótipo editorial · Imagens de capa ilustrativas; fontes em cada artigo.</div></div></footer>
 <script src="{asset('app.js',prefix)}" defer></script>'''
