@@ -1,8 +1,8 @@
 # Revisão editorial — nem toda inteligência artificial é generativa
 
-**Status:** texto aprovado pela responsável editorial e incorporado à prévia. Não publicado em `main`; lançamento ainda não autorizado.
+**Status:** texto aprovado pela responsável editorial e incorporado à prévia. Não publicado em `main`; lançamento ainda não autorizado. A editoria da revista passa a se chamar **Inteligência Artificial** e o formato desta matéria, **Explicação**; o texto integral aprovado abaixo permanece inalterado.
 
-## Texto proposto
+## Texto aprovado
 
 ### Nem toda inteligência artificial é generativa: o que cada tipo de aplicação faz?
 
