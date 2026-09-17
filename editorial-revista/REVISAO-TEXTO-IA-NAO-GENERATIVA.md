@@ -1,6 +1,6 @@
 # Revisão editorial — nem toda inteligência artificial é generativa
 
-**Status:** proposta de texto para avaliação da responsável editorial. Não substitui o artigo atual na prévia, não modifica `main` e não autoriza publicação.
+**Status:** texto aprovado pela responsável editorial e incorporado à prévia. Não publicado em `main`; lançamento ainda não autorizado.
 
 ## Texto proposto
 

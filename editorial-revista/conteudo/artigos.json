@@ -135,8 +135,8 @@
   },
   {
     "slug": "nem-toda-ia-e-generativa",
-    "titulo": "Nem toda inteligência artificial é generativa",
-    "subtitulo": "Prever, classificar, reconhecer, recomendar e gerar são tarefas diferentes — e cada uma pede um tipo de solução.",
+    "titulo": "Nem toda inteligência artificial é generativa: o que cada tipo de aplicação faz?",
+    "subtitulo": "Produzir texto é apenas uma possibilidade. Classificar, estimar valores, reconhecer sinais, recomendar e apoiar decisões exigem perguntas e critérios de avaliação diferentes.",
     "categoria": "Tecnologia",
     "editoria": "Inteligência artificial",
     "formato": "IA com Método",
@@ -150,36 +150,60 @@
     "corpo": [
       {
         "tipo": "p",
-        "texto": "A popularização dos chatbots fez muita gente associar inteligência artificial apenas à produção de textos e imagens. Mas esse é um recorte. Sistemas de IA também podem identificar padrões, estimar valores, reconhecer sinais e apoiar escolhas, mesmo sem produzir uma resposta em linguagem natural."
-      },
-      {
-        "tipo": "h2",
-        "texto": "Uma pergunta diferente, uma saída diferente"
+        "texto": "Quando alguém pensa em inteligência artificial, é comum imaginar um chatbot que escreve, resume ou cria imagens. Mas gerar conteúdo é apenas uma das tarefas possíveis. Há sistemas de IA que atribuem categorias, estimam números, reconhecem padrões ou ajudam a selecionar alternativas — sem precisar produzir um texto novo."
       },
       {
         "tipo": "p",
-        "texto": "Ao verificar se uma imagem mostra um gato, o sistema pode executar uma classificação: escolher uma categoria entre possibilidades. Ao estimar a temperatura de amanhã, a saída pode ser um número. Ao sugerir músicas com base no histórico de escuta, a tarefa envolve recomendação. Ao redigir um resumo, entramos em uma aplicação generativa."
+        "texto": "A distinção mais útil não é perguntar qual ferramenta está na moda. É começar pelo problema: o que precisa entrar no sistema e que tipo de resposta seria útil?"
+      },
+      {
+        "tipo": "h2",
+        "texto": "Classificar e reconhecer não são o mesmo que gerar"
+      },
+      {
+        "tipo": "p",
+        "texto": "Um sistema que identifica se uma fotografia mostra um gato executa uma tarefa de classificação: associa a imagem a uma ou mais categorias. Reconhecer uma fala pode envolver outras etapas, como transformar áudio em texto. Em ambos os casos, o objetivo principal é identificar informação presente nos dados, não inventar um novo conteúdo."
+      },
+      {
+        "tipo": "p",
+        "texto": "Classificações podem ser úteis para organizar documentos por assunto, identificar mensagens que exigem atenção ou separar tipos de ocorrência. O acerto deve ser medido: uma classificação equivocada também tem consequências."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Prever pode significar uma classe ou um número"
+      },
+      {
+        "tipo": "p",
+        "texto": "Se a pergunta é “vai chover amanhã?”, a saída pode ser uma categoria ou uma probabilidade. Se queremos saber quantos milímetros de chuva são esperados, a saída é numérica. Na aprendizagem de máquina, são formulações distintas: classificação para categorias e regressão para valores numéricos."
+      },
+      {
+        "tipo": "p",
+        "texto": "Por isso, “previsão” descreve o objetivo de estimar algo desconhecido; não é, por si só, o nome de uma única técnica. Os dados, a unidade da resposta e a margem de erro aceitável fazem diferença."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Recomendar e otimizar são outras tarefas"
+      },
+      {
+        "tipo": "p",
+        "texto": "Ao sugerir músicas ou produtos, um sistema pode usar informações sobre preferências e contexto para organizar opções. Ao distribuir horários de atendimento ou planejar rotas, o objetivo pode ser otimizar uma escolha sujeita a restrições, como capacidade e tempo. Nem toda recomendação ou otimização precisa de IA: às vezes, regras e métodos convencionais resolvem melhor o problema."
+      },
+      {
+        "tipo": "h2",
+        "texto": "E a IA generativa?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Modelos generativos produzem conteúdo, como texto, imagem, áudio ou código, com base em padrões aprendidos. Eles podem ajudar a explicar resultados de outros sistemas, mas uma resposta bem escrita não é prova de que a informação esteja correta. A validação continua necessária."
       },
       {
         "tipo": "callout",
-        "titulo": "O ponto de partida",
-        "texto": "Defina o que deve entrar no sistema, qual saída é necessária e como você verificará se ela está correta. Só depois escolha a tecnologia."
-      },
-      {
-        "tipo": "h2",
-        "texto": "Previsão e classificação podem se encontrar"
+        "titulo": "Antes do prompt, vem o fluxo de trabalho",
+        "texto": "defina a tarefa, os dados de entrada, a saída esperada, como avaliar o resultado e em que ponto uma pessoa precisa revisar ou decidir."
       },
       {
         "tipo": "p",
-        "texto": "Uma previsão sobre chuva pode ter como resultado uma classe — 'vai chover' ou 'não vai chover' — ou uma quantidade numérica, como a precipitação esperada. O objetivo de negócio e a forma da resposta determinam como formulamos o problema."
-      },
-      {
-        "tipo": "h2",
-        "texto": "Por que isso importa?"
-      },
-      {
-        "tipo": "p",
-        "texto": "Quando confundimos todas as tarefas com geração de texto, corremos o risco de escolher ferramentas inadequadas e avaliações vagas. Para aplicar IA com método, precisamos entender o trabalho, os dados disponíveis e os critérios de qualidade da resposta."
+        "texto": "Uma mesma aplicação pode combinar diferentes recursos: classificar solicitações, estimar demanda e, depois, gerar um resumo para leitura humana. Não precisamos escolher uma única categoria para todo o sistema. Precisamos entender o papel de cada etapa para aplicar IA com método."
       }
     ],
     "fontes": [
@@ -191,6 +215,7 @@
         "nome": "Google for Developers — Classificação",
         "url": "https://developers.google.com/machine-learning/crash-course/classification?hl=pt-BR"
       }
-    ]
+    ],
+    "descricao_seo": "Nem toda IA é generativa: classificação, previsão, reconhecimento, recomendação e otimização exigem tarefas e critérios de avaliação diferentes."
   }
 ]
