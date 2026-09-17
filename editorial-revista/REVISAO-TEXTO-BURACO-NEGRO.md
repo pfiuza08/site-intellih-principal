@@ -1,6 +1,6 @@
 # Revisão editorial — por que a luz não escapa de um buraco negro?
 
-**Status:** proposta de texto para aprovação. Não substitui a página da prévia, não altera `main` e não autoriza publicação.
+**Status:** texto aprovado pela responsável editorial e incorporado à prévia. Não publicado em `main`; lançamento ainda não autorizado.
 
 ## Texto proposto
 
