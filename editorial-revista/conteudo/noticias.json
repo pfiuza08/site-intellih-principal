@@ -1,14 +1,14 @@
 [
   {
     "slug": "webb-anas-marrons-duas-massas-jupiter",
-    "titulo": "Webb identifica anãs marrons com apenas duas massas de Júpiter",
-    "titulo_seo": "Webb encontra anãs marrons com duas massas de Júpiter",
-    "descricao_seo": "Em IC 348, o James Webb identificou anãs marrons muito leves. Entenda como foram estudadas e o que isso revela sobre a formação estelar.",
-    "subtitulo": "Em um berçário estelar, pesquisadores encontraram objetos excepcionalmente leves que ajudam a investigar a fronteira entre estrelas e planetas.",
+    "titulo": "Webb encontra anãs marrons com massa estimada em apenas duas vezes a de Júpiter",
+    "titulo_seo": "Webb encontra anãs marrons com massa estimada em duas vezes a de Júpiter",
+    "descricao_seo": "Na região IC 348, o James Webb identificou anãs marrons com massa estimada em cerca de duas vezes a de Júpiter. Entenda o estudo.",
+    "subtitulo": "Em um berçário estelar a cerca de mil anos-luz da Terra, o telescópio ajudou a investigar até que ponto objetos muito leves podem se formar pelo mesmo processo das estrelas.",
     "categoria": "Ciência",
     "editoria": "Espaço",
     "formato": "Notícia explicada",
-    "chamada": "O que muda quando um objeto nasce como uma estrela, mas tem massa comparável à de um planeta?",
+    "chamada": "Uma massa comparável à de um planeta gigante, mas uma formação semelhante à de estrelas.",
     "destaque": true,
     "parece": true,
     "imagem": "",
@@ -23,24 +23,73 @@
     "data": "2026-09-17",
     "data_divulgacao": "2026-09-15",
     "corpo": [
-      {"tipo":"p","texto":"Um objeto com apenas duas vezes a massa de Júpiter pode surgir de um processo semelhante ao que forma estrelas? Observações do telescópio espacial James Webb, divulgadas pela NASA e pela ESA em 15 de setembro de 2026, trouxeram novos dados para essa pergunta. Em IC 348, pesquisadores identificaram anãs marrons de massa estimada tão baixa quanto duas massas de Júpiter."},
-      {"tipo":"h2","texto":"O que os astrônomos encontraram?"},
-      {"tipo":"p","texto":"IC 348 é uma região de formação estelar na constelação de Perseu, a cerca de mil anos-luz da Terra. A equipe usou a câmera NIRCam do Webb em 2024 para registrar a região e selecionar candidatos por seu brilho e suas cores. Observações espectroscópicas realizadas com o instrumento NIRSpec em 2025 ajudaram a estudar esses objetos e estimar suas massas."},
-      {"tipo":"p","texto":"Segundo a NASA, as anãs marrons identificadas estão entre as menos massivas conhecidas. O resultado desafia modelos que procuram explicar até que ponto o colapso de nuvens de gás e poeira pode produzir objetos cada vez menores."},
-      {"tipo":"h2","texto":"Por que não chamá-las simplesmente de planetas?"},
-      {"tipo":"p","texto":"Anãs marrons se formam por um mecanismo semelhante ao das estrelas, mas não conseguem sustentar a fusão do hidrogênio comum que alimenta estrelas como o Sol. Algumas podem fundir deutério brevemente. A massa comparável à de um planeta gigante, por si só, não determina a história de formação do objeto."},
-      {"tipo":"callout","titulo":"Fato, interpretação e hipótese","texto":"O Webb identificou objetos classificados pela equipe como anãs marrons com massas estimadas muito baixas. A ideia de que isso impõe novos desafios aos modelos de formação é uma interpretação científica. A existência de planetas orbitando esses objetos não foi demonstrada por essa notícia."},
-      {"tipo":"h2","texto":"Um disco pode formar planetas?"},
-      {"tipo":"p","texto":"Uma das anãs marrons mais leves apresentou sinais de um disco ao redor dela. Esse indício sugere que pequenos planetas poderiam se formar ali, mas um disco não equivale à detecção de um planeta. Os pesquisadores também relataram uma característica espectral atribuída a um hidrocarboneto ainda não identificado."},
-      {"tipo":"h2","texto":"O que a imagem mostra — e o que ela não mostra"},
-      {"tipo":"p","texto":"O panorama de IC 348 revela estrelas jovens, gás e poeira, além de jatos associados a objetos em formação. Ele não deve ser apresentado como a fotografia isolada de uma anã marrom específica com duas massas de Júpiter: essa conclusão depende da análise das observações e dos espectros feita pela equipe."},
-      {"tipo":"p","texto":"A descoberta não é a história de uma estrela adulta que encolheu. Ela amplia a investigação sobre como objetos muito leves podem nascer em regiões onde estrelas se formam — e sobre as classificações que usamos para descrevê-los."}
+      {
+        "tipo": "p",
+        "texto": "Um objeto com massa comparável à de um planeta gigante pode nascer de maneira semelhante a uma estrela? Observações do telescópio espacial James Webb, apresentadas pela NASA e pela ESA em 15 de setembro de 2026, ampliaram essa discussão. Na região de formação estelar IC 348, os pesquisadores identificaram anãs marrons cujas massas foram estimadas em cerca de duas vezes a massa de Júpiter."
+      },
+      {
+        "tipo": "h2",
+        "texto": "O que foi observado?"
+      },
+      {
+        "tipo": "p",
+        "texto": "IC 348 fica na constelação de Perseu, a aproximadamente mil anos-luz da Terra. Em 2024, a equipe usou a câmera de infravermelho próximo NIRCam para observar a região e selecionar possíveis anãs marrons com base no brilho e nas cores. Em 2025, observações com o espectrógrafo NIRSpec ajudaram a investigar a natureza e a massa desses objetos."
+      },
+      {
+        "tipo": "p",
+        "texto": "Segundo os comunicados científicos, eles estão entre as anãs marrons de menor massa já identificadas. Sua existência desafia modelos que tentam determinar a menor massa possível para um objeto formado pelo colapso de nuvens de gás e poeira."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Afinal, é planeta ou estrela?"
+      },
+      {
+        "tipo": "p",
+        "texto": "A massa, sozinha, não conta toda a história. Anãs marrons podem se formar pelo colapso de nuvens de gás, como as estrelas, mas não sustentam a fusão do hidrogênio comum que alimenta estrelas como o Sol. Algumas conseguem fundir deutério por um período limitado. Objetos com massas parecidas podem, portanto, ter trajetórias de formação diferentes."
+      },
+      {
+        "tipo": "callout",
+        "titulo": "O que se sabe e o que ainda se investiga",
+        "texto": "O que se sabe: a equipe identificou objetos classificados como anãs marrons e estimou massas muito baixas. O que ainda se investiga: como objetos tão leves podem surgir nesse processo de formação. Não houve anúncio da descoberta de planetas orbitando essas anãs marrons."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Poderiam existir planetas ao redor delas?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Uma das anãs marrons mais leves apresentou indícios de um disco ao seu redor. Isso torna interessante a possibilidade de formação de pequenos planetas, mas um disco não é a detecção de um planeta. A equipe também encontrou, nos espectros de algumas anãs marrons, uma característica que atribuiu a hidrocarbonetos ainda não identificados com precisão."
+      },
+      {
+        "tipo": "h2",
+        "texto": "O que a imagem do Webb realmente mostra?"
+      },
+      {
+        "tipo": "p",
+        "texto": "O panorama de IC 348, feito a partir de observações no infravermelho próximo, revela a região de formação estelar: estrelas jovens, gás, poeira e jatos associados a objetos em formação. Não é uma fotografia individual da anã marrom de duas massas de Júpiter. Essa estimativa depende da análise das observações e dos espectros realizada pelos pesquisadores."
+      },
+      {
+        "tipo": "p",
+        "texto": "A novidade não é que uma estrela adulta encolheu nem que um novo planeta foi descoberto. É uma evidência de que o processo de formação estelar pode produzir objetos ainda mais leves do que certos modelos previam — e uma oportunidade de aperfeiçoar esses modelos."
+      }
     ],
     "fontes": [
-      {"nome":"NASA — Webb Reveals Dynamic Panorama of Star Formation (15 set. 2026)","url":"https://science.nasa.gov/missions/webb/nasas-webb-reveals-dynamic-panorama-of-star-formation/"},
-      {"nome":"ESA/Webb — Webb reveals stunning panorama of star formation (15 set. 2026)","url":"https://esawebb.org/news/weic2619/"},
-      {"nome":"ESA/Webb — Imagem original e crédito de IC 348","url":"https://esawebb.org/images/weic2619a/"},
-      {"nome":"ESA/Webb — Condições de uso de imagens (CC BY 4.0)","url":"https://esawebb.org/copyright/"}
+      {
+        "nome": "NASA — Webb Reveals Dynamic Panorama of Star Formation (15 set. 2026)",
+        "url": "https://science.nasa.gov/missions/webb/nasas-webb-reveals-dynamic-panorama-of-star-formation/"
+      },
+      {
+        "nome": "ESA/Webb — Webb reveals stunning panorama of star formation (15 set. 2026)",
+        "url": "https://esawebb.org/news/weic2619/"
+      },
+      {
+        "nome": "ESA/Webb — Imagem original e crédito de IC 348",
+        "url": "https://esawebb.org/images/weic2619a/"
+      },
+      {
+        "nome": "ESA/Webb — Condições de uso de imagens (CC BY 4.0)",
+        "url": "https://esawebb.org/copyright/"
+      }
     ]
   }
 ]

@@ -1,6 +1,6 @@
 # Revisão editorial — matéria de estreia do Webb
 
-**Status:** proposta de texto para aprovação; não substitui a página publicada na prévia, não altera `main` e não autoriza lançamento.
+**Status:** texto aprovado pela responsável editorial e incorporado à prévia; não publicado em `main` e sem autorização para lançamento.
 
 ## Texto proposto
 
