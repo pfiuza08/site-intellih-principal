@@ -1,8 +1,8 @@
 [
   {
     "slug": "lua-formacao-em-horas",
-    "titulo": "A Lua pode ter se formado em poucas horas?",
-    "subtitulo": "Uma simulação publicada em 2022 propôs uma origem muito mais rápida para o nosso satélite. A hipótese não encerra a discussão científica.",
+    "titulo": "A Lua pode ter se formado em poucas horas? O que uma simulação de 2022 revelou",
+    "subtitulo": "Um modelo computacional propôs que um satélite semelhante à Lua poderia surgir rapidamente após uma colisão gigantesca. É uma possibilidade científica, não uma medição do que aconteceu.",
     "categoria": "Ciência",
     "editoria": "Espaço",
     "formato": "Verdade ou exagero?",
@@ -16,36 +16,40 @@
     "corpo": [
       {
         "tipo": "p",
-        "texto": "A ideia de que a Lua surgiu em apenas algumas horas parece improvável à primeira vista. Mas ela vem de uma hipótese científica concreta: simulações computacionais divulgadas pela NASA em outubro de 2022 mostraram que material lançado para a órbita após uma colisão gigantesca poderia formar um satélite rapidamente."
+        "texto": "A ideia de que a Lua nasceu em poucas horas parece extraordinária. Ela tem origem em simulações publicadas em 2022 por pesquisadores que estudaram uma possível colisão entre a Terra primitiva e um corpo aproximadamente do tamanho de Marte, conhecido como Theia. Em alguns cenários simulados, parte do material lançado ao espaço formou, quase imediatamente, um satélite com características semelhantes às da Lua. Isso não significa que os cientistas tenham observado o nascimento do nosso satélite nem determinado sua duração real."
       },
       {
         "tipo": "h2",
-        "texto": "De onde vem essa hipótese?"
+        "texto": "Por que os pesquisadores fizeram essa simulação?"
       },
       {
         "tipo": "p",
-        "texto": "O cenário investigado parte de um impacto entre a Terra primitiva e um corpo aproximadamente do tamanho de Marte, frequentemente chamado Theia. Modelos anteriores costumavam representar a formação da Lua a partir de detritos que se agregariam ao longo de um período mais extenso. As simulações de alta resolução estudadas pela equipe apresentaram outra possibilidade: parte do material poderia entrar em órbita já reunida em um corpo semelhante à Lua."
+        "texto": "Uma das hipóteses mais estudadas para a origem da Lua envolve um grande impacto há bilhões de anos. Modelos tradicionais descrevem detritos orbitando a Terra e se reunindo ao longo de meses ou anos. Mas existem perguntas difíceis: por exemplo, por que as rochas lunares analisadas têm composição isotópica tão semelhante à de rochas terrestres? A equipe investigou se simulações de resolução mais alta revelariam resultados diferentes."
+      },
+      {
+        "tipo": "h2",
+        "texto": "O que mudou no modelo de 2022?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Em parte das simulações, a colisão colocou diretamente em órbita um corpo com massa semelhante à da Lua. Segundo os pesquisadores, a resolução numérica foi importante: modelos menos detalhados poderiam não mostrar alguns comportamentos do material e da dinâmica do impacto. A possibilidade de formação rápida oferece outra maneira de investigar a composição da Lua e a evolução inicial de sua órbita."
       },
       {
         "tipo": "callout",
-        "titulo": "O que o estudo indica",
-        "texto": "A formação em horas é um resultado possível dentro das condições simuladas. Não é uma observação direta do nascimento da Lua nem uma conclusão definitiva sobre o que realmente aconteceu."
+        "titulo": "O que a pesquisa mostrou — e o que não mostrou",
+        "texto": "um satélite semelhante à Lua pode se formar em questão de horas nas condições de determinadas simulações. Isso não comprova que a Lua real tenha se formado exatamente assim, nem estabelece uma contagem definitiva de horas."
       },
       {
         "tipo": "h2",
-        "texto": "Por que ainda existe debate?"
+        "texto": "O que ainda falta descobrir?"
       },
       {
         "tipo": "p",
-        "texto": "A colisão ocorreu há bilhões de anos, e pesquisadores precisam confrontar modelos com evidências como a composição das rochas lunares e a dinâmica do sistema Terra–Lua. Simulações são ferramentas poderosas, mas dependem de hipóteses, resolução numérica e parâmetros escolhidos. Uma hipótese promissora precisa explicar o conjunto dessas observações."
-      },
-      {
-        "tipo": "h2",
-        "texto": "Então, é verdade ou exagero?"
+        "texto": "Uma simulação depende das condições iniciais e das propriedades físicas escolhidas para representar a colisão. Para avaliar qual cenário corresponde melhor à história real, é necessário compará-lo com a composição das rochas lunares, a órbita atual do sistema Terra–Lua e outras observações. Amostras de diferentes regiões da Lua podem ajudar a testar essas explicações."
       },
       {
         "tipo": "p",
-        "texto": "É correto dizer que uma pesquisa propôs uma formação extremamente rápida da Lua. É exagerado apresentar a duração como um fato medido ou afirmar que o problema da origem lunar já está resolvido. A descoberta interessante está justamente na nova possibilidade que o modelo abre para a investigação."
+        "texto": "Portanto, “a Lua nasceu em cinco horas” não é um fato confirmado. O que existe é uma hipótese respaldada por um estudo computacional de 2022: em certas condições, um grande impacto poderia formar um satélite semelhante à Lua muito mais depressa do que propunham alguns modelos anteriores. A descoberta está na nova possibilidade que podemos investigar, não em um cronômetro do passado."
       }
     ],
     "fontes": [
@@ -57,7 +61,9 @@
         "nome": "NASA Science — Moon Formation",
         "url": "https://science.nasa.gov/moon/formation/"
       }
-    ]
+    ],
+    "titulo_seo": "A Lua pode ter se formado em poucas horas? Simulação de 2022",
+    "descricao_seo": "Simulações publicadas em 2022 propuseram uma formação muito rápida da Lua. Saiba o que o estudo mostra e o que ainda é hipótese."
   },
   {
     "slug": "por-que-luz-nao-escapa-buraco-negro",

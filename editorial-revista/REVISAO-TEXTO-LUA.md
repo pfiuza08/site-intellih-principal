@@ -1,6 +1,6 @@
 # Revisão editorial — formação da Lua em poucas horas
 
-**Status:** proposta para aprovação. Não substitui a matéria na prévia, não modifica `main` e não autoriza o lançamento da revista.
+**Status:** texto aprovado pela responsável editorial e incorporado à prévia. Ainda não publicado em `main`; lançamento não autorizado.
 
 ## Texto proposto
 
