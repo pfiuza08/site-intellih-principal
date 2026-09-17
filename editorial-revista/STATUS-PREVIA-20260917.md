@@ -1,21 +1,18 @@
-# Revista Intellih — estado da primeira edição (prévia, 17/09/2026)
+# Revista Intellih — estado editorial da prévia
 
-**Somente na branch `revista-preview-20260917`. Não publicar nem fazer merge na `main` sem nova autorização.**
+**Somente branch `revista-preview-20260917`. Não fazer merge na `main` nem publicar.**
 
-## Seleção aprovada pela responsável editorial
+## Seleção e andamento da primeira edição
 
-A homepage exibe **quatro matérias**: Webb e as anãs marrons (destaque), por que a luz não escapa de um buraco negro, a hipótese de formação da Lua em poucas horas (simulação de 2022) e nem toda IA é generativa. A pauta de classificação e previsão da chuva foi retirada das páginas da primeira edição e preservada em `editorial-revista/rascunhos/quando-previsao-e-classificacao.json` para uma edição futura.
+- **Webb / IC 348:** texto revisado, aprovado e incorporado à prévia; massa estimada em cerca de duas massas de Júpiter; crédito ESA/Webb visível na capa e no artigo.
+- **Buracos negros:** texto revisado, aprovado e incorporado à prévia; imagem identificada como ilustração conceitual.
+- **Formação da Lua:** texto revisado, aprovado e incorporado à prévia; destaca que as simulações são de 2022 e que a formação em horas não é fato comprovado. Imagem identificada como ilustração editorial, não como a simulação original.
+- **Nem toda IA é generativa:** texto ainda pendente de revisão e aprovação final.
 
-O gerador `editorial-revista/build.py` reúne `conteudo/noticias.json` e `conteudo/artigos.json`; executado nesta etapa, gerou homepage, quatro artigos e seis editorias. Todos os HTMLs permanecem com `noindex,nofollow` e aviso de prévia. A capa e o artigo Webb exibem a identificação da observação IC 348 e o crédito completo ESA/Webb, NASA, CSA, K. Luhman, C. Alves De Oliveira, M. Zamani (ESA/Webb), associado à imagem original. A ilustração não deve ser descrita como fotografia individual da anã marrom.
+O artigo sobre previsão/classificação da chuva foi arquivado em `editorial-revista/rascunhos/` para uma edição futura. A fonte editorial é `editorial-revista/conteudo/noticias.json` mais `editorial-revista/conteudo/artigos.json`; `python3 editorial-revista/build.py` gera homepage, quatro artigos e seis editorias. As automações temporárias usadas para incorporar os textos foram removidas.
 
-O CSS responsivo aprovado foi preservado. Um fluxo temporário de geração executou e validou a edição, depois foi removido; não há automação editorial permanente criada nesta etapa.
+## Segurança e pendências
 
-## Antes do lançamento
+Todas as páginas continuam com `noindex,nofollow` e aviso de prévia; nada foi incluído no sitemap de produção. O CSS mobile aprovado foi preservado. Não alterar `public/index.html`, `public/blog/`, serviços, `vercel.json`, `robots.txt` nem `sitemap.xml`.
 
-- Confirmar visualmente o crédito e o carregamento da imagem externa na prévia da Vercel, no computador e no celular.
-- Revisar e aprovar **os textos integrais** e as fontes; seleção das pautas não equivale a aprovação final dos textos.
-- Substituir ou aprovar as ilustrações conceituais dos três explicadores, com atribuição compatível; manter a Lua como hipótese de simulação publicada em 2022.
-- Definir datas reais de publicação, títulos/metadescrições definitivos, canonical, Open Graph e sitemap apenas dos textos aprovados.
-- Confirmar autorização expressa para merge/publicação. Até lá, não retirar `noindex,nofollow`.
-
-**Não alterados:** `public/index.html`, `public/blog/`, serviços, `vercel.json`, `robots.txt` e `sitemap.xml`.
+Antes de publicar, revisar o artigo de IA, ilustrações e direitos, datas reais de publicação, metadados definitivos, links e visual desktop/mobile. Somente com autorização expressa será possível planejar a entrada no domínio de produção.
