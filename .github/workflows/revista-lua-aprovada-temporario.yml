@@ -1,0 +1,95 @@
+name: Incorporar texto da Lua aprovado na prévia (temporário)
+on:
+  push:
+    branches: [revista-preview-20260917]
+    paths: [.github/workflows/revista-lua-aprovada-temporario.yml]
+permissions:
+  contents: write
+jobs:
+  incorporar-lua:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Incorporar texto aprovado na fonte editorial
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, re
+          from pathlib import Path
+          draft=Path('editorial-revista/REVISAO-TEXTO-LUA.md')
+          text=draft.read_text(encoding='utf-8')
+          old_status='**Status:** proposta para aprovação. Não substitui a matéria na prévia, não modifica `main` e não autoriza o lançamento da revista.'
+          assert old_status in text, 'Status inesperado: revisão manual necessária'
+          part=text.split('## Texto proposto\n',1)[1].split('\n**Imagem da matéria:**',1)[0]
+          chunks=re.split(r'\n\s*\n',part.strip())
+          clean=lambda s:re.sub(r'\*(.*?)\*',r'\1',re.sub(r'\*\*(.*?)\*\*',r'\1',s.strip()))
+          title=None; subtitle=None; blocks=[]
+          for chunk in chunks:
+            chunk=' '.join(line.strip() for line in chunk.splitlines())
+            if chunk.startswith('### '):
+              if title is None: title=clean(chunk[4:])
+              else: blocks.append({'tipo':'h2','texto':clean(chunk[4:])})
+            elif chunk.startswith('**Linha fina:** '):
+              subtitle=clean(chunk.split(':** ',1)[1])
+            elif chunk.startswith('> '):
+              label, body=chunk[2:].split(':** ',1)
+              blocks.append({'tipo':'callout','titulo':clean(label),'texto':clean(body)})
+            else:
+              blocks.append({'tipo':'p','texto':clean(chunk)})
+          assert title=='A Lua pode ter se formado em poucas horas? O que uma simulação de 2022 revelou',title
+          assert subtitle and len(blocks)==9, (subtitle,len(blocks))
+          assert sum(b['tipo']=='callout' for b in blocks)==1
+          assert 'cinco horas' in blocks[-1]['texto'] and 'não é um fato confirmado' in blocks[-1]['texto']
+          p=Path('editorial-revista/conteudo/artigos.json')
+          articles=json.loads(p.read_text(encoding='utf-8'))
+          assert len(articles)==3
+          matches=[a for a in articles if a['slug']=='lua-formacao-em-horas']
+          assert len(matches)==1
+          article=matches[0]
+          assert article['imagem']=='lua-impacto.svg' and article['credito_imagem'].startswith('Ilustração editorial')
+          article.update(titulo=title,subtitulo=subtitle,corpo=blocks)
+          article['titulo_seo']='A Lua pode ter se formado em poucas horas? Simulação de 2022'
+          article['descricao_seo']='Simulações publicadas em 2022 propuseram uma formação muito rápida da Lua. Saiba o que o estudo mostra e o que ainda é hipótese.'
+          assert article['data']=='2026-09-16', 'Não trocar data de rascunho por data fictícia de publicação'
+          p.write_text(json.dumps(articles,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          draft.write_text(text.replace(old_status,'**Status:** texto aprovado pela responsável editorial e incorporado à prévia. Ainda não publicado em `main`; lançamento não autorizado.'),encoding='utf-8')
+          PY
+      - name: Gerar e validar a prévia sem tocar o site principal
+        shell: bash
+        run: |
+          python3 editorial-revista/build.py
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('public/revista')
+          articles=json.loads(Path('editorial-revista/conteudo/artigos.json').read_text(encoding='utf-8'))
+          news=json.loads(Path('editorial-revista/conteudo/noticias.json').read_text(encoding='utf-8'))
+          assert len(articles)==3 and len(news)==1
+          assert [a['slug'] for a in news+articles]==['webb-anas-marrons-duas-massas-jupiter','lua-formacao-em-horas','por-que-luz-nao-escapa-buraco-negro','nem-toda-ia-e-generativa']
+          article=(root/'artigos/lua-formacao-em-horas.html').read_text(encoding='utf-8')
+          for phrase in ('O que uma simulação de 2022 revelou','O que a pesquisa mostrou — e o que não mostrou','não é um fato confirmado','não é imagem da simulação original','noindex,nofollow','PRÉVIA EDITORIAL'):
+            assert phrase in article,phrase
+          assert 'A ideia de que a Lua surgiu em apenas algumas horas parece improvável' not in article
+          assert 'Webb encontra anãs marrons com massa estimada' in (root/'index.html').read_text(encoding='utf-8')
+          assert 'O horizonte de eventos não funciona como uma parede' in (root/'artigos/por-que-luz-nao-escapa-buraco-negro.html').read_text(encoding='utf-8')
+          assert not (root/'artigos/quando-previsao-e-classificacao.html').exists()
+          for page in [root/'index.html',*root.glob('artigos/*.html'),*root.glob('editorias/*.html')]:
+            data=page.read_text(encoding='utf-8')
+            assert 'noindex,nofollow' in data and 'PRÉVIA EDITORIAL' in data,page
+          changed=set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines())
+          permitted={'editorial-revista/REVISAO-TEXTO-LUA.md','editorial-revista/conteudo/artigos.json'}
+          assert changed<=permitted|{p for p in changed if p.startswith('public/revista/')},changed
+          assert permitted<=changed and 'public/revista/artigos/lua-formacao-em-horas.html' in changed,changed
+          print('OK: Lua aprovada na prévia; 4 artigos, noindex e nenhuma mudança fora da revista.')
+          PY
+      - name: Registrar apenas arquivos da revista na branch de revisão
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add editorial-revista/REVISAO-TEXTO-LUA.md editorial-revista/conteudo/artigos.json public/revista/
+          git diff --cached --check
+          git commit -m 'Revista: incorpora texto da Lua aprovado à prévia'
+          git push origin HEAD:revista-preview-20260917
