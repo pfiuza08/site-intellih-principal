@@ -1,31 +1,25 @@
 # Revista Intellih — prévia GitHub/Vercel
 
-Este pacote foi montado a partir do ZIP aprovado, para ser **adicionado sem substituições** ao repositório `pfiuza08/site-intellih-principal` numa branch de revisão. A integração acrescenta `public/revista/` e `editorial-revista/`; **não modifica** `public/index.html`, `public/blog/`, `vercel.json`, `sitemap.xml`, `robots.txt`, APIs nem arquivos de serviços.
+Este projeto adiciona `public/revista/` e `editorial-revista/` ao repositório `pfiuza08/site-intellih-principal` na branch `revista-preview-20260917`. **Não altera** a homepage institucional, o blog, APIs, páginas comerciais nem o sitemap.
 
-## Prévia local
+## Fontes de conteúdo
 
-```bash
-python3 -m http.server 8000 --directory public
-# Acesse http://localhost:8000/revista/
-```
+- `editorial-revista/conteudo/noticias.json`: matéria de estreia do James Webb (IC 348), com imagem científica da ESA/Webb, crédito, legenda, texto e referências.
+- `editorial-revista/conteudo/artigos.json`: quatro explicadores demonstrativos. A matéria sobre a Lua trata da simulação divulgada em 2022; não apresentá-la como descoberta de 2026.
+- `editorial-revista/build.py`: combina os dois arquivos e gera a homepage, **cinco artigos** e seis páginas de editorias. O destaque é a matéria Webb.
 
-## Gerar páginas após editar conteúdos
+## Gerar e conferir localmente
 
 ```bash
 python3 editorial-revista/build.py
+python3 -m http.server 8000 --directory public
+# Abra http://localhost:8000/revista/
 ```
 
-As páginas são geradas de `editorial-revista/conteudo/artigos.json`. As URLs internas usam `/revista/` para funcionarem com `cleanUrls: true` do Vercel. Execute o servidor local com raiz `public` para simular esse caminho. A busca filtra somente os cards da página atual.
+A geração grava arquivos apenas em `public/revista/`. Os caminhos internos usam `/revista/`. O CSS responsivo aprovado fica em `public/revista/assets/style.css` e não é alterado pelo gerador. A busca filtra os cards da página atual; não pesquisa o acervo inteiro.
 
-## Não publicar no domínio ainda
+## Restrições da prévia
 
-As páginas incluem `noindex,nofollow` e aviso de PRÉVIA. Os quatro artigos presentes no ZIP original são demonstrativos, com imagens vetoriais ilustrativas e datas a revisar. O rascunho de estreia `ARTIGO-ESTREIA-RASCUNHO.md` **não aparece** na homepage e precisa de revisão editorial e imagem autorizada. Não adicionar a revista ao sitemap nem ao menu institucional antes da aprovação; não remover `noindex` no preview.
+Todos os HTMLs gerados contêm `noindex,nofollow` e aviso de revisão. Os quatro artigos demonstrativos e suas ilustrações ainda precisam de aprovação. A imagem de IC 348 é carregada por URL externa e deve ter sua exibição e atribuição verificadas visualmente. O resultado local foi conferido com os cinco artigos; não equivale a teste do deploy remoto.
 
-## Publicação depois da aprovação
-
-1. Revisar e aprovar texto, fontes, título, imagem e créditos; ocultar ou substituir os artigos demonstrativos não aprovados.
-2. Preparar canonical, metadados sociais e sitemap da revista, sem sobrescrever o sitemap atual.
-3. Validar URLs com o Vercel Preview da branch e executar smoke test de `/`, `/blog/` e páginas comerciais.
-4. Só depois: remover avisos e `noindex` **nas páginas aprovadas**; criar link discreto no site institucional, preservando o layout existente; fazer merge em `main` com autorização explícita.
-
-O protótipo não inclui CMS nem integração de newsletter. O Vercel Preview depende de a branch ser adicionada ao GitHub e da integração Vercel estar ativa; este ZIP por si só não cria deploy.
+**Não faça merge na `main` nem remova os bloqueios de indexação sem aprovação explícita.** Antes de publicar, revisar conteúdo e licenças, registrar datas reais, incluir canonical/SEO/sitemap somente das páginas aprovadas, testar a prévia na Vercel e confirmar que `/`, `/blog/` e as páginas de soluções permanecem intactos.
