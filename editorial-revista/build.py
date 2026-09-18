@@ -7,6 +7,7 @@ from __future__ import annotations
 from datetime import datetime
 from html import escape
 import json
+import re
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -16,6 +17,8 @@ EVERGREEN = json.loads((BASE / 'conteudo' / 'artigos.json').read_text(encoding='
 NEWS = json.loads((BASE / 'conteudo' / 'noticias.json').read_text(encoding='utf-8'))
 # A pauta principal é a notícia aprovada para a prévia; a Lua (estudo de 2022) não é notícia recente.
 ARTICLES = NEWS + [{**a, 'destaque': False} for a in EVERGREEN]
+PUBLICATION_DATE = '2026-09-18'
+PUBLICATION_DATE_BR = datetime.strptime(PUBLICATION_DATE, '%Y-%m-%d').strftime('%d/%m/%Y')
 EDITORIAS = {
     'ciencia': ('Ciência', 'O que a pesquisa revela sobre o Universo, a Terra e as grandes perguntas da ciência.', lambda a: a['categoria'] == 'Ciência'),
     'tecnologia': ('Tecnologia', 'IA, ferramentas e conceitos tecnológicos explicados com contexto e método.', lambda a: a['categoria'] == 'Tecnologia'),
@@ -61,7 +64,7 @@ def footer(prefix='./'):
 <div class="footer-end">© Intellih · Protótipo editorial · Fotografias e ilustrações identificadas nas matérias; fontes em cada artigo.</div></div></footer>
 <script src="{asset('app.js',prefix)}" defer></script>'''
 
-def doc(title, desc, main, prefix='./', active='Revista', page_type='website'):
+def doc(title, desc, main, prefix='./', active='Revista', page_type='website', canonical_path='/revista/', publication_date=None, is_empty=False):
     page = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>{h(title)} | Intellih Revista</title><meta name="description" content="{h(desc)}"><meta name="theme-color" content="#050505">
 <meta property="og:site_name" content="Revista Intellih"><meta property="og:locale" content="pt_BR"><meta property="og:type" content="{h(page_type)}"><meta property="og:title" content="{h(title)} | Intellih Revista"><meta property="og:description" content="{h(desc)}">
@@ -74,6 +77,20 @@ def doc(title, desc, main, prefix='./', active='Revista', page_type='website'):
     page = page.replace('href="https://www.intellih.com.br/"', 'href="/"')
     page = page.replace('EDIÇÃO PILOTO · Protótipo para revisão — ainda não publicado na Intellih', 'PRÉVIA EDITORIAL · Conteúdo e imagens em revisão; não publicar sem aprovação')
     page = page.replace('edição piloto', 'prévia editorial').replace('Protótipo editorial', 'Prévia editorial')
+    # Metadados de producao, sem data ficticia e sem indexar editorias vazias.
+    robots = 'noindex,follow' if is_empty else 'index,follow'
+    page = page.replace('<meta name="robots" content="noindex,nofollow">', f'<meta name="robots" content="{robots}">')
+    canonical = 'https://www.intellih.com.br' + canonical_path
+    metadata = f'<link rel="canonical" href="{h(canonical)}"><meta property="og:url" content="{h(canonical)}">'
+    if publication_date:
+        metadata += f'<meta property="article:published_time" content="{h(publication_date)}">'
+    page = page.replace('</head>', metadata + '</head>')
+    page = page.replace('<div class="demo-bar">PRÉVIA EDITORIAL · Conteúdo e imagens em revisão; não publicar sem aprovação</div>', '')
+    page = page.replace('Redação Intellih · texto em revisão', 'Redação Intellih')
+    page = page.replace('© Intellih · Prévia editorial · ', '© Intellih · ')
+    page = page.replace('<p>Este protótipo não possui newsletter nem sistema automático de publicação.</p>', '')
+    page = page.replace('Esta editoria ainda não tem artigos no protótipo. Preferimos uma página transparente a preencher o espaço com notícias fictícias.', 'Esta editoria está em preparação. Novos artigos serão publicados quando estiverem prontos.')
+    page = re.sub(r'<p style="font-size:12px;color:#777;font-family:Inter,Arial,sans-serif">Texto editorial preparado para avaliação; revisar informações, imagens e direitos antes da publicação definitiva.</p>', '', page)
     return page
 
 def picture(a, prefix='./', tag=False, link_credit=False):
@@ -104,7 +121,7 @@ def index_page():
     rail=''.join(f'<a class="rail-item" href="{art_link(a)}"><div><span class="eyebrow">{h(a["categoria"])} · {h(a["editoria"])}</span><h3>{h(a["titulo"])}</h3><span class="meta">{h(a["leitura"])} de leitura</span></div>{picture(a)}</a>' for a in other[:3])
     cards=''.join(article_card(a,search=True) for a in ARTICLES)
     cats=''.join(f'<a class="category-tile" href="./editorias/{slug}.html"><span>↗ EDITORIA</span><h3>{h(name)}</h3><p>{h(text)}</p></a>' for slug,(name,text,_) in list(EDITORIAS.items())[:4])
-    body=f'''<section class="hero-intro"><div class="wrap"><div class="line"></div><span class="eyebrow">REVISTA INTELLIH</span><h1>Inteligência para<br>entender o mundo.</h1><p>Ciência, tecnologia e histórias extraordinárias — explicadas com contexto, evidências e sem exagero.</p><div class="edition">Uma publicação da Intellih · primeira edição em revisão · {len(ARTICLES)} artigos</div></div></section>
+    body=f'''<section class="hero-intro"><div class="wrap"><div class="line"></div><span class="eyebrow">REVISTA INTELLIH</span><h1>Inteligência para<br>entender o mundo.</h1><p>Ciência, tecnologia e histórias extraordinárias — explicadas com contexto, evidências e sem exagero.</p><div class="edition">Uma publicação da Intellih · edição de {PUBLICATION_DATE_BR} · {len(ARTICLES)} artigos</div></div></section>
 <section class="wrap lead-grid" aria-label="Destaques"><a class="lead-card" href="{art_link(feature)}">{picture(feature,tag=True)}<span class="eyebrow" style="display:block;margin-top:18px">{h(feature['categoria'])} · {h(feature['editoria'])}</span><h2>{h(feature['titulo'])}</h2><p>{h(feature['subtitulo'])}</p><span class="meta">{h(feature['formato'])} · {h(feature['leitura'])} de leitura</span></a>
 <aside class="lead-rail"><div class="rail-label">Para descobrir <span style="color:var(--accent)">↗</span></div>{rail}<div class="rail-note"><b>O que é a revista Intellih?</b><p>Uma seleção editorial: fatos, conceitos e descobertas com explicação e fontes. Não é um serviço de notícias em tempo real.</p></div></aside></section>
 <section class="section section-cream" data-collection><div class="wrap"><div class="divider-title"><h2>Explore os artigos</h2><span class="meta">{len(ARTICLES)} leituras</span></div><div class="cards">{cards}</div><p class="search-empty" data-search-empty>Nenhum artigo desta página corresponde à busca.</p></div></section>
@@ -125,11 +142,11 @@ def article_page(a):
     sources=''.join('<li><a href="'+h(s['url'])+'" target="_blank" rel="noopener noreferrer">'+h(s['nome'])+' ↗</a></li>' for s in a['fontes'])
     related=[b for b in ARTICLES if b is not a][:3]
     rec=''.join('<a href="'+art_link(b,prefix)+'">'+h(b['titulo'])+'</a>' for b in related)
-    body=f'''<div class="wrap article-hero"><div class="breadcrumbs"><a href="../index.html">Revista</a> / <a href="../editorias/{'ciencia' if a['categoria']=='Ciência' else 'tecnologia'}.html">{h(a['categoria'])}</a> / {h(a['editoria'])}</div><span class="eyebrow">{h(a['categoria'])} · {h(a['formato'])}</span><h1>{h(a['titulo'])}</h1><p class="dek">{h(a['subtitulo'])}</p><div class="article-meta"><span>Redação Intellih · texto em revisão</span><span>Rascunho em {datetime.strptime(a['data'],'%Y-%m-%d').strftime('%d/%m/%Y')}</span><span>{h(a['leitura'])} de leitura</span></div></div>
+    body=f'''<div class="wrap article-hero"><div class="breadcrumbs"><a href="../index.html">Revista</a> / <a href="../editorias/{'ciencia' if a['categoria']=='Ciência' else 'tecnologia'}.html">{h(a['categoria'])}</a> / {h(a['editoria'])}</div><span class="eyebrow">{h(a['categoria'])} · {h(a['formato'])}</span><h1>{h(a['titulo'])}</h1><p class="dek">{h(a['subtitulo'])}</p><div class="article-meta"><span>Redação Intellih · texto em revisão</span><span>Publicado em {datetime.strptime(a['publicado_em'],'%Y-%m-%d').strftime('%d/%m/%Y')}</span><span>{h(a['leitura'])} de leitura</span></div></div>
 <div class="article-media">{picture(a,prefix,link_credit=True)}{'' if a.get('credito_exibir') else '<p class="credit">'+h(a['credito_imagem'])+'</p>'}</div>
 <div class="article-layout"><article class="prose" aria-label="Texto do artigo">{prose}<section class="source-box" aria-labelledby="fontes"><h2 id="fontes">Fontes e referências</h2><ul>{sources}</ul><p style="font-size:12px;color:#777;font-family:Inter,Arial,sans-serif">Texto editorial preparado para avaliação; revisar informações, imagens e direitos antes da publicação definitiva.</p></section></article><aside class="aside"><div class="aside-title">Continue explorando</div>{rec}<p>Leitura com contexto, sem transformar hipótese em certeza.</p></aside></div>
 <section class="article-footer"><div class="wrap"><h2>Gostou de descobrir mais?</h2><a class="pill-link" href="../index.html">Voltar à revista →</a></div></section>'''
-    (SITE/'artigos'/f'{a["slug"]}.html').write_text(doc(a.get('titulo_seo',a['titulo']),a.get('descricao_seo',a['subtitulo']),body,prefix,active='Revista',page_type='article'),encoding='utf-8')
+    (SITE/'artigos'/f'{a["slug"]}.html').write_text(doc(a.get('titulo_seo',a['titulo']),a.get('descricao_seo',a['subtitulo']),body,prefix,active='Revista',page_type='article',canonical_path='/revista/artigos/'+a['slug'],publication_date=a['publicado_em']),encoding='utf-8')
 
 def section_page(slug, data):
     title, desc, predicate=data
@@ -139,7 +156,7 @@ def section_page(slug, data):
     else:
         cards='<div class="empty-state"><span class="eyebrow">EM PREPARAÇÃO</span><h2>Novas histórias vêm aí.</h2><p>Esta editoria ainda não tem artigos no protótipo. Preferimos uma página transparente a preencher o espaço com notícias fictícias.</p><a class="pill-link" href="../index.html">Voltar à revista →</a></div>'
     body=heading(title,desc)+f'<section class="collection"><div class="wrap" data-collection><div class="divider-title"><h2>Artigos desta editoria</h2><span class="meta">{len(selection)} artigo(s)</span></div>{cards}</div></section>'
-    (SITE/'editorias'/f'{slug}.html').write_text(doc(title,desc,body,'../',active=title),encoding='utf-8')
+    (SITE/'editorias'/f'{slug}.html').write_text(doc(title,desc,body,'../',active=title,canonical_path='/revista/editorias/'+slug,is_empty=not selection),encoding='utf-8')
 
 def validate():
     slugs=set()

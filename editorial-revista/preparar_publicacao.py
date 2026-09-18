@@ -186,7 +186,7 @@ def picture(a, prefix='./', tag=False, link_credit=False):''',
                 candidate = PUBLIC / value.lstrip('/')
                 if not candidate.is_file():
                     raise RuntimeError(f'Recurso local ausente: {path} {value}')
-        if p.parent.name=='artigos' and 'Crédito: ESA/Webb' not in text and 'gerada com IA' not in text:
+        if p.parent.name=='artigos' and 'ESA/Webb, NASA, CSA' not in text and 'gerada com IA' not in text:
             raise RuntimeError('Credito da imagem ausente em '+path)
     if index_count != 9:raise RuntimeError(f'Quantidade inesperada de paginas indexaveis: {index_count}')
     if any('/revista/editorias/'+empty in sitemap.read_text(encoding='utf-8') for empty in ('natureza','cultura')):

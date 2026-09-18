@@ -64,7 +64,8 @@
     ],
     "titulo_seo": "A Lua pode ter se formado em poucas horas? Simulação de 2022",
     "descricao_seo": "Simulações publicadas em 2022 propuseram uma formação muito rápida da Lua. Saiba o que o estudo mostra e o que ainda é hipótese.",
-    "alt_imagem": "Ilustração artística gerada com IA de uma colisão na Terra primitiva, com material incandescente lançado ao espaço."
+    "alt_imagem": "Ilustração artística gerada com IA de uma colisão na Terra primitiva, com material incandescente lançado ao espaço.",
+    "publicado_em": "2026-09-18"
   },
   {
     "slug": "por-que-luz-nao-escapa-buraco-negro",
@@ -133,7 +134,8 @@
         "url": "https://www.nasa.gov/universe/what-are-black-holes/"
       }
     ],
-    "alt_imagem": "Ilustração conceitual gerada com IA de um buraco negro cercado por um disco luminoso de material aquecido."
+    "alt_imagem": "Ilustração conceitual gerada com IA de um buraco negro cercado por um disco luminoso de material aquecido.",
+    "publicado_em": "2026-09-18"
   },
   {
     "slug": "nem-toda-ia-e-generativa",
@@ -219,6 +221,7 @@
       }
     ],
     "descricao_seo": "Nem toda IA é generativa: classificação, previsão, reconhecimento, recomendação e otimização exigem tarefas e critérios de avaliação diferentes.",
-    "alt_imagem": "Imagem conceitual gerada com IA de um ambiente de trabalho com computador, representando diferentes aplicações de inteligência artificial."
+    "alt_imagem": "Imagem conceitual gerada com IA de um ambiente de trabalho com computador, representando diferentes aplicações de inteligência artificial.",
+    "publicado_em": "2026-09-18"
   }
 ]

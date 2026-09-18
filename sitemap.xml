@@ -41,4 +41,42 @@
     <priority>0.5</priority>
   </url>
 
+
+  <!-- Revista Intellih: primeira edicao -->
+  <url>
+    <loc>https://www.intellih.com.br/revista/</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/artigos/webb-anas-marrons-duas-massas-jupiter</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/artigos/lua-formacao-em-horas</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/artigos/por-que-luz-nao-escapa-buraco-negro</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/artigos/nem-toda-ia-e-generativa</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/editorias/ciencia</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/editorias/tecnologia</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/editorias/parece-inventado</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/editorias/inteligencia-artificial</loc>
+    <lastmod>2026-09-18</lastmod>
+  </url>
 </urlset>
