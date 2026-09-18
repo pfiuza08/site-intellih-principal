@@ -60,8 +60,10 @@ def local_path(value: str, page: Path) -> Path | None:
 
 
 def main() -> None:
-    articles = json.loads((DATA / 'artigos.json').read_text(encoding='utf-8'))
-    articles += json.loads((DATA / 'noticias.json').read_text(encoding='utf-8'))
+    evergreen = json.loads((DATA / 'artigos.json').read_text(encoding='utf-8'))
+    news = json.loads((DATA / 'noticias.json').read_text(encoding='utf-8'))
+    # Mesmo tratamento do build.py: artigos atemporais nao viram destaque de noticia.
+    articles = news + [{**a, 'destaque': False} for a in evergreen]
     assert len(articles) == 4, 'Esperados quatro artigos aprovados'
     assert len({a['slug'] for a in articles}) == 4, 'Slugs duplicados'
     assert sum(bool(a.get('destaque')) for a in articles) == 1, 'Destaque incorreto'
