@@ -1,0 +1,81 @@
+name: Corrigir sitemap e canonical da Revista Intellih (temporario)
+on:
+  push:
+    branches: [revista-correcao-sitemap-20260918]
+    paths: ['.github/workflows/revista-hotfix-temporario.yml']
+permissions:
+  contents: write
+jobs:
+  corrigir:
+    if: github.ref == 'refs/heads/revista-correcao-sitemap-20260918'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ajustar caminhos realmente servidos pela Vercel e validar
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git branch --show-current)" = revista-correcao-sitemap-20260918
+          test "$(git rev-parse HEAD)" = '$(git rev-parse HEAD)' || true
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = 994b5dfaf3934239bc37d91d418287ba1ba697e2
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, re, subprocess, xml.etree.ElementTree as ET
+          root=Path('.')
+          b=Path('editorial-revista/build.py')
+          builder=b.read_text(encoding='utf-8')
+          before="canonical_path='/revista/'"
+          assert builder.count(before)==1
+          b.write_text(builder.replace(before,"canonical_path='/revista'"),encoding='utf-8')
+          sitemap=Path('sitemap.xml')
+          xml=sitemap.read_text(encoding='utf-8')
+          old='<loc>https://www.intellih.com.br/revista/</loc>'
+          assert xml.count(old)==1
+          xml=xml.replace(old,'<loc>https://www.intellih.com.br/revista</loc>')
+          sitemap.write_text(xml,encoding='utf-8')
+          public_sitemap=Path('public/sitemap.xml')
+          public_robots=Path('public/robots.txt')
+          assert not public_sitemap.exists() and not public_robots.exists()
+          public_sitemap.write_text(xml,encoding='utf-8')
+          public_robots.write_bytes(Path('robots.txt').read_bytes())
+          tree=ET.parse(public_sitemap)
+          ns='{http://www.sitemaps.org/schemas/sitemap/0.9}'
+          locs=[e.text for e in tree.getroot().iter(ns+'loc')]
+          assert len(locs)==len(set(locs))==14
+          assert 'https://www.intellih.com.br/revista' in locs
+          assert all('/revista/editorias/'+s not in ' '.join(locs) for s in ('natureza','cultura'))
+          articles=sorted(Path('public/revista/artigos').glob('*.html'))
+          def body(p):
+              t=p.read_text(encoding='utf-8')
+              m=re.search(r'<article class="prose" aria-label="Texto do artigo">(.*?)<section class="source-box"',t,re.S)
+              assert m,p
+              return hashlib.sha256(m.group(1).encode('utf-8')).hexdigest()
+          before_texts={p.name:body(p) for p in articles}
+          subprocess.check_call(['python3','editorial-revista/build.py'])
+          assert {p.name:body(p) for p in articles}==before_texts
+          html=Path('public/revista/index.html').read_text(encoding='utf-8')
+          assert '<link rel="canonical" href="https://www.intellih.com.br/revista">' in html
+          assert '<meta property="og:url" content="https://www.intellih.com.br/revista">' in html
+          assert '<meta name="robots" content="index,follow">' in html
+          for slug in ('natureza','cultura'):
+              page=Path('public/revista/editorias/'+slug+'.html').read_text(encoding='utf-8')
+              assert '<meta name="robots" content="noindex,follow">' in page
+          assert public_robots.read_bytes()==Path('robots.txt').read_bytes()
+          print('HOTFIX OK: URL real /revista, sitemap servido por public, robots servido por public, 14 URLs, textos intactos.')
+          PY
+          python3 -m py_compile editorial-revista/build.py
+          git diff --check
+          test -z "$(git diff --name-only -- public/index.html public/blog robots.txt vercel.json)"
+      - name: Gravar somente o hotfix na branch separada
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add editorial-revista/build.py public/revista/index.html sitemap.xml public/sitemap.xml public/robots.txt
+          git diff --cached --quiet && { echo 'Sem hotfix'; exit 1; }
+          git commit -m 'Corrigir sitemap e canonical da revista no dominio publico'
+          git push origin HEAD:revista-correcao-sitemap-20260918
