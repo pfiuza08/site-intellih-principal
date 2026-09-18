@@ -61,9 +61,11 @@ def footer(prefix='./'):
 <div class="footer-end">© Intellih · Protótipo editorial · Fotografias e ilustrações identificadas nas matérias; fontes em cada artigo.</div></div></footer>
 <script src="{asset('app.js',prefix)}" defer></script>'''
 
-def doc(title, desc, main, prefix='./', active='Revista'):
+def doc(title, desc, main, prefix='./', active='Revista', page_type='website'):
     page = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>{h(title)} | Intellih Revista</title><meta name="description" content="{h(desc)}"><meta name="theme-color" content="#050505">
+<meta property="og:site_name" content="Revista Intellih"><meta property="og:locale" content="pt_BR"><meta property="og:type" content="{h(page_type)}"><meta property="og:title" content="{h(title)} | Intellih Revista"><meta property="og:description" content="{h(desc)}">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="{h(title)} | Intellih Revista"><meta name="twitter:description" content="{h(desc)}">
 <link rel="icon" type="image/png" href="{asset('img/intellih-symbol-dark.png',prefix)}"><link rel="stylesheet" href="{asset('style.css',prefix)}"></head>
 <body>{header(prefix,active)}<main id="conteudo">{main}</main>{footer(prefix)}</body></html>'''
     page = page.replace('href="../', 'href="/revista/').replace('src="../', 'src="/revista/')
@@ -128,7 +130,7 @@ def article_page(a):
 <div class="article-media">{picture(a,prefix,link_credit=True)}{'' if a.get('credito_exibir') else '<p class="credit">'+h(a['credito_imagem'])+'</p>'}</div>
 <div class="article-layout"><article class="prose" aria-label="Texto do artigo">{prose}<section class="source-box" aria-labelledby="fontes"><h2 id="fontes">Fontes e referências</h2><ul>{sources}</ul><p style="font-size:12px;color:#777;font-family:Inter,Arial,sans-serif">Texto editorial preparado para avaliação; revisar informações, imagens e direitos antes da publicação definitiva.</p></section></article><aside class="aside"><div class="aside-title">Continue explorando</div>{rec}<p>Leitura com contexto, sem transformar hipótese em certeza.</p></aside></div>
 <section class="article-footer"><div class="wrap"><h2>Gostou de descobrir mais?</h2><a class="pill-link" href="../index.html">Voltar à revista →</a></div></section>'''
-    (SITE/'artigos'/f'{a["slug"]}.html').write_text(doc(a.get('titulo_seo',a['titulo']),a.get('descricao_seo',a['subtitulo']),body,prefix,active='Revista'),encoding='utf-8')
+    (SITE/'artigos'/f'{a["slug"]}.html').write_text(doc(a.get('titulo_seo',a['titulo']),a.get('descricao_seo',a['subtitulo']),body,prefix,active='Revista',page_type='article'),encoding='utf-8')
 
 def section_page(slug, data):
     title, desc, predicate=data

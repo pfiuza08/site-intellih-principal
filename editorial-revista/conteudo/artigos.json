@@ -215,7 +215,7 @@
       },
       {
         "nome": "Google for Developers — Classificação",
-        "url": "https://developers.google.com/machine-learning/crash-course/classification?hl=pt-BR"
+        "url": "https://developers.google.com/machine-learning/crash-course/classification"
       }
     ],
     "descricao_seo": "Nem toda IA é generativa: classificação, previsão, reconhecimento, recomendação e otimização exigem tarefas e critérios de avaliação diferentes.",
