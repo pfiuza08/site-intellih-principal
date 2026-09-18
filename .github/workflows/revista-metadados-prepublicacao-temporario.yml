@@ -11,85 +11,76 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Atualizar gerador e conferir que continua sendo prévia
+      - name: Preparar metadados e preservar os artigos
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from html.parser import HTMLParser
-          import hashlib, re, subprocess, json
-          branch = subprocess.check_output(['git','branch','--show-current'], text=True).strip()
-          assert branch == 'revista-preview-20260917', branch
-          root = Path('public/revista')
-          originals = sorted((root/'artigos').glob('*.html'))
-          assert len(originals) == 4
-          def body(p):
-              match = re.search(r'<article class="prose" aria-label="Texto do artigo">(.*?)<section class="source-box"',p.read_text(encoding='utf-8'),re.S)
-              assert match, p
-              return hashlib.sha256(match.group(1).encode()).hexdigest()
-          before = {p.name: body(p) for p in originals}
-          img_before = {str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'assets'/'img').glob('*') if p.suffix in ('.png','.webp')}
-          source = Path('editorial-revista/conteudo/artigos.json')
-          data = source.read_text(encoding='utf-8')
-          oldlink='https://developers.google.com/machine-learning/crash-course/classification?hl=pt-BR'
-          newlink='https://developers.google.com/machine-learning/crash-course/classification'
-          assert data.count(oldlink)==1, 'Fonte de classificação não encontrada uma vez'
-          source.write_text(data.replace(oldlink,newlink), encoding='utf-8')
-          buildpath = Path('editorial-revista/build.py')
-          code = buildpath.read_text(encoding='utf-8')
-          old_signature="def doc(title, desc, main, prefix='./', active='Revista'):"
-          new_signature="def doc(title, desc, main, prefix='./', active='Revista', page_type='website'):"
-          assert code.count(old_signature)==1
-          code=code.replace(old_signature,new_signature)
-          oldhead='''<meta name="robots" content="noindex,nofollow"><title>{h(title)} | Intellih Revista</title><meta name="description" content="{h(desc)}"><meta name="theme-color" content="#050505">'''
-          newhead='''<meta name="robots" content="noindex,nofollow"><title>{h(title)} | Intellih Revista</title><meta name="description" content="{h(desc)}"><meta name="theme-color" content="#050505">
-<meta property="og:site_name" content="Revista Intellih"><meta property="og:locale" content="pt_BR"><meta property="og:type" content="{h(page_type)}"><meta property="og:title" content="{h(title)} | Intellih Revista"><meta property="og:description" content="{h(desc)}">
-<meta name="twitter:card" content="summary"><meta name="twitter:title" content="{h(title)} | Intellih Revista"><meta name="twitter:description" content="{h(desc)}">'''
-          assert code.count(oldhead)==1, 'Head do gerador divergiu da versão auditada'
-          code=code.replace(oldhead,newhead)
-          old_article="body,prefix,active='Revista'),encoding='utf-8')"
-          new_article="body,prefix,active='Revista',page_type='article'),encoding='utf-8')"
-          assert code.count(old_article)==1, 'Chamada de artigo inesperada'
-          code=code.replace(old_article,new_article)
-          buildpath.write_text(code, encoding='utf-8')
+          import hashlib, re, subprocess
+          assert subprocess.check_output(['git','branch','--show-current'],text=True).strip()=='revista-preview-20260917'
+          root=Path('public/revista')
+          articles=sorted((root/'artigos').glob('*.html'))
+          assert len(articles)==4
+          def article_body(p):
+              m=re.search(r'<article class="prose" aria-label="Texto do artigo">(.*?)<section class="source-box"',p.read_text(encoding='utf-8'),re.S)
+              assert m,p
+              return hashlib.sha256(m.group(1).encode()).hexdigest()
+          before={p.name:article_body(p) for p in articles}
+          image_hashes={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'assets'/'img').glob('*') if p.suffix in ('.png','.webp')}
+          source=Path('editorial-revista/conteudo/artigos.json')
+          source_text=source.read_text(encoding='utf-8')
+          old_url='https://developers.google.com/machine-learning/crash-course/classification?hl=pt-BR'
+          new_url='https://developers.google.com/machine-learning/crash-course/classification'
+          assert source_text.count(old_url)==1
+          source.write_text(source_text.replace(old_url,new_url),encoding='utf-8')
+          buildpath=Path('editorial-revista/build.py')
+          build=buildpath.read_text(encoding='utf-8')
+          old_sig="def doc(title, desc, main, prefix='./', active='Revista'):"
+          new_sig="def doc(title, desc, main, prefix='./', active='Revista', page_type='website'):"
+          assert build.count(old_sig)==1
+          build=build.replace(old_sig,new_sig)
+          oldhead='<meta name="robots" content="noindex,nofollow"><title>{h(title)} | Intellih Revista</title><meta name="description" content="{h(desc)}"><meta name="theme-color" content="#050505">'
+          newhead=oldhead+('\n<meta property="og:site_name" content="Revista Intellih"><meta property="og:locale" content="pt_BR"><meta property="og:type" content="{h(page_type)}"><meta property="og:title" content="{h(title)} | Intellih Revista"><meta property="og:description" content="{h(desc)}">' '\n<meta name="twitter:card" content="summary"><meta name="twitter:title" content="{h(title)} | Intellih Revista"><meta name="twitter:description" content="{h(desc)}">')
+          assert build.count(oldhead)==1
+          build=build.replace(oldhead,newhead)
+          old_call="body,prefix,active='Revista'),encoding='utf-8')"
+          assert build.count(old_call)==1
+          build=build.replace(old_call,"body,prefix,active='Revista',page_type='article'),encoding='utf-8')")
+          buildpath.write_text(build,encoding='utf-8')
           subprocess.check_call(['python3','editorial-revista/build.py'])
-          assert {p.name:body(p) for p in originals}==before, 'Corpos dos textos aprovados foram alterados'
-          assert {str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'assets'/'img').glob('*') if p.suffix in ('.png','.webp')}==img_before, 'Imagem foi alterada'
+          assert {p.name:article_body(p) for p in articles}==before,'Corpos aprovados alterados'
+          assert {str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'assets'/'img').glob('*') if p.suffix in ('.png','.webp')}==image_hashes,'Imagens alteradas'
           class Check(HTMLParser):
-              def __init__(self): super().__init__(); self.meta=[]; self.title=[]; self.current=False
+              def __init__(self):super().__init__();self.meta=[]
               def handle_starttag(self,tag,attrs):
-                  a=dict(attrs)
-                  if tag=='meta':self.meta.append(a)
-              def find(self,attr,value):
-                  return [x.get('content') for x in self.meta if x.get(attr)==value]
+                  if tag=='meta':self.meta.append(dict(attrs))
+              def get(self,attr,key):return [m.get('content') for m in self.meta if m.get(attr)==key]
           pages=sorted(root.rglob('*.html'))
-          assert len(pages)==12, len(pages)
+          assert len(pages)==12
           for page in pages:
               raw=page.read_text(encoding='utf-8')
               assert '<meta name="robots" content="noindex,nofollow">' in raw,page
               if page.name=='ia-com-metodo.html':continue
               p=Check();p.feed(raw)
               for key in ('og:site_name','og:locale','og:type','og:title','og:description'):
-                  assert len(p.find('property',key))==1 and p.find('property',key)[0],(page,key)
+                  assert len(p.get('property',key))==1 and p.get('property',key)[0],(page,key)
               for key in ('twitter:card','twitter:title','twitter:description'):
-                  assert len(p.find('name',key))==1 and p.find('name',key)[0],(page,key)
-              assert p.find('property','og:type')==(['article'] if page.parent.name=='artigos' else ['website'])
-              assert not p.find('property','og:url') and not p.find('property','og:image'), page
-              assert 'rel="canonical"' not in raw and 'datePublished' not in raw, page
-              if page.parent.name=='artigos':
-                  assert newlink in raw if page.name=='nem-toda-ia-e-generativa.html' else True
-              assert oldlink not in raw,page
-          assert set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines()).issubset({
-              'editorial-revista/build.py','editorial-revista/conteudo/artigos.json',
-              *[str(p) for p in pages]}), 'Mudança fora do escopo'
-          print('TESTE APROVADO: 11 páginas com metadados sociais textuais; 4 textos e imagens intactos; sem canonical, OG:image, data publicada ou indexação.')
-          print('REFERÊNCIA GOOGLE:',newlink)
+                  assert len(p.get('name',key))==1 and p.get('name',key)[0],(page,key)
+              assert p.get('property','og:type')==(['article'] if page.parent.name=='artigos' else ['website'])
+              assert not p.get('property','og:url') and not p.get('property','og:image')
+              assert 'rel="canonical"' not in raw and 'datePublished' not in raw
+              assert old_url not in raw
+              if page.name=='nem-toda-ia-e-generativa.html':assert new_url in raw
+          allowed={'editorial-revista/build.py','editorial-revista/conteudo/artigos.json',*[str(p) for p in pages]}
+          assert set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines()).issubset(allowed)
+          print('APROVADO: 11 paginas com metadados textuais, 4 corpos e imagens preservados; nenhum canonical, dataPublished, og:image ou indexacao.')
           PY
-      - name: Salvar somente na branch de prévia
+      - name: Salvar somente na branch de previa
         run: |
           test "$(git branch --show-current)" = revista-preview-20260917
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add editorial-revista/build.py editorial-revista/conteudo/artigos.json public/revista/index.html public/revista/artigos/*.html public/revista/editorias/*.html
-          git diff --cached --quiet && { echo 'Nenhuma alteração'; exit 1; }
-          git commit -m "Preparar metadados sociais textuais e ajustar fonte Google na prévia"
+          git diff --cached --quiet && { echo 'Nenhuma alteracao'; exit 1; }
+          git commit -m "Preparar metadados sociais textuais e ajustar fonte Google na previa"
           git push origin HEAD:revista-preview-20260917
