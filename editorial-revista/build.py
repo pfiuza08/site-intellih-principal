@@ -58,7 +58,7 @@ def footer(prefix='./'):
 <div><img src="{asset('img/intellih-horizontal-dark.png',prefix)}" class="footer-logo" width="171" height="51" alt="Intellih"><p>Inteligência para entender o mundo. Ciência, tecnologia e ideias com contexto e fontes.</p></div>
 <div><b>Explore</b><a href="{prefix}index.html">Revista Intellih</a><a href="{prefix}editorias/ciencia.html">Ciência</a><a href="{prefix}editorias/tecnologia.html">Tecnologia</a><a href="{prefix}editorias/parece-inventado.html">Parece Inventado?</a><a href="{prefix}editorias/inteligencia-artificial.html">Inteligência Artificial</a></div>
 <div><b>Intellih</b><a href="https://www.intellih.com.br/">Site institucional ↗</a><a href="https://www.intellih.com.br/analise-presenca-digital">Soluções para negócios ↗</a><a href="mailto:contato@intellih.com.br">Contato por e-mail</a><p>Este protótipo não possui newsletter nem sistema automático de publicação.</p></div></div>
-<div class="footer-end">© Intellih · Protótipo editorial · Imagens de capa ilustrativas; fontes em cada artigo.</div></div></footer>
+<div class="footer-end">© Intellih · Protótipo editorial · Fotografias e ilustrações identificadas nas matérias; fontes em cada artigo.</div></div></footer>
 <script src="{asset('app.js',prefix)}" defer></script>'''
 
 def doc(title, desc, main, prefix='./', active='Revista'):
