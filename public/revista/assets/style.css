@@ -105,3 +105,6 @@
 [hidden]{display:none!important}
 /* O PNG original tem fundo #050505; este ajuste evita um retângulo visível no cabeçalho. */
 .header,.footer{background:#050505}
+
+/* Imagens WebP com PNG como alternativa, sem alterar os enquadramentos existentes. */
+.image-box picture{display:block;width:100%;height:100%}

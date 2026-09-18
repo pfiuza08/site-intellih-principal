@@ -87,7 +87,11 @@ def picture(a, prefix='./', tag=False, link_credit=False):
         if link_credit and a.get('fonte_imagem'):
             credit_name='<a href="'+h(a['fonte_imagem'])+'" target="_blank" rel="noopener noreferrer">'+credit_name+'</a>'
         credit='<figcaption class="image-credit">'+h(a.get('legenda_imagem',''))+' Crédito: '+credit_name+'</figcaption>'
-    return f'<figure class="editorial-figure"><div class="image-box"><img src="{h(src)}" alt="{h(alt)}" width="808" height="1000" loading="{loading}">{sticker}</div>{credit}</figure>'
+    img=f'<img src="{h(src)}" alt="{h(alt)}" width="808" height="1000" loading="{loading}">'
+    if not a.get('imagem_url'):
+        optimized=asset('img/'+Path(a['imagem']).with_suffix('.webp').name,prefix)
+        img=f'<picture><source type="image/webp" srcset="{h(optimized)}">{img}</picture>'
+    return f'<figure class="editorial-figure"><div class="image-box">{img}{sticker}</div>{credit}</figure>'
 
 def article_card(a, prefix='./', search=False):
     dat=(f' data-search-card data-search="{h(a["titulo"]+" "+a["subtitulo"]+" "+a["categoria"]+" "+a["editoria"])}"' if search else '')
