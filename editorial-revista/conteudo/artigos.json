@@ -1,0 +1,227 @@
+[
+  {
+    "slug": "lua-formacao-em-horas",
+    "titulo": "A Lua pode ter se formado em poucas horas? O que uma simulação de 2022 revelou",
+    "subtitulo": "Um modelo computacional propôs que um satélite semelhante à Lua poderia surgir rapidamente após uma colisão gigantesca. É uma possibilidade científica, não uma medição do que aconteceu.",
+    "categoria": "Ciência",
+    "editoria": "Espaço",
+    "formato": "Verdade ou exagero?",
+    "chamada": "O que a simulação realmente mostrou — e o que ainda não sabemos.",
+    "destaque": true,
+    "parece": true,
+    "imagem": "formacao-lua-impacto-realista.png",
+    "credito_imagem": "Ilustração artística gerada com IA para a Revista Intellih, baseada na hipótese de grande impacto para a formação da Lua. Não é fotografia nem imagem da simulação de 2022.",
+    "leitura": "4 min",
+    "data": "2026-09-16",
+    "corpo": [
+      {
+        "tipo": "p",
+        "texto": "A ideia de que a Lua nasceu em poucas horas parece extraordinária. Ela tem origem em simulações publicadas em 2022 por pesquisadores que estudaram uma possível colisão entre a Terra primitiva e um corpo aproximadamente do tamanho de Marte, conhecido como Theia. Em alguns cenários simulados, parte do material lançado ao espaço formou, quase imediatamente, um satélite com características semelhantes às da Lua. Isso não significa que os cientistas tenham observado o nascimento do nosso satélite nem determinado sua duração real."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Por que os pesquisadores fizeram essa simulação?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Uma das hipóteses mais estudadas para a origem da Lua envolve um grande impacto há bilhões de anos. Modelos tradicionais descrevem detritos orbitando a Terra e se reunindo ao longo de meses ou anos. Mas existem perguntas difíceis: por exemplo, por que as rochas lunares analisadas têm composição isotópica tão semelhante à de rochas terrestres? A equipe investigou se simulações de resolução mais alta revelariam resultados diferentes."
+      },
+      {
+        "tipo": "h2",
+        "texto": "O que mudou no modelo de 2022?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Em parte das simulações, a colisão colocou diretamente em órbita um corpo com massa semelhante à da Lua. Segundo os pesquisadores, a resolução numérica foi importante: modelos menos detalhados poderiam não mostrar alguns comportamentos do material e da dinâmica do impacto. A possibilidade de formação rápida oferece outra maneira de investigar a composição da Lua e a evolução inicial de sua órbita."
+      },
+      {
+        "tipo": "callout",
+        "titulo": "O que a pesquisa mostrou — e o que não mostrou",
+        "texto": "um satélite semelhante à Lua pode se formar em questão de horas nas condições de determinadas simulações. Isso não comprova que a Lua real tenha se formado exatamente assim, nem estabelece uma contagem definitiva de horas."
+      },
+      {
+        "tipo": "h2",
+        "texto": "O que ainda falta descobrir?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Uma simulação depende das condições iniciais e das propriedades físicas escolhidas para representar a colisão. Para avaliar qual cenário corresponde melhor à história real, é necessário compará-lo com a composição das rochas lunares, a órbita atual do sistema Terra–Lua e outras observações. Amostras de diferentes regiões da Lua podem ajudar a testar essas explicações."
+      },
+      {
+        "tipo": "p",
+        "texto": "Portanto, “a Lua nasceu em cinco horas” não é um fato confirmado. O que existe é uma hipótese respaldada por um estudo computacional de 2022: em certas condições, um grande impacto poderia formar um satélite semelhante à Lua muito mais depressa do que propunham alguns modelos anteriores. A descoberta está na nova possibilidade que podemos investigar, não em um cronômetro do passado."
+      }
+    ],
+    "fontes": [
+      {
+        "nome": "NASA — Collision May Have Formed the Moon in Mere Hours (2022)",
+        "url": "https://www.nasa.gov/solar-system/collision-may-have-formed-the-moon-in-mere-hours-simulations-reveal/"
+      },
+      {
+        "nome": "NASA Science — Moon Formation",
+        "url": "https://science.nasa.gov/moon/formation/"
+      }
+    ],
+    "titulo_seo": "A Lua pode ter se formado em poucas horas? Simulação de 2022",
+    "descricao_seo": "Simulações publicadas em 2022 propuseram uma formação muito rápida da Lua. Saiba o que o estudo mostra e o que ainda é hipótese.",
+    "alt_imagem": "Ilustração artística gerada com IA de uma colisão na Terra primitiva, com material incandescente lançado ao espaço.",
+    "publicado_em": "2026-09-18"
+  },
+  {
+    "slug": "por-que-luz-nao-escapa-buraco-negro",
+    "titulo": "Se a luz não tem massa, por que não escapa de um buraco negro?",
+    "subtitulo": "O horizonte de eventos não funciona como uma parede que segura a luz: ele marca uma região da qual nenhum sinal consegue voltar para fora.",
+    "categoria": "Ciência",
+    "editoria": "Física",
+    "formato": "Explicação",
+    "chamada": "O horizonte de eventos é uma fronteira sem caminho de saída.",
+    "destaque": false,
+    "parece": true,
+    "imagem": "buraco-negro-realista.png",
+    "credito_imagem": "Ilustração conceitual gerada com IA para a Revista Intellih. O brilho representa material aquecido ao redor do buraco negro, não luz emitida de seu interior.",
+    "leitura": "4 min",
+    "data": "2026-09-16",
+    "corpo": [
+      {
+        "tipo": "p",
+        "texto": "A luz não tem massa de repouso. Mesmo assim, sua trajetória muda na presença de gravidade. Isso parece contraditório apenas quando imaginamos a gravidade como uma força que atua exclusivamente sobre objetos pesados. Na relatividade geral de Einstein, matéria e energia estão associadas à curvatura do espaço-tempo, e a luz percorre caminhos nessa geometria."
+      },
+      {
+        "tipo": "h2",
+        "texto": "A luz pode escapar das proximidades de um buraco negro?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Sim — se ainda estiver fora do horizonte de eventos e seguir uma trajetória que alcance uma região distante. A gravidade pode desviar intensamente a luz, fazendo com que a matéria brilhante atrás do buraco negro apareça distorcida. Estar perto de um buraco negro não é o mesmo que ter atravessado sua fronteira sem retorno."
+      },
+      {
+        "tipo": "h2",
+        "texto": "O que muda ao cruzar o horizonte de eventos?"
+      },
+      {
+        "tipo": "p",
+        "texto": "O horizonte é um limite do espaço-tempo, não uma superfície sólida. Depois de atravessá-lo, nenhum caminho possível para a luz, orientado para o futuro, leva de volta a um observador externo. É nesse sentido que dizemos que nem a luz escapa: não existe uma rota de saída que ela possa seguir."
+      },
+      {
+        "tipo": "callout",
+        "titulo": "O ponto essencial",
+        "texto": "a luz não precisa ter massa de repouso para ser afetada pela geometria do espaço-tempo. O horizonte de eventos é uma fronteira causal, não uma barreira material."
+      },
+      {
+        "tipo": "h2",
+        "texto": "A luz fica mais lenta lá dentro?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Não no sentido de perder sua velocidade local no vácuo. Para um observador em sua vizinhança, a luz continua se propagando à velocidade da luz. O problema é a direção dos caminhos disponíveis no espaço-tempo: dentro do horizonte, nenhum deles alcança o exterior."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Então de onde vem o brilho das imagens de buracos negros?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Do ambiente fora do horizonte. Gás que se aquece no disco de acreção pode emitir radiação intensa; a gravidade distorce os caminhos dessa luz e ajuda a produzir o anel luminoso visto em imagens astronômicas. A região escura no centro corresponde à sombra associada ao buraco negro — não a uma fotografia da luz saindo de seu interior."
+      }
+    ],
+    "fontes": [
+      {
+        "nome": "NASA Science — Anatomy of a Black Hole",
+        "url": "https://science.nasa.gov/universe/black-holes/anatomy/"
+      },
+      {
+        "nome": "NASA — What Are Black Holes?",
+        "url": "https://www.nasa.gov/universe/what-are-black-holes/"
+      }
+    ],
+    "alt_imagem": "Ilustração conceitual gerada com IA de um buraco negro cercado por um disco luminoso de material aquecido.",
+    "publicado_em": "2026-09-18"
+  },
+  {
+    "slug": "nem-toda-ia-e-generativa",
+    "titulo": "Nem toda inteligência artificial é generativa: o que cada tipo de aplicação faz?",
+    "subtitulo": "Produzir texto é apenas uma possibilidade. Classificar, estimar valores, reconhecer sinais, recomendar e apoiar decisões exigem perguntas e critérios de avaliação diferentes.",
+    "categoria": "Tecnologia",
+    "editoria": "Inteligência artificial",
+    "formato": "Explicação",
+    "chamada": "Antes de escolher um chatbot, entenda qual é a tarefa.",
+    "destaque": false,
+    "parece": false,
+    "imagem": "inteligencia-artificial-aplicacoes-pt.png",
+    "credito_imagem": "Imagem conceitual gerada com IA para a Revista Intellih, representando aplicações de inteligência artificial em contextos profissionais. A cena não demonstra o funcionamento de um sistema específico.",
+    "leitura": "5 min",
+    "data": "2026-09-16",
+    "corpo": [
+      {
+        "tipo": "p",
+        "texto": "Quando alguém pensa em inteligência artificial, é comum imaginar um chatbot que escreve, resume ou cria imagens. Mas gerar conteúdo é apenas uma das tarefas possíveis. Há sistemas de IA que atribuem categorias, estimam números, reconhecem padrões ou ajudam a selecionar alternativas — sem precisar produzir um texto novo."
+      },
+      {
+        "tipo": "p",
+        "texto": "A distinção mais útil não é perguntar qual ferramenta está na moda. É começar pelo problema: o que precisa entrar no sistema e que tipo de resposta seria útil?"
+      },
+      {
+        "tipo": "h2",
+        "texto": "Classificar e reconhecer não são o mesmo que gerar"
+      },
+      {
+        "tipo": "p",
+        "texto": "Um sistema que identifica se uma fotografia mostra um gato executa uma tarefa de classificação: associa a imagem a uma ou mais categorias. Reconhecer uma fala pode envolver outras etapas, como transformar áudio em texto. Em ambos os casos, o objetivo principal é identificar informação presente nos dados, não inventar um novo conteúdo."
+      },
+      {
+        "tipo": "p",
+        "texto": "Classificações podem ser úteis para organizar documentos por assunto, identificar mensagens que exigem atenção ou separar tipos de ocorrência. O acerto deve ser medido: uma classificação equivocada também tem consequências."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Prever pode significar uma classe ou um número"
+      },
+      {
+        "tipo": "p",
+        "texto": "Se a pergunta é “vai chover amanhã?”, a saída pode ser uma categoria ou uma probabilidade. Se queremos saber quantos milímetros de chuva são esperados, a saída é numérica. Na aprendizagem de máquina, são formulações distintas: classificação para categorias e regressão para valores numéricos."
+      },
+      {
+        "tipo": "p",
+        "texto": "Por isso, “previsão” descreve o objetivo de estimar algo desconhecido; não é, por si só, o nome de uma única técnica. Os dados, a unidade da resposta e a margem de erro aceitável fazem diferença."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Recomendar e otimizar são outras tarefas"
+      },
+      {
+        "tipo": "p",
+        "texto": "Ao sugerir músicas ou produtos, um sistema pode usar informações sobre preferências e contexto para organizar opções. Ao distribuir horários de atendimento ou planejar rotas, o objetivo pode ser otimizar uma escolha sujeita a restrições, como capacidade e tempo. Nem toda recomendação ou otimização precisa de IA: às vezes, regras e métodos convencionais resolvem melhor o problema."
+      },
+      {
+        "tipo": "h2",
+        "texto": "E a IA generativa?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Modelos generativos produzem conteúdo, como texto, imagem, áudio ou código, com base em padrões aprendidos. Eles podem ajudar a explicar resultados de outros sistemas, mas uma resposta bem escrita não é prova de que a informação esteja correta. A validação continua necessária."
+      },
+      {
+        "tipo": "callout",
+        "titulo": "Antes do prompt, vem o fluxo de trabalho",
+        "texto": "defina a tarefa, os dados de entrada, a saída esperada, como avaliar o resultado e em que ponto uma pessoa precisa revisar ou decidir."
+      },
+      {
+        "tipo": "p",
+        "texto": "Uma mesma aplicação pode combinar diferentes recursos: classificar solicitações, estimar demanda e, depois, gerar um resumo para leitura humana. Não precisamos escolher uma única categoria para todo o sistema. Precisamos entender o papel de cada etapa para aplicar IA com método."
+      }
+    ],
+    "fontes": [
+      {
+        "nome": "Google for Developers — Machine Learning Crash Course",
+        "url": "https://developers.google.com/machine-learning/crash-course"
+      },
+      {
+        "nome": "Google for Developers — Classificação",
+        "url": "https://developers.google.com/machine-learning/crash-course/classification"
+      }
+    ],
+    "descricao_seo": "Nem toda IA é generativa: classificação, previsão, reconhecimento, recomendação e otimização exigem tarefas e critérios de avaliação diferentes.",
+    "alt_imagem": "Imagem conceitual gerada com IA de um ambiente de trabalho com computador, representando diferentes aplicações de inteligência artificial.",
+    "publicado_em": "2026-09-18"
+  }
+]
