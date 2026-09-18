@@ -87,9 +87,12 @@
   .inner-hero { padding: 32px 0; }
   .inner-hero h1 { font-size: 34px; }
   .inner-hero p { font-size: 15px; }
-  .article-hero { padding: 30px 0 23px; }
-  .article-hero h1 { font-size: 32px; line-height: 1.12; }
-  .article-hero .dek { font-size: 16px; }
+  /* A classe article-hero tambem e wrap: nao zerar as margens laterais no celular. */
+  .article-hero { padding: 18px 16px 16px; }
+  .article-hero .breadcrumbs { font-size: 12px; line-height: 1.4; margin-bottom: 14px; }
+  .article-hero h1 { font-size: clamp(27px, 7.9vw, 30px); line-height: 1.12; letter-spacing: -.035em; margin: 9px 0 12px; overflow-wrap: break-word; }
+  .article-hero .dek { font-size: 15px; line-height: 1.5; margin-bottom: 16px; }
+  .article-hero .article-meta { gap: 7px 12px; font-size: 11px; line-height: 1.4; padding-top: 12px; }
   .article-media { padding-inline: 16px; }
   .article-media .image-box { aspect-ratio: 1.6; }
   .article-layout { padding-inline: 16px; margin: 28px auto 55px; gap: 28px; }
