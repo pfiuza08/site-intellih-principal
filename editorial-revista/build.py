@@ -64,7 +64,7 @@ def footer(prefix='./'):
 <div class="footer-end">© Intellih · Protótipo editorial · Fotografias e ilustrações identificadas nas matérias; fontes em cada artigo.</div></div></footer>
 <script src="{asset('app.js',prefix)}" defer></script>'''
 
-def doc(title, desc, main, prefix='./', active='Revista', page_type='website', canonical_path='/revista/', publication_date=None, is_empty=False):
+def doc(title, desc, main, prefix='./', active='Revista', page_type='website', canonical_path='/revista', publication_date=None, is_empty=False):
     page = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>{h(title)} | Intellih Revista</title><meta name="description" content="{h(desc)}"><meta name="theme-color" content="#050505">
 <meta property="og:site_name" content="Revista Intellih"><meta property="og:locale" content="pt_BR"><meta property="og:type" content="{h(page_type)}"><meta property="og:title" content="{h(title)} | Intellih Revista"><meta property="og:description" content="{h(desc)}">
