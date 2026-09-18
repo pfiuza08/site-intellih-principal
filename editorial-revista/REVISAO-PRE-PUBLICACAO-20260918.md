@@ -12,6 +12,7 @@
 | Imagens | Fotografia do Webb: panorama IC 348, crédito integral ESA/Webb na capa e no artigo. Três outras matérias: imagens de IA identificadas como ilustração artística/conceitual. Os três arquivos locais existem. |
 | Editorias | **Natureza e Cultura permanecem no menu, com “Em preparação”**, conforme decisão da responsável editorial. |
 | Estado de prévia | Todas as 12 páginas verificadas mantêm `noindex,nofollow` e o PR continua em rascunho. Isso protege contra indexação pretendida, mas não torna a URL da Vercel privada ou inacessível a quem possuir o link. |
+| Otimização de imagens | **Concluída na prévia:** três WebPs (572.242 B no total) com fallback dos PNGs originais (5.878.505 B no total), redução de 90,3% dos bytes dessas três imagens quando o navegador usa WebP. Teste dos quatro corpos aprovados e das 12 páginas passou. Detalhes: `editorial-revista/OTIMIZACAO-IMAGENS-20260918.md`. Revalidar visualmente no site hospedado após a conversão. |
 
 ## 2. Fontes, datas e direitos — verificação de referência
 
@@ -34,7 +35,7 @@
 
 ### Melhorias recomendadas antes de divulgação ampla
 
-- [ ] **Otimizar as imagens locais para celular.** Os três PNGs pesam, respectivamente, 2.169.113 B (Lua), 2.152.106 B (buraco negro) e 1.557.286 B (IA), total de cerca de **5,88 MB**. Gerar WebP/AVIF e dimensões responsivas sem perda visual perceptível, manter os originais como fonte e testar carregamento real/LCP. A fotografia Webb externa também depende de rede e servidor da ESA.
+- [x] **Otimizar as três imagens locais para celular, mantendo os PNGs originais.** WebP gerados com redução de 90,3% nos bytes dessas imagens; converter dimensões sem alteração; teste do gerador e preservação de créditos e artigos passaram. **Pendente:** confirmação visual dos WebP na prévia e medição real de carregamento/LCP. Ver relatório de otimização.
 - [ ] Conferir títulos e descrições que aparecerão no Google e nos compartilhamentos; confirmar logo, favicon, imagem social e textos finais sem prometer descoberta definitiva nem endosso da ESA.
 - [ ] Testar teclado, foco, contraste e leitor de tela; a auditoria de HTML verificou apenas presença de `alt`, IDs e alguns elementos, **não** certificação WCAG.
 - [ ] Decidir responsável editorial e canal de correções para fatos posteriores, além da rotina de atualização das datas e das fontes.
@@ -43,4 +44,4 @@
 
 **Não fazer merge, não ativar auto-merge e não alterar `main`, homepage, blog, `vercel.json`, `robots.txt` ou `sitemap.xml` antes da autorização expressa da responsável editorial.** Depois de concluir os itens necessários, apresentar uma versão final para aprovação e receber instrução inequívoca sobre publicar a revista em `/revista/`. O deploy da branch de prévia **não é** a publicação no domínio principal.
 
-**Registro de evidência:** auditoria estática de 18/09/2026: https://github.com/pfiuza08/site-intellih-principal/actions/runs/35384755046 . Consulta às fontes oficiais e revisão dos arquivos citados acima. Visuais de celular foram fornecidos pela responsável editorial; não houve teste automatizado da Vercel em desktop nesta rodada.
+**Registro de evidência:** auditoria estática https://github.com/pfiuza08/site-intellih-principal/actions/runs/35384755046 e otimização https://github.com/pfiuza08/site-intellih-principal/actions/runs/35385688989 . Consulta às fontes oficiais e revisão dos arquivos citados acima. Visuais de celular foram fornecidos pela responsável editorial; não houve teste automatizado da Vercel em desktop nesta rodada.
