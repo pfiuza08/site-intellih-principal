@@ -145,7 +145,7 @@ def validate():
         if a.get('imagem_url'):
             if a['imagem_url']!='https://cdn.esawebb.org/archives/images/screen/weic2619a.jpg':raise ValueError('Imagem externa não aprovada')
             if not a.get('credito_exibir') or not a.get('credito_imagem'):raise ValueError('Crédito obrigatório para a imagem ESA')
-        elif a['imagem'] not in ('lua-impacto.svg','buraco-negro.svg','ia-modelos.svg'):raise ValueError('Imagem ausente')
+        elif a['imagem'] not in ('formacao-lua-impacto-realista.png','buraco-negro-realista.png','inteligencia-artificial-aplicacoes-pt.png') or not (SITE/'assets'/'img'/a['imagem']).is_file():raise ValueError('Imagem ausente ou não aprovada')
         for s in a['fontes']:
             if not url_ok(s['url']):raise ValueError('Fonte inválida '+repr(s))
 

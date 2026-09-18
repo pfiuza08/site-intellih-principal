@@ -9,8 +9,8 @@
     "chamada": "O que a simulação realmente mostrou — e o que ainda não sabemos.",
     "destaque": true,
     "parece": true,
-    "imagem": "lua-impacto.svg",
-    "credito_imagem": "Ilustração editorial produzida para o protótipo; não é imagem da simulação original.",
+    "imagem": "formacao-lua-impacto-realista.png",
+    "credito_imagem": "Ilustração artística gerada com IA para a Revista Intellih, baseada na hipótese de grande impacto para a formação da Lua. Não é fotografia nem imagem da simulação de 2022.",
     "leitura": "4 min",
     "data": "2026-09-16",
     "corpo": [
@@ -63,7 +63,8 @@
       }
     ],
     "titulo_seo": "A Lua pode ter se formado em poucas horas? Simulação de 2022",
-    "descricao_seo": "Simulações publicadas em 2022 propuseram uma formação muito rápida da Lua. Saiba o que o estudo mostra e o que ainda é hipótese."
+    "descricao_seo": "Simulações publicadas em 2022 propuseram uma formação muito rápida da Lua. Saiba o que o estudo mostra e o que ainda é hipótese.",
+    "alt_imagem": "Ilustração artística gerada com IA de uma colisão na Terra primitiva, com material incandescente lançado ao espaço."
   },
   {
     "slug": "por-que-luz-nao-escapa-buraco-negro",
@@ -75,8 +76,8 @@
     "chamada": "O horizonte de eventos é uma fronteira sem caminho de saída.",
     "destaque": false,
     "parece": true,
-    "imagem": "buraco-negro.svg",
-    "credito_imagem": "Ilustração editorial conceitual; não é fotografia de um buraco negro.",
+    "imagem": "buraco-negro-realista.png",
+    "credito_imagem": "Ilustração conceitual gerada com IA para a Revista Intellih. O brilho representa material aquecido ao redor do buraco negro, não luz emitida de seu interior.",
     "leitura": "4 min",
     "data": "2026-09-16",
     "corpo": [
@@ -131,7 +132,8 @@
         "nome": "NASA — What Are Black Holes?",
         "url": "https://www.nasa.gov/universe/what-are-black-holes/"
       }
-    ]
+    ],
+    "alt_imagem": "Ilustração conceitual gerada com IA de um buraco negro cercado por um disco luminoso de material aquecido."
   },
   {
     "slug": "nem-toda-ia-e-generativa",
@@ -143,8 +145,8 @@
     "chamada": "Antes de escolher um chatbot, entenda qual é a tarefa.",
     "destaque": false,
     "parece": false,
-    "imagem": "ia-modelos.svg",
-    "credito_imagem": "Ilustração editorial conceitual produzida para o protótipo.",
+    "imagem": "inteligencia-artificial-aplicacoes-pt.png",
+    "credito_imagem": "Imagem conceitual gerada com IA para a Revista Intellih, representando aplicações de inteligência artificial em contextos profissionais. A cena não demonstra o funcionamento de um sistema específico.",
     "leitura": "5 min",
     "data": "2026-09-16",
     "corpo": [
@@ -216,6 +218,7 @@
         "url": "https://developers.google.com/machine-learning/crash-course/classification?hl=pt-BR"
       }
     ],
-    "descricao_seo": "Nem toda IA é generativa: classificação, previsão, reconhecimento, recomendação e otimização exigem tarefas e critérios de avaliação diferentes."
+    "descricao_seo": "Nem toda IA é generativa: classificação, previsão, reconhecimento, recomendação e otimização exigem tarefas e critérios de avaliação diferentes.",
+    "alt_imagem": "Imagem conceitual gerada com IA de um ambiente de trabalho com computador, representando diferentes aplicações de inteligência artificial."
   }
 ]
