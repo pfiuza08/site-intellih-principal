@@ -57,7 +57,7 @@ def footer(prefix='./'):
     return f'''<footer class="footer"><div class="wrap"><div class="footer-grid">
 <div><img src="{asset('img/intellih-horizontal-dark.png',prefix)}" class="footer-logo" width="171" height="51" alt="Intellih"><p>Inteligência para entender o mundo. Ciência, tecnologia e ideias com contexto e fontes.</p></div>
 <div><b>Explore</b><a href="{prefix}index.html">Revista Intellih</a><a href="{prefix}editorias/ciencia.html">Ciência</a><a href="{prefix}editorias/tecnologia.html">Tecnologia</a><a href="{prefix}editorias/parece-inventado.html">Parece Inventado?</a><a href="{prefix}editorias/inteligencia-artificial.html">Inteligência Artificial</a></div>
-<div><b>Intellih</b><a href="https://www.intellih.com.br/">Site institucional ↗</a><a href="https://www.intellih.com.br/analise-presenca-digital">Soluções para negócios ↗</a><a href="mailto:contato@intellih.com.br">Contato por e-mail</a><p>Este protótipo não possui newsletter nem sistema automático de publicação.</p></div></div>
+<div><b>Intellih</b><a href="https://intellih.com.br/">Soluções baseadas em IA ↗</a><a href="mailto:contato@intellih.com.br">Contato por e-mail</a><p>Este protótipo não possui newsletter nem sistema automático de publicação.</p></div></div>
 <div class="footer-end">© Intellih · Protótipo editorial · Fotografias e ilustrações identificadas nas matérias; fontes em cada artigo.</div></div></footer>
 <script src="{asset('app.js',prefix)}" defer></script>'''
 
@@ -72,7 +72,6 @@ def doc(title, desc, main, prefix='./', active='Revista', page_type='website'):
     page = page.replace('href="./', 'href="/revista/').replace('src="./', 'src="/revista/')
     page = page.replace('href="/revista/index.html"', 'href="/revista/"')
     page = page.replace('href="https://www.intellih.com.br/"', 'href="/"')
-    page = page.replace('href="https://www.intellih.com.br/analise-presenca-digital"', 'href="/analise-presenca-digital"')
     page = page.replace('EDIÇÃO PILOTO · Protótipo para revisão — ainda não publicado na Intellih', 'PRÉVIA EDITORIAL · Conteúdo e imagens em revisão; não publicar sem aprovação')
     page = page.replace('edição piloto', 'prévia editorial').replace('Protótipo editorial', 'Prévia editorial')
     return page
