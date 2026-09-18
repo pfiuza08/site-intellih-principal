@@ -24,6 +24,18 @@ jobs:
           done
           test "$(git rev-parse origin/main:public/blog)" = "$(git rev-parse HEAD:public/blog)"
           echo 'Homepage, sitemap, robots, vercel e blog correspondem a main.'
+      - name: Alinhar verificacao do credito Webb ao HTML com link de fonte
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('editorial-revista/preparar_publicacao.py')
+          old="if p.parent.name=='artigos' and 'Crédito: ESA/Webb' not in text and 'gerada com IA' not in text:"
+          new="if p.parent.name=='artigos' and 'ESA/Webb, NASA, CSA' not in text and 'gerada com IA' not in text:"
+          content=p.read_text(encoding='utf-8')
+          assert content.count(old)==1
+          p.write_text(content.replace(old,new),encoding='utf-8')
+          PY
       - name: Preparar publicacao na data efetiva e auditar
         env:
           REVISTA_DATA_PUBLICACAO: '2026-09-18'
@@ -41,7 +53,7 @@ jobs:
           test "$(git branch --show-current)" = revista-lancamento-20260918
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add editorial-revista/build.py editorial-revista/conteudo/artigos.json editorial-revista/conteudo/noticias.json public/index.html sitemap.xml public/revista/index.html public/revista/artigos public/revista/editorias
+          git add editorial-revista/preparar_publicacao.py editorial-revista/build.py editorial-revista/conteudo/artigos.json editorial-revista/conteudo/noticias.json public/index.html sitemap.xml public/revista/index.html public/revista/artigos public/revista/editorias
           git diff --cached --quiet && { echo 'Sem alteracoes para publicar'; exit 1; }
           git commit -m 'Preparar primeira edicao publica da Revista Intellih'
           git push origin HEAD:revista-lancamento-20260918
