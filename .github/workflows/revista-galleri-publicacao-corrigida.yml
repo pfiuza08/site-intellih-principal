@@ -1,0 +1,85 @@
+name: Revista - validacao final Galleri
+on:
+  push:
+    branches: [revista-galleri-20260921]
+    paths: ['.github/workflows/revista-galleri-publicacao-corrigida.yml']
+permissions:
+  contents: write
+jobs:
+  gerar-e-validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: revista-galleri-20260921
+          fetch-depth: 0
+      - name: Gerar versao publica e validar
+        run: |
+          set -euo pipefail
+          python3 editorial-revista/build.py
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          p=Path('public/revista')
+          d=json.loads(Path('editorial-revista/conteudo/novas/galleri-exame-multicancer.json').read_text(encoding='utf-8'))
+          slug='como-exame-sangue-procura-mais-de-50-canceres'
+          date='2026-09-21'
+          assert (d['slug'],d['data'],d['publicado_em'],d['categoria'],d['destaque']) == (slug,date,date,'Ciência',True)
+          original=p/'assets/img/ChatGPT Image 21 de set. de 2026, 20_26_04.png'
+          renamed=p/'assets/img/galleri-exame-multicancer.png'
+          webp=p/'assets/img/galleri-exame-multicancer.webp'
+          assert all(x.is_file() and x.stat().st_size>10000 for x in (original,renamed,webp))
+          assert hashlib.sha256(original.read_bytes()).digest()==hashlib.sha256(renamed.read_bytes()).digest()
+          assert webp.read_bytes()[:4]==b'RIFF' and webp.read_bytes()[8:12]==b'WEBP'
+          articles=list((p/'artigos').glob('*.html'))
+          sections=[x for x in (p/'editorias').glob('*.html') if x.stem!='ia-com-metodo']
+          assert len(articles)==5 and len(sections)==6,(len(articles),len(sections))
+          assert (p/'editorias/ia-com-metodo.html').is_file(), 'Preservar redirecionamento legado'
+          for file in [p/'index.html',*articles,*sections]:
+              text=file.read_text(encoding='utf-8')
+              empty=file.parent.name=='editorias' and file.stem in ('natureza','cultura')
+              robots='noindex,follow' if empty else 'index,follow'
+              assert f'<meta name="robots" content="{robots}">' in text,str(file)
+              assert 'noindex,nofollow' not in text and 'PRÉVIA EDITORIAL' not in text
+              assert 'Texto editorial preparado para avaliação' not in text and 'texto em revisão' not in text
+              assert '<link rel="canonical" href="https://www.intellih.com.br/revista' in text
+          article=(p/'artigos'/f'{slug}.html').read_text(encoding='utf-8')
+          home=(p/'index.html').read_text(encoding='utf-8')
+          science=(p/'editorias/ciencia.html').read_text(encoding='utf-8')
+          assert '<meta property="article:published_time" content="2026-09-21">' in article
+          assert 'Publicado em 21/09/2026' in article and 'Imagem conceitual gerada com IA' in article
+          assert '/revista/assets/img/galleri-exame-multicancer.webp' in article
+          assert '/revista/assets/img/galleri-exame-multicancer.png' in article
+          assert '2026-09-18' in (p/'artigos/lua-formacao-em-horas.html').read_text(encoding='utf-8')
+          assert slug in home and slug in science and '5 artigos' in home and '21/09/2026' in home
+          for name in ('natureza','cultura'):
+              assert 'EM PREPARAÇÃO' in (p/'editorias'/f'{name}.html').read_text(encoding='utf-8')
+          xml=Path('public/sitemap.xml').read_text(encoding='utf-8')
+          origin='https://www.intellih.com.br/revista'
+          for url in (origin,origin+'/editorias/ciencia'):
+              old=f'<loc>{url}</loc>\n    <lastmod>2026-09-18</lastmod>'
+              assert xml.count(old)==1,url
+              xml=xml.replace(old,f'<loc>{url}</loc>\n    <lastmod>{date}</lastmod>')
+          new=origin+'/artigos/'+slug
+          assert new not in xml
+          xml=xml.replace('</urlset>',f'  <url>\n    <loc>{new}</loc>\n    <lastmod>{date}</lastmod>\n  </url>\n</urlset>')
+          ET.fromstring(xml)
+          assert xml.count('<loc>'+new+'</loc>')==1
+          assert '/editorias/natureza</loc>' not in xml and '/editorias/cultura</loc>' not in xml
+          Path('public/sitemap.xml').write_text(xml,encoding='utf-8')
+          Path('sitemap.xml').write_text(xml,encoding='utf-8')
+          assert Path('sitemap.xml').read_bytes()==Path('public/sitemap.xml').read_bytes()
+          print('PASSOU: cinco artigos, seis editorias, redirect legado, data, imagens, robots e ambos sitemaps')
+          PY
+      - name: Salvar apenas publicacao validada e limpar workflows temporarios
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/revista/index.html public/revista/artigos public/revista/editorias public/sitemap.xml sitemap.xml
+          git rm .github/workflows/revista-galleri-publicacao-corrigida.yml .github/workflows/revista-publicar-galleri-20260921.yml
+          git diff --cached --check
+          git diff --cached --name-only
+          git commit -m 'Revista: aprovar publicacao Galleri com datas, metadados e sitemap'
+          git push origin HEAD:revista-galleri-20260921
