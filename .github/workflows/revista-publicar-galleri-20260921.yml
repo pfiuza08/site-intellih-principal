@@ -1,0 +1,92 @@
+name: Revista - preparar publicacao aprovada Galleri
+on:
+  push:
+    branches: [revista-galleri-20260921]
+    paths: ['.github/workflows/revista-publicar-galleri-20260921.yml']
+permissions:
+  contents: write
+jobs:
+  preparar-publicacao:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: revista-galleri-20260921
+          fetch-depth: 0
+      - name: Regenerar conteudo e conferir lancamento
+        run: |
+          set -euo pipefail
+          python3 editorial-revista/build.py
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import re
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+
+          base = Path('public/revista')
+          data = json.loads(Path('editorial-revista/conteudo/novas/galleri-exame-multicancer.json').read_text(encoding='utf-8'))
+          slug = 'como-exame-sangue-procura-mais-de-50-canceres'
+          date = '2026-09-21'
+          assert data['slug'] == slug and data['publicado_em'] == date and data['data'] == date
+          assert data['categoria'] == 'Ciência' and data['destaque'] is True
+          original = base/'assets/img/ChatGPT Image 21 de set. de 2026, 20_26_04.png'
+          named = base/'assets/img/galleri-exame-multicancer.png'
+          optimized = base/'assets/img/galleri-exame-multicancer.webp'
+          assert all(x.is_file() and x.stat().st_size > 10000 for x in (original,named,optimized))
+          assert hashlib.sha256(original.read_bytes()).digest() == hashlib.sha256(named.read_bytes()).digest(), 'imagem difere da enviada'
+          assert optimized.read_bytes()[:4] == b'RIFF' and optimized.read_bytes()[8:12] == b'WEBP'
+          articles = list((base/'artigos').glob('*.html'))
+          sections = list((base/'editorias').glob('*.html'))
+          assert len(articles) == 5 and len(sections) == 6, (len(articles),len(sections))
+          for file in [base/'index.html',*articles,*sections]:
+              text=file.read_text(encoding='utf-8')
+              expected = 'noindex,follow' if file.stem in ('natureza','cultura') and file.parent.name=='editorias' else 'index,follow'
+              assert f'<meta name="robots" content="{expected}">' in text, f'{file}: robots incorretos'
+              assert 'noindex,nofollow' not in text, f'{file}: marcacao de previa'
+              assert 'PRÉVIA EDITORIAL' not in text and 'Texto editorial preparado para avaliação' not in text
+              assert 'Protótipo editorial' not in text and 'texto em revisão' not in text
+              assert '<link rel="canonical" href="https://www.intellih.com.br/revista' in text
+          article = (base/'artigos'/f'{slug}.html').read_text(encoding='utf-8')
+          cover = (base/'index.html').read_text(encoding='utf-8')
+          science = (base/'editorias/ciencia.html').read_text(encoding='utf-8')
+          assert '<meta property="article:published_time" content="2026-09-21">' in article
+          assert 'Publicado em 21/09/2026' in article
+          assert 'Imagem conceitual gerada com IA' in article and 'fontes' in article.lower()
+          assert '/revista/assets/img/galleri-exame-multicancer.webp' in article
+          assert '/revista/assets/img/galleri-exame-multicancer.png' in article
+          assert '2026-09-18' in (base/'artigos/lua-formacao-em-horas.html').read_text(encoding='utf-8')
+          assert slug in cover and slug in science and '5 artigos' in cover and '21/09/2026' in cover
+          assert 'EM PREPARAÇÃO' in (base/'editorias/natureza.html').read_text(encoding='utf-8')
+          sitemap = Path('public/sitemap.xml')
+          xml = sitemap.read_text(encoding='utf-8')
+          root_url = 'https://www.intellih.com.br/revista'
+          science_url = root_url + '/editorias/ciencia'
+          for url in (root_url, science_url):
+              old = f'<loc>{url}</loc>\n    <lastmod>2026-09-18</lastmod>'
+              new = f'<loc>{url}</loc>\n    <lastmod>{date}</lastmod>'
+              assert xml.count(old) == 1, f'sitemap: entrada inesperada para {url}'
+              xml = xml.replace(old,new)
+          new_url = root_url + '/artigos/' + slug
+          assert new_url not in xml
+          xml = xml.replace('</urlset>', f'  <url>\n    <loc>{new_url}</loc>\n    <lastmod>{date}</lastmod>\n  </url>\n</urlset>')
+          sitemap.write_text(xml,encoding='utf-8')
+          Path('sitemap.xml').write_text(xml,encoding='utf-8')
+          root=ET.fromstring(xml)
+          ns={'sm':'http://www.sitemaps.org/schemas/sitemap/0.9'}
+          urls=[el.text for el in root.findall('sm:url/sm:loc',ns)]
+          assert urls.count(new_url)==1 and not any('/editorias/natureza' in u or '/editorias/cultura' in u for u in urls)
+          assert Path('sitemap.xml').read_bytes() == sitemap.read_bytes()
+          print('APROVADO: 5 artigos, seis editorias, datas, credito, imagem, indexacao e dois sitemaps')
+          PY
+      - name: Gravar apenas as paginas e os sitemaps; retirar workflow temporario
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/revista/index.html public/revista/artigos public/revista/editorias sitemap.xml public/sitemap.xml
+          git rm .github/workflows/revista-publicar-galleri-20260921.yml
+          git diff --cached --check
+          git diff --cached --name-only
+          git commit -m 'Revista: preparar Galleri aprovado para publicacao em 21 de setembro'
+          git push origin HEAD:revista-galleri-20260921
