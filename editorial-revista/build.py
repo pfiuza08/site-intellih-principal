@@ -15,9 +15,14 @@ BASE = Path(__file__).resolve().parent
 SITE = BASE.parent / 'public' / 'revista'
 EVERGREEN = json.loads((BASE / 'conteudo' / 'artigos.json').read_text(encoding='utf-8'))
 NEWS = json.loads((BASE / 'conteudo' / 'noticias.json').read_text(encoding='utf-8'))
+NOVAS = [json.loads(p.read_text(encoding='utf-8')) for p in sorted((BASE / 'conteudo' / 'novas').glob('*.json'))]
+if NOVAS:
+    NEWS = sorted(NEWS + NOVAS, key=lambda a: a.get('data', ''), reverse=True)
+    destaque_slug = NEWS[0]['slug']
+    NEWS = [{**a, 'destaque': a['slug'] == destaque_slug} for a in NEWS]
 # A pauta principal é a notícia aprovada para a prévia; a Lua (estudo de 2022) não é notícia recente.
 ARTICLES = NEWS + [{**a, 'destaque': False} for a in EVERGREEN]
-PUBLICATION_DATE = '2026-09-18'
+PUBLICATION_DATE = max(a.get('publicado_em', a.get('data', '2026-09-18')) for a in ARTICLES)
 PUBLICATION_DATE_BR = datetime.strptime(PUBLICATION_DATE, '%Y-%m-%d').strftime('%d/%m/%Y')
 EDITORIAS = {
     'ciencia': ('Ciência', 'O que a pesquisa revela sobre o Universo, a Terra e as grandes perguntas da ciência.', lambda a: a['categoria'] == 'Ciência'),
@@ -167,7 +172,7 @@ def validate():
         if a.get('imagem_url'):
             if a['imagem_url']!='https://cdn.esawebb.org/archives/images/screen/weic2619a.jpg':raise ValueError('Imagem externa não aprovada')
             if not a.get('credito_exibir') or not a.get('credito_imagem'):raise ValueError('Crédito obrigatório para a imagem ESA')
-        elif a['imagem'] not in ('formacao-lua-impacto-realista.png','buraco-negro-realista.png','inteligencia-artificial-aplicacoes-pt.png') or not (SITE/'assets'/'img'/a['imagem']).is_file():raise ValueError('Imagem ausente ou não aprovada')
+        elif not a.get('imagem') or Path(a['imagem']).name != a['imagem'] or Path(a['imagem']).suffix.lower() not in ('.png','.jpg','.jpeg','.webp') or not (SITE/'assets'/'img'/a['imagem']).is_file() or not a.get('credito_imagem'):raise ValueError('Imagem ausente, sem credito ou com caminho invalido')
         for s in a['fontes']:
             if not url_ok(s['url']):raise ValueError('Fonte inválida '+repr(s))
 

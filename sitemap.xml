@@ -45,7 +45,7 @@
   <!-- Revista Intellih: primeira edicao -->
   <url>
     <loc>https://www.intellih.com.br/revista</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-21</lastmod>
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/artigos/webb-anas-marrons-duas-massas-jupiter</loc>
@@ -65,7 +65,7 @@
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/editorias/ciencia</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-21</lastmod>
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/editorias/tecnologia</loc>
@@ -78,5 +78,9 @@
   <url>
     <loc>https://www.intellih.com.br/revista/editorias/inteligencia-artificial</loc>
     <lastmod>2026-09-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/artigos/como-exame-sangue-procura-mais-de-50-canceres</loc>
+    <lastmod>2026-09-21</lastmod>
   </url>
 </urlset>
