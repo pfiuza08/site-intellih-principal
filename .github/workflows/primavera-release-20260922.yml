@@ -1,0 +1,87 @@
+name: Preparar publicacao Cultura - Primavera dos Museus
+on:
+  push:
+    branches: [publicar-primavera-museus-20260922]
+    paths: [.github/workflows/primavera-release-20260922.yml]
+permissions:
+  contents: write
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Montar materia aprovada sem alterar artigos existentes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Revista Intellih - publicacao'
+          git config user.email 'actions@users.noreply.github.com'
+          test "$(git rev-parse HEAD^)" = "$(git rev-parse origin/main)" || { echo 'A main mudou: revisar antes de publicar'; exit 1; }
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          ref = 'origin/artigo-primavera-museus-20260922:editorial-revista/conteudo/novas/primavera-dos-museus-bastidores-acervos.json'
+          a = json.loads(subprocess.check_output(['git','show',ref]))
+          assert a['slug']=='primavera-dos-museus-bastidores-acervos' and a['categoria']=='Cultura'
+          a['publicado_em']='2026-09-22'
+          path=Path('editorial-revista/conteudo/novas/primavera-dos-museus-bastidores-acervos.json')
+          path.parent.mkdir(parents=True,exist_ok=True)
+          path.write_text(json.dumps(a,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          p=Path('editorial-revista/build.py')
+          s=p.read_text(encoding='utf-8')
+          old="'ciencia' if a['categoria']=='Ciência' else 'tecnologia'"
+          new="'ciencia' if a['categoria']=='Ciência' else 'cultura' if a['categoria']=='Cultura' else 'natureza' if a['categoria']=='Natureza' else 'tecnologia'"
+          assert s.count(old)==1, 'Breadcrumb de Cultura requer revisao'
+          p.write_text(s.replace(old,new),encoding='utf-8')
+          PY
+          test "$(git hash-object public/revista/assets/img/primavera-dos-museus-acervos.webp)" = ce4547e4397f8ddc5ab3fc826b24c30e2cf6fe88 || { echo 'Imagem HD divergente na main'; exit 1; }
+          python3 editorial-revista/build.py
+          python3 - <<'PY'
+          from pathlib import Path
+          slug='primavera-dos-museus-bastidores-acervos'
+          article=Path(f'public/revista/artigos/{slug}.html').read_text(encoding='utf-8')
+          culture=Path('public/revista/editorias/cultura.html').read_text(encoding='utf-8')
+          home=Path('public/revista/index.html').read_text(encoding='utf-8')
+          assert 'O que os museus guardam quando ninguém está olhando?' in article
+          assert 'Publicado em 22/09/2026' in article and 'article:published_time" content="2026-09-22"' in article
+          assert 'name="robots" content="index,follow"' in article and 'name="robots" content="index,follow"' in culture
+          assert 'PRÉVIA EDITORIAL' not in article+home+culture
+          assert 'texto em revisão' not in article
+          assert 'primavera-dos-museus-acervos.webp' in article
+          assert 'Ilustração gerada com IA' in article
+          assert 'como-exame-sangue-procura-mais-de-50-canceres' in home, 'Matéria Galleri anterior não pode sumir'
+          assert slug in home and slug in culture and '6 artigos' in home
+          for location in ('sitemap.xml','public/sitemap.xml'):
+              p=Path(location); s=p.read_text(encoding='utf-8')
+              previous='<loc>https://www.intellih.com.br/revista</loc>\n    <lastmod>2026-09-21</lastmod>'
+              current='<loc>https://www.intellih.com.br/revista</loc>\n    <lastmod>2026-09-22</lastmod>'
+              assert s.count(previous)==1 and s.count('</urlset>')==1
+              new='''  <!-- Revista Intellih: Cultura - Primavera dos Museus -->
+            <url>
+              <loc>https://www.intellih.com.br/revista/editorias/cultura</loc>
+              <lastmod>2026-09-22</lastmod>
+            </url>
+            <url>
+              <loc>https://www.intellih.com.br/revista/artigos/primavera-dos-museus-bastidores-acervos</loc>
+              <lastmod>2026-09-22</lastmod>
+            </url>
+            '''
+              assert 'revista/editorias/cultura</loc>' not in s and 'revista/artigos/'+slug+'</loc>' not in s
+              s=s.replace(previous,current).replace('</urlset>',new+'</urlset>')
+              p.write_text(s,encoding='utf-8')
+          assert Path('sitemap.xml').read_bytes()==Path('public/sitemap.xml').read_bytes()
+          print('Pre-publicacao OK: 6 materias, Cultura indexavel, imagem HD e sitemaps iguais.')
+          PY
+          git add editorial-revista/build.py editorial-revista/conteudo/novas/primavera-dos-museus-bastidores-acervos.json public/revista/index.html public/revista/editorias/cultura.html public/revista/artigos/primavera-dos-museus-bastidores-acervos.html sitemap.xml public/sitemap.xml
+          git rm .github/workflows/primavera-release-20260922.yml
+          python3 - <<'PY'
+          import subprocess
+          files=set(subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines())
+          expected={'.github/workflows/primavera-release-20260922.yml','editorial-revista/build.py','editorial-revista/conteudo/novas/primavera-dos-museus-bastidores-acervos.json','public/revista/index.html','public/revista/editorias/cultura.html','public/revista/artigos/primavera-dos-museus-bastidores-acervos.html','sitemap.xml','public/sitemap.xml'}
+          assert files==expected, (files,expected)
+          print('Arquivos autorizados no commit:',*sorted(files),sep='\n')
+          PY
+          git commit -m 'Publicar Primavera dos Museus: artigo Cultura, capa e sitemap'
+          git push origin HEAD:publicar-primavera-museus-20260922
