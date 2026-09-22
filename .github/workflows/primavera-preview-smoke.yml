@@ -1,0 +1,37 @@
+name: Revista — conferir prévia Primavera dos Museus
+on:
+  push:
+    branches: [artigo-primavera-museus-20260922]
+    paths: [.github/workflows/primavera-preview-smoke.yml]
+permissions:
+  contents: write
+jobs:
+  conferir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Conferir páginas, imagem e marcação de prévia no domínio Vercel
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://site-intellih-principal-git-c930f3-patricias-projects-df23d0bc.vercel.app'
+          for path in /revista/ /revista/editorias/cultura /revista/artigos/primavera-dos-museus-bastidores-acervos /revista/assets/img/primavera-dos-museus-acervos.webp; do
+            code=$(curl -L -sS --max-time 25 -w '%{http_code}' -o /tmp/response "$base$path")
+            echo "$path HTTP=$code bytes=$(wc -c < /tmp/response)"
+            test "$code" = 200
+          done
+          curl -fsSL --max-time 25 "$base/revista/artigos/primavera-dos-museus-bastidores-acervos" -o /tmp/artigo.html
+          grep -q 'O que os museus guardam quando ninguém está olhando' /tmp/artigo.html
+          grep -q 'name="robots" content="noindex,follow"' /tmp/artigo.html
+          grep -q 'PRÉVIA EDITORIAL' /tmp/artigo.html
+          grep -q 'Ilustração gerada com IA' /tmp/artigo.html
+          echo 'Prévia ao vivo OK: artigo, Cultura, imagem e noindex.'
+      - name: Remover workflow temporário
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Revista Intellih — automação'
+          git config user.email 'actions@users.noreply.github.com'
+          git rm .github/workflows/primavera-preview-smoke.yml
+          git commit -m 'Remove teste temporário da prévia de Cultura'
+          git push origin HEAD:artigo-primavera-museus-20260922
