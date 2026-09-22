@@ -92,4 +92,13 @@
     <loc>https://www.intellih.com.br/revista/artigos/primavera-dos-museus-bastidores-acervos</loc>
     <lastmod>2026-09-22</lastmod>
   </url>
-  </urlset>
+    <!-- Revista Intellih: Natureza - nova ra da Amazonia -->
+  <url>
+    <loc>https://www.intellih.com.br/revista/editorias/natureza</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
+  <url>
+    <loc>https://www.intellih.com.br/revista/artigos/adenomera-varcena-canto-amazonia</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
+</urlset>
