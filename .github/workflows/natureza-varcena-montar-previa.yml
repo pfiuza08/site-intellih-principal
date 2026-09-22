@@ -1,0 +1,77 @@
+name: Montar previa editorial Natureza varcena
+on:
+  push:
+    branches: [previa-natureza-adenomera-varcena-20260922]
+    paths: ['.github/workflows/natureza-varcena-montar-previa.yml']
+permissions:
+  contents: write
+jobs:
+  previa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Obter fotografia livre e construir paginas exclusivamente de previa
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet pillow
+          curl -fL --retry 3 --max-time 75 -A 'IntellihRevista/1.0 (editorial; imagem CC BY 2.0)' 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Rio_Urubu_Flooded_Forest_-_Flickr_-_treegrow_%281%29.jpg/1280px-Rio_Urubu_Flooded_Forest_-_Flickr_-_treegrow_%281%29.jpg' -o /tmp/varzea-katja.jpg
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          original=Image.open('/tmp/varzea-katja.jpg').convert('RGB')
+          print('Foto Commons:',original.size)
+          assert original.width>=1200 and original.height>=800
+          destino=Path('public/revista/assets/img/varzea-rio-urubu-katja-schulz.webp')
+          original.save(destino,format='WEBP',quality=87,method=6)
+          assert destino.stat().st_size>45000
+          print('WEBP:',destino.stat().st_size,'bytes')
+          PY
+          python3 editorial-revista/build.py
+          python3 - <<'PY'
+          from pathlib import Path
+          name='adenomera-varcena-canto-amazonia'
+          paths=[Path('public/revista/artigos')/(name+'.html'),Path('public/revista/editorias/natureza.html'),Path('public/revista/index.html')]
+          for p in paths:
+              html=p.read_text(encoding='utf-8')
+              assert 'name="robots" content="index,follow"' in html
+              html=html.replace('name="robots" content="index,follow"','name="robots" content="noindex,follow"',1)
+              html=html.replace('<body>','<body><div style="padding:12px;text-align:center;background:#fff0db;color:#492900;font:700 14px Arial,sans-serif">PRÉVIA EDITORIAL — esta matéria ainda não está publicada.</div>',1)
+              if p.name==name+'.html':
+                  html=html.replace('Publicado em 22/09/2026','Proposta editorial de 22/09/2026')
+                  html=html.replace('<meta property="article:published_time" content="2026-09-22">','')
+                  assert 'Fotografia de floresta amazônica alagada' in html
+                  assert 'Katja Schulz' in html
+                  assert 'não do Alto Juruá nem da rã' in html
+              p.write_text(html,encoding='utf-8')
+              print('Prévia noindex:',p)
+          assert '<h1>O canto que revelou uma nova rã na Amazônia</h1>' in paths[0].read_text()
+          assert name in paths[1].read_text() and name in paths[2].read_text()
+          assert 'como-exame-sangue-procura-mais-de-50-canceres' in paths[2].read_text()
+          PY
+          # O build local atualiza outros artigos sem necessidade: preservá-los integralmente.
+          git restore public/revista/artigos/ public/revista/editorias/ || true
+          # git restore pode preservar apenas rastreados; manter novo artigo e editoria Natureza modificada.
+          python3 editorial-revista/build.py
+          python3 - <<'PY'
+          from pathlib import Path
+          slug='adenomera-varcena-canto-amazonia'
+          for p in (Path('public/revista/artigos')/(slug+'.html'),Path('public/revista/editorias/natureza.html'),Path('public/revista/index.html')):
+              h=p.read_text(encoding='utf-8').replace('name="robots" content="index,follow"','name="robots" content="noindex,follow"',1)
+              h=h.replace('<body>','<body><div style="padding:12px;text-align:center;background:#fff0db;color:#492900;font:700 14px Arial,sans-serif">PRÉVIA EDITORIAL — esta matéria ainda não está publicada.</div>',1)
+              if p.name==slug+'.html':
+                  h=h.replace('Publicado em 22/09/2026','Proposta editorial de 22/09/2026').replace('<meta property="article:published_time" content="2026-09-22">','')
+              p.write_text(h,encoding='utf-8')
+          PY
+          git restore public/revista/artigos/como-exame-sangue-procura-mais-de-50-canceres.html public/revista/artigos/lua-formacao-em-horas.html public/revista/artigos/nem-toda-ia-e-generativa.html public/revista/artigos/por-que-luz-nao-escapa-buraco-negro.html public/revista/artigos/primavera-dos-museus-bastidores-acervos.html public/revista/artigos/webb-anas-marrons-duas-massas-jupiter.html
+          git restore public/revista/editorias/ciencia.html public/revista/editorias/cultura.html public/revista/editorias/ia-com-metodo.html public/revista/editorias/inteligencia-artificial.html public/revista/editorias/parece-inventado.html public/revista/editorias/tecnologia.html
+          git config user.name 'Revista Intellih - previa'
+          git config user.email 'actions@users.noreply.github.com'
+          git rm .github/workflows/natureza-varcena-montar-previa.yml
+          git add public/revista/assets/img/varzea-rio-urubu-katja-schulz.webp public/revista/artigos/adenomera-varcena-canto-amazonia.html public/revista/editorias/natureza.html public/revista/index.html
+          git diff --cached --name-only
+          test "$(git diff --cached --name-only | wc -l)" -eq 5
+          git commit -m 'Preparar somente previa de Natureza e foto CC BY, sem indexar'
+          git push origin HEAD:previa-natureza-adenomera-varcena-20260922
