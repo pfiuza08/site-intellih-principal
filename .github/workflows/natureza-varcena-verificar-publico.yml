@@ -1,0 +1,61 @@
+name: Conferir Natureza publicada no dominio
+on:
+  push:
+    branches: [publicar-natureza-adenomera-varcena-20260922]
+    paths: ['.github/workflows/natureza-varcena-verificar-publico.yml']
+permissions:
+  contents: write
+jobs:
+  verificar:
+    if: github.event.head_commit.message == 'Conferir no dominio a publicacao autorizada de Natureza'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Conferir URLs publicas, indexacao, licenca e imagem
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=https://www.intellih.com.br
+          slug=adenomera-varcena-canto-amazonia
+          for tentativa in $(seq 1 12); do
+            code=$(curl -L -sS --max-time 25 -w '%{http_code}' -o /tmp/artigo.html "$base/revista/artigos/$slug" || true)
+            if [ "$code" = 200 ] && grep -q 'O canto que revelou uma nova rã na Amazônia' /tmp/artigo.html; then
+              echo "Artigo publico HTTP=$code (tentativa $tentativa)";break
+            fi
+            echo "Aguardando producao: tentativa $tentativa HTTP=$code";sleep 10
+          done
+          test "$code" = 200
+          grep -q 'name="robots" content="index,follow"' /tmp/artigo.html
+          grep -q 'Publicado em 22/09/2026' /tmp/artigo.html
+          grep -q 'Katja Schulz' /tmp/artigo.html
+          grep -q 'não do Alto Juruá nem da rã' /tmp/artigo.html
+          ! grep -q 'PRÉVIA EDITORIAL' /tmp/artigo.html
+          for path in / /blog/ /revista /revista/editorias/natureza /revista/editorias/cultura /sitemap.xml; do
+            code=$(curl -L -sS --max-time 25 -w '%{http_code}' -o /tmp/pg "$base$path")
+            echo "$path HTTP=$code bytes=$(wc -c </tmp/pg)"
+            test "$code" = 200
+            if [ "$path" = /revista ]; then grep -q "$slug" /tmp/pg;grep -q 'primavera-dos-museus-bastidores-acervos' /tmp/pg;fi
+            if [ "$path" = /revista/editorias/natureza ]; then grep -q "$slug" /tmp/pg;grep -q 'name="robots" content="index,follow"' /tmp/pg;fi
+            if [ "$path" = /sitemap.xml ]; then grep -q "$slug" /tmp/pg;grep -q 'revista/editorias/natureza' /tmp/pg;fi
+          done
+          code=$(curl -L -sS --max-time 25 -w '%{http_code}' -o /tmp/foto.webp "$base/revista/assets/img/varzea-rio-urubu-katja-schulz.webp")
+          echo "Foto HTTP=$code bytes=$(wc -c </tmp/foto.webp)"
+          test "$code" = 200
+          python3 - <<'PY'
+          from pathlib import Path
+          b=Path('/tmp/foto.webp').read_bytes()
+          assert len(b)>90000
+          assert b[:4]==b'RIFF' and b[8:12]==b'WEBP'
+          print('PASSOU: imagem WEBP contextual, tamanho',len(b))
+          PY
+          echo 'PASSOU: artigo publico, Natureza, Cultura, revista, blog, site e sitemap.'
+      - name: Remover workflow temporario da branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Revista Intellih - automacao'
+          git config user.email 'actions@users.noreply.github.com'
+          git rm .github/workflows/natureza-varcena-verificar-publico.yml
+          git commit -m 'Remover teste temporario de publicacao Natureza'
+          git push origin HEAD:publicar-natureza-adenomera-varcena-20260922
