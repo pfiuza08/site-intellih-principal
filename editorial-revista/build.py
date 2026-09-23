@@ -66,8 +66,8 @@ def footer(prefix='./'):
 <div><img src="{asset('img/intellih-horizontal-dark.png',prefix)}" class="footer-logo" width="171" height="51" alt="Intellih"><p>Inteligência para entender o mundo. Ciência, tecnologia e ideias com contexto e fontes.</p></div>
 <div><b>Explore</b><a href="{prefix}index.html">Revista Intellih</a><a href="{prefix}editorias/ciencia.html">Ciência</a><a href="{prefix}editorias/tecnologia.html">Tecnologia</a><a href="{prefix}editorias/parece-inventado.html">Parece Inventado?</a><a href="{prefix}editorias/inteligencia-artificial.html">Inteligência Artificial</a></div>
 <div><b>Intellih</b><a href="https://intellih.com.br/">Soluções baseadas em IA ↗</a><a href="mailto:contato@intellih.com.br">Contato por e-mail</a><p>Este protótipo não possui newsletter nem sistema automático de publicação.</p></div></div>
-<div class="footer-end">© Intellih · Protótipo editorial · Fotografias e ilustrações identificadas nas matérias; fontes em cada artigo.</div></div></footer>
-<script src="{asset('app.js',prefix)}" defer></script>'''
+<div class="footer-end">© Intellih · Protótipo editorial · Fotografias e ilustrações identificadas nas matérias; fontes em cada artigo. <a href="/politica-de-privacidade.html">Privacidade</a> · <button type="button" data-analytics-settings>Preferências de medição</button></div></div></footer>
+<script src="{asset('app.js',prefix)}" defer></script><script src="{asset('analytics.js',prefix)}" defer></script>'''
 
 def doc(title, desc, main, prefix='./', active='Revista', page_type='website', canonical_path='/revista', publication_date=None, is_empty=False):
     page = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
