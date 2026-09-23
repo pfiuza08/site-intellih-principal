@@ -45,7 +45,7 @@
   <!-- Revista Intellih: primeira edicao -->
   <url>
     <loc>https://www.intellih.com.br/revista</loc>
-    <lastmod>2026-09-22</lastmod>
+    <lastmod>2026-09-23</lastmod>
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/artigos/webb-anas-marrons-duas-massas-jupiter</loc>
@@ -69,7 +69,7 @@
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/editorias/tecnologia</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-23</lastmod>
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/editorias/parece-inventado</loc>
@@ -77,7 +77,7 @@
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/editorias/inteligencia-artificial</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-23</lastmod>
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/artigos/como-exame-sangue-procura-mais-de-50-canceres</loc>
@@ -100,5 +100,10 @@
   <url>
     <loc>https://www.intellih.com.br/revista/artigos/adenomera-varcena-canto-amazonia</loc>
     <lastmod>2026-09-22</lastmod>
+  </url>
+  <!-- Revista Intellih: IA - avaliacao de sistemas -->
+  <url>
+    <loc>https://www.intellih.com.br/revista/artigos/a-ia-funcionou-mas-como-voce-sabe</loc>
+    <lastmod>2026-09-23</lastmod>
   </url>
 </urlset>
