@@ -1,9 +1,7 @@
 (function () {
   'use strict';
 
-  // Substituir pelo ID do fluxo Web da propriedade Intellih — Revista antes de publicar.
-  const measurementId = 'G-REPLACE_ME';
-  if (measurementId === 'G-REPLACE_ME') return;
+  const measurementId = 'G-PLP8JCYHE5';
 
   const storageKey = 'intellih_analytics_consent_v1';
   let preference = null;
