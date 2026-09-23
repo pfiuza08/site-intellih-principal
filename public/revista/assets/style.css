@@ -114,3 +114,15 @@
 .brand-feature .feature-symbol-wrap{display:flex;justify-content:center;align-items:center}
 @media(max-width:800px){.brand-feature .parece-symbol{width:min(100%,150px)}}
 @media(max-width:540px){.brand-feature .feature-grid{grid-template-columns:minmax(0,1fr)}.brand-feature .feature-symbol-wrap{display:flex;justify-content:center}.brand-feature .parece-symbol{width:min(100%,140px)}}
+
+/* O aviso aparece apenas até a pessoa escolher e pode ser reaberto pelo rodapé. */
+.footer-end a,.footer-end button{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.footer-end button{font:inherit;border:0;background:none;cursor:pointer;padding:0}
+.analytics-choice{position:fixed;z-index:30;bottom:16px;left:16px;right:16px;max-width:620px;margin:auto;padding:20px;border:1px solid #c5b7aa;border-radius:12px;background:#fffaf5;color:#211b18;box-shadow:0 8px 35px #0004;font:14px/1.5 Inter,Arial,sans-serif}
+.analytics-choice h2{font-size:18px;line-height:1.25;margin:0 0 8px}
+.analytics-choice p{margin:0 0 14px}
+.analytics-choice a{color:#6c381e;text-decoration:underline}
+.analytics-choice-actions{display:flex;flex-wrap:wrap;gap:9px}
+.analytics-choice button{padding:9px 14px;border-radius:7px;border:1px solid #29211c;background:transparent;color:#29211c;font:600 13px Inter,Arial,sans-serif;cursor:pointer}
+.analytics-choice button[data-analytics-allow]{background:#29211c;color:white}
+@media(max-width:540px){.analytics-choice{bottom:8px;left:8px;right:8px;padding:16px}}
