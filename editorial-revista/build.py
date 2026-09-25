@@ -69,7 +69,7 @@ def footer(prefix='./'):
 <div class="footer-end">© Intellih · Protótipo editorial · Fotografias e ilustrações identificadas nas matérias; fontes em cada artigo. <a href="/politica-de-privacidade.html">Privacidade</a> · <button type="button" data-analytics-settings>Preferências de medição</button></div></div></footer>
 <script src="{asset('app.js',prefix)}" defer></script><script src="{asset('analytics.js',prefix)}" defer></script>'''
 
-def doc(title, desc, main, prefix='./', active='Revista', page_type='website', canonical_path='/revista', publication_date=None, is_empty=False):
+def doc(title, desc, main, prefix='./', active='Revista', page_type='website', canonical_path='/revista', publication_date=None, is_empty=False, extra_head=''):
     page = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>{h(title)} | Intellih Revista</title><meta name="description" content="{h(desc)}"><meta name="theme-color" content="#050505">
 <meta property="og:site_name" content="Revista Intellih"><meta property="og:locale" content="pt_BR"><meta property="og:type" content="{h(page_type)}"><meta property="og:title" content="{h(title)} | Intellih Revista"><meta property="og:description" content="{h(desc)}">
@@ -89,7 +89,7 @@ def doc(title, desc, main, prefix='./', active='Revista', page_type='website', c
     metadata = f'<link rel="canonical" href="{h(canonical)}"><meta property="og:url" content="{h(canonical)}">'
     if publication_date:
         metadata += f'<meta property="article:published_time" content="{h(publication_date)}">'
-    page = page.replace('</head>', metadata + '</head>')
+    page = page.replace('</head>', metadata + extra_head + '</head>')
     page = page.replace('<div class="demo-bar">PRÉVIA EDITORIAL · Conteúdo e imagens em revisão; não publicar sem aprovação</div>', '')
     page = page.replace('Redação Intellih · texto em revisão', 'Redação Intellih')
     page = page.replace('© Intellih · Prévia editorial · ', '© Intellih · ')
@@ -110,11 +110,13 @@ def picture(a, prefix='./', tag=False, link_credit=False):
         if link_credit and a.get('fonte_imagem'):
             credit_name='<a href="'+h(a['fonte_imagem'])+'" target="_blank" rel="noopener noreferrer">'+credit_name+'</a>'
         credit='<figcaption class="image-credit">'+h(a.get('legenda_imagem',''))+' Crédito: '+credit_name+'</figcaption>'
-    img=f'<img src="{h(src)}" alt="{h(alt)}" width="808" height="1000" loading="{loading}">'
-    if not a.get('imagem_url'):
+    dimensions='width="1019" height="561"' if a.get('imagem_cientifica_integral') else 'width="808" height="1000"'
+    img=f'<img src="{h(src)}" alt="{h(alt)}" {dimensions} loading="{loading}">'
+    if not a.get('imagem_url') and (SITE/'assets'/'img'/Path(a['imagem']).with_suffix('.webp').name).is_file():
         optimized='/revista/assets/img/'+Path(a['imagem']).with_suffix('.webp').name
         img=f'<picture><source type="image/webp" srcset="{h(optimized)}">{img}</picture>'
-    return f'<figure class="editorial-figure"><div class="image-box">{img}{sticker}</div>{credit}</figure>'
+    figure_class='editorial-figure scientific-figure' if a.get('imagem_cientifica_integral') else 'editorial-figure'
+    return f'<figure class="{figure_class}"><div class="image-box">{img}{sticker}</div>{credit}</figure>'
 
 def article_card(a, prefix='./', search=False):
     dat=(f' data-search-card data-search="{h(a["titulo"]+" "+a["subtitulo"]+" "+a["categoria"]+" "+a["editoria"])}"' if search else '')
@@ -151,7 +153,25 @@ def article_page(a):
 <div class="article-media">{picture(a,prefix,link_credit=True)}{'' if a.get('credito_exibir') else '<p class="credit">'+h(a['credito_imagem'])+'</p>'}</div>
 <div class="article-layout"><article class="prose" aria-label="Texto do artigo">{prose}<section class="source-box" aria-labelledby="fontes"><h2 id="fontes">Fontes e referências</h2><ul>{sources}</ul><p style="font-size:12px;color:#777;font-family:Inter,Arial,sans-serif">Texto editorial preparado para avaliação; revisar informações, imagens e direitos antes da publicação definitiva.</p></section></article><aside class="aside"><div class="aside-title">Continue explorando</div>{rec}<p>Leitura com contexto, sem transformar hipótese em certeza.</p></aside></div>
 <section class="article-footer"><div class="wrap"><h2>Gostou de descobrir mais?</h2><a class="pill-link" href="../index.html">Voltar à revista →</a></div></section>'''
-    (SITE/'artigos'/f'{a["slug"]}.html').write_text(doc(a.get('titulo_seo',a['titulo']),a.get('descricao_seo',a['subtitulo']),body,prefix,active='Revista',page_type='article',canonical_path='/revista/artigos/'+a['slug'],publication_date=a['publicado_em']),encoding='utf-8')
+    extra_head=''
+    if a.get('imagem_cientifica_integral'):
+        canonical='https://www.intellih.com.br/revista/artigos/'+a['slug']
+        image='https://www.intellih.com.br/revista/assets/img/'+a['imagem']
+        structured={
+            '@context':'https://schema.org', '@type':'Article',
+            'headline':a['titulo'], 'description':a.get('descricao_seo',a['subtitulo']),
+            'image':image, 'datePublished':a['publicado_em'], 'dateModified':a['publicado_em'],
+            'inLanguage':'pt-BR', 'articleSection':a['categoria'], 'mainEntityOfPage':canonical,
+            'author':{'@type':'Organization','name':'Revista Intellih'},
+            'publisher':{'@type':'Organization','name':'Revista Intellih','url':'https://www.intellih.com.br/revista'},
+            'creditText':a['credito_imagem'],
+        }
+        safe_json=json.dumps(structured,ensure_ascii=False).replace('<','\\u003c')
+        extra_head=(f'<meta property="og:image" content="{h(image)}">'
+                    f'<meta property="og:image:alt" content="{h(a["alt_imagem"])}">'
+                    f'<meta name="twitter:image" content="{h(image)}">'
+                    f'<script type="application/ld+json">{safe_json}</script>')
+    (SITE/'artigos'/f'{a["slug"]}.html').write_text(doc(a.get('titulo_seo',a['titulo']),a.get('descricao_seo',a['subtitulo']),body,prefix,active='Revista',page_type='article',canonical_path='/revista/artigos/'+a['slug'],publication_date=a['publicado_em'],extra_head=extra_head),encoding='utf-8')
 
 def section_page(slug, data):
     title, desc, predicate=data
