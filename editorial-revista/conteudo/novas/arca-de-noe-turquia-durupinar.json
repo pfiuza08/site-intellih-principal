@@ -10,7 +10,7 @@
   "chamada": "Novas perfurações reacenderam o mistério de Durupınar. Há dados novos — mas nenhuma embarcação foi demonstrada.",
   "destaque": true,
   "parece": false,
-  "imagem_cientifica_integral": true,
+  "imagem_cientifica_integral": false,
   "alt_imagem": "Fotografia da formação geológica de Durupınar, na província de Ağrı, Turquia, cujo contorno é associado à hipótese da Arca de Noé.",
   "credito_imagem": "Mfikretyilmaz / Wikimedia Commons · CC BY 3.0",
   "credito_exibir": true,
@@ -216,5 +216,6 @@
     }
   ],
   "imagem_url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/The_Structure_Claimed_to_be_the_Noah%27s_Ark_near_the_Mount_Ararat_in_Turkey.jpg",
-  "fonte_imagem": "https://commons.wikimedia.org/wiki/File:The_Structure_Claimed_to_be_the_Noah%27s_Ark_near_the_Mount_Ararat_in_Turkey.jpg"
+  "fonte_imagem": "https://commons.wikimedia.org/wiki/File:The_Structure_Claimed_to_be_the_Noah%27s_Ark_near_the_Mount_Ararat_in_Turkey.jpg",
+  "imagem_horizontal": true
 }
