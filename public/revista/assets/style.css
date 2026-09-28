@@ -136,3 +136,12 @@
 .documentary-figure .image-box img{object-fit:cover;object-position:center 58%}
 .article-media .documentary-figure .image-box{aspect-ratio:auto;background:transparent}
 .article-media .documentary-figure .image-box img{height:auto;object-fit:contain;object-position:center center}
+
+
+/* Imagens científicas em versões reduzidas: preencher cards/rails sem barras, preservando a imagem integral no artigo. */
+.lead-card .scientific-figure .image-box img,
+.story-card .scientific-figure .image-box img,
+.rail-item .scientific-figure .image-box img{
+  object-fit:cover;
+  object-position:center center;
+}
