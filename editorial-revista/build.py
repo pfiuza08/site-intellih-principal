@@ -156,7 +156,7 @@ def article_page(a):
     extra_head=''
     if a.get('imagem_cientifica_integral'):
         canonical='https://www.intellih.com.br/revista/artigos/'+a['slug']
-        image='https://www.intellih.com.br/revista/assets/img/'+a['imagem']
+        image=a.get('imagem_url') or ('https://www.intellih.com.br/revista/assets/img/'+a['imagem'])
         structured={
             '@context':'https://schema.org', '@type':'Article',
             'headline':a['titulo'], 'description':a.get('descricao_seo',a['subtitulo']),
@@ -190,7 +190,7 @@ def validate():
         if a['slug'] in slugs:raise ValueError('Slug duplicado: '+a['slug'])
         slugs.add(a['slug'])
         if a.get('imagem_url'):
-            if a['imagem_url']!='https://cdn.esawebb.org/archives/images/screen/weic2619a.jpg':raise ValueError('Imagem externa não aprovada')
+            if a['imagem_url'] not in {'https://cdn.esawebb.org/archives/images/screen/weic2619a.jpg','https://upload.wikimedia.org/wikipedia/commons/1/1a/The_Structure_Claimed_to_be_the_Noah%27s_Ark_near_the_Mount_Ararat_in_Turkey.jpg'}:raise ValueError('Imagem externa não aprovada')
             if not a.get('credito_exibir') or not a.get('credito_imagem'):raise ValueError('Crédito obrigatório para a imagem ESA')
         elif not a.get('imagem') or Path(a['imagem']).name != a['imagem'] or Path(a['imagem']).suffix.lower() not in ('.png','.jpg','.jpeg','.webp') or not (SITE/'assets'/'img'/a['imagem']).is_file() or not a.get('credito_imagem'):raise ValueError('Imagem ausente, sem credito ou com caminho invalido')
         for s in a['fontes']:
