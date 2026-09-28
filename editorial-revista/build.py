@@ -110,12 +110,12 @@ def picture(a, prefix='./', tag=False, link_credit=False):
         if link_credit and a.get('fonte_imagem'):
             credit_name='<a href="'+h(a['fonte_imagem'])+'" target="_blank" rel="noopener noreferrer">'+credit_name+'</a>'
         credit='<figcaption class="image-credit">'+h(a.get('legenda_imagem',''))+' Crédito: '+credit_name+'</figcaption>'
-    dimensions='width="1019" height="561"' if a.get('imagem_cientifica_integral') else 'width="808" height="1000"'
+    dimensions='width="1019" height="561"' if (a.get('imagem_cientifica_integral') or a.get('imagem_horizontal')) else 'width="808" height="1000"'
     img=f'<img src="{h(src)}" alt="{h(alt)}" {dimensions} loading="{loading}">'
     if not a.get('imagem_url') and (SITE/'assets'/'img'/Path(a['imagem']).with_suffix('.webp').name).is_file():
         optimized='/revista/assets/img/'+Path(a['imagem']).with_suffix('.webp').name
         img=f'<picture><source type="image/webp" srcset="{h(optimized)}">{img}</picture>'
-    figure_class='editorial-figure scientific-figure' if a.get('imagem_cientifica_integral') else 'editorial-figure'
+    figure_class=('editorial-figure documentary-figure' if a.get('imagem_horizontal') else 'editorial-figure scientific-figure' if a.get('imagem_cientifica_integral') else 'editorial-figure')
     return f'<figure class="{figure_class}"><div class="image-box">{img}{sticker}</div>{credit}</figure>'
 
 def article_card(a, prefix='./', search=False):
@@ -154,7 +154,7 @@ def article_page(a):
 <div class="article-layout"><article class="prose" aria-label="Texto do artigo">{prose}<section class="source-box" aria-labelledby="fontes"><h2 id="fontes">Fontes e referências</h2><ul>{sources}</ul><p style="font-size:12px;color:#777;font-family:Inter,Arial,sans-serif">Texto editorial preparado para avaliação; revisar informações, imagens e direitos antes da publicação definitiva.</p></section></article><aside class="aside"><div class="aside-title">Continue explorando</div>{rec}<p>Leitura com contexto, sem transformar hipótese em certeza.</p></aside></div>
 <section class="article-footer"><div class="wrap"><h2>Gostou de descobrir mais?</h2><a class="pill-link" href="../index.html">Voltar à revista →</a></div></section>'''
     extra_head=''
-    if a.get('imagem_cientifica_integral'):
+    if a.get('imagem_cientifica_integral') or a.get('imagem_horizontal'):
         canonical='https://www.intellih.com.br/revista/artigos/'+a['slug']
         image=a.get('imagem_url') or ('https://www.intellih.com.br/revista/assets/img/'+a['imagem'])
         structured={

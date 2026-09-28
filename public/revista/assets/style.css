@@ -130,3 +130,9 @@
 .analytics-choice button{padding:9px 14px;border-radius:7px;border:1px solid #29211c;background:transparent;color:#29211c;font:600 13px Inter,Arial,sans-serif;cursor:pointer}
 .analytics-choice button[data-analytics-allow]{background:#29211c;color:white}
 @media(max-width:540px){.analytics-choice{bottom:8px;left:8px;right:8px;padding:16px}}
+
+
+/* Fotos documentais horizontais: preencher capas/cards sem barras e preservar a imagem integral no artigo. */
+.documentary-figure .image-box img{object-fit:cover;object-position:center 58%}
+.article-media .documentary-figure .image-box{aspect-ratio:auto;background:transparent}
+.article-media .documentary-figure .image-box img{height:auto;object-fit:contain;object-position:center center}
