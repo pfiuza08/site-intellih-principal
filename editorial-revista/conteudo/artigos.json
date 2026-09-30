@@ -128,7 +128,11 @@
     "titulo_seo": "GTA VI terá furacões: como funciona um mundo virtual que continua mudando",
     "descricao_seo": "GTA VI terá furacões, clima localizado e mais de 170 espécies. Entenda como persistência e simulação ajudam a criar um mundo virtual convincente.",
     "alt_imagem": "Captura oficial de GTA VI mostrando a região pantanosa de Grassrivers, em Leonida.",
-    "publicado_em": "2026-09-30"
+    "publicado_em": "2026-09-30",
+    "imagem_horizontal": true,
+    "credito_exibir": true,
+    "legenda_imagem": "Grassrivers, região pantanosa de Leonida em GTA VI. Captura oficial.",
+    "fonte_imagem": "https://www.rockstargames.com/VI/media/screenshots"
   },
   {
     "slug": "retatrutida-tres-hormonios-glp1-gip-glucagon",
