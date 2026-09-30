@@ -45,7 +45,7 @@
   <!-- Revista Intellih: primeira edicao -->
   <url>
     <loc>https://www.intellih.com.br/revista</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-09-30</lastmod>
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/artigos/webb-anas-marrons-duas-massas-jupiter</loc>
@@ -120,5 +120,10 @@
   <url>
     <loc>https://www.intellih.com.br/revista/artigos/como-furacao-vira-categoria-5-em-24-horas</loc>
     <lastmod>2026-09-29</lastmod>
+  </url>
+  <!-- Revista Intellih: retatrutida -->
+  <url>
+    <loc>https://www.intellih.com.br/revista/artigos/retatrutida-tres-hormonios-glp1-gip-glucagon</loc>
+    <lastmod>2026-09-30</lastmod>
   </url>
 </urlset>

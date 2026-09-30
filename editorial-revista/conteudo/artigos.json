@@ -1,5 +1,68 @@
 [
   {
+    "slug": "retatrutida-tres-hormonios-glp1-gip-glucagon",
+    "titulo": "Retatrutida age em três vias hormonais ao mesmo tempo. Por que isso chama tanta atenção?",
+    "subtitulo": "Novo medicamento experimental combina ação sobre GLP-1, GIP e glucagon. Em fase 3, a dose mais alta esteve associada a uma perda média de 20,8% do peso em 80 semanas.",
+    "categoria": "Ciência",
+    "editoria": "Metabolismo",
+    "formato": "Reportagem explicativa",
+    "chamada": "Um agonista triplo apresentou resultados expressivos em fase 3 — mas ainda é experimental.",
+    "destaque": false,
+    "parece": true,
+    "imagem": "https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid=171390338&t=l",
+    "credito_imagem": "PubChem / National Library of Medicine",
+    "leitura": "8 min",
+    "data": "2026-09-30",
+    "corpo": [
+      {
+        "tipo": "p",
+        "texto": "A retatrutida é um medicamento experimental projetado para atuar simultaneamente nos receptores de GIP, GLP-1 e glucagon. Resultados do estudo de fase 3 TRIUMPH-2 colocaram a molécula em evidência, mas ela ainda não está aprovada para uso."
+      },
+      {
+        "tipo": "h2",
+        "texto": "De um receptor para três"
+      },
+      {
+        "tipo": "p",
+        "texto": "A proposta da retatrutida é combinar, em uma única molécula, três vias metabólicas diferentes. Isso não significa simplesmente três vezes mais efeito: as vias interagem e o equilíbrio entre elas faz parte do desenvolvimento farmacológico."
+      },
+      {
+        "tipo": "h2",
+        "texto": "O que o estudo mostrou"
+      },
+      {
+        "tipo": "p",
+        "texto": "Depois de 80 semanas, a dose de 12 mg esteve associada a uma redução média de 20,8% do peso em adultos com obesidade ou sobrepeso e diabetes tipo 2. O resultado é uma média de uma população específica, não uma previsão individual."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Ainda é experimental"
+      },
+      {
+        "tipo": "p",
+        "texto": "A retatrutida não está aprovada para comercialização. A Anvisa alerta contra produtos vendidos irregularmente com esse nome e sem garantia de composição, dose ou armazenamento."
+      }
+    ],
+    "fontes": [
+      {
+        "nome": "Eli Lilly — resultados do TRIUMPH-2 (2026)",
+        "url": "https://investor.lilly.com/news-releases/news-release-details/lillys-triple-agonist-retatrutide-delivered-substantial-weight"
+      },
+      {
+        "nome": "Anvisa — retatrutida ainda não está aprovada para uso",
+        "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2026/retatrutida-ainda-nao-esta-aprovada-para-uso-em-nenhum-lugar-do-mundo"
+      },
+      {
+        "nome": "PubChem — retatrutide",
+        "url": "https://pubchem.ncbi.nlm.nih.gov/substance/507750402"
+      }
+    ],
+    "titulo_seo": "Retatrutida: como funciona o medicamento que age em três hormônios",
+    "descricao_seo": "A retatrutida atua em GLP-1, GIP e glucagon e apresentou resultados expressivos em fase 3. Entenda como funciona e por que ainda é experimental.",
+    "alt_imagem": "Representação bidimensional da estrutura química associada à retatrutida.",
+    "publicado_em": "2026-09-30"
+  },
+  {
     "slug": "lua-formacao-em-horas",
     "titulo": "A Lua pode ter se formado em poucas horas? O que uma simulação de 2022 revelou",
     "subtitulo": "Um modelo computacional propôs que um satélite semelhante à Lua poderia surgir rapidamente após uma colisão gigantesca. É uma possibilidade científica, não uma medição do que aconteceu.",
