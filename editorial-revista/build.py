@@ -17,11 +17,18 @@ EVERGREEN = json.loads((BASE / 'conteudo' / 'artigos.json').read_text(encoding='
 NEWS = json.loads((BASE / 'conteudo' / 'noticias.json').read_text(encoding='utf-8'))
 NOVAS = [json.loads(p.read_text(encoding='utf-8')) for p in sorted((BASE / 'conteudo' / 'novas').glob('*.json'))]
 if NOVAS:
-    NEWS = sorted(NEWS + NOVAS, key=lambda a: a.get('data', ''), reverse=True)
-    destaque_slug = NEWS[0]['slug']
-    NEWS = [{**a, 'destaque': a['slug'] == destaque_slug} for a in NEWS]
-# A pauta principal é a notícia aprovada para a prévia; a Lua (estudo de 2022) não é notícia recente.
-ARTICLES = NEWS + [{**a, 'destaque': False} for a in EVERGREEN]
+    NEWS = NEWS + NOVAS
+
+# O destaque da home é sempre o artigo publicado mais recentemente,
+# independentemente de estar em notícias, novas pautas ou no acervo editorial.
+ARTICLES = sorted(
+    NEWS + EVERGREEN,
+    key=lambda a: a.get('publicado_em', a.get('data', '')),
+    reverse=True,
+)
+if ARTICLES:
+    destaque_slug = ARTICLES[0]['slug']
+    ARTICLES = [{**a, 'destaque': a['slug'] == destaque_slug} for a in ARTICLES]
 PUBLICATION_DATE = max(a.get('publicado_em', a.get('data', '2026-09-18')) for a in ARTICLES)
 PUBLICATION_DATE_BR = datetime.strptime(PUBLICATION_DATE, '%Y-%m-%d').strftime('%d/%m/%Y')
 EDITORIAS = {
@@ -101,19 +108,21 @@ def doc(title, desc, main, prefix='./', active='Revista', page_type='website', c
 def picture(a, prefix='./', tag=False, link_credit=False):
     """Mostra a observação original e seu crédito visível, sem simular fotografia."""
     sticker='<span class="image-tag">'+h(a['formato'])+'</span>' if tag else ''
-    src=a.get('imagem_url') or asset('img/'+a['imagem'],prefix)
+    image_value=a.get('imagem_url') or a.get('imagem','')
+    external_image=url_ok(image_value)
+    src=image_value if external_image else asset('img/'+image_value,prefix)
     alt=a.get('alt_imagem',a['credito_imagem'])
     loading='eager' if tag else 'lazy'
     credit=''
-    if a.get('credito_exibir'):
+    if a.get('credito_exibir') or external_image:
         credit_name=h(a['credito_imagem'])
         if link_credit and a.get('fonte_imagem'):
             credit_name='<a href="'+h(a['fonte_imagem'])+'" target="_blank" rel="noopener noreferrer">'+credit_name+'</a>'
         credit='<figcaption class="image-credit">'+h(a.get('legenda_imagem',''))+' Crédito: '+credit_name+'</figcaption>'
     dimensions='width="1019" height="561"' if (a.get('imagem_cientifica_integral') or a.get('imagem_horizontal')) else 'width="808" height="1000"'
     img=f'<img src="{h(src)}" alt="{h(alt)}" {dimensions} loading="{loading}">'
-    if not a.get('imagem_url') and (SITE/'assets'/'img'/Path(a['imagem']).with_suffix('.webp').name).is_file():
-        optimized='/revista/assets/img/'+Path(a['imagem']).with_suffix('.webp').name
+    if not external_image and (SITE/'assets'/'img'/Path(image_value).with_suffix('.webp').name).is_file():
+        optimized='/revista/assets/img/'+Path(image_value).with_suffix('.webp').name
         img=f'<picture><source type="image/webp" srcset="{h(optimized)}">{img}</picture>'
     figure_class=('editorial-figure documentary-figure' if a.get('imagem_horizontal') else 'editorial-figure scientific-figure' if a.get('imagem_cientifica_integral') else 'editorial-figure')
     return f'<figure class="{figure_class}"><div class="image-box">{img}{sticker}</div>{credit}</figure>'
@@ -189,10 +198,10 @@ def validate():
     for a in ARTICLES:
         if a['slug'] in slugs:raise ValueError('Slug duplicado: '+a['slug'])
         slugs.add(a['slug'])
-        if a.get('imagem_url'):
-            if a['imagem_url'] not in {'https://cdn.esawebb.org/archives/images/screen/weic2619a.jpg','https://upload.wikimedia.org/wikipedia/commons/1/1a/The_Structure_Claimed_to_be_the_Noah%27s_Ark_near_the_Mount_Ararat_in_Turkey.jpg'}:raise ValueError('Imagem externa não aprovada')
-            if not a.get('credito_exibir') or not a.get('credito_imagem'):raise ValueError('Crédito obrigatório para a imagem ESA')
-        elif not a.get('imagem') or Path(a['imagem']).name != a['imagem'] or Path(a['imagem']).suffix.lower() not in ('.png','.jpg','.jpeg','.webp') or not (SITE/'assets'/'img'/a['imagem']).is_file() or not a.get('credito_imagem'):raise ValueError('Imagem ausente, sem credito ou com caminho invalido')
+        image_value=a.get('imagem_url') or a.get('imagem','')
+        if url_ok(image_value):
+            if not a.get('credito_imagem'):raise ValueError('Crédito obrigatório para imagem externa')
+        elif not image_value or Path(image_value).name != image_value or Path(image_value).suffix.lower() not in ('.png','.jpg','.jpeg','.webp') or not (SITE/'assets'/'img'/image_value).is_file() or not a.get('credito_imagem'):raise ValueError('Imagem ausente, sem credito ou com caminho invalido')
         for s in a['fontes']:
             if not url_ok(s['url']):raise ValueError('Fonte inválida '+repr(s))
 
