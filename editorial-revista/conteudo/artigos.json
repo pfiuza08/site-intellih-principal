@@ -1,5 +1,136 @@
 [
   {
+    "slug": "gta-vi-furacoes-clima-mundo-simulado",
+    "titulo": "GTA VI terá furacões. O mais interessante é o que acontece depois da chuva",
+    "subtitulo": "Tempestades localizadas, superfícies que continuam molhadas depois da chuva e mais de 170 espécies mostram como GTA VI tenta criar um mundo virtual que parece continuar funcionando sem o jogador.",
+    "categoria": "Tecnologia",
+    "editoria": "Simulação",
+    "formato": "Reportagem explicativa",
+    "chamada": "Clima localizado, persistência ambiental e fauna ajudam a transformar um grande mapa em um mundo que parece ter continuidade.",
+    "destaque": false,
+    "parece": true,
+    "imagem": "https://www.rockstargames.com/VI/_next/static/media/Grassrivers_05.0.dx9~67tljry.jpg?akim=1&imdensity=1&imwidth=3840",
+    "credito_imagem": "Rockstar Games",
+    "leitura": "8 min",
+    "data": "2026-09-30",
+    "corpo": [
+      {
+        "tipo": "p",
+        "texto": "Imagine dirigir por uma avenida sob céu azul e perceber, alguns quilômetros adiante, uma grande tempestade caindo sobre outra região. Quando você chega ao lugar onde estava chovendo, a tempestade já passou — mas o asfalto continua molhado e há poças espalhadas pelo caminho. Essa situação fará parte de Grand Theft Auto VI."
+      },
+      {
+        "tipo": "p",
+        "texto": "Segundo informações fornecidas pela Rockstar Games à Game Informer, Leonida terá nuvens dinâmicas, tempestades localizadas, tempestades tropicais e furacões. E talvez a parte tecnologicamente mais interessante não seja a tempestade, mas o que permanece depois dela."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Primeiro: o que é GTA VI?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Grand Theft Auto VI é o próximo grande jogo da série GTA, desenvolvida pela Rockstar Games. A história acompanha Jason e Lucia e acontece em Leonida, um estado fictício inspirado na Flórida que inclui uma nova versão de Vice City. O lançamento está previsto para 19 de novembro de 2026, inicialmente para PlayStation 5 e Xbox Series X|S."
+      },
+      {
+        "tipo": "p",
+        "texto": "Quanto mais convincente um mundo aberto precisa parecer, mais sistemas precisam funcionar ao mesmo tempo: trânsito, pedestres, veículos, água, vegetação, animais, iluminação, física e clima. E todos precisam dividir recursos computacionais limitados."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Não precisa chover no mapa inteiro"
+      },
+      {
+        "tipo": "p",
+        "texto": "A Rockstar revelou que GTA VI terá tempestades localizadas. O jogador poderá permanecer em uma região seca e ensolarada enquanto observa chuva intensa acontecendo à distância. Quando regiões diferentes apresentam condições meteorológicas distintas, o clima passa a parecer um acontecimento localizado no espaço, não apenas um efeito aplicado a todo o cenário."
+      },
+      {
+        "tipo": "h2",
+        "texto": "E quando a chuva acaba?"
+      },
+      {
+        "tipo": "p",
+        "texto": "Depois que uma tempestade passa, ainda será possível encontrar poças e outras superfícies molhadas. Sob condições adequadas de iluminação, poderão surgir até arco-íris. O estado do ambiente pode persistir depois que o evento que o produziu terminou."
+      },
+      {
+        "tipo": "p",
+        "texto": "Isso não significa que o jogo simule fisicamente cada gota. A Rockstar não revelou esse nível de detalhe. Estados, mapas de umidade, propriedades de materiais e outras simplificações podem produzir a mesma experiência de continuidade."
+      },
+      {
+        "tipo": "h2",
+        "texto": "É como se o cenário tivesse memória"
+      },
+      {
+        "tipo": "p",
+        "texto": "Memória é uma metáfora. O jogo precisa apenas conservar informações suficientes para que um acontecimento anterior produza efeitos posteriores. O jogador retorna e encontra sinais de algo que aconteceu enquanto estava longe."
+      },
+      {
+        "tipo": "h2",
+        "texto": "E haverá furacões"
+      },
+      {
+        "tipo": "p",
+        "texto": "A Rockstar confirmou tempestades tropicais e furacões em Leonida. Ainda não sabemos com que frequência ocorrerão nem até que ponto afetarão missões, trânsito, personagens ou a história. Furacões no jogo estão confirmados; destruição permanente do mapa ou mudanças de missão ainda seriam especulação."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Mais de 170 espécies"
+      },
+      {
+        "tipo": "p",
+        "texto": "Leonida terá mais de 170 espécies de animais distribuídas por terra, ar e água. A lista inclui flamingos, pelicanos, peixes-boi, jacarés, iguanas-verdes, sapos-cururu, gatos ferais e macacos-rhesus, entre outros."
+      },
+      {
+        "tipo": "p",
+        "texto": "A Rockstar também está expandindo sistemas para penas, pelos, iridescência, translucidez e bioluminescência. Alguns animais poderão ser classificados como raros, descobríveis ou lendários."
+      },
+      {
+        "tipo": "h2",
+        "texto": "O computador não pode calcular tudo"
+      },
+      {
+        "tipo": "p",
+        "texto": "Mundos virtuais complexos dependem de simplificações e níveis de detalhe. Aquilo que está perto do jogador pode receber mais processamento; eventos distantes podem ser representados por estados ou regras até que precisem ser reconstruídos em maior detalhe."
+      },
+      {
+        "tipo": "p",
+        "texto": "O desafio não é calcular tudo, mas decidir o que precisa ser calculado agora para que o mundo continue convincente."
+      },
+      {
+        "tipo": "h2",
+        "texto": "Um mapa grande não é necessariamente um mundo vivo"
+      },
+      {
+        "tipo": "p",
+        "texto": "Quilômetros quadrados não garantem complexidade. O que torna um ambiente convincente é a interação entre sistemas e a presença de consequências. O jogador passa, algo acontece, ele retorna e encontra sinais desse acontecimento. Essa continuidade pode ser mais importante do que simplesmente aumentar o tamanho do mapa."
+      }
+    ],
+    "fontes": [
+      {
+        "nome": "Rockstar Games — GTA VI será lançado em 19 de novembro de 2026",
+        "url": "https://www.rockstargames.com/br/newswire/article/ak3ak31a49a221/grand-theft-auto-vi-is-now-set-to-launch-november-19-2026"
+      },
+      {
+        "nome": "Game Informer — GTA VI Features Tropical Storms And Hurricanes",
+        "url": "https://gameinformer.com/exclusive/2026/09/29/exclusive-grand-theft-auto-vi-features-tropical-storms-and-hurricanes"
+      },
+      {
+        "nome": "Game Informer — GTA VI Includes Over 170 Animal Species",
+        "url": "https://gameinformer.com/exclusive/2026/09/29/exclusive-grand-theft-auto-vi-includes-over-170-animal-species"
+      },
+      {
+        "nome": "Game Informer — The Grand Theft Auto VI Digital Issue Is Now Live",
+        "url": "https://gameinformer.com/digital-issue/2026/09/28/the-grand-theft-auto-vi-digital-issue-is-now-live"
+      },
+      {
+        "nome": "Rockstar Games — galeria oficial de screenshots de GTA VI",
+        "url": "https://www.rockstargames.com/VI/media/screenshots"
+      }
+    ],
+    "titulo_seo": "GTA VI terá furacões: como funciona um mundo virtual que continua mudando",
+    "descricao_seo": "GTA VI terá furacões, clima localizado e mais de 170 espécies. Entenda como persistência e simulação ajudam a criar um mundo virtual convincente.",
+    "alt_imagem": "Captura oficial de GTA VI mostrando a região pantanosa de Grassrivers, em Leonida.",
+    "publicado_em": "2026-09-30"
+  },
+  {
     "slug": "retatrutida-tres-hormonios-glp1-gip-glucagon",
     "titulo": "Retatrutida age em três vias hormonais ao mesmo tempo. Por que isso chama tanta atenção?",
     "subtitulo": "Novo medicamento experimental combina ação sobre GLP-1, GIP e glucagon. Em fase 3, a dose mais alta esteve associada a uma perda média de 20,8% do peso em 80 semanas.",
