@@ -45,7 +45,7 @@
   <!-- Revista Intellih: primeira edicao -->
   <url>
     <loc>https://www.intellih.com.br/revista</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-06</lastmod>
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/artigos/webb-anas-marrons-duas-massas-jupiter</loc>
@@ -65,7 +65,7 @@
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/editorias/ciencia</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-06</lastmod>
   </url>
   <url>
     <loc>https://www.intellih.com.br/revista/editorias/tecnologia</loc>
@@ -135,5 +135,11 @@
   <url>
     <loc>https://www.intellih.com.br/revista/artigos/optogenetica-neuronios-luz-nobel-medicina-2026</loc>
     <lastmod>2026-10-05</lastmod>
+  </url>
+
+  <!-- Revista Intellih: Nobel de Física 2026 / IceCube -->
+  <url>
+    <loc>https://www.intellih.com.br/revista/artigos/nobel-fisica-2026-francis-halzen-icecube-neutrinos</loc>
+    <lastmod>2026-10-06</lastmod>
   </url>
 </urlset>
