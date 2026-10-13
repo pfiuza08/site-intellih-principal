@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>O que automatizar — e o que deve continuar humano? | Blog Intellih</title>
+  <meta name="description" content="Como avaliar frequência, previsibilidade, verificabilidade e risco antes de entregar uma tarefa à inteligência artificial.">
+  <link rel="canonical" href="https://www.intellih.com.br/blog/o-que-automatizar-e-o-que-deve-continuar-humano.html">
+  <link rel="icon" href="/favicon_intellih.ico">
+  <meta property="og:type" content="article"><meta property="og:title" content="Como desenhar um fluxo de trabalho com inteligência artificial">
+  <meta property="og:description" content="Decida o que automatizar, o que apoiar com IA e o que deve continuar sob responsabilidade humana.">
+  <meta property="og:url" content="https://www.intellih.com.br/blog/o-que-automatizar-e-o-que-deve-continuar-humano.html">
+  <meta property="og:image" content="https://www.intellih.com.br/og-image.jpg"><meta property="article:published_time" content="2026-09-10"><meta property="article:author" content="Patrícia Fiuza">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"O que automatizar — e o que deve continuar humano?","description":"Como avaliar frequência, previsibilidade, verificabilidade e risco antes de entregar uma tarefa à inteligência artificial.","datePublished":"2026-10-13","dateModified":"2026-10-13","inLanguage":"pt-BR","mainEntityOfPage":"https://www.intellih.com.br/blog/o-que-automatizar-e-o-que-deve-continuar-humano.html","author":{"@type":"Person","name":"Patrícia Fiuza"},"publisher":{"@type":"Organization","name":"Intellih Tecnologia","url":"https://www.intellih.com.br/","logo":{"@type":"ImageObject","url":"https://www.intellih.com.br/og-image.jpg"}},"image":"https://www.intellih.com.br/og-image.jpg","keywords":["automação","inteligência artificial","trabalho humano","negócio de uma pessoa","método OPA","IA aplicada"]}</script>
+  <style>
+    :root{--bg:#fbfaf8;--paper:#fff;--ink:#191715;--soft:#5f5a55;--muted:#817870;--line:#e8e1da;--brand:#c65f22;--dark:#944314;--pale:#fff0e7;--graphite:#171411;--max:1160px;--read:760px;--radius:24px;--shadow:0 20px 55px rgba(31,25,20,.1)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}p{margin:0 0 1.25rem}.container{width:min(var(--max),calc(100% - 40px));margin:auto}.progress{position:fixed;inset:0 auto auto 0;z-index:200;height:3px;width:0;background:var(--brand)}
+    .topbar{position:sticky;top:0;z-index:100;background:rgba(251,250,248,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:12px;font-weight:850}.mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--brand),#e47c3c);font-weight:900}.links{display:flex;gap:20px;color:var(--soft);font-size:.95rem}.links a:hover,.links .active{color:var(--brand)}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 19px;border-radius:999px;background:var(--brand);color:#fff;font-weight:800}.btn:hover{background:var(--dark)}.menu{display:none;border:1px solid var(--line);background:#fff;border-radius:13px;padding:10px 12px;font:inherit;font-weight:800}
+    .hero{position:relative;overflow:hidden;padding:78px 0 72px;background:radial-gradient(circle at 82% 20%,rgba(198,95,34,.18),transparent 29%),radial-gradient(circle at 8% 84%,rgba(231,238,232,.75),transparent 32%),linear-gradient(145deg,#fff,#f8f3ee);border-bottom:1px solid var(--line)}.hero:after{content:"07";position:absolute;right:max(4vw,24px);bottom:-78px;color:rgba(198,95,34,.065);font-size:clamp(12rem,26vw,25rem);font-weight:950;line-height:1;letter-spacing:-.09em}.crumbs{color:var(--muted);font-size:.9rem;margin-bottom:30px}.hero-copy{position:relative;z-index:1;max-width:920px}.label{display:inline-flex;gap:9px;align-items:center;padding:8px 13px;border:1px solid #f0cbb4;border-radius:999px;background:#ffffffbf;color:var(--dark);font-size:.82rem;font-weight:850;letter-spacing:.055em;text-transform:uppercase}.label:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand)}h1{margin:24px 0;max-width:1000px;font-size:clamp(2.45rem,6vw,5.35rem);line-height:.99;letter-spacing:-.065em}.deck{max-width:800px;color:var(--soft);font-size:clamp(1.08rem,2vw,1.34rem)}.meta{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:32px;color:var(--muted);font-size:.92rem}.dot{width:4px;height:4px;margin:auto 0;border-radius:50%;background:#b7aca3}
+    .shell{display:grid;grid-template-columns:250px minmax(0,var(--read));justify-content:center;gap:70px;padding:72px 0 90px}.toc{align-self:start;position:sticky;top:105px}.toc strong{display:block;margin-bottom:13px;font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}.toc a{display:block;padding:8px 0 8px 14px;border-left:2px solid var(--line);color:var(--soft);font-size:.91rem;line-height:1.4}.toc a:hover{border-color:var(--brand);color:var(--brand)}.article .lead{font-size:1.28rem;color:#3e3935}.article h2{margin:3.3rem 0 1.15rem;font-size:clamp(1.8rem,4vw,2.65rem);line-height:1.1;letter-spacing:-.045em}.article h3{margin:1.8rem 0 .55rem;font-size:1.25rem}.article ul{padding-left:1.3rem;margin:0 0 1.4rem}.article li{margin:.5rem 0}.thesis{margin:34px 0;padding:28px 30px;border-left:5px solid var(--brand);border-radius:0 var(--radius) var(--radius) 0;background:var(--pale);font-size:1.22rem;font-weight:750;line-height:1.5}.cards{display:grid;gap:14px;margin:28px 0}.card{padding:22px 24px;border:1px solid var(--line);border-radius:18px;background:#fff}.card span{display:block;color:var(--dark);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.card h3{margin:.35rem 0}.card p{margin:0;color:var(--soft)}.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}.compare>div{padding:24px;border:1px solid var(--line);border-radius:20px;background:#fff}.compare span{color:var(--dark);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.compare h3{margin:.5rem 0}.map{margin:34px 0;padding:30px;border-radius:24px;background:var(--graphite);color:#fff}.map h3{margin:0 0 8px;font-size:1.55rem}.map p{color:#d0c7bf}.map ol{padding-left:1.3rem}.map li{margin:.75rem 0}.opa{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0}.opa>div{padding:22px;border:1px solid var(--line);border-radius:20px;background:#fff}.letter{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:var(--brand);color:#fff;font-weight:950}.opa h3{margin:.7rem 0 .35rem}.opa p{margin:0;color:var(--soft);font-size:.94rem}.author{display:flex;gap:18px;align-items:center;margin-top:55px;padding-top:28px;border-top:1px solid var(--line)}.author-mark{flex:0 0 58px;width:58px;height:58px;display:grid;place-items:center;border-radius:18px;background:var(--pale);color:var(--dark);font-weight:900}.author h3,.author p{margin:0}.author p{color:var(--soft);font-size:.92rem}
+    .next{padding:72px 0;background:var(--graphite);color:#fff}.next-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:center}.kicker{color:#e9a273;font-weight:850;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}.next h2{margin:10px 0 14px;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.05em}.next p{color:#cec5bd}.next-list{display:grid;gap:10px}.next-item{padding:17px 19px;border:1px solid #ffffff1f;border-radius:15px;background:#ffffff0d;color:#e9e4df}.next-item.current{border-color:#cf7945;background:#c65f222b}.next-item span{color:#e9a273;font-weight:900;margin-right:9px}.cta{padding:62px 0;background:#fff}.cta-box{display:flex;justify-content:space-between;gap:35px;align-items:center;padding:36px;border-radius:26px;background:var(--pale);border:1px solid #f0d3c1}.cta-box h2{margin:0 0 8px;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.1}.cta-box p{margin:0;max-width:700px;color:var(--soft)}footer{padding:30px 0;background:#110f0d;color:#a99f97;font-size:.9rem}.footer{display:flex;justify-content:space-between;gap:20px}
+    @media(max-width:900px){.links{display:none;position:absolute;top:70px;right:20px;left:20px;padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow);flex-direction:column}.links.open{display:flex}.nav>.btn{display:none}.menu{display:block}.shell{grid-template-columns:minmax(0,var(--read));gap:0}.toc{display:none}.next-grid{grid-template-columns:1fr}}@media(max-width:650px){.container{width:min(100% - 28px,var(--max))}.hero{padding:52px 0 50px}h1{font-size:clamp(2.4rem,13vw,4rem)}.dot{display:none}.meta{display:grid;gap:5px}.shell{padding:50px 0 70px}.compare,.opa{grid-template-columns:1fr}.thesis,.map{padding:23px}.cta-box{align-items:flex-start;flex-direction:column;padding:27px}.footer{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="topbar"><div class="container nav"><a class="brand" href="/"><span class="mark">I</span><span>Intellih Tecnologia</span></a><nav class="links" id="links"><a href="/#frentes">Frentes</a><a href="/#publicos">Para quem</a><a href="/#como-funciona">Como funciona</a><a class="active" href="/blog/">Blog</a><a href="/#contato">Contato</a></nav><a class="btn" href="/#contato">Fale com a Intellih</a><button class="menu" id="menu" aria-expanded="false">Menu</button></div></header>
+  <main>
+    <header class="hero"><div class="container"><div class="crumbs"><a href="/">Início</a> · <a href="/blog/">Blog</a> · Negócios de Uma Pessoa</div><div class="hero-copy"><div class="label">Negócios de Uma Pessoa · Artigo 7 · Encerramento</div><h1>O que automatizar — e o que deve continuar humano?</h1><p class="deck">Como avaliar frequência, previsibilidade, verificabilidade e risco antes de entregar uma tarefa à inteligência artificial.</p><div class="meta"><span>Por <strong>Patrícia Fiuza</strong></span><span class="dot"></span><time datetime="2026-10-13">13 de outubro de 2026</time><span class="dot"></span><span>Leitura de 12 minutos</span></div></div></div></header>
+    <div class="container shell">
+      <aside class="toc"><strong>Neste artigo</strong><a href="#objetivo">Automatizar não é o objetivo</a><a href="#candidata">Quatro características</a><a href="#destinos">Quatro destinos</a><a href="#humano">O que continua humano</a><a href="#risco">O risco muda a decisão</a><a href="#conta">A conta completa</a><a href="#matriz">Matriz de decisão</a><a href="#teste">Automatizar por etapas</a><a href="#opa">Método OPA</a><a href="#fechamento">Fechamento da série</a></aside>
+      <article class="article">
+        <p class="lead">Depois de mapear um fluxo de trabalho, surge uma pergunta inevitável: até onde a inteligência artificial deve participar?</p>
+        <p>Uma tarefa pode ser repetitiva e consumir muito tempo. Ainda assim, isso não significa que deva ser entregue integralmente a uma automação. Algumas atividades admitem regras claras e conferência simples. Outras dependem de contexto, confiança, negociação ou julgamento diante de situações que não se repetem da mesma forma.</p>
+        <p>O objetivo não é retirar a pessoa do negócio. É reduzir trabalho operacional suficiente para que ela concentre atenção nas decisões, relações e entregas em que sua experiência realmente produz valor.</p>
+        <div class="thesis">Automatizar bem não significa fazer a tecnologia participar de tudo. Significa escolher cuidadosamente onde ela reduz esforço sem retirar controle, qualidade e responsabilidade.</div>
+
+        <h2 id="objetivo">Automatizar não é o objetivo final</h2>
+        <p>Automação costuma ser apresentada como sinônimo de eficiência. Mas uma atividade automatizada só melhora a operação quando produz um benefício concreto: reduz tempo, espera, erro, custo ou sobrecarga sem criar um problema maior em outra parte do processo.</p>
+        <p>Uma resposta automática pode diminuir o tempo inicial de atendimento e aumentar o número de conversas que precisam ser corrigidas. Um relatório pode ser produzido em minutos, mas exigir uma revisão tão extensa que o ganho desaparece. Uma integração pode eliminar uma cópia manual e criar dependência de sistemas difíceis de manter.</p>
+        <p>Por isso, a análise deve considerar o fluxo inteiro. A pergunta não é apenas quanto tempo a IA economiza na execução. É quanto esforço permanece na preparação dos dados, na conferência, na correção, no tratamento das exceções e na manutenção.</p>
+        <div class="compare"><div><span>Automação aparente</span><h3>A etapa ficou mais rápida</h3><p>O resultado é medido apenas pelo tempo necessário para gerar uma saída.</p></div><div><span>Melhoria real</span><h3>O fluxo ficou melhor</h3><p>Tempo total, qualidade, retrabalho, risco e experiência do cliente melhoraram de forma verificável.</p></div></div>
+
+        <h2 id="candidata">Quatro características de uma boa candidata</h2>
+        <p>Não existe uma fórmula universal, mas quatro fatores ajudam a reconhecer tarefas com maior potencial.</p>
+        <div class="cards">
+          <div class="card"><span>01 · FREQUÊNCIA</span><h3>A atividade acontece vezes suficientes?</h3><p>Quanto mais recorrente, maior a possibilidade de recuperar o esforço necessário para estruturar, testar e manter a solução.</p></div>
+          <div class="card"><span>02 · PREVISIBILIDADE</span><h3>As etapas seguem padrões reconhecíveis?</h3><p>Tarefas com entradas, regras e caminhos relativamente estáveis são mais fáceis de delimitar do que atividades cheias de variações implícitas.</p></div>
+          <div class="card"><span>03 · VERIFICABILIDADE</span><h3>É possível reconhecer um resultado aceitável?</h3><p>Campos obrigatórios, fontes, cálculos, classificações e formatos permitem conferir a saída sem depender apenas de impressão subjetiva.</p></div>
+          <div class="card"><span>04 · CONSEQUÊNCIA DO ERRO</span><h3>O que acontece quando o sistema falha?</h3><p>Quanto maior o impacto sobre dinheiro, saúde, direitos, reputação ou confiança, maior deve ser a participação humana.</p></div>
+        </div>
+        <p>Uma tarefa frequente, previsível e verificável pode ser boa candidata. Mas, se um erro tiver consequência grave ou difícil de reverter, ela ainda exigirá revisão, limites e encaminhamento.</p>
+
+        <h2 id="destinos">Uma tarefa pode ter quatro destinos</h2>
+        <p>A decisão não precisa ser apenas “manual ou automatizada”. Entre os dois extremos existem arranjos mais úteis.</p>
+        <div class="cards">
+          <div class="card"><span>DESTINO 1</span><h3>Manter sob execução humana</h3><p>Faz sentido quando a atividade depende de confiança, negociação, interpretação complexa ou responsabilidade elevada.</p></div>
+          <div class="card"><span>DESTINO 2</span><h3>Apoiar com inteligência artificial</h3><p>A tecnologia localiza informações, organiza opções ou sugere caminhos. A pessoa continua conduzindo a tarefa.</p></div>
+          <div class="card"><span>DESTINO 3</span><h3>Executar com revisão</h3><p>A IA produz uma etapa ou primeira versão, mas a saída só avança depois de uma verificação humana baseada em critérios.</p></div>
+          <div class="card"><span>DESTINO 4</span><h3>Automatizar com controle</h3><p>A tarefa acontece dentro de regras conhecidas, com monitoramento, registro e interrupção diante de exceções.</p></div>
+        </div>
+        <p>Esses destinos também podem coexistir no mesmo fluxo. Um atendimento pode automatizar a confirmação de horário, usar IA com revisão para preparar um resumo e preservar integralmente para uma pessoa a condução de uma reclamação sensível.</p>
+
+        <h2 id="humano">O que tende a continuar humano?</h2>
+        <p>Algumas atividades recebem apoio tecnológico, mas mantêm valor justamente porque alguém compreende o contexto e responde pela decisão.</p>
+        <ul>
+          <li>descobrir necessidades que o cliente ainda não consegue formular;</li>
+          <li>negociar prioridades, limites, preço e compromissos;</li>
+          <li>interpretar situações ambíguas ou excepcionais;</li>
+          <li>construir confiança e conduzir conversas difíceis;</li>
+          <li>avaliar consequências que não aparecem nos dados disponíveis;</li>
+          <li>criar novos critérios quando o padrão existente deixa de servir;</li>
+          <li>assumir responsabilidade pela recomendação e pela entrega.</li>
+        </ul>
+        <p>Isso não significa proteger toda atividade intelectual da tecnologia. Pesquisa, organização, comparação e produção de primeiras versões podem ser apoiadas. A questão é preservar a participação humana onde ela constitui parte essencial do valor.</p>
+        <div class="thesis">O trabalho humano não deve ser definido apenas pelo que a tecnologia ainda não consegue fazer. Deve ser definido pelo que o negócio precisa que uma pessoa compreenda, decida e assuma.</div>
+
+        <h2 id="risco">O risco muda a decisão</h2>
+        <p>Duas tarefas igualmente repetitivas podem exigir tratamentos muito diferentes. Classificar mensagens de uma newsletter e classificar solicitações médicas não possuem a mesma consequência de erro.</p>
+        <p>Antes de ampliar a autonomia, é necessário considerar:</p>
+        <ul>
+          <li>o erro pode ser detectado antes de chegar ao cliente?</li>
+          <li>a decisão pode ser revertida sem prejuízo importante?</li>
+          <li>há dados pessoais, sigilosos ou estratégicos envolvidos?</li>
+          <li>o sistema consegue indicar incerteza ou ausência de informação?</li>
+          <li>existe obrigação de explicar como o resultado foi produzido?</li>
+          <li>quem será responsável se a saída estiver errada?</li>
+        </ul>
+        <p>Quanto maior a consequência, mais importante é reduzir a autonomia, fortalecer a revisão e registrar as evidências utilizadas. Automação controlada não significa confiança irrestrita: significa saber dentro de quais condições a execução pode ocorrer.</p>
+
+        <h2 id="conta">A conta completa da automação</h2>
+        <p>Uma demonstração costuma mostrar apenas a execução. Uma operação real inclui custos menos visíveis:</p>
+        <ul>
+          <li>preparar e atualizar informações;</li>
+          <li>configurar prompts, regras, integrações e permissões;</li>
+          <li>revisar amostras ou todas as saídas;</li>
+          <li>corrigir erros e tratar casos fora do padrão;</li>
+          <li>acompanhar mudanças nas ferramentas;</li>
+          <li>proteger dados e controlar acessos;</li>
+          <li>manter um caminho alternativo quando o sistema falha;</li>
+          <li>pagar assinaturas, consumo de APIs e infraestrutura.</li>
+        </ul>
+        <p>Para um negócio de uma pessoa, essa conta é especialmente importante. Uma automação tecnicamente sofisticada pode consumir mais atenção do que economiza. Em muitos casos, um modelo simples, uma rotina organizada e uma execução assistida oferecem resultado melhor.</p>
+
+        <h2 id="matriz">Uma matriz prática de decisão</h2>
+        <p>Para cada tarefa, atribua uma avaliação baixa, média ou alta aos quatro fatores:</p>
+        <div class="map"><h3>Frequência × previsibilidade × verificação × risco</h3><ol><li><strong>Frequência:</strong> quantas vezes a tarefa acontece e quanto tempo consome?</li><li><strong>Previsibilidade:</strong> entradas, regras e caminhos se repetem?</li><li><strong>Verificabilidade:</strong> existem critérios objetivos para aceitar o resultado?</li><li><strong>Consequência do erro:</strong> qual é o impacto e quão fácil é corrigi-lo?</li></ol></div>
+        <p>A combinação orienta uma decisão inicial:</p>
+        <ul>
+          <li><strong>alta frequência, alta previsibilidade, alta verificabilidade e baixo risco:</strong> forte candidata à automação controlada;</li>
+          <li><strong>alta frequência e verificabilidade, mas risco relevante:</strong> execução assistida com revisão;</li>
+          <li><strong>baixa previsibilidade e forte dependência de contexto:</strong> apoio à pessoa, sem automatizar a decisão;</li>
+          <li><strong>baixa frequência e alto risco:</strong> provavelmente deve permanecer sob execução humana direta.</li>
+        </ul>
+        <p>A matriz não substitui um piloto. Ela ajuda a escolher onde testar primeiro e qual nível de autonomia é razoável.</p>
+
+        <h2 id="teste">Automatize por etapas</h2>
+        <p>Uma implantação segura pode avançar de forma gradual:</p>
+        <div class="cards">
+          <div class="card"><span>ETAPA 1</span><h3>Observe o processo atual</h3><p>Registre tempo, erros, exceções e decisões antes de modificar o fluxo.</p></div>
+          <div class="card"><span>ETAPA 2</span><h3>Use a IA como apoio</h3><p>Compare sugestões com a execução humana e descubra onde o contexto ainda está ausente.</p></div>
+          <div class="card"><span>ETAPA 3</span><h3>Delegue uma parte verificável</h3><p>Permita que a tecnologia produza uma etapa, mantendo critérios claros de aprovação.</p></div>
+          <div class="card"><span>ETAPA 4</span><h3>Aumente a autonomia somente com evidências</h3><p>Automatize quando resultados, exceções e riscos estiverem suficientemente conhecidos.</p></div>
+        </div>
+        <p>Depois de cada etapa, compare o fluxo inteiro: tempo total, qualidade, retrabalho, falhas, custo e efeito sobre o cliente. A autonomia deve ser consequência de evidências, não de entusiasmo com a ferramenta.</p>
+
+        <h2 id="opa">A decisão pelo método OPA</h2>
+        <div class="opa"><div><div class="letter">O</div><h3>Oportunidade</h3><p>Qual ganho justificaria a mudança e como ele será percebido no negócio?</p></div><div><div class="letter">P</div><h3>Processo</h3><p>Quais tarefas, critérios, decisões, riscos e exceções compõem o fluxo?</p></div><div><div class="letter">A</div><h3>Aplicação</h3><p>Qual nível de participação tecnológica produz benefício sem retirar o controle necessário?</p></div></div>
+        <p>A ordem continua essencial. Quando começamos pela aplicação, procuramos tarefas que justifiquem a ferramenta. Quando começamos pela oportunidade e pelo processo, escolhemos a tecnologia apenas quando ela melhora algo que importa.</p>
+
+        <h2 id="fechamento">O que uma única pessoa será capaz de construir?</h2>
+        <p>Esta série começou com uma pergunta sobre a ampliação da capacidade individual. Ao longo dos artigos, percorremos o caminho entre habilidade e negócio, examinamos modelos possíveis, defendemos a validação por serviços, identificamos funções apoiadas pela IA e organizamos o fluxo de trabalho.</p>
+        <p>A conclusão não é que uma pessoa possa ou deva fazer tudo. Também não é que a tecnologia forme uma empresa automática ao redor dela.</p>
+        <p>Uma pessoa pode operar com mais capacidade quando:</p>
+        <ul>
+          <li>escolhe um problema relevante e um cliente reconhecível;</li>
+          <li>transforma conhecimento em uma entrega clara;</li>
+          <li>testa a oferta antes de investir demais;</li>
+          <li>organiza o processo e explicita os critérios;</li>
+          <li>aplica IA em tarefas delimitadas e verificáveis;</li>
+          <li>preserva julgamento, relação e responsabilidade onde são essenciais.</li>
+        </ul>
+        <div class="thesis">Um negócio de uma pessoa não é um negócio sem pessoas. É uma operação construída para usar melhor a capacidade, o conhecimento e as decisões da pessoa que está no centro dela.</div>
+        <p>A inteligência artificial amplia possibilidades. O que transforma essas possibilidades em negócio continua sendo a combinação entre oportunidade, processo, aplicação e responsabilidade.</p>
+        <div class="author"><div class="author-mark">PF</div><div><h3>Patrícia Fiuza</h3><p>Fundadora da Intellih Tecnologia. Trabalha com inteligência artificial aplicada, organização da informação, automação e desenho de soluções orientadas a processos.</p></div></div>
+      </article>
+    </div>
+    <section class="next"><div class="container next-grid"><div><div class="kicker">Série Negócios de Uma Pessoa · Concluída</div><h2>Da possibilidade à decisão responsável.</h2><p>Sete artigos sobre como transformar conhecimento em uma operação viável, organizar o trabalho e aplicar inteligência artificial sem perder controle, qualidade e responsabilidade.</p></div><div class="next-list"><a class="next-item" href="/blog/a-pequena-equipe-invisivel-funcoes-que-a-ia-pode-apoiar.html"><span>05</span> A pequena equipe invisível</a><a class="next-item" href="/blog/como-desenhar-um-fluxo-de-trabalho-com-inteligencia-artificial.html"><span>06</span> Como desenhar um fluxo de trabalho com IA</a><div class="next-item current"><span>07</span> O que automatizar — e o que deve continuar humano?</div><a class="next-item" href="/blog/"><span>→</span> Ver todos os artigos do Blog da Intellih</a></div></div></section>
+    <section class="cta"><div class="container"><div class="cta-box"><div><h2>Qual parte da sua operação merece apoio da inteligência artificial?</h2><p>A Intellih ajuda a transformar oportunidades em fluxos de trabalho claros e aplicações de inteligência artificial com critérios, controle e responsabilidade.</p></div><a class="btn" href="/#contato">Conversar com a Intellih</a></div></div></section>
+  </main>
+  <footer><div class="container footer"><span>© 2026 Intellih Tecnologia. Inteligência artificial aplicada com método.</span><span><a href="/blog/">Voltar ao blog</a> · <a href="/#contato">Contato</a></span></div></footer>
+  <script>const m=document.getElementById('menu'),l=document.getElementById('links'),p=document.getElementById('progress');m.addEventListener('click',()=>{const o=l.classList.toggle('open');m.setAttribute('aria-expanded',o)});const u=()=>{const a=document.documentElement.scrollHeight-innerHeight;p.style.width=(a?Math.min(100,scrollY/a*100):0)+'%'};u();addEventListener('scroll',u,{passive:true});addEventListener('resize',u)</script>
+</body></html>
