@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Documentos não são uma base de conhecimento: como começar a organizar? | Blog Intellih</title>
+  <meta name="description" content="Ter PDFs e planilhas não significa ter uma base de conhecimento. Veja como encontrar divergências, definir fontes confiáveis e organizar informações para IA." />
+  <link rel="canonical" href="https://www.intellih.com.br/blog/documentos-nao-sao-base-de-conhecimento-como-organizar" />
+
+  <meta property="og:title" content="Documentos não são uma base de conhecimento: como começar a organizar? | Blog Intellih" />
+  <meta property="og:description" content="Ter PDFs e planilhas não significa ter uma base de conhecimento. Veja como encontrar divergências, definir fontes confiáveis e organizar informações para IA." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.intellih.com.br/blog/documentos-nao-sao-base-de-conhecimento-como-organizar" />
+  <meta property="og:image" content="https://www.intellih.com.br/og-image.jpg" />
+
+  <link rel="icon" href="/favicon_intellih.ico" />
+
+  <!-- Meta Pixel Code - Intellih Principal -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}
+  (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1240394014783181');
+  fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1240394014783181&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Documentos não são uma base de conhecimento: como começar a organizar?",
+  "description": "Ter PDFs e planilhas não significa ter uma base de conhecimento. Veja como encontrar divergências, definir fontes confiáveis e organizar informações para IA.",
+  "inLanguage": "pt-BR",
+  "author": {
+    "@type": "Organization",
+    "name": "Intellih Tecnologia",
+    "url": "https://www.intellih.com.br/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Intellih Tecnologia",
+    "url": "https://www.intellih.com.br/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.intellih.com.br/blog/documentos-nao-sao-base-de-conhecimento-como-organizar"
+  },
+  "datePublished": "2026-10-28",
+  "dateModified": "2026-10-28"
+}
+</script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f5f2;
+      --text: #191715;
+      --text-soft: #5f5a55;
+      --muted: #817870;
+      --line: #e7e0d8;
+      --brand: #c65f22;
+      --brand-dark: #944314;
+      --brand-light: #e47c3c;
+      --brand-soft: #fff0e7;
+      --graphite: #25211e;
+      --radius: 24px;
+      --shadow-soft: 0 10px 28px rgba(21, 18, 15, 0.08);
+      --max: 1160px;
+      --article-max: 820px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.72;
+    }
+    a { color: inherit; text-decoration: none; }
+    p { margin: 0 0 1.1rem; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231, 224, 216, 0.78);
+    }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      font-size: 1.08rem;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(198, 95, 34, 0.24);
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: var(--brand); }
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 800;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      border-radius: 999px;
+      padding: 13px 20px;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.96rem;
+      font-weight: 820;
+      white-space: nowrap;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(198, 95, 34, 0.25);
+    }
+    .btn-primary:hover { background: var(--brand-dark); }
+    .btn-light {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .article-hero {
+      padding: 74px 0 46px;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(198, 95, 34, 0.16), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(37, 33, 30, 0.10), transparent 30%),
+        linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .article-hero-inner { max-width: var(--article-max); }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      border: 1px solid #ffd7c1;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 0.88rem;
+      font-weight: 840;
+      margin-bottom: 20px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(198, 95, 34, 0.14);
+    }
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+      color: var(--text);
+    }
+    h1 {
+      font-size: clamp(2.35rem, 4.7vw, 4.5rem);
+      margin-bottom: 22px;
+    }
+    h2 {
+      font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+      margin: 42px 0 16px;
+    }
+    .article-meta {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-top: 18px;
+    }
+    .lead {
+      font-size: clamp(1.08rem, 1.45vw, 1.28rem);
+      color: var(--text-soft);
+      max-width: 760px;
+    }
+    .article-wrap { padding: 56px 0 76px; }
+    .article-content {
+      max-width: var(--article-max);
+      margin: 0 auto;
+      font-size: 1.06rem;
+    }
+    .article-content strong { color: var(--text); }
+    .article-content ul {
+      margin: 18px 0 24px;
+      padding-left: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .article-content li {
+      position: relative;
+      padding-left: 28px;
+      color: var(--text-soft);
+    }
+    .article-content li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+    .callout {
+      margin: 32px 0;
+      padding: 24px;
+      border-radius: var(--radius);
+      background: var(--brand-soft);
+      border: 1px solid #ffd7c1;
+      box-shadow: var(--shadow-soft);
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    .article-cta {
+      margin-top: 52px;
+      padding: 34px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(198,95,34,.24), transparent 32%),
+        linear-gradient(135deg, #201c19, #11100f);
+      color: #fff;
+      box-shadow: 0 18px 45px rgba(21, 18, 15, 0.14);
+    }
+    .article-cta h2 { margin-top: 0; color: #fff; }
+    .article-cta p { color: #d8d0c8; }
+    .article-nav {
+      max-width: var(--article-max);
+      margin: 40px auto 0;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer {
+      background: #11100f;
+      color: #cfc7bf;
+      padding: 40px 0;
+    }
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer a { color: #fff; font-weight: 760; }
+    .socials { display: flex; gap: 10px; align-items: center; }
+    .socials a {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .socials a:hover {
+      transform: translateY(-1px);
+      background: rgba(198,95,34,.82);
+      border-color: rgba(255,255,255,.18);
+    }
+    .socials svg { width: 20px; height: 20px; fill: currentColor; }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 20px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow-soft);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: inline-flex; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .article-hero { padding: 56px 0 36px; }
+      .article-wrap { padding: 42px 0 58px; }
+      .brand span:last-child { display: none; }
+      .btn, .article-nav .btn { width: 100%; }
+      .article-cta { padding: 24px; border-radius: 26px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="Intellih Tecnologia">
+        <span class="brand-mark">I</span>
+        <span>Intellih Tecnologia</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Menu principal">
+        <a href="/">Início</a>
+        <a href="/#solucoes">Soluções</a>
+        <a href="/#como-funciona">Como funciona</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contato">Contato</a>
+      </nav>
+
+      <button class="menu-btn" type="button" aria-label="Abrir menu" id="menuBtn">Menu</button>
+    </div>
+  </header>
+
+  <main>
+<section class="article-hero"><div class="container article-hero-inner">
+<div class="eyebrow"><span class="dot"></span> Bases de Conhecimento com Método · Parte 2</div>
+<h1>Documentos não são uma base de conhecimento: como começar a organizar?</h1>
+<p class="lead">Arquivos armazenados não garantem respostas confiáveis. Aprenda a identificar divergências e estruturar as informações que sua empresa realmente utiliza.</p>
+<p class="article-meta">Publicado por Intellih Tecnologia · 28 de outubro de 2026 · Leitura de 7 minutos</p>
+</div></section>
+<section class="article-wrap"><div class="container"><article class="article-content">
+<p>Uma empresa pode ter centenas de arquivos e, ainda assim, não conseguir responder a uma pergunta simples: <strong>qual é a orientação correta para este atendimento?</strong></p>
+<p>Os documentos existem. O problema é que estão espalhados entre pastas, planilhas, e-mails, mensagens e versões antigas de procedimentos. Às vezes, dois arquivos tratam do mesmo assunto e chegam a conclusões diferentes.</p>
+<p>É por isso que <strong>guardar documentos não equivale a construir uma base de conhecimento</strong>. O primeiro passo não é escolher um banco vetorial ou conectar arquivos a um chatbot. É identificar quais informações o negócio precisa consultar, quais fontes são confiáveis e o que ainda precisa ser decidido.</p>
+<div class="callout"><p><strong>A diferença essencial:</strong> um repositório guarda arquivos; uma base de conhecimento organiza informações para que as pessoas — e, quando fizer sentido, os sistemas — encontrem respostas compreensíveis, válidas e verificáveis.</p></div>
+<h2>O que falta quando há muitos arquivos, mas pouca clareza?</h2>
+<p>É comum confundir volume de documentos com maturidade informacional. Um diretório compartilhado pode concentrar PDFs, contratos, apresentações, tabelas e manuais sem oferecer respostas consistentes. O conteúdo até pode estar lá, mas a pessoa que precisa dele deve descobrir onde procurar, qual versão usar e se existem exceções.</p>
+<p>Quatro problemas costumam aparecer juntos:</p>
+<ul>
+<li><strong>Dispersão:</strong> a mesma orientação está distribuída entre diferentes canais.</li>
+<li><strong>Duplicidade:</strong> existem cópias semelhantes com pequenas diferenças.</li>
+<li><strong>Desatualização:</strong> documentos antigos continuam circulando sem indicação de validade.</li>
+<li><strong>Ausência de responsabilidade:</strong> ninguém sabe quem pode aprovar ou corrigir uma resposta.</li>
+</ul>
+<p>Uma tecnologia de busca pode ajudar a localizar trechos. Mas encontrar rapidamente uma orientação errada não torna o processo confiável.</p>
+<h2>O caso da Clínica Aurora: três respostas para a mesma pergunta</h2>
+<p>Vamos continuar o exemplo da <strong>Clínica Aurora</strong>, uma empresa fictícia apresentada no <a href="/blog/o-que-e-base-de-conhecimento-para-empresas">primeiro artigo desta série</a>.</p>
+<p>Um cliente pergunta: “Posso remarcar minha sessão no mesmo dia?”. A recepção encontra três registros: uma mensagem antiga dizendo que não é possível; um PDF com prazo de 24 horas; e uma anotação recente permitindo remarcações em situações específicas.</p>
+<p>Qual resposta deve ser enviada? Não basta escolher o documento mais novo: pode haver regras diferentes para tipos de serviço, e a anotação talvez nem tenha sido aprovada pela coordenação.</p>
+<p>Antes de cadastrar uma resposta definitiva, a clínica precisa identificar a política vigente, suas exceções, o responsável pela aprovação e a data em que a regra entrou em vigor. Se isso não estiver claro, a questão deve permanecer sinalizada como pendente — não ser resolvida por suposição.</p>
+<h2>Como transformar documentos dispersos em conhecimento utilizável?</h2>
+<p>Um caminho inicial pode ser realizado com uma planilha simples. O foco não é migrar todos os arquivos, mas organizar primeiro as informações mais procuradas e mais relevantes para a operação.</p>
+<ol>
+<li><strong>Escolha um processo:</strong> comece, por exemplo, por agendamentos, dúvidas frequentes ou atendimento de novos clientes. Evite tentar organizar a empresa inteira de uma só vez.</li>
+<li><strong>Reúna perguntas reais:</strong> anote dúvidas que hoje exigem buscar informações em vários lugares.</li>
+<li><strong>Mapeie as fontes:</strong> registre qual arquivo, página, sistema ou responsável contém a resposta.</li>
+<li><strong>Identifique conflitos:</strong> destaque regras incompatíveis, informações incompletas e conteúdos sem data.</li>
+<li><strong>Valide com quem decide:</strong> a área responsável deve aprovar a orientação vigente e esclarecer exceções.</li>
+<li><strong>Publique uma versão consultável:</strong> registre o conteúdo de forma clara e indique quem o mantém atualizado.</li>
+</ol>
+<h2>Uma estrutura mínima para começar hoje</h2>
+<p>Não é necessário implantar uma plataforma especializada para iniciar. Uma tabela com campos bem definidos já revela problemas e ajuda a estabelecer responsabilidades.</p>
+<div class="callout"><p><strong>Modelo de registro:</strong><br>Assunto: Remarcação de sessão<br>Pergunta: É possível remarcar no mesmo dia?<br>Resposta aprovada: [preencher após validação]<br>Fonte: política de agendamentos vigente<br>Responsável: coordenação<br>Última revisão: [data]<br>Exceções: [condições verificadas]<br>Status: aprovado ou pendente de validação</p></div>
+<p>Os campos entre colchetes não devem ser preenchidos automaticamente por uma IA. Eles dependem de uma decisão documentada da empresa.</p>
+<p>Outro cuidado: a base deve conter apenas o necessário para cada finalidade. Dados pessoais, informações clínicas e conteúdos internos sensíveis exigem controle de acesso e tratamento adequado; não devem ser copiados indiscriminadamente para uma base de consulta geral.</p>
+<h2>Quando uma pasta organizada já é suficiente?</h2>
+<p>Nem todo negócio precisa de uma plataforma de gestão do conhecimento. Se a equipe é pequena, o volume de informação é moderado e as regras são estáveis, documentos bem nomeados, uma estrutura de pastas compreensível, versões controladas e responsáveis definidos podem ser suficientes.</p>
+<p>Uma solução mais sofisticada passa a fazer sentido quando há grande volume de consultas, múltiplas fontes, diferentes permissões, atualizações frequentes ou necessidade de integrar conhecimento a fluxos e sistemas. A escolha da tecnologia vem depois de entender essas exigências.</p>
+<h2>E se a empresa quiser usar esse conhecimento com IA?</h2>
+<p>Assistentes com <a href="/blog/rag-quando-a-ia-consulta-conhecimento">RAG</a> podem recuperar informações em fontes externas para apoiar respostas. Mas <strong>RAG não substitui curadoria, governança ou validação das fontes</strong>. Se a base contém versões contraditórias, o sistema pode recuperar uma delas e produzir uma resposta convincente, porém incorreta.</p>
+<p>Além de organizar a base, será necessário definir permissões, avaliar a qualidade da recuperação, testar perguntas reais e prever encaminhamento humano quando não houver informação suficiente. Esses pontos serão desenvolvidos ao longo da série.</p>
+<h2>Exercício prático: audite apenas cinco perguntas</h2>
+<p>Selecione cinco perguntas frequentes do seu negócio. Para cada uma, procure a resposta em pelo menos duas fontes utilizadas pela equipe e verifique:</p>
+<ul><li>As fontes concordam?</li><li>É possível identificar qual versão está válida?</li><li>Há uma pessoa responsável por aprovar a resposta?</li><li>As exceções estão explícitas?</li><li>Alguém de fora da rotina conseguiria localizar a informação sem pedir ajuda?</li></ul>
+<p>Se alguma resposta for “não”, você encontrou um ponto concreto para melhorar. O resultado desse pequeno diagnóstico vale mais do que importar centenas de arquivos sem revisão.</p>
+<h2>O próximo passo da série</h2>
+<p>Neste artigo, identificamos por que documentos dispersos não constituem automaticamente uma base de conhecimento. No próximo, veremos <strong>como selecionar as informações que realmente devem entrar na base</strong> — e o que deve ficar de fora.</p>
+<p>O princípio permanece o mesmo: <a href="/blog/antes-da-ia-vem-o-fluxo">antes da IA, vem o fluxo de trabalho</a>. E, antes de automatizar respostas, é necessário saber de onde elas vêm.</p>
+<div class="cta-box"><h2>Seu negócio sabe onde está a informação correta?</h2><p>A Intellih ajuda a mapear processos, organizar fontes de conhecimento e identificar onde a inteligência artificial pode apoiar o trabalho com critérios claros.</p><a class="btn btn-primary" href="/#contato">Fale com a Intellih</a></div></article>
+<div class="article-nav"><a class="btn btn-light" href="/blog/o-que-e-base-de-conhecimento-para-empresas">Artigo anterior da série</a><a class="btn btn-light" href="/blog/">Voltar para o blog</a></div>
+</div></section>
+</main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Intellih Tecnologia</strong>
+        <p style="margin: 6px 0 0;">Soluções com IA para facilitar rotinas, organizar informações e transformar oportunidades em resultado.</p>
+        <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+      </div>
+
+      <div class="socials" aria-label="Redes sociais">
+        <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/chat-widget.js"></script>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const year = document.getElementById('year');
+
+    year.textContent = new Date().getFullYear();
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>
