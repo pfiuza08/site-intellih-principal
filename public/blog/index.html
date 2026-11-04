@@ -751,29 +751,56 @@
 }
 @media (prefers-reduced-motion:reduce) { .topic-carousel { scroll-behavior:auto; } }
 
+  
+    /* Identidade compartilhada com a revista; tipografia de serviços preservada. */
+    .topbar { background: #050505; color: #fff; border-bottom: 1px solid #323232; backdrop-filter: none; box-shadow: 0 4px 22px #0002; }
+    .nav { min-height: 81px; }
+    .topbar .brand { flex-shrink: 0; width: 188px; }
+    .topbar .brand img { width: 188px; height: auto; }
+    .topbar .nav-links { margin-left: auto; gap: 22px; color: #f2eee9; font-size: 0.85rem; font-weight: 700; }
+    .topbar .nav-links a:hover { color: #ffb984; }
+    .topbar .btn-primary { min-height: 39px; padding: 10px 17px; background: #c44b04; box-shadow: none; font-size: 0.8rem; }
+    .topbar .btn-primary:hover { background: #ee6a28; }
+
+
+    /* Navegação responsiva idêntica à página principal da Intellih. */
+    .topbar .nav-links a.active { color: #ffb984; }
+    @media (max-width: 1050px) {
+      .topbar .nav-links { gap: 14px; }
+      .topbar .brand, .topbar .brand img { width: 160px; }
+    }
+    @media (max-width: 980px) {
+      .topbar .nav-links { display: none; top: 100%; left: 0; right: 0; margin: 0; background: #191919; color: #fff; border: 0; border-top: 1px solid #333; border-radius: 0; box-shadow: 0 12px 20px #0003; padding: 20px 28px 24px; gap: 0; }
+      .topbar .nav-links.open { display: flex; }
+      .topbar .nav-links a { width: 100%; padding: 12px 0; border-bottom: 1px solid #333; }
+      .topbar .menu-btn { display: inline-flex; background: transparent; border: 1px solid #444; color: #fff; }
+      .topbar .nav-actions .btn { display: inline-flex; }
+    }
+    @media (max-width: 640px) {
+      .topbar .nav { min-height: 66px; gap: 10px; }
+      .topbar .brand, .topbar .brand img { width: 142px; }
+      .topbar .nav-actions .btn { display: none; }
+    }
+
   </style>
 </head>
 
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a href="/" class="brand" aria-label="Intellih Tecnologia">
-        <span class="brand-mark">I</span>
-        <span>Intellih Tecnologia</span>
+      <a href="/" class="brand" aria-label="Intellih Tecnologia — início">
+        <img src="/revista/assets/img/intellih-horizontal-dark.png" alt="Intellih" width="188" height="56">
       </a>
-
       <nav class="nav-links" id="navLinks" aria-label="Menu principal">
         <a href="/#solucoes">Soluções</a>
-        <a href="/#frentes">Frentes</a>
         <a href="/#publicos">Para quem</a>
         <a href="/#como-funciona">Como funciona</a>
-        <a class="active" href="/blog/">Blog</a>
-        <a href="/#contato">Contato</a>
+        <a href="/revista/">Revista</a>
+        <a class="active" aria-current="page" href="/blog/">Blog</a>
       </nav>
-
       <div class="nav-actions">
-        <a class="btn btn-primary" href="/#contato">Fale com a Intellih</a>
-        <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks" id="menuBtn">Menu</button>
+        <a class="btn btn-primary" href="/#contato">Fale Conosco</a>
+        <button class="menu-btn" type="button" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false" id="menuBtn">Menu</button>
       </div>
     </div>
   </header>
@@ -885,7 +912,7 @@
               <a class="post-link" href="/blog/antes-da-ia-vem-o-fluxo.html">Ler artigo →</a>
             </div>
           </article>
-    <article class="blog-card">
+          <article class="blog-card">
             <a class="post-visual" href="/blog/como-saber-se-minha-empresa-precisa-de-ia.html" aria-label="Ler artigo: Como saber se minha empresa precisa de IA">
               <span>Diagnóstico</span>
               <strong>Sua empresa precisa de IA ou de processo?</strong>
@@ -900,7 +927,7 @@
               <a class="post-link" href="/blog/como-saber-se-minha-empresa-precisa-de-ia.html">Ler artigo →</a>
             </div>
           </article>
-    <article class="blog-card">
+          <article class="blog-card">
             <a class="post-visual" href="/blog/quando-vale-a-pena-criar-um-assistente-inteligente.html" aria-label="Ler artigo: Quando vale a pena criar um assistente inteligente">
               <span>Assistentes inteligentes</span>
               <strong>Quando um assistente realmente ajuda?</strong>
@@ -915,17 +942,17 @@
               <a class="post-link" href="/blog/quando-vale-a-pena-criar-um-assistente-inteligente.html">Ler artigo →</a>
             </div>
           </article>
-    <article class="blog-card">
-            <a class="post-visual" href="/blog/o-que-automatizar-e-o-que-deve-continuar-humano.html" aria-label="Ler artigo: O que automatizar e o que deve continuar humano">
-              <span>Novo artigo · Encerramento da série</span><strong>Nem tudo que pode ser automatizado deve ser</strong>
-            </a>
-            <div class="post-body"><div class="post-meta"><span>Automação responsável</span><span>Decisão prática</span></div><h4>O que automatizar — e o que deve continuar humano?</h4><p>Como avaliar frequência, previsibilidade, verificabilidade e risco antes de entregar uma tarefa à inteligência artificial.</p><a class="post-link" href="/blog/o-que-automatizar-e-o-que-deve-continuar-humano.html">Ler artigo →</a></div>
-          </article>
-    <article class="blog-card">
+          <article class="blog-card">
             <a class="post-visual" href="/blog/como-desenhar-um-fluxo-de-trabalho-com-inteligencia-artificial.html" aria-label="Ler artigo: Como desenhar um fluxo de trabalho com inteligência artificial">
               <span>Artigo 6</span><strong>Antes do prompt, vem o fluxo de trabalho</strong>
             </a>
             <div class="post-body"><div class="post-meta"><span>Fluxos de trabalho</span><span>Método OPA</span></div><h4>Como desenhar um fluxo de trabalho com inteligência artificial</h4><p>Um método prático para organizar entradas, tarefas, decisões, revisão e responsabilidade antes de escolher ferramentas ou criar automações.</p><a class="post-link" href="/blog/como-desenhar-um-fluxo-de-trabalho-com-inteligencia-artificial.html">Ler artigo →</a></div>
+          </article>
+          <article class="blog-card">
+            <a class="post-visual" href="/blog/o-que-automatizar-e-o-que-deve-continuar-humano.html" aria-label="Ler artigo: O que automatizar e o que deve continuar humano">
+              <span>Novo artigo · Encerramento da série</span><strong>Nem tudo que pode ser automatizado deve ser</strong>
+            </a>
+            <div class="post-body"><div class="post-meta"><span>Automação responsável</span><span>Decisão prática</span></div><h4>O que automatizar — e o que deve continuar humano?</h4><p>Como avaliar frequência, previsibilidade, verificabilidade e risco antes de entregar uma tarefa à inteligência artificial.</p><a class="post-link" href="/blog/o-que-automatizar-e-o-que-deve-continuar-humano.html">Ler artigo →</a></div>
           </article>
   </div>
 </section>
@@ -1200,12 +1227,14 @@
     menuBtn.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
     });
 
     navLinks.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
         menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-label', 'Abrir menu');
       });
     });
 
