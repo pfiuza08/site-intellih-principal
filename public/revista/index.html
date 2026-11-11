@@ -8,7 +8,8 @@
 .lead-grid{grid-template-columns:minmax(0,1fr);gap:22px;padding-bottom:32px}
 .lead-grid .feature-carousel{width:100%;max-width:1000px;margin-inline:auto}
 .lead-grid .feature-media{aspect-ratio:16/9;max-height:430px;background:#111}
-.lead-grid .feature-media img{object-fit:contain;object-position:center}
+.lead-grid .feature-media{display:flex;align-items:center;justify-content:center}
+.lead-grid .feature-media img{width:100%;height:100%;object-fit:contain;object-position:50% 50%;margin-inline:auto}
 .lead-grid .lead-rail{border-left:0;border-top:1px solid var(--line);padding:24px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 24px;align-items:start}
 .lead-grid .rail-item{display:block;min-width:0;margin:0;padding:0 0 15px;overflow-wrap:anywhere}
 .lead-grid .rail-item h3{font-size:18px;line-height:1.3}
