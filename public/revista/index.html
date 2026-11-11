@@ -4,6 +4,17 @@
 <meta name="twitter:card" content="summary"><meta name="twitter:title" content="Inteligência para entender o mundo | Intellih Revista"><meta name="twitter:description" content="Revista Intellih: ciência, tecnologia e descobertas explicadas com contexto e fontes.">
 <link rel="icon" type="image/png" href="/revista/assets/img/intellih-symbol-dark.png"><link rel="stylesheet" href="/revista/assets/style.css"><link rel="canonical" href="https://www.intellih.com.br/revista"><meta property="og:url" content="https://www.intellih.com.br/revista"><style>
 .feature-carousel{min-width:0;overflow:hidden;position:relative;background:#111;color:#fff;border-radius:4px;align-self:start}
+/* Página inicial: destaque em largura total; chamadas secundárias abaixo. */
+.lead-grid{grid-template-columns:minmax(0,1fr);gap:22px;padding-bottom:32px}
+.lead-grid .feature-carousel{width:100%}
+.lead-grid .feature-media{aspect-ratio:2.2/1;max-height:570px}
+.lead-grid .lead-rail{border-left:0;border-top:1px solid var(--line);padding:24px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 24px;align-items:start}
+.lead-grid .rail-item{display:block;min-width:0;margin:0;padding:0 0 15px;overflow-wrap:anywhere}
+.lead-grid .rail-item h3{font-size:18px;line-height:1.3}
+.lead-grid .rail-note{grid-column:1/-1;margin-top:2px}
+@media(max-width:850px){.lead-grid .lead-rail{grid-template-columns:repeat(2,minmax(0,1fr))}.lead-grid .feature-media{aspect-ratio:16/9}}
+@media(max-width:540px){.lead-grid .lead-rail{grid-template-columns:minmax(0,1fr);gap:12px}.lead-grid .rail-item h3{font-size:17px}.lead-grid .feature-media{aspect-ratio:16/9}}
+
 .feature-slides{position:relative}.feature-slide{display:none}.feature-slide.is-active{display:block}
 .feature-slide-link{display:block;color:inherit;text-decoration:none}.feature-slide-link:hover h2{text-decoration:underline;text-decoration-color:var(--accent)}
 .feature-media{aspect-ratio:16/9;background:#1a1a1a;overflow:hidden}.feature-media img{display:block;width:100%;height:100%;object-fit:cover}
