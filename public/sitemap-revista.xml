@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.intellih.com.br/revista</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.intellih.com.br/revista</loc><lastmod>2026-11-21</lastmod></url>
 
-  <url><loc>https://www.intellih.com.br/revista/editorias/ciencia</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.intellih.com.br/revista/editorias/ciencia</loc><lastmod>2026-11-21</lastmod></url>
   <url><loc>https://www.intellih.com.br/revista/editorias/tecnologia</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://www.intellih.com.br/revista/editorias/natureza</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://www.intellih.com.br/revista/editorias/natureza</loc><lastmod>2026-11-21</lastmod></url>
   <url><loc>https://www.intellih.com.br/revista/editorias/cultura</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://www.intellih.com.br/revista/editorias/inteligencia-artificial</loc><lastmod>2026-11-16</lastmod></url>
-  <url><loc>https://www.intellih.com.br/revista/editorias/parece-inventado</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.intellih.com.br/revista/editorias/parece-inventado</loc><lastmod>2026-11-21</lastmod></url>
 
   <url><loc>https://www.intellih.com.br/revista/artigos/webb-anas-marrons-duas-massas-jupiter</loc><lastmod>2026-09-18</lastmod></url>
   <url><loc>https://www.intellih.com.br/revista/artigos/lua-formacao-em-horas</loc><lastmod>2026-09-18</lastmod></url>
@@ -63,4 +63,5 @@
   <url><loc>https://www.intellih.com.br/revista/artigos/euclid-15-mil-lentes-gravitacionais-ia-ciencia-cidada</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://www.intellih.com.br/revista/artigos/estrela-morta-sinais-radio-oito-minutos-curtin</loc><lastmod>2026-11-17</lastmod></url>
   <url><loc>https://www.intellih.com.br/revista/artigos/estrela-engoliu-outra-fusao-bao-andromeda</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.intellih.com.br/revista/artigos/deserto-atacama-flores-2026-nasa-landsat</loc><lastmod>2026-11-21</lastmod></url>
 </urlset>
