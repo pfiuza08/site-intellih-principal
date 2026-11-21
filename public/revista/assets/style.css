@@ -145,3 +145,15 @@
   object-fit:cover;
   object-position:center center;
 }
+
+
+/* Atacama 2026: capa editorial de duas fontes documentais */
+.atacama-cover{width:100%;aspect-ratio:16/9;position:relative;isolation:isolate;overflow:hidden;border-radius:4px;background:#71564a}
+.atacama-cover img,.atacama-cover .atacama-satellite,.atacama-cover .atacama-flowers{display:block;position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;margin:0}
+.atacama-cover .atacama-satellite{object-position:50% 50%;filter:saturate(1.12) contrast(1.05)}
+.atacama-cover .atacama-flowers{left:30%;width:70%;object-position:56% 52%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 32%);mask-image:linear-gradient(90deg,transparent 0%,#000 32%)}
+.atacama-cover::after{content:"";position:absolute;inset:56% 0 0;pointer-events:none;background:linear-gradient(0deg,rgba(23,8,20,.6),transparent)}
+.atacama-image-label{position:absolute;bottom:12px;left:15px;z-index:2;color:#fff;font-size:12px;font-weight:600;letter-spacing:.02em;text-shadow:0 2px 5px #141414}
+.feature-media .atacama-cover{width:100%;height:100%;aspect-ratio:auto}
+.story-card .atacama-cover{width:100%;aspect-ratio:16/9}
+@media(max-width:640px){.atacama-image-label{font-size:10px;left:9px;bottom:7px}}
