@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Como construir uma base de conhecimento na prática | Blog Intellih</title>
+  <meta name="description" content="Construa sua primeira base de conhecimento passo a passo. Exemplo da Clínica Aurora, registros preenchidos, testes e planilha gratuita para adaptar ao seu negócio." />
+  <link rel="canonical" href="https://www.intellih.com.br/blog/como-construir-primeira-base-de-conhecimento-exemplo-pratico" />
+
+  <meta property="og:title" content="Como construir sua primeira base de conhecimento: um exemplo prático | Blog Intellih" />
+  <meta property="og:description" content="Construa sua primeira base de conhecimento passo a passo. Exemplo da Clínica Aurora, registros preenchidos, testes e planilha gratuita para adaptar ao seu negócio." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.intellih.com.br/blog/como-construir-primeira-base-de-conhecimento-exemplo-pratico" />
+  <meta property="og:image" content="https://www.intellih.com.br/og-image.jpg" />
+
+  <link rel="icon" href="/favicon_intellih.ico" />
+
+  <!-- Meta Pixel Code - Intellih Principal -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}
+  (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1240394014783181');
+  fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1240394014783181&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Como construir sua primeira base de conhecimento: um exemplo prático",
+  "description": "Construa sua primeira base de conhecimento passo a passo. Exemplo da Clínica Aurora, registros preenchidos, testes e planilha gratuita para adaptar ao seu negócio.",
+  "inLanguage": "pt-BR",
+  "datePublished": "2026-11-24",
+  "dateModified": "2026-11-24",
+  "author": {
+    "@type": "Organization",
+    "name": "Intellih Tecnologia",
+    "url": "https://www.intellih.com.br/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Intellih Tecnologia",
+    "url": "https://www.intellih.com.br/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.intellih.com.br/og-image.jpg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.intellih.com.br/blog/como-construir-primeira-base-de-conhecimento-exemplo-pratico"
+  }
+}
+  </script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f5f2;
+      --text: #191715;
+      --text-soft: #5f5a55;
+      --muted: #817870;
+      --line: #e7e0d8;
+      --brand: #c65f22;
+      --brand-dark: #944314;
+      --brand-light: #e47c3c;
+      --brand-soft: #fff0e7;
+      --graphite: #25211e;
+      --radius: 24px;
+      --shadow-soft: 0 10px 28px rgba(21, 18, 15, 0.08);
+      --max: 1160px;
+      --article-max: 820px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.72;
+    }
+    a { color: inherit; text-decoration: none; }
+    p { margin: 0 0 1.1rem; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231, 224, 216, 0.78);
+    }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      font-size: 1.08rem;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(198, 95, 34, 0.24);
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: var(--brand); }
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 800;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      border-radius: 999px;
+      padding: 13px 20px;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.96rem;
+      font-weight: 820;
+      white-space: nowrap;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(198, 95, 34, 0.25);
+    }
+    .btn-primary:hover { background: var(--brand-dark); }
+    .btn-light {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .article-hero {
+      padding: 74px 0 46px;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(198, 95, 34, 0.16), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(37, 33, 30, 0.10), transparent 30%),
+        linear-gradient(180deg, #fff 0%, #fbf8f5 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .article-hero-inner { max-width: var(--article-max); }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      border: 1px solid #ffd7c1;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 0.88rem;
+      font-weight: 840;
+      margin-bottom: 20px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(198, 95, 34, 0.14);
+    }
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+      color: var(--text);
+    }
+    h1 {
+      font-size: clamp(2.35rem, 4.7vw, 4.5rem);
+      margin-bottom: 22px;
+    }
+    h2 {
+      font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+      margin: 42px 0 16px;
+    }
+    .article-meta {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-top: 18px;
+    }
+    .lead {
+      font-size: clamp(1.08rem, 1.45vw, 1.28rem);
+      color: var(--text-soft);
+      max-width: 760px;
+    }
+    .article-wrap { padding: 56px 0 76px; }
+    .article-content {
+      max-width: var(--article-max);
+      margin: 0 auto;
+      font-size: 1.06rem;
+    }
+    .article-content strong { color: var(--text); }
+    .article-content ul {
+      margin: 18px 0 24px;
+      padding-left: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .article-content li {
+      position: relative;
+      padding-left: 28px;
+      color: var(--text-soft);
+    }
+    .article-content li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+    .callout {
+      margin: 32px 0;
+      padding: 24px;
+      border-radius: var(--radius);
+      background: var(--brand-soft);
+      border: 1px solid #ffd7c1;
+      box-shadow: var(--shadow-soft);
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    .article-cta {
+      margin-top: 52px;
+      padding: 34px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(198,95,34,.24), transparent 32%),
+        linear-gradient(135deg, #201c19, #11100f);
+      color: #fff;
+      box-shadow: 0 18px 45px rgba(21, 18, 15, 0.14);
+    }
+    .article-cta h2 { margin-top: 0; color: #fff; }
+    .article-cta p { color: #d8d0c8; }
+    .article-nav {
+      max-width: var(--article-max);
+      margin: 40px auto 0;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer {
+      background: #11100f;
+      color: #cfc7bf;
+      padding: 40px 0;
+    }
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer a { color: #fff; font-weight: 760; }
+    .socials { display: flex; gap: 10px; align-items: center; }
+    .socials a {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .socials a:hover {
+      transform: translateY(-1px);
+      background: rgba(198,95,34,.82);
+      border-color: rgba(255,255,255,.18);
+    }
+    .socials svg { width: 20px; height: 20px; fill: currentColor; }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 20px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow-soft);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: inline-flex; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .article-hero { padding: 56px 0 36px; }
+      .article-wrap { padding: 42px 0 58px; }
+      .brand span:last-child { display: none; }
+      .btn, .article-nav .btn { width: 100%; }
+      .article-cta { padding: 24px; border-radius: 26px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="Intellih Tecnologia">
+        <span class="brand-mark">I</span>
+        <span>Intellih Tecnologia</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Menu principal">
+        <a href="/">Início</a>
+        <a href="/#solucoes">Soluções</a>
+        <a href="/#como-funciona">Como funciona</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contato">Contato</a>
+      </nav>
+
+      <button class="menu-btn" type="button" aria-label="Abrir menu" id="menuBtn">Menu</button>
+    </div>
+  </header>
+
+  <main>
+<section class="article-hero"><div class="container article-hero-inner">
+<div class="eyebrow"><span class="dot"></span> Bases de Conhecimento com Método · Parte 6</div>
+<h1>Como construir sua primeira base de conhecimento: um exemplo prático</h1>
+<p class="lead">Da seleção das fontes aos testes de consulta: veja como montar uma base inicial com uma planilha e exemplos preenchidos.</p>
+<p class="article-meta">Publicado por Intellih Tecnologia · 24 de novembro de 2026 · Leitura de 11 minutos</p>
+</div></section>
+<section class="article-wrap"><div class="container"><article class="article-content">
+<p>Sua empresa precisa de uma ferramenta sofisticada para começar a construir uma base de conhecimento? <strong>Não. Precisa começar com um problema definido, informações confiáveis e um jeito simples de mantê-las organizadas.</strong></p>
+<p>Nos cinco primeiros artigos da série <em>Bases de Conhecimento com Método</em>, discutimos o que é uma base, por que documentos dispersos não bastam, como <a href="/blog/como-selecionar-informacoes-base-de-conhecimento">selecionar as informações</a>, como <a href="/blog/como-estruturar-base-de-conhecimento-categorias-metadados">estruturá-las</a> e como <a href="/blog/como-preparar-documentos-para-ia-encontrar-informacoes">prepará-las para busca e recuperação</a>.</p>
+<p>Agora vamos juntar essas etapas e construir uma versão inicial que já possa servir à equipe — mesmo sem um assistente de IA conectado. Para isso, continuaremos com a <strong>Clínica Aurora</strong>, uma organização fictícia de fisioterapia e Pilates que utilizamos como exemplo ao longo da série.</p>
+<div class="callout"><p><strong>O que construiremos:</strong> uma pequena base de conhecimento de atendimento, com categorias, registros padronizados, indicação de fontes, responsáveis, permissões e um roteiro de testes. Ao final, você poderá baixar um modelo em CSV e adaptá-lo ao seu negócio.</p></div>
+
+<h2>Passo 1 — Escolha um processo pequeno e defina o escopo</h2>
+<p>Não tente organizar toda a empresa de uma vez. O primeiro projeto deve ser pequeno o suficiente para ser concluído e testado por quem realmente utiliza as informações.</p>
+<p>Na Clínica Aurora, o recorte será o <strong>atendimento inicial</strong>: serviços oferecidos, agendamento, remarcação e encaminhamento de dúvidas. Não incluiremos prontuários, dados clínicos de pacientes ou orientações individuais de saúde em uma base geral.</p>
+<p>Antes de abrir a planilha, registre três decisões:</p>
+<ul>
+<li><strong>Objetivo:</strong> reduzir dúvidas repetidas e respostas contraditórias no atendimento.</li>
+<li><strong>Usuários:</strong> equipe de recepção; alguns registros também poderão ser usados em respostas públicas, após aprovação.</li>
+<li><strong>Limite:</strong> a base informará regras administrativas, mas não tomará decisões clínicas nem confirmará exceções sem intervenção humana.</li>
+</ul>
+<p>Esse limite é parte do projeto. Uma base útil não precisa responder a tudo; precisa saber o que está autorizada a responder.</p>
+
+<h2>Passo 2 — Comece pelas perguntas que realmente aparecem</h2>
+<p>Converse com quem executa o processo. Quais perguntas são feitas todos os dias? Quais respostas exigem consultar alguém? Onde surgem divergências?</p>
+<p>Para nosso exemplo, selecionaremos cinco perguntas iniciais:</p>
+<ol>
+<li>Quais serviços a clínica oferece?</li>
+<li>Como solicitar um agendamento?</li>
+<li>É possível remarcar uma sessão?</li>
+<li>Quais formas de pagamento são aceitas?</li>
+<li>O que fazer quando um cliente pede orientação clínica específica?</li>
+</ol>
+<p>Cinco perguntas não representam toda a operação. Mas são suficientes para testar se a estrutura é compreensível e se existe um fluxo claro de validação.</p>
+
+<h2>Passo 3 — Localize as fontes e resolva as pendências</h2>
+<p>Uma pergunta não deve receber resposta apenas porque alguém se lembra de como o processo costuma funcionar. Procure o documento oficial, a regra aprovada ou o sistema que contém a informação vigente.</p>
+<p>Na Clínica Aurora, podemos associar os assuntos a um catálogo de serviços, uma rotina de agendamento, uma política de remarcação e um procedimento de encaminhamento à equipe técnica. Se houver uma tabela de pagamentos sem data ou aprovação, a resposta continuará pendente.</p>
+<p><strong>Não preencha lacunas com suposições.</strong> Se a fonte ainda precisa ser validada, registre essa condição e indique quem deve tomar a decisão.</p>
+
+<h2>Passo 4 — Crie uma ficha padrão para cada informação</h2>
+<p>Uma planilha simples funciona como primeiro repositório estruturado. Cada linha será um registro de conhecimento, e cada coluna terá uma função clara.</p>
+<p>Os campos recomendados para começar são: <strong>ID, categoria, pergunta, orientação, condições e exceções, fonte, responsável, status, versão, data da última validação, próxima revisão, nível de acesso e próxima ação</strong>.</p>
+<p>A vantagem não é apenas estética. Quando os campos são padronizados, fica mais fácil localizar uma orientação, comparar versões, filtrar conteúdos pendentes e perceber quem precisa revisar determinada informação.</p>
+
+<h2>Passo 5 — Preencha os primeiros registros: exemplo da Clínica Aurora</h2>
+<p>Veja como as cinco perguntas podem se transformar em registros. <strong>Todos os nomes de documentos, fluxos e regras abaixo são exemplos fictícios</strong>, criados para demonstrar o método; não são políticas de uma clínica real.</p>
+<div style="overflow-x:auto;max-width:100%;margin:20px 0">
+<table style="width:100%;min-width:720px;border-collapse:collapse;font-size:.9rem">
+<thead><tr><th style="padding:10px;text-align:left;border-bottom:2px solid #ddd">ID e categoria</th><th style="padding:10px;text-align:left;border-bottom:2px solid #ddd">Pergunta</th><th style="padding:10px;text-align:left;border-bottom:2px solid #ddd">Orientação ou situação</th><th style="padding:10px;text-align:left;border-bottom:2px solid #ddd">Status</th></tr></thead>
+<tbody>
+<tr><td style="padding:10px;border-bottom:1px solid #e5e5e5">AUR-SRV-001<br>Serviços</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Quais serviços são oferecidos?</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Fisioterapia e Pilates; preços e disponibilidade devem ser confirmados</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Aprovado na simulação</td></tr>
+<tr><td style="padding:10px;border-bottom:1px solid #e5e5e5">AUR-AGD-002<br>Agendamentos</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Como solicitar um agendamento?</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Usar os canais oficiais; a confirmação depende da agenda</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Aprovado na simulação</td></tr>
+<tr><td style="padding:10px;border-bottom:1px solid #e5e5e5">AUR-REM-003<br>Remarcações</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Posso remarcar uma sessão?</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Solicitações com pelo menos 24 horas; fora do prazo, encaminhar à coordenação</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Aprovado na simulação</td></tr>
+<tr><td style="padding:10px;border-bottom:1px solid #e5e5e5">AUR-PAG-004<br>Pagamentos</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Quais formas de pagamento são aceitas?</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Aguardando validação de tabela e condições</td><td style="padding:10px;border-bottom:1px solid #e5e5e5">Em revisão</td></tr>
+<tr><td style="padding:10px">AUR-ENC-005<br>Encaminhamentos</td><td style="padding:10px">Quem responde dúvidas clínicas individuais?</td><td style="padding:10px">Encaminhar ao profissional habilitado; não improvisar orientação clínica</td><td style="padding:10px">Aprovado na simulação</td></tr>
+</tbody>
+</table>
+</div>
+<p>Observe dois detalhes importantes. O registro de remarcação conserva <em>a regra e sua exceção</em>, evitando respostas fora de contexto. Já o item de pagamentos continua em revisão: estar na planilha não significa estar liberado para consulta pública.</p>
+<p>As datas, fontes e responsáveis devem ser preenchidos com informações reais antes que esse modelo seja colocado em operação.</p>
+
+<h2>Baixe o modelo de base de conhecimento</h2>
+<p>Preparamos um arquivo CSV com os cinco registros fictícios e os campos descritos neste artigo. O arquivo pode ser aberto no Excel ou importado no Google Sheets. Você poderá substituir os exemplos, acrescentar linhas e filtrar os registros por categoria, status, responsável e nível de acesso.</p>
+<div class="callout">
+<p><strong>Modelo gratuito — Base de Conhecimento Intellih</strong></p>
+<p>Inclui identificador, categoria, pergunta, orientação, exceções, fonte, responsável, status, versão, datas, acesso e próxima ação.</p>
+<p><a href="/blog/modelo-base-conhecimento-intellih.csv" download="modelo-base-conhecimento-intellih.csv"><strong>Baixar modelo de planilha (CSV)</strong></a></p>
+<p><small>Arquivo separado por ponto e vírgula, adequado para importação em planilhas com configuração regional brasileira. Os dados preenchidos são exclusivamente ilustrativos.</small></p>
+</div>
+<p><strong>Importante:</strong> a planilha é um instrumento de organização. Ela não substitui um repositório documental com controle de acesso e histórico de alterações quando esses requisitos forem necessários.</p>
+
+<h2>Passo 6 — Estabeleça regras simples de publicação e manutenção</h2>
+<p>Mesmo uma base pequena precisa de um fluxo de governança. Uma proposta inicial é:</p>
+<ol>
+<li><strong>Rascunho:</strong> o registro foi criado, mas ainda não foi verificado.</li>
+<li><strong>Em revisão:</strong> existe uma fonte ou uma regra que precisa de confirmação.</li>
+<li><strong>Aprovado:</strong> o responsável validou a informação para o público indicado.</li>
+<li><strong>Arquivado:</strong> o registro deixou de ser vigente, mas pode permanecer para histórico conforme a política de retenção.</li>
+</ol>
+<p>Defina quem pode alterar a informação, quem aprova a publicação, onde está a versão oficial e quando a revisão deve ocorrer. Para regras que mudam com frequência, revisões por calendário podem não ser suficientes: atualizações de política ou serviço devem disparar nova conferência.</p>
+<p>Em uma planilha compartilhada, permissões de edição, histórico de versões e regras de acesso devem ser configurados na ferramenta utilizada. O simples campo “nível de acesso” não impede que outra pessoa visualize um registro.</p>
+
+<h2>Passo 7 — Teste a consulta com perguntas reais</h2>
+<p>Peça a uma pessoa da equipe para localizar respostas usando apenas a base. Escolha perguntas com graus diferentes de dificuldade e registre o resultado.</p>
+<ul>
+<li>“Vocês trabalham com Pilates?” — deve encontrar a categoria Serviços.</li>
+<li>“Se eu pedir horário, a sessão estará confirmada?” — deve identificar que a confirmação depende de disponibilidade.</li>
+<li>“Quero remarcar em menos de 24 horas. Posso?” — deve encontrar a exceção e o encaminhamento à coordenação.</li>
+<li>“Quais cartões são aceitos?” — deve sinalizar que a informação de pagamento ainda não foi aprovada, sem inventar uma resposta.</li>
+<li>“Estou sentindo dor: devo continuar fazendo o exercício?” — deve encaminhar a questão ao profissional habilitado, sem produzir orientação individualizada.</li>
+</ul>
+<p>Para cada teste, avalie quatro aspectos: <strong>encontrou a informação certa?</strong> Ela estava atualizada e aprovada? As condições e exceções foram preservadas? O usuário tinha autorização para acessá-la?</p>
+<p>Uma base pequena que responde corretamente a quatro perguntas e reconhece a quinta como pendente é mais confiável do que uma base volumosa que aparenta responder a tudo.</p>
+
+<h2>Quando a base está pronta para ser conectada a uma IA?</h2>
+<p>Ela estará mais preparada quando tiver escopo definido, registros revisados, fontes identificáveis, responsáveis, metadados, permissões aplicadas e exemplos de perguntas que possam ser usados em testes.</p>
+<p>Isso ainda não significa que o RAG funcionará corretamente. Será necessário escolher uma arquitetura adequada, preparar índices e trechos recuperáveis, aplicar filtros de acesso, verificar a atualização dos conteúdos e avaliar separadamente a <em>recuperação</em> e a <em>resposta gerada</em>.</p>
+<p>Em outras palavras, <strong>uma boa base de conhecimento é uma condição importante para um sistema mais confiável, não uma garantia automática de qualidade.</strong></p>
+
+<h2>Seu exercício: monte uma base mínima em um processo do seu negócio</h2>
+<p>Use o modelo para registrar cinco a dez perguntas recorrentes. Para cada uma, identifique a fonte, escreva a orientação, acrescente exceções, indique o responsável e marque se o conteúdo está aprovado ou pendente. Depois, convide alguém que não participou da organização para localizar as respostas.</p>
+<div class="callout"><p><strong>Resultado esperado:</strong> uma pequena base consultável pela equipe, com informações rastreáveis e pendências visíveis. A próxima evolução será melhorar sua manutenção e consistência — antes de adicionar complexidade tecnológica.</p></div>
+
+<h2>Próximo artigo: como manter a base atualizada, consistente e confiável</h2>
+<p>Construir a primeira versão é apenas o começo. Na Parte 7, abordaremos o problema que costuma aparecer depois: como evitar que regras antigas permaneçam em circulação, que versões entrem em conflito e que a base se torne pouco confiável com o passar do tempo.</p>
+<p>Essa é a lógica da Intellih: <strong>antes da IA, vem o processo. E, antes de automatizar respostas, vem o cuidado com o conhecimento que as sustenta.</strong></p>
+<div class="cta-box"><h2>Quer estruturar uma base de conhecimento para seu negócio?</h2><p>A Intellih apoia a organização de informações, fluxos e critérios de qualidade para que a inteligência artificial seja aplicada com método e processo.</p><a class="btn btn-primary" href="/#contato">Converse com a Intellih</a></div>
+</article>
+<div class="article-nav"><a class="btn btn-light" href="/blog/como-preparar-documentos-para-ia-encontrar-informacoes">Artigo anterior da série</a><a class="btn btn-light" href="/blog/">Voltar para o blog</a></div>
+</div></section>
+</main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Intellih Tecnologia</strong>
+        <p style="margin: 6px 0 0;">Soluções com IA para facilitar rotinas, organizar informações e transformar oportunidades em resultado.</p>
+        <p style="margin: 6px 0 0;">© <span id="year"></span> Intellih. Todos os direitos reservados.</p>
+      </div>
+
+      <div class="socials" aria-label="Redes sociais">
+        <a href="https://www.instagram.com/intellih.tecnologia" target="_blank" rel="noopener" aria-label="Instagram da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/intellih-tecnologia" target="_blank" rel="noopener" aria-label="LinkedIn da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm7 0h3.8v1.5h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V21h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.27-1.87 2.57V21H10V10Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@IntellihTecnologia" target="_blank" rel="noopener" aria-label="YouTube da Intellih">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.85.5 9.4.5 9.4.5s7.55 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/chat-widget.js"></script>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const year = document.getElementById('year');
+
+    year.textContent = new Date().getFullYear();
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>
